@@ -9,6 +9,7 @@ Python re-implementation of the MATLAB near-fault velocity-pulse classifier in
 |---|---|---|
 | `pulse_classification/matlab_wavelets.py` | `cwt` / `intwave` / `scal2frq` / `centfrq` | old-style CWT driven by a **discrete** wavelet (`db4`); `pywt.cwt` cannot do this, so MATLAB's convolve-the-integrated-wavelet-then-differentiate algorithm is reproduced directly |
 | `pulse_classification/parse.py` | `parse_segment.m` | `parse_segment` keeps the hard-coded `dt = 0.01`; `parse_asc` added to rebuild the `*_VEL_N.txt` inputs from ESM `.ASC` files |
+| `pulse_classification/preprocess.py` | `parseAT2/CWB/JP/iceland.m`, `parse_ASC.m`, `convert_dis_vel_acc.m` | raw record → `*_VEL_[NE].txt`: format readers, unit conversion, de-trend/taper, Butterworth band-pass, `acc↔vel↔dis`, resampling |
 | `pulse_classification/analyze_record.py` | `analyze_record.m` (+ nested `fn_extract_one_wavelet`) | |
 | `pulse_classification/classification_algo.py` | `classification_algo.m` / `cont_wavelet_trans.m` | |
 | `pulse_classification/plotting.py` | `make_plot.m` | matplotlib |
@@ -17,12 +18,33 @@ Python re-implementation of the MATLAB near-fault velocity-pulse classifier in
 ## Run
 
 ```bash
-pip install numpy scipy PyWavelets pandas matplotlib
+pip install numpy scipy PyWavelets pandas matplotlib      # + obspy only for miniSEED
+```
+
+### 1. Pre-process raw records → `*_VEL_[NE].txt` (optional)
+
+Skip this if you already have single-column velocity (cm/s) files.
+
+```bash
+python -m pulse_classification.preprocess \
+    --stations stations.txt --in-dir RAW --out-dir TXT \
+    --pattern-n '{sta}_ACC_N.txt' --pattern-e '{sta}_ACC_E.txt' \
+    --in-kind acc --dt 0.01 \
+    --detrend linear --fmin 0.02          # band-pass / taper / --target-dt optional
+```
+
+`--pattern-*` may contain `{sta}` and shell globs (e.g.
+`'TK.{sta}..HNN.*.ASC'`). Format is taken from the extension: `.AT2` (PEER,
+g-acc), `.ASC` (ESM, unit + `dt` from header), `.mseed` (ObsPy), anything else
+is plain text and needs `--dt`. With every optional flag off, the acc→vel step
+is exactly MATLAB `cumtrapz` (and dis→vel is `gradient`).
+
+### 2. Classify
+
+```bash
 python -m pulse_classification.main \
-    --data   path/to/DATA/<event>_TXT \
-    --stations stations_pulse.txt \
-    --figures path/to/Results/Figures \
-    --out    path/to/Results \
+    --data TXT --stations stations.txt \
+    --figures Results/Figures --out Results \
     [--dt 0.01] [--limit N]
 ```
 
