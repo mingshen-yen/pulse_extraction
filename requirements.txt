@@ -3,3 +3,5 @@ scipy>=1.10
 PyWavelets>=1.4
 pandas>=1.5
 matplotlib>=3.6
+obspy>=1.4          # MiniSEED / FDSN fetch + instrument-response removal
+pytest>=7          # tests

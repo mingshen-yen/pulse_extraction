@@ -3,6 +3,11 @@
 Python re-implementation of the MATLAB near-fault velocity-pulse classifier in
 `../classification_matlab/` (Shahi & Baker stratified wavelet algorithm).
 
+The `waveform/` package adds the front end: raw 3-component acceleration →
+baseline correction → the classifier, so a record can go straight from a
+MiniSEED file or an FDSN data centre to a pulse verdict. See
+[waveform/README](waveform/README.md).
+
 ## Layout
 
 | Python | replaces MATLAB | notes |

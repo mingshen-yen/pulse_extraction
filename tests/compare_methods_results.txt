@@ -1,0 +1,33 @@
+
+==============================================================================
+ACCURACY  — |Δ| of pulse Tp / PGV / PI vs ES published 'corrected'
+==============================================================================
+
+  kamai           (n=23, failed=0, pulse-flag disagreements=5)
+     Tp  [s]     median   0.13   mean   0.59   p90   1.69   max   5.30
+     PGV [cm/s]  median   2.06   mean   3.35   p90   6.49   max  20.33
+     PI          median   0.95   mean   1.92   p90   3.49   max  11.02
+
+  ebasco-ref      (n=20, failed=3, pulse-flag disagreements=3)
+     Tp  [s]     median   0.45   mean   1.44   p90   4.91   max   8.63
+     PGV [cm/s]  median   7.15   mean  13.11   p90  39.05   max  51.55
+     PI          median   6.10   mean   8.28   p90  15.47   max  33.17
+
+  ebasco-legacy   (n=18, failed=5, pulse-flag disagreements=3)
+     Tp  [s]     median   0.12   mean   0.62   p90   1.51   max   5.08
+     PGV [cm/s]  median   4.04   mean   4.62   p90   7.84   max  18.01
+     PI          median   2.06   mean   3.26   p90   7.96   max  12.01
+
+==============================================================================
+STABILITY  — CV%% of Tp/PGV/PI  (noise: 5 reps @ ~1%% RMS; trim: starts [0.0, 1.0, 2.0, 3.0, 5.0] s)
+==============================================================================
+
+  kamai           (run failures during perturbation: 0)
+                         Tp       PGV        PI
+     noise CV%         0.00      0.04      0.15
+     trim  CV%         0.00      0.02      0.08
+
+  ebasco-ref      (run failures during perturbation: 1)
+                         Tp       PGV        PI
+     noise CV%         0.00      1.05      6.25
+     trim  CV%         0.00      0.01      0.03
