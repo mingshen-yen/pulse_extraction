@@ -4,7 +4,8 @@ Bridges `00_BASC_Fling_rm/BASC/` (baseline correction) to
 `pulse_classification/` (Shahi & Baker wavelet pulse extraction).
 
 ```
-fetch.py      MiniSEED / FDSN / read_cwa_freefield() (CWA "FreeField" .txt, gal)
+fetch.py      MiniSEED / FDSN / read_cwa_freefield() (CWA .txt, gal)
+              fetch_esm_event() — esm-db.eu DYNA .ASC (cm/s², open for IT/RAN)
 response.py     └─ resolve_response(): file → cache → FDSN → other-epoch → routed
                    → nominal sensitivity → assumed-physical → (else fail)
    │          instrument-response removal  →  acceleration [cm/s²]
@@ -139,6 +140,36 @@ from waveform.fetch import fetch_event_acc
 acc = fetch_event_acc("TK", "NAR", "2023-02-06T01:17:36", channel="HN?", client="IRIS")
 out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="ebasco")
 ```
+
+## Engineering Strong Motion database (esm-db.eu)
+
+`esm_event_search(...)` wraps ESM's FDSN `event` service (no auth) to find an
+event id; `fetch_esm_event(eventid, station)` pulls that station's 3-component
+record from ESM's `esmws/eventdata` service as DYNA `.ASC` — already in cm/s²,
+so no StationXML / deconvolution (response is tagged `assumed-physical`).
+
+```python
+from waveform.fetch import esm_event_search, fetch_esm_event
+ev = esm_event_search("2016-08-24T01:36:00", "2016-08-24T01:37:00", minmag=5.5)[0]
+acc = fetch_esm_event(ev["ev_id"], "AMT", processing="CV")   # CV = uncorrected
+out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="kamai",
+                response=acc.meta["response"], window="arias", decimate_to=50)
+```
+
+`processing`: `"CV"` uncorrected (default — the right input for the BASC
+pipeline), `"MP"` manually processed, `"AP"` auto-processed. `acc.meta` carries
+the DYNA header — `network`, `vs30`, `ec8`, `event_lat/lon`, `magnitude`,
+`epicentral_distance_km`, `baseline_correction`, `data_license`, …. ESM streams
+named `HN1/HN2/HN3` are mapped `1→N, 2→E, 3→Z` (noted in `meta["component_map"]`;
+the classifier rotates over all azimuths so the E/N labelling does not affect
+`Tp`/`PGV`/`is_pulse`). IT/RAN and most European strong-motion data are open;
+`token=<ESM/ORFEUS token file>` covers access-restricted networks.
+`read_esm_asc_zip(path)` is the offline counterpart for a saved eventdata ZIP.
+`run_record --sta AMT --esm-event <id> [--esm-processing CV] [--esm-token f]`.
+
+Sanity check (2016-08-24 Amatrice M6.0, station AMT, `CV` → Kamai + Arias +
+50 Hz): `is_pulse=True`, `Tp ≈ 0.8 s`, `PGV ≈ 44 cm/s` — the well-known Amatrice
+directivity pulse.
 
 ## Baseline-correction methods
 

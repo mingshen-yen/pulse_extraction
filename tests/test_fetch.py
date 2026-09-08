@@ -1,8 +1,14 @@
-"""Tests for waveform.fetch.read_cwa_freefield and waveform.batch."""
+"""Tests for waveform.fetch (CWA + ESM readers) and waveform.batch.
+
+The live ESM / FDSN network paths are not exercised here; only the DYNA .ASC
+parsing and ZIP assembly are.
+"""
 
 from __future__ import annotations
 
+import io
 import sys
+import zipfile
 from pathlib import Path
 
 import numpy as np
@@ -10,7 +16,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from waveform.batch import batch_cwa_freefield                    # noqa: E402
-from waveform.fetch import read_cwa_freefield                     # noqa: E402
+from waveform.fetch import (_parse_dyna_asc, read_cwa_freefield,  # noqa: E402
+                            read_esm_asc_zip)
 
 SR = 100.0
 
@@ -102,6 +109,97 @@ def test_batch_cwa_freefield_records_errors_and_continues(tmp_path):
     err = {r["record"]: r["error"] for r in rows}
     assert err["GOOD.CVA"] == ""
     assert err["BROKEN.CVA"]
+
+
+# --------------------------------------------------------------------------- #
+# ESM DYNA .ASC
+# --------------------------------------------------------------------------- #
+def _dyna_asc(stream, data, dt=0.01, station="AMT", network="IT"):
+    hdr = [
+        "EVENT_NAME: TEST", "EVENT_ID: EMSC-TEST_0001",
+        "EVENT_DATE_YYYYMMDD: 20160824", "EVENT_TIME_HHMMSS: 013632",
+        "EVENT_LATITUDE_DEGREE: 42.70", "EVENT_LONGITUDE_DEGREE: 13.23",
+        "EVENT_DEPTH_KM: 8.1", "MAGNITUDE_W: 6.0", "MAGNITUDE_L: ",
+        f"NETWORK: {network}", f"STATION_CODE: {station}", "STATION_NAME: Amatrice",
+        "STATION_LATITUDE_DEGREE: 42.632500", "STATION_LONGITUDE_DEGREE: 13.286400",
+        "VS30_M/S: 670", "SITE_CLASSIFICATION_EC8: B",
+        "EPICENTRAL_DISTANCE_KM: 8.5",
+        "DATE_TIME_FIRST_SAMPLE_YYYYMMDD_HHMMSS: 20160824_013628.000",
+        f"SAMPLING_INTERVAL_S: {dt:.6f}", f"NDATA: {len(data)}",
+        f"DURATION_S: {len(data) * dt:.3f}", f"STREAM: {stream}",
+        "UNITS: cm/s^2", "BASELINE_CORRECTION: BASELINE NOT REMOVED",
+        "DATABASE_VERSION: HEADER_FORMAT: DYNA 1.2",
+        "DATA_TYPE: ACCELERATION", "PROCESSING: none",
+        "DATA_LICENSE: CC-BY",
+    ]
+    body = "\n".join(f"{v:.6f}" for v in data)
+    return ("\n".join(hdr) + "\n" + body + "\n").encode()
+
+
+def _esm_zip(dt=0.01, n=3000, pulse=True, streams=("HGE", "HGN", "HGZ")):
+    t = np.arange(n) * dt
+    rng = np.random.default_rng(1)
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        for s in streams:
+            a = rng.normal(0, 0.3, n)
+            if pulse and s[-1] in "EN12":
+                m = (t >= 12.0) & (t <= 20.0)
+                a[m] += 35 * np.sin(2 * np.pi * t[m] / 2.0) * np.hanning(m.sum())
+            zf.writestr(f"IT.AMT..{s}.D.EMSC-TEST_0001.ACC.CV.ASC",
+                        _dyna_asc(s, a, dt=dt))
+    return buf.getvalue()
+
+
+def test_parse_dyna_asc_splits_header_and_data():
+    raw = _dyna_asc("HGE", np.arange(50, dtype=float) * 0.1, dt=0.02).decode()
+    data, hdr = _parse_dyna_asc(raw)
+    assert hdr["STATION_CODE"] == "AMT"
+    assert hdr["dt"] == pytest.approx(0.02)
+    assert hdr["npts"] == 50
+    assert len(data) == 50 and data[10] == pytest.approx(1.0)
+
+
+def test_read_esm_asc_zip_assembles_three_components(tmp_path):
+    z = tmp_path / "esm.zip"
+    z.write_bytes(_esm_zip())
+    acc = read_esm_asc_zip(z)
+    assert acc.dt == pytest.approx(0.01)
+    assert len(acc.acc_e) == len(acc.acc_n) == len(acc.acc_z) == 3000
+    m = acc.meta
+    assert m["format"] == "esm-dyna-asc"
+    assert m["station"] == "AMT" and m["network"] == "IT"
+    assert m["magnitude"] == pytest.approx(6.0)
+    assert m["vs30"] == pytest.approx(670.0)
+    assert m["epicentral_distance_km"] == pytest.approx(8.5)
+    assert m["response"]["source"] == "assumed-physical"
+    assert m["response_removed"] is False
+
+
+def test_read_esm_asc_zip_maps_numeric_streams(tmp_path):
+    z = tmp_path / "esm12.zip"
+    z.write_bytes(_esm_zip(streams=("HN2", "HN1", "HNZ")))   # 2->E, 1->N, Z->Z
+    acc = read_esm_asc_zip(z)
+    assert acc.meta["component_map"].startswith("HN1/HN2/HN3")
+    assert len(acc.acc_e) == 3000
+
+
+def test_read_esm_asc_zip_rejects_incomplete(tmp_path):
+    z = tmp_path / "bad.zip"
+    z.write_bytes(_esm_zip(streams=("HGE", "HGN")))          # no vertical
+    with pytest.raises(ValueError, match="missing component"):
+        read_esm_asc_zip(z)
+
+
+def test_read_esm_asc_zip_runs_through_pipeline(tmp_path):
+    from waveform.pipeline import run_pulse
+    z = tmp_path / "esm.zip"
+    z.write_bytes(_esm_zip(pulse=True))
+    acc = read_esm_asc_zip(z)
+    out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="kamai",
+                    response=acc.meta["response"], window="arias", decimate_to=50)
+    assert out["primary"] >= 1
+    assert out["dt"] == pytest.approx(0.02)
 
 
 if __name__ == "__main__":
