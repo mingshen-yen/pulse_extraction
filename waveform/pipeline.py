@@ -18,6 +18,7 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from . import basc
+from . import window as window_mod
 from .classify import classify_velocity
 from .ebasco import ebasco_correct
 from .qc import QCError, check_record
@@ -211,6 +212,7 @@ def run_pulse(acc_e, acc_n, acc_z, dt, *, method: str = "kamai",
               remove_fling: bool = False, fling_params: dict | None = None,
               ebasco_kwargs: dict | None = None, ebasco_fallback: bool = True,
               qc: str = "gate", response=None,
+              window=None, decimate_to=None,
               select: str = "strongest", early_tol: float = 0.2,
               min_split_s: float = 1.0,
               include_waveforms: bool = True, verbose: bool = False) -> dict:
@@ -219,14 +221,22 @@ def run_pulse(acc_e, acc_n, acc_z, dt, *, method: str = "kamai",
     Returns a JSON-friendly ``_result_block`` (``method``, ``dt``, ``npts``,
     ``fling_removed``, ``fling_params``, ``vel_n``/``vel_e``, ``pulses``,
     ``any_pulse``, ``primary``, ``select``, optional ``ebasco``) plus a
-    top-level ``qc``.
+    top-level ``qc`` and ``preprocess``.
 
     ``qc`` -- ``"gate"`` (default) raises :class:`waveform.qc.QCError` if the
     record fails QC; ``"attach"`` runs QC without gating; ``"off"`` skips it.
-    ``select`` -- ``"strongest"`` (default, classifier pulse 1) or
-    ``"earliest"`` (the directivity-pulse pick among near-equal candidates).
+    QC always sees the *untrimmed* record.
+    ``window`` -- ``None`` (default, whole record), ``"arias"`` (5-95 % Arias +
+    10/15 s margins), a :func:`waveform.window.strong_motion_window` kwarg dict,
+    or an explicit ``(t0_s, t1_s)`` tuple.  Applied to the raw acceleration.
+    ``decimate_to`` -- ``None``, a target sample rate in Hz, or an integer
+    factor -- anti-alias downsample before baseline correction.
+    ``select`` -- ``"strongest"`` (default) or ``"earliest"``.
     """
     qc_res = _apply_qc(acc_e, acc_n, acc_z, dt, qc, response=response)
+
+    acc_e, acc_n, acc_z, dt, prep = window_mod.prepare(
+        acc_e, acc_n, acc_z, dt, window=window, decimate_to=decimate_to)
 
     vr = acc_to_velocity(acc_e, acc_n, acc_z, dt, method=method,
                          remove_fling=remove_fling, fling_params=fling_params,
@@ -239,15 +249,17 @@ def run_pulse(acc_e, acc_n, acc_z, dt, *, method: str = "kamai",
                         fling_params=vr.fling_params, ebasco=vr.ebasco,
                         include_waveforms=include_waveforms,
                         select=select, early_tol=early_tol,
-                            min_split_s=min_split_s, verbose=verbose)
+                        min_split_s=min_split_s, verbose=verbose)
     out["qc"] = qc_res.to_dict() if qc_res is not None else None
+    out["preprocess"] = prep
     return out
 
 
 def run_pulse_variants(acc_e, acc_n, acc_z, dt, *,
                        fling_params: dict | None = None,
                        taper_frac: float = 0.0, qc: str = "gate",
-                       response=None, select: str = "strongest",
+                       response=None, window=None, decimate_to=None,
+                       select: str = "strongest",
                        early_tol: float = 0.2, min_split_s: float = 1.0,
                        include_waveforms: bool = True,
                        verbose: bool = False) -> dict:
@@ -268,11 +280,9 @@ def run_pulse_variants(acc_e, acc_n, acc_z, dt, *,
     """
     qc_res = _apply_qc(acc_e, acc_n, acc_z, dt, qc, response=response)
 
-    acc_e = np.asarray(acc_e, dtype=float).ravel()
-    acc_n = np.asarray(acc_n, dtype=float).ravel()
-    acc_z = np.asarray(acc_z, dtype=float).ravel()
+    acc_e, acc_n, acc_z, dt, prep = window_mod.prepare(
+        acc_e, acc_n, acc_z, dt, window=window, decimate_to=decimate_to)
     n = min(acc_e.size, acc_n.size, acc_z.size)
-    acc_e, acc_n, acc_z = acc_e[:n], acc_n[:n], acc_z[:n]
     t = np.arange(n, dtype=float) * dt
 
     ae = basc.taper(basc.detrend_poly(acc_e, 6), taper_frac)
@@ -320,6 +330,7 @@ def run_pulse_variants(acc_e, acc_n, acc_z, dt, *,
         "dt": float(dt),
         "fling_params": used,
         "qc": qc_res.to_dict() if qc_res is not None else None,
+        "preprocess": prep,
         "variants": {
             "basc": _variant("retained"),
             "fling_removed": _variant("removed"),
