@@ -172,20 +172,27 @@ the classifier rotates over all azimuths so the E/N labelling does not affect
 pulls a list of stations for one event and writes one CSV row each, same schema
 as the CWA batch plus `Mw`, `Repi_km`, `vs30`, `ec8`.
 
-### Validation — 2009 L'Aquila (Mw 6.1, `IT-2009-0009`), `CV` → Kamai + Arias + 50 Hz
+### Validation — vs Shahi & Baker (2014), `CV` → Kamai + Arias + 50 Hz
 
-Straight from esm-db.eu, no local files, vs Shahi & Baker (2014)
-(`data/reference/table_SB2014.csv`):
+Every SB2014 (`data/reference/table_SB2014.csv`) pulse record whose event is on
+ESM and whose station is nameable — pulled straight from esm-db.eu, no local
+files:
 
-| station | Tp SB2014 | Tp here | PGV SB2014 | PGV here | is_pulse |
+| event | station | Mw | Tp SB2014 → here | PGV SB2014 → here | is_pulse |
 |---|---|---|---|---|---|
-| AQV | 1.07 | 1.09 | 42.1 | 42.0 | ✓ |
-| AQA | 1.18 | 1.20 | 31.6 | 31.1 | ✓ |
-| AQK | 1.98 | 1.99 | 46.3 | 45.8 | ✓ |
+| 2009 L'Aquila (`IT-2009-0009`) | AQV | 6.1 | 1.07 → 1.09 | 42.1 → 42.0 | ✓ |
+| | AQA | 6.1 | 1.18 → 1.20 | 31.6 → 31.1 | ✓ |
+| | AQK | 6.1 | 1.98 → 1.99 | 46.3 → 45.8 | ✓ |
+| 1980 Irpinia-01 (`IT-1980-0012`) | BGI | 6.9 | 1.71 → 1.74 | 38.1 → 38.4 | ✓ |
+| | STR | 6.9 | 3.27 → 3.31 | 71.1 → 72.8 | ✓ |
+| 1979 Montenegro (`ME-1979-0003`) | BAR | 6.9 | 1.44 → 1.43 | 62.7 → 60.5 | ✓ |
+| | ULO | 6.9 | 1.97 → 1.93 | 62.8 → 63.8 | ✓ |
 
-median |ΔTp| 0.02 s, median |ΔPGV| 0.5 cm/s, is_pulse 3/3. All far-field
-stations in the 14-station run are correctly `is_pulse=0`. See
-`output/2009_LAquila/`. (Sanity check on 2016-08-24 Amatrice M6.0 / AMT:
+7/7 records (1979–2009, analog and digital instruments): median |ΔTp| 0.024 s
+(max 0.038), median |ΔPGV| 0.55 cm/s (max 2.2), is_pulse 7/7. Every far-field
+station in the wider per-event runs is correctly `is_pulse=0`. See
+`output/{2009_LAquila,1980_Irpinia,1979_Montenegro}/` and
+`output/esm_vs_SB2014_all.csv`. (Sanity check, 2016-08-24 Amatrice M6.0 / AMT:
 `is_pulse=True`, `Tp ≈ 0.8 s`, `PGV ≈ 44 cm/s` — the known Amatrice pulse.)
 
 ## Baseline-correction methods
