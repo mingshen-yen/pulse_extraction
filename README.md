@@ -63,7 +63,16 @@ Inputs per station `S`: `S_VEL_N.txt`, `S_VEL_E.txt` (one velocity sample per
 line, cm/s). Outputs: `S_j_rotated.txt`, `S_j_pulseth.txt`, `S_j_pulse.png` for
 each pulse-like component, plus a combined `pulseData.csv`.
 
-## Validation
+## Test / validate with your own data
+
+`pytest` runs anywhere on the committed fixtures in `tests/fixtures/`. For batch
+validation against the EarthScope 2023 Türkiye pulse table, drop the records in
+`data/records/2023_turkey/` and the CSV in `data/reference/` (both git-ignored)
+and run `tests/historical_2023_turkey.py`, `tests/compare_methods.py`,
+`tests/compare_corrected_acc.py`. Layout and filename convention:
+[data/README.md](data/README.md).
+
+## Validation (classifier port)
 
 `tests/validate.py` regenerated the `TK.3123` / `TK.2712` inputs from the ESM
 `.ASC` files and compared against `classification_matlab/Results/2023_Turkey/`.
