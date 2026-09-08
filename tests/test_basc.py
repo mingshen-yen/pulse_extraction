@@ -164,7 +164,25 @@ def test_classify_velocity_can_drop_waveforms():
     vr = acc_to_velocity(acc_e, acc_n, acc_z, dt, method="kamai")
     lean = classify_velocity(vr.vel_n, vr.vel_e, dt, include_waveforms=False)
     assert "rotated_wave" not in lean["pulses"][0]
+    assert lean["pulses"][0]["pulse_peak_time"] is not None   # kept even in lean mode
     assert len(lean["pulses"]) == 5
+
+
+def test_select_earliest_prefers_earlier_pulse():
+    """`earliest` never reports a later pulse than `strongest` when the two
+    top candidates are within tolerance; it picks the first-arriving one."""
+    acc_e, acc_n, acc_z, dt = _load_acc()
+    vr = acc_to_velocity(acc_e, acc_n, acc_z, dt, method="kamai")
+
+    strong = classify_velocity(vr.vel_n, vr.vel_e, dt, select="strongest")
+    early = classify_velocity(vr.vel_n, vr.vel_e, dt, select="earliest",
+                              early_tol=0.5)
+    assert strong["select"] == "strongest" and early["select"] == "earliest"
+    ps = strong["pulses"][strong["primary"] - 1]
+    pe = early["pulses"][early["primary"] - 1]
+    assert pe["pulse_peak_time"] <= ps["pulse_peak_time"] + 1e-9
+    # both indices are valid pulse-like picks
+    assert 1 <= early["primary"] <= 5
 
 
 def test_kamai_fling_decompose_fixed_vs_fitted():
