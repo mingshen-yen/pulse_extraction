@@ -41,7 +41,8 @@ def pulse_to_dict(index: int, p, dt: float, *,
     return d
 
 
-def pulse_picks(pulses: list, *, early_tol: float = 0.2) -> dict:
+def pulse_picks(pulses: list, *, early_tol: float = 0.2,
+                min_split_s: float = 1.0) -> dict:
     """Identify the *strongest* and the *earliest* pulse and whether they split.
 
     The classifier returns up to 5 pulses.  For interpretation two are useful:
@@ -52,10 +53,15 @@ def pulse_picks(pulses: list, *, early_tol: float = 0.2) -> dict:
       within ``early_tol`` of the strongest pulse-like one, the earliest in
       time.  A rupture-directivity pulse rides the S-wave first arrival.
 
-    When the two differ (both pulse-like, comparable strength, different time)
-    the record plausibly carries an **early directivity pulse plus a later,
-    stronger pulse that may be a basin / site-response effect** -- worth
-    keeping separate rather than collapsing to one number.
+    ``split`` is set only when ``earliest`` really is a *separate* feature: the
+    two peaks are at least ``max(min_split_s, min(Tp)/3)`` apart in time.  Two
+    wavelets a fraction of a period apart (the classifier often re-finds the
+    same pulse at a nearby angle) do **not** count -- that was catching false
+    positives.
+
+    When ``split`` is true the record plausibly carries an **early directivity
+    pulse plus a later, stronger pulse that may be a basin / site-response
+    effect** -- worth keeping separate rather than collapsing to one number.
 
     Returns ``{strongest, earliest, split, split_dt, interpretation}``
     (indices are 1-based into ``pulses``, or ``None``).
@@ -80,7 +86,9 @@ def pulse_picks(pulses: list, *, early_tol: float = 0.2) -> dict:
     pe = pulses[earliest - 1]
     tps, tpe = ps["pulse_peak_time"], pe["pulse_peak_time"]
     split_dt = (None if tps is None or tpe is None else float(tps - tpe))
-    split = earliest != strongest and split_dt is not None and abs(split_dt) > 0
+    sep_needed = max(min_split_s, min(ps["Tp"], pe["Tp"]) / 3.0)
+    split = (earliest != strongest and split_dt is not None
+             and abs(split_dt) >= sep_needed)
 
     if not split:
         interp = "single dominant pulse (directivity)"
@@ -93,23 +101,26 @@ def pulse_picks(pulses: list, *, early_tol: float = 0.2) -> dict:
 
 
 def select_primary(pulses: list, *, select: str = "strongest",
-                   early_tol: float = 0.2) -> int:
+                   early_tol: float = 0.2, min_split_s: float = 1.0) -> int:
     """1-based index of the pulse to report as *the* pulse.
 
     ``"strongest"`` -- the classifier's pulse 1 (matches the MATLAB row).
-    ``"earliest"``  -- the directivity-pulse pick (see :func:`pulse_picks`).
+    ``"earliest"``  -- the earlier pulse **only when the record genuinely
+    splits** (see :func:`pulse_picks`); otherwise falls back to strongest.
     """
-    picks = pulse_picks(pulses, early_tol=early_tol)
+    picks = pulse_picks(pulses, early_tol=early_tol, min_split_s=min_split_s)
     if select == "strongest":
         return picks["strongest"] or 1
     if select == "earliest":
-        return picks["earliest"] or picks["strongest"] or 1
+        if picks["split"]:
+            return picks["earliest"]
+        return picks["strongest"] or 1
     raise ValueError(f"unknown select {select!r}; use 'strongest' or 'earliest'")
 
 
 def classify_velocity(vel_n, vel_e, dt, *, include_waveforms: bool = True,
                       select: str = "strongest", early_tol: float = 0.2,
-                      verbose: bool = False) -> dict:
+                      min_split_s: float = 1.0, verbose: bool = False) -> dict:
     """Run the wavelet pulse extraction on two horizontal velocity components.
 
     ``vel_n`` / ``vel_e`` -- velocity in cm/s (fault-processing "north"/"east"),
@@ -140,13 +151,11 @@ def classify_velocity(vel_n, vel_e, dt, *, include_waveforms: bool = True,
     res = classification_algo(vel_n, vel_e, dt, verbose=verbose)
     pulses = [pulse_to_dict(j, p, dt, include_waveforms=include_waveforms)
               for j, p in enumerate(res.pulse_datas, start=1)]
-    picks = pulse_picks(pulses, early_tol=early_tol)
-    primary = (picks["strongest"] if select == "strongest"
-               else picks["earliest"] or picks["strongest"])
-    if primary is None:
-        primary = 1
     if select not in ("strongest", "earliest"):
         raise ValueError(f"unknown select {select!r}")
+    picks = pulse_picks(pulses, early_tol=early_tol, min_split_s=min_split_s)
+    primary = select_primary(pulses, select=select, early_tol=early_tol,
+                             min_split_s=min_split_s)
     return {
         "dt": float(dt),
         "npts": int(m),

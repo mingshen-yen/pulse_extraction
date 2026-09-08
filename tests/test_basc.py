@@ -169,8 +169,8 @@ def test_classify_velocity_can_drop_waveforms():
 
 
 def test_select_earliest_prefers_earlier_pulse():
-    """`earliest` never reports a later pulse than `strongest` when the two
-    top candidates are within tolerance; it picks the first-arriving one."""
+    """`earliest` never reports a later pulse than `strongest`; with no genuine
+    split it falls back to the strongest pick."""
     acc_e, acc_n, acc_z, dt = _load_acc()
     vr = acc_to_velocity(acc_e, acc_n, acc_z, dt, method="kamai")
 
@@ -181,8 +181,29 @@ def test_select_earliest_prefers_earlier_pulse():
     ps = strong["pulses"][strong["primary"] - 1]
     pe = early["pulses"][early["primary"] - 1]
     assert pe["pulse_peak_time"] <= ps["pulse_peak_time"] + 1e-9
-    # both indices are valid pulse-like picks
+    # `earliest` only diverges from `strongest` when picks["split"] is set
+    if not early["picks"]["split"]:
+        assert early["primary"] == strong["primary"]
     assert 1 <= early["primary"] <= 5
+
+
+def test_split_needs_real_time_separation():
+    """A near-duplicate wavelet (< min(Tp)/3 apart) must not be flagged split."""
+    from waveform.classify import pulse_picks
+
+    def pk(t_strong, t_early, tp=3.0, pi_s=20.0, pi_e=19.0):
+        pulses = [
+            dict(index=1, is_pulse=True, Tp=tp, pulse_indicator=pi_s,
+                 pulse_peak_time=t_strong),
+            dict(index=2, is_pulse=True, Tp=tp + 0.4, pulse_indicator=pi_e,
+                 pulse_peak_time=t_early),
+        ]
+        return pulse_picks(pulses, early_tol=0.2, min_split_s=1.0)
+
+    assert pk(12.0, 11.8)["split"] is False        # 0.2 s apart -> same pulse
+    assert pk(12.0, 11.5)["split"] is False        # 0.5 s, still < max(1, Tp/3)
+    assert pk(15.7, 13.4)["split"] is True         # 2.3 s -> genuine early pulse
+    assert pk(12.0, 11.8)["earliest"] == 2         # candidate still identified
 
 
 def test_kamai_fling_decompose_fixed_vs_fitted():

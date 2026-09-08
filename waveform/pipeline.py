@@ -173,6 +173,7 @@ def _ebasco_summary(ebasco):
 def _result_block(method, vel_n, vel_e, dt, *, fling_removed, fling_params,
                   disp_n=None, disp_e=None, ebasco=None,
                   include_waveforms=True, select="strongest", early_tol=0.2,
+                  min_split_s=1.0,
                   verbose=False) -> dict:
     """The common per-result shape shared by ``run_pulse`` and each variant of
     ``run_pulse_variants`` (everything except the top-level ``qc``)."""
@@ -182,7 +183,8 @@ def _result_block(method, vel_n, vel_e, dt, *, fling_removed, fling_params,
     vel_n, vel_e = vel_n[:m], vel_e[:m]
 
     cls = classify_velocity(vel_n, vel_e, dt, include_waveforms=include_waveforms,
-                            select=select, early_tol=early_tol, verbose=verbose)
+                            select=select, early_tol=early_tol,
+                            min_split_s=min_split_s, verbose=verbose)
     block = {
         "method": method,
         "dt": float(dt),
@@ -210,6 +212,7 @@ def run_pulse(acc_e, acc_n, acc_z, dt, *, method: str = "kamai",
               ebasco_kwargs: dict | None = None, ebasco_fallback: bool = True,
               qc: str = "gate", response=None,
               select: str = "strongest", early_tol: float = 0.2,
+              min_split_s: float = 1.0,
               include_waveforms: bool = True, verbose: bool = False) -> dict:
     """Full pipeline: corrected acceleration -> pulse-classification summary.
 
@@ -235,7 +238,8 @@ def run_pulse(acc_e, acc_n, acc_z, dt, *, method: str = "kamai",
                         fling_removed=vr.fling_removed,
                         fling_params=vr.fling_params, ebasco=vr.ebasco,
                         include_waveforms=include_waveforms,
-                        select=select, early_tol=early_tol, verbose=verbose)
+                        select=select, early_tol=early_tol,
+                            min_split_s=min_split_s, verbose=verbose)
     out["qc"] = qc_res.to_dict() if qc_res is not None else None
     return out
 
@@ -244,7 +248,8 @@ def run_pulse_variants(acc_e, acc_n, acc_z, dt, *,
                        fling_params: dict | None = None,
                        taper_frac: float = 0.0, qc: str = "gate",
                        response=None, select: str = "strongest",
-                       early_tol: float = 0.2, include_waveforms: bool = True,
+                       early_tol: float = 0.2, min_split_s: float = 1.0,
+                       include_waveforms: bool = True,
                        verbose: bool = False) -> dict:
     """Kamai baseline correction with an explicit, separable fling term
     (:func:`waveform.basc.kamai_fling_decompose`), emitting two products from
@@ -307,7 +312,8 @@ def run_pulse_variants(acc_e, acc_n, acc_z, dt, *,
             fling_removed=(kind == "removed"), fling_params=used,
             disp_n=dn[kind][2], disp_e=de[kind][2],
             include_waveforms=include_waveforms,
-            select=select, early_tol=early_tol, verbose=verbose)
+            select=select, early_tol=early_tol,
+                            min_split_s=min_split_s, verbose=verbose)
 
     return {
         "method": "kamai+fling",
