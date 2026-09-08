@@ -112,9 +112,10 @@ def main(argv=None):
 
     res = run_pulse_variants(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt,
                              fling_params=fp, qc="off", verbose=not args.quiet)
+    variants = res["variants"]
 
-    _dump_variant(args.out, args.sta, "basc", res["basc"], acc.dt)
-    _dump_variant(args.out, args.sta, "frm", res["fling_removed"], acc.dt)
+    _dump_variant(args.out, args.sta, "basc", variants["basc"], acc.dt)
+    _dump_variant(args.out, args.sta, "frm", variants["fling_removed"], acc.dt)
     if qc.level != "pass":
         print(f"\n  NOTE: QC level = {qc.level} "
               f"({len(qc.warnings)} warning(s)) — results written but flagged")
@@ -126,7 +127,7 @@ def main(argv=None):
               f"Dsite={fp[c]['Dsite']:+.1f} cm")
     for tag, key in (("basc (fling retained)", "basc"),
                      ("frm  (fling removed) ", "fling_removed")):
-        v = res[key]
+        v = variants[key]
         p1 = v["pulses"][0]
         pd = f"permDisp E={np.asarray(v['disp_e'])[-1]:+.1f} N={np.asarray(v['disp_n'])[-1]:+.1f} cm"
         print(f"  {tag}: {pd}  any_pulse={v['any_pulse']!s:5}  "

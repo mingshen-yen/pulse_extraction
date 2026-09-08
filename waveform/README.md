@@ -15,8 +15,19 @@ qc.py         check_record(): response provenance / finite / sampling / duration
 basc.py       Kamai path:  detrend_poly(6) → taper → baseline_ka → (opt) flingstep_rm
 ebasco.py     eBASCO path: pre/strong/post-event trilinear detrend  (keeps permanent disp)
    │
-pipeline.py   acc_to_velocity(method=…) → classification_algo → JSON-friendly dict
+classify.py   classify_velocity(vel_n, vel_e, dt) → the pulse dict  (standalone;
+              the single PulseData→dict contract)
+pipeline.py   acc_to_velocity(method=…) → classify_velocity → JSON-friendly dict
 ```
+
+`waveform/` is the entry point for new work. The legacy file-based tooling
+(`pulse_classification/{preprocess.py, parse.py, main.py}`, MATLAB-parity) is
+kept for reproducing the original results only.
+
+To run **just the classifier** on an already-corrected velocity pair (no fetch /
+QC / baseline correction), call `waveform.classify_velocity(vel_n, vel_e, dt)` —
+it returns `{dt, npts, pulses[…], any_pulse}`, the same `pulses` schema
+`run_pulse` embeds. `include_waveforms=False` drops the three per-pulse arrays.
 
 ## Missing StationXML (`response.py`)
 
@@ -71,6 +82,12 @@ out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="kamai")
 print(out["any_pulse"], out["pulses"][0]["Tp"], out["pulses"][0]["PGV"])
 ```
 
+`out` is `{method, dt, npts, fling_removed, fling_params, vel_n, vel_e,
+pulses[…], any_pulse, qc, ebasco?}`.  `run_pulse_variants(...)` returns the same
+block twice under `out["variants"]["basc"]` (fling retained) and
+`out["variants"]["fling_removed"]`, with `qc` / `fling_params` / `method` /
+`dt` at the top.
+
 Near-real-time from a data centre:
 
 ```python
@@ -102,6 +119,8 @@ to `p2 t² + … + p6 t⁶ + Dsite·unit_fling(t; t1, Tf)`, then
 
 * `basc`          — subtract only the polynomial → **permanent displacement kept**
 * `fling_removed` — subtract polynomial + fling term → permanent displacement ≈ 0
+
+…returned under `out["variants"]["basc"]` and `out["variants"]["fling_removed"]`.
 
 `t1` auto-defaults to the Arias-5 % onset and `Tf` to 2 s, with `Dsite` from the
 fit; pass `fling_params={"t1":…, "Tf":…, "Dsite":…}` to pin them (the original

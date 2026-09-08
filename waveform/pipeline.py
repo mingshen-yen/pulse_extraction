@@ -2,9 +2,10 @@
 
 ``acc_to_velocity`` runs the BASC chain (detrend -> taper -> Kamai baseline
 correction, optional fling-step removal) and returns the two horizontal velocity
-components the classifier expects.  ``run_pulse`` feeds those into
-``pulse_classification.classification_algo`` and returns a plain dict that a web
-backend can serialise.
+components the classifier expects.  ``run_pulse`` / ``run_pulse_variants`` feed
+those through :func:`waveform.classify.classify_velocity` and return a plain
+dict a web backend can serialise -- every entry point uses the same
+``_result_block`` shape.
 
 Everything here works on NumPy arrays; reading MiniSEED / removing instrument
 response lives in :mod:`waveform.fetch`.
@@ -16,9 +17,8 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from pulse_classification.classification_algo import classification_algo
-
 from . import basc
+from .classify import classify_velocity
 from .ebasco import ebasco_correct
 from .qc import QCError, check_record
 
@@ -160,40 +160,60 @@ def acc_to_velocity(acc_e, acc_n, acc_z, dt, *,
     )
 
 
-def _summarise_pulses(vel_n, vel_e, dt, verbose):
-    res = classification_algo(vel_n, vel_e, dt, verbose=verbose)
-    pulses = []
-    for j, p in enumerate(res.pulse_datas, start=1):
-        pulses.append({
-            "index": j,
-            "is_pulse": bool(p.is_pulse),
-            "angle_deg": float(p.angles),   # analyze_record already stores degrees
-            "Tp": float(p.Tp),
-            "PGV": float(p.PGV),
-            "PGV_resid": float(p.PGV_resid),
-            "pulse_indicator": float(p.pulse_indicator),
-            "PC": float(p.PC),
-            "late": bool(p.late),
-            "rotated_wave": np.asarray(p.signal, dtype=float).tolist(),
-            "pulse_wave": np.asarray(p.pulse_th, dtype=float).tolist(),
-            "resid_wave": np.asarray(p.resid_th, dtype=float).tolist(),
-        })
-    return pulses
+def _ebasco_summary(ebasco):
+    return {
+        c: {"t1": getattr(ebasco, c).t1, "t2": getattr(ebasco, c).t2,
+            "t3": getattr(ebasco, c).t3,
+            "f_value": getattr(ebasco, c).f_value,
+            "permanent_disp": getattr(ebasco, c).permanent_disp}
+        for c in ("e", "n", "z")
+    }
+
+
+def _result_block(method, vel_n, vel_e, dt, *, fling_removed, fling_params,
+                  disp_n=None, disp_e=None, ebasco=None,
+                  include_waveforms=True, verbose=False) -> dict:
+    """The common per-result shape shared by ``run_pulse`` and each variant of
+    ``run_pulse_variants`` (everything except the top-level ``qc``)."""
+    vel_n = np.asarray(vel_n, dtype=float).ravel()
+    vel_e = np.asarray(vel_e, dtype=float).ravel()
+    m = min(vel_n.size, vel_e.size)
+    vel_n, vel_e = vel_n[:m], vel_e[:m]
+
+    cls = classify_velocity(vel_n, vel_e, dt,
+                            include_waveforms=include_waveforms, verbose=verbose)
+    block = {
+        "method": method,
+        "dt": float(dt),
+        "npts": int(m),
+        "fling_removed": bool(fling_removed),
+        "fling_params": fling_params,
+        "vel_n": vel_n.tolist(),
+        "vel_e": vel_e.tolist(),
+        "pulses": cls["pulses"],
+        "any_pulse": cls["any_pulse"],
+    }
+    if disp_n is not None:
+        block["disp_n"] = np.asarray(disp_n, dtype=float).tolist()
+        block["disp_e"] = np.asarray(disp_e, dtype=float).tolist()
+    if ebasco is not None:
+        block["ebasco"] = _ebasco_summary(ebasco)
+    return block
 
 
 def run_pulse(acc_e, acc_n, acc_z, dt, *, method: str = "kamai",
               remove_fling: bool = False, fling_params: dict | None = None,
               ebasco_kwargs: dict | None = None, ebasco_fallback: bool = True,
-              qc: str = "gate", response=None, verbose: bool = False) -> dict:
+              qc: str = "gate", response=None,
+              include_waveforms: bool = True, verbose: bool = False) -> dict:
     """Full pipeline: corrected acceleration -> pulse-classification summary.
 
-    Returns a JSON-friendly dict: the corrected velocity the classifier saw,
-    plus, for each of the 5 extracted pulses, its direction / Tp / PGV /
-    indicator / is_pulse and the rotated + extracted-pulse waveforms.
+    Returns a JSON-friendly ``_result_block`` (``method``, ``dt``, ``npts``,
+    ``fling_removed``, ``fling_params``, ``vel_n``/``vel_e``, ``pulses``,
+    ``any_pulse``, optional ``ebasco``) plus a top-level ``qc``.
 
     ``qc`` -- ``"gate"`` (default) raises :class:`waveform.qc.QCError` if the
     record fails QC; ``"attach"`` runs QC without gating; ``"off"`` skips it.
-    The result is under ``out["qc"]``.
     """
     qc_res = _apply_qc(acc_e, acc_n, acc_z, dt, qc, response=response)
 
@@ -203,48 +223,33 @@ def run_pulse(acc_e, acc_n, acc_z, dt, *, method: str = "kamai",
                          ebasco_fallback=ebasco_fallback)
     out_method = vr.method if vr.method == method else f"{method}->fell back to {vr.method}"
 
-    pulses = _summarise_pulses(vr.vel_n, vr.vel_e, vr.dt, verbose)
-
-    out = {
-        "method": out_method,
-        "dt": vr.dt,
-        "npts": int(vr.vel_n.size),
-        "fling_removed": vr.fling_removed,
-        "fling_params": vr.fling_params,
-        "qc": qc_res.to_dict() if qc_res is not None else None,
-        "vel_n": vr.vel_n.tolist(),
-        "vel_e": vr.vel_e.tolist(),
-        "pulses": pulses,
-        "any_pulse": any(p["is_pulse"] for p in pulses),
-    }
-    if vr.ebasco is not None:
-        out["ebasco"] = {
-            c: {"t1": getattr(vr.ebasco, c).t1, "t2": getattr(vr.ebasco, c).t2,
-                "t3": getattr(vr.ebasco, c).t3,
-                "f_value": getattr(vr.ebasco, c).f_value,
-                "permanent_disp": getattr(vr.ebasco, c).permanent_disp}
-            for c in ("e", "n", "z")
-        }
+    out = _result_block(out_method, vr.vel_n, vr.vel_e, vr.dt,
+                        fling_removed=vr.fling_removed,
+                        fling_params=vr.fling_params, ebasco=vr.ebasco,
+                        include_waveforms=include_waveforms, verbose=verbose)
+    out["qc"] = qc_res.to_dict() if qc_res is not None else None
     return out
 
 
 def run_pulse_variants(acc_e, acc_n, acc_z, dt, *,
                        fling_params: dict | None = None,
                        taper_frac: float = 0.0, qc: str = "gate",
-                       response=None, verbose: bool = False) -> dict:
+                       response=None, include_waveforms: bool = True,
+                       verbose: bool = False) -> dict:
     """Kamai baseline correction with an explicit, separable fling term
     (:func:`waveform.basc.kamai_fling_decompose`), emitting two products from
-    one joint fit:
+    one joint fit under ``out["variants"]``:
 
-    ``"basc"``          -- polynomial drift removed, fling step **retained**
-                           (keeps the permanent displacement)
-    ``"fling_removed"`` -- polynomial *and* fling term removed (permanent
-                           displacement ~0; matches the plain Kamai output)
+    ``variants["basc"]``          -- polynomial drift removed, fling step
+                                     **retained** (keeps the permanent disp)
+    ``variants["fling_removed"]`` -- polynomial *and* fling term removed
+                                     (permanent disp ~0; == plain Kamai)
 
-    Each entry is a ``run_pulse``-style dict.  ``fling_params`` reports the
-    ``{t1, Tf, Dsite}`` per horizontal -- ``t1``/``Tf`` are auto-estimated
-    from the uncorrected displacement (override with a ``{"t1","Tf"}`` or
-    ``{"e":{...},"n":{...}}`` ``fling_params``), ``Dsite`` comes from the fit.
+    Each variant is a full ``_result_block`` (same shape as ``run_pulse``, plus
+    ``disp_n``/``disp_e``).  Top level: ``method``, ``dt``, ``qc``,
+    ``fling_params`` -- the ``{t1, Tf, Dsite}`` per horizontal (``t1``/``Tf``
+    auto-estimated unless overridden by ``{"t1","Tf"}`` /
+    ``{"e":{...},"n":{...}}``; ``Dsite`` from the fit).
     """
     qc_res = _apply_qc(acc_e, acc_n, acc_z, dt, qc, response=response)
 
@@ -286,24 +291,20 @@ def run_pulse_variants(acc_e, acc_n, acc_z, dt, *,
     used = {"e": {"t1": t1e, "Tf": tfe, "Dsite": de["Dsite"]},
             "n": {"t1": t1n, "Tf": tfn, "Dsite": dn["Dsite"]}}
 
-    def _variant(kind, key):
-        ve = de[kind][1]
-        vn = dn[kind][1]
-        m = min(ve.size, vn.size)
-        pulses = _summarise_pulses(vn[:m], ve[:m], dt, verbose)
-        return {
-            "fling_removed": kind == "removed", "npts": int(m),
-            "vel_n": vn[:m].tolist(), "vel_e": ve[:m].tolist(),
-            "disp_n": dn[kind][2].tolist(), "disp_e": de[kind][2].tolist(),
-            "pulses": pulses,
-            "any_pulse": any(p["is_pulse"] for p in pulses),
-        }
+    def _variant(kind):
+        return _result_block(
+            "kamai+fling", dn[kind][1], de[kind][1], dt,
+            fling_removed=(kind == "removed"), fling_params=used,
+            disp_n=dn[kind][2], disp_e=de[kind][2],
+            include_waveforms=include_waveforms, verbose=verbose)
 
     return {
         "method": "kamai+fling",
-        "dt": dt,
+        "dt": float(dt),
         "fling_params": used,
         "qc": qc_res.to_dict() if qc_res is not None else None,
-        "basc": _variant("retained", "basc"),
-        "fling_removed": _variant("removed", "fling_removed"),
+        "variants": {
+            "basc": _variant("retained"),
+            "fling_removed": _variant("removed"),
+        },
     }

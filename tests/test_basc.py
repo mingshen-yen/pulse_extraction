@@ -26,6 +26,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from waveform import basc                                       # noqa: E402
+from waveform.classify import classify_velocity                 # noqa: E402
 from waveform.ebasco import ebasco_correct                      # noqa: E402
 from waveform.pipeline import (acc_to_velocity, run_pulse,      # noqa: E402
                                run_pulse_variants)
@@ -132,14 +133,38 @@ def test_run_pulse_variants_splits_fling():
     out = run_pulse_variants(acc_e, acc_n, acc_z, dt,
                              fling_params=dict(t1=20.52, Tf=1.3, Dsite=32.8))
 
-    assert set(out) >= {"basc", "fling_removed", "fling_params"}
-    d_ret = np.array(out["basc"]["disp_e"])
-    d_rem = np.array(out["fling_removed"]["disp_e"])
+    assert set(out) >= {"variants", "fling_params", "method", "dt", "qc"}
+    variants = out["variants"]
+    assert set(variants) == {"basc", "fling_removed"}
+    d_ret = np.array(variants["basc"]["disp_e"])
+    d_rem = np.array(variants["fling_removed"]["disp_e"])
     assert abs(d_ret[-1]) > 10.0            # permanent displacement retained
     assert abs(d_rem[-1]) < abs(d_ret[-1]) / 3   # and removed in the other
-    for v in (out["basc"], out["fling_removed"]):
-        assert len(v["pulses"]) == 5
+    for v in variants.values():
+        assert v["method"] == "kamai+fling" and len(v["pulses"]) == 5
         assert np.all(np.isfinite(v["vel_n"])) and np.all(np.isfinite(v["vel_e"]))
+
+
+def test_classify_velocity_standalone_matches_pipeline():
+    """The facade run directly on corrected velocity == what run_pulse reports."""
+    acc_e, acc_n, acc_z, dt = _load_acc()
+    vr = acc_to_velocity(acc_e, acc_n, acc_z, dt, method="kamai")
+    direct = classify_velocity(vr.vel_n, vr.vel_e, dt)
+    viap = run_pulse(acc_e, acc_n, acc_z, dt, method="kamai", qc="off")
+
+    assert direct["any_pulse"] == viap["any_pulse"]
+    for a, b in zip(direct["pulses"], viap["pulses"]):
+        assert a["is_pulse"] == b["is_pulse"]
+        assert a["Tp"] == pytest.approx(b["Tp"])
+        assert a["PGV"] == pytest.approx(b["PGV"])
+
+
+def test_classify_velocity_can_drop_waveforms():
+    acc_e, acc_n, acc_z, dt = _load_acc()
+    vr = acc_to_velocity(acc_e, acc_n, acc_z, dt, method="kamai")
+    lean = classify_velocity(vr.vel_n, vr.vel_e, dt, include_waveforms=False)
+    assert "rotated_wave" not in lean["pulses"][0]
+    assert len(lean["pulses"]) == 5
 
 
 def test_kamai_fling_decompose_fixed_vs_fitted():
