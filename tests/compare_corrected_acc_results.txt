@@ -1,0 +1,47 @@
+
+   sta  method           relL2%  hiFrac │  noiseDrift%  nPGA CV% │   trimDrift%  tPGA CV%
+  3123  kamai              0.57    0.20 │        0.005     0.085 │        0.000     0.001
+  3123  ebasco-ref       885.10    0.98 │        0.009     0.054 │       -0.000     0.000
+  3123  ebasco-legacy     11.73    1.00 │        0.002     0.033 │        0.027     0.006
+
+   sta  method           relL2%  hiFrac │  noiseDrift%  nPGA CV% │   trimDrift%  tPGA CV%
+  2712  kamai              0.26    0.05 │        0.005     0.105 │        0.000     0.000
+  2712  ebasco-ref       130.71    1.00 │        0.732     0.066 │        0.000     0.000
+  2712  ebasco-legacy     22.79    1.00 │        0.016     0.070 │        0.024     0.001
+
+   sta  method           relL2%  hiFrac │  noiseDrift%  nPGA CV% │   trimDrift%  tPGA CV%
+  3145  kamai              0.24    0.16 │        0.005     0.043 │        0.000     0.000
+  3145  ebasco-ref      1117.47    0.99 │        0.127     0.035 │        0.000     0.000
+  3145  ebasco-legacy     10.36    1.00 │        0.006     0.080 │        0.000     0.000
+
+   sta  method           relL2%  hiFrac │  noiseDrift%  nPGA CV% │   trimDrift%  tPGA CV%
+  4615  kamai              0.32    0.12 │        0.005     0.079 │        0.000     0.000
+  4615  ebasco-ref       132.52    0.99 │        0.491     0.099 │        0.000     0.000
+  4615  ebasco-legacy     12.89    1.00 │        0.002     0.066 │        0.220     0.014
+
+   sta  method           relL2%  hiFrac │  noiseDrift%  nPGA CV% │   trimDrift%  tPGA CV%
+   NAR  kamai              0.25    0.05 │        0.005     0.051 │        0.000     0.001
+   NAR  ebasco-ref       130.32    0.98 │        0.365     0.087 │        0.000     0.000
+   NAR  ebasco-legacy     29.97    1.00 │        0.002     0.042 │        0.295     0.010
+
+   sta  method           relL2%  hiFrac │  noiseDrift%  nPGA CV% │   trimDrift%  tPGA CV%
+  3137  kamai              0.35    0.12 │        0.005     0.026 │        0.000     0.000
+  3137  ebasco-ref       164.41    0.99 │        0.468     0.022 │        0.000     0.000
+  3137  ebasco-legacy     16.29    1.00 │        0.002     0.049 │        0.080     0.001
+
+   sta  method           relL2%  hiFrac │  noiseDrift%  nPGA CV% │   trimDrift%  tPGA CV%
+  2716  kamai              0.53    0.26 │        0.005     0.117 │        0.000     0.000
+  2716  ebasco-ref       113.75    0.99 │        0.064     0.110 │        0.000     0.018
+  2716  ebasco-legacy      8.99    1.00 │        0.001     0.113 │        0.065     0.017
+
+   sta  method           relL2%  hiFrac │  noiseDrift%  nPGA CV% │   trimDrift%  tPGA CV%
+  3116  kamai              0.42    0.06 │        0.005     0.098 │        0.000     0.001
+  3116  ebasco-ref        20.25    1.00 │        0.025     0.073 │        0.000     0.000
+  3116  ebasco-legacy     20.25    1.00 │        0.365     0.075 │        0.919     0.026
+
+============================================================================================
+MEDIAN                   relL2%  hiFrac │  noiseDrift%  nPGA CV% │   trimDrift%  tPGA CV%
+============================================================================================
+kamai                      0.33    0.12 │        0.005     0.082 │        0.000     0.000   (n=8)
+ebasco-ref               131.61    0.99 │        0.246     0.070 │        0.000     0.000   (n=8)
+ebasco-legacy             14.59    1.00 │        0.002     0.068 │        0.072     0.008   (n=8)
