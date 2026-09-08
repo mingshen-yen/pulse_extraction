@@ -23,11 +23,8 @@ import numpy as np
 warnings.filterwarnings("ignore")
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from waveform.pipeline import run_pulse                          # noqa: E402
+from tests._data import es_csv, read_three, records_dir          # noqa: E402
 
-MSEED = Path("/Volumes/WD/work/pulse/00_BASC_Fling_rm/BASC/TK_unprocess")
-ES = Path("/Volumes/WD/work/pulse/01_pulse_classification/PulseClassification-master"
-          "/2023_turkey/ES_published_pulse_table.csv")
-EVID = "INT-20230206_0000008"
 SUBSET = ["3123", "2712", "3145", "4615", "NAR", "3137", "2716", "3116"]
 
 METHODS = {
@@ -39,8 +36,8 @@ METHODS = {
 }
 
 
-def load_es():
-    rows = list(csv.reader(open(ES)))
+def load_es(path):
+    rows = list(csv.reader(open(path)))
     out = {}
     for r in rows[3:]:
         if len(r) < 14 or not r[1].strip():
@@ -48,15 +45,6 @@ def load_es():
         out[r[1].strip()] = dict(Tp=float(r[11]), PGV=float(r[12]), PI=float(r[13]),
                                  Rrup=float(r[3]))
     return out
-
-
-def read_acc(sta):
-    import obspy
-    net = "KO" if sta == "KHMN" else "TK"
-    b = str(MSEED / f"{net}.{sta}..HN{{}}.{EVID}.ACC.CV.mseed")
-    tr = [obspy.read(b.format(c))[0] for c in "ENZ"]
-    return (tr[0].data.astype(float), tr[1].data.astype(float),
-            tr[2].data.astype(float), float(tr[0].stats.delta))
 
 
 def pulse_of(out):
@@ -73,7 +61,7 @@ def run(ae, an, az, dt, cfg):
 
 
 # ------------------------------------------------------------------ accuracy
-def accuracy(es):
+def accuracy(es, mseed_dir):
     print("\n" + "=" * 78)
     print("ACCURACY  — |Δ| of pulse Tp / PGV / PI vs ES published 'corrected'")
     print("=" * 78)
@@ -81,7 +69,7 @@ def accuracy(es):
         dtp, dpgv, dpi, nfail, nflip = [], [], [], 0, 0
         for sta, ref in es.items():
             try:
-                ae, an, az, dt = read_acc(sta)
+                ae, an, az, dt = read_three(sta, mseed_dir)
                 tp, pgv, pi, isp, meth = run(ae, an, az, dt, cfg)
             except Exception:                                    # noqa: BLE001
                 nfail += 1
@@ -106,7 +94,7 @@ def _cv(vals):
     return 100.0 * v.std() / abs(v.mean()) if v.mean() else np.nan
 
 
-def stability(quick):
+def stability(quick, mseed_dir):
     reps = 5 if quick else 10
     trims_s = [0.0, 1.0, 2.0, 3.0, 5.0]
     rng = np.random.default_rng(0)
@@ -124,7 +112,7 @@ def stability(quick):
         fails = 0
         for sta in SUBSET:
             try:
-                ae, an, az, dt = read_acc(sta)
+                ae, an, az, dt = read_three(sta, mseed_dir)
             except Exception:                                    # noqa: BLE001
                 continue
 
@@ -172,10 +160,13 @@ def stability(quick):
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true")
+    ap.add_argument("--mseed", help="directory of 3-component mseed")
+    ap.add_argument("--es", help="ES_published_pulse_table.csv")
     args = ap.parse_args(argv)
-    es = load_es()
-    accuracy(es)
-    stability(args.quick)
+    mseed_dir = records_dir(args.mseed)
+    es = load_es(es_csv(args.es))
+    accuracy(es, mseed_dir)
+    stability(args.quick, mseed_dir)
 
 
 if __name__ == "__main__":

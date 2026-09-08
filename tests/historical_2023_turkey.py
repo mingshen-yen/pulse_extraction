@@ -17,11 +17,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from waveform.pipeline import run_pulse                          # noqa: E402
-
-DEF_MSEED = Path("/Volumes/WD/work/pulse/00_BASC_Fling_rm/BASC/TK_unprocess")
-DEF_ES = Path("/Volumes/WD/work/pulse/01_pulse_classification/PulseClassification-master"
-              "/2023_turkey/ES_published_pulse_table.csv")
-EVID = "INT-20230206_0000008"
+from tests._data import es_csv, read_three, records_dir         # noqa: E402
 
 
 def load_es(path):
@@ -39,19 +35,8 @@ def load_es(path):
     return out
 
 
-def net_for(sta):
-    return "KO" if sta == "KHMN" else "TK"
-
-
 def read_acc(mseed_dir, sta):
-    import obspy
-    net = net_for(sta)
-    base = mseed_dir / f"{net}.{sta}..HN{{}}.{EVID}.ACC.CV.mseed"
-    e = obspy.read(str(base).format("E"))[0]
-    n = obspy.read(str(base).format("N"))[0]
-    z = obspy.read(str(base).format("Z"))[0]
-    return (e.data.astype(float), n.data.astype(float), z.data.astype(float),
-            float(e.stats.delta))
+    return read_three(sta, mseed_dir)
 
 
 def best_pulse(out):
@@ -64,12 +49,13 @@ def best_pulse(out):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mseed", type=Path, default=DEF_MSEED)
-    ap.add_argument("--es", type=Path, default=DEF_ES)
+    ap.add_argument("--mseed", help="directory of 3-component mseed")
+    ap.add_argument("--es", help="ES_published_pulse_table.csv")
     ap.add_argument("--method", choices=["kamai", "ebasco", "both"], default="both")
     args = ap.parse_args(argv)
 
-    es = load_es(args.es)
+    args.mseed = records_dir(args.mseed)
+    es = load_es(es_csv(args.es))
     methods = ["kamai", "ebasco"] if args.method == "both" else [args.method]
 
     hdr = (f"{'sta':>5} {'Rrup':>5} {'is_p':>5} │ "

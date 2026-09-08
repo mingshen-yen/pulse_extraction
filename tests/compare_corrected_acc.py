@@ -36,19 +36,14 @@ warnings.filterwarnings("ignore")
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from waveform import basc                                        # noqa: E402
 from waveform.ebasco import ebasco_correct                       # noqa: E402
+from tests._data import read_three, records_dir                  # noqa: E402
 
-MSEED = Path("/Volumes/WD/work/pulse/00_BASC_Fling_rm/BASC/TK_unprocess")
-EVID = "INT-20230206_0000008"
 STATIONS = ["3123", "2712", "3145", "4615", "NAR", "3137", "2716", "3116"]
+_MSEED = None
 
 
 def read_acc(sta):
-    import obspy
-    net = "KO" if sta == "KHMN" else "TK"
-    b = str(MSEED / f"{net}.{sta}..HN{{}}.{EVID}.ACC.CV.mseed")
-    tr = [obspy.read(b.format(c))[0] for c in "ENZ"]
-    return (tr[0].data.astype(float), tr[1].data.astype(float),
-            tr[2].data.astype(float), float(tr[0].stats.delta))
+    return read_three(sta, _MSEED)
 
 
 def corrected_acc_e(ae, an, az, dt, method):
@@ -175,7 +170,10 @@ def analyse(sta, method, reps, rng):
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--reps", type=int, default=8)
+    ap.add_argument("--mseed", help="directory of 3-component mseed")
     args = ap.parse_args(argv)
+    global _MSEED
+    _MSEED = records_dir(args.mseed)
     methods = ["kamai", "ebasco-ref", "ebasco-legacy"]
     rng = np.random.default_rng(0)
 
