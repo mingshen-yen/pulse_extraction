@@ -22,7 +22,7 @@ ebasco.py     eBASCO path: pre/strong/post-event trilinear detrend  (keeps perma
 classify.py   classify_velocity(vel_n, vel_e, dt) → the pulse dict  (standalone;
               the single PulseData→dict contract)
 pipeline.py   acc_to_velocity(method=…) → classify_velocity → JSON-friendly dict
-batch.py      batch_cwa_freefield(): a directory of CWA .txt → one CSV row / record
+batch.py      batch_cwa_freefield() / batch_esm_event(): many records → one CSV
 ```
 
 `waveform/` is the entry point for new work. The legacy file-based tooling
@@ -167,9 +167,26 @@ the classifier rotates over all azimuths so the E/N labelling does not affect
 `read_esm_asc_zip(path)` is the offline counterpart for a saved eventdata ZIP.
 `run_record --sta AMT --esm-event <id> [--esm-processing CV] [--esm-token f]`.
 
-Sanity check (2016-08-24 Amatrice M6.0, station AMT, `CV` → Kamai + Arias +
-50 Hz): `is_pulse=True`, `Tp ≈ 0.8 s`, `PGV ≈ 44 cm/s` — the well-known Amatrice
-directivity pulse.
+`batch_esm_event(eventid, stations, out_csv)` (also
+`python -m waveform.batch --esm-event <id> --esm-stations AQV,AQK,AQA --out …`)
+pulls a list of stations for one event and writes one CSV row each, same schema
+as the CWA batch plus `Mw`, `Repi_km`, `vs30`, `ec8`.
+
+### Validation — 2009 L'Aquila (Mw 6.1, `IT-2009-0009`), `CV` → Kamai + Arias + 50 Hz
+
+Straight from esm-db.eu, no local files, vs Shahi & Baker (2014)
+(`data/reference/table_SB2014.csv`):
+
+| station | Tp SB2014 | Tp here | PGV SB2014 | PGV here | is_pulse |
+|---|---|---|---|---|---|
+| AQV | 1.07 | 1.09 | 42.1 | 42.0 | ✓ |
+| AQA | 1.18 | 1.20 | 31.6 | 31.1 | ✓ |
+| AQK | 1.98 | 1.99 | 46.3 | 45.8 | ✓ |
+
+median |ΔTp| 0.02 s, median |ΔPGV| 0.5 cm/s, is_pulse 3/3. All far-field
+stations in the 14-station run are correctly `is_pulse=0`. See
+`output/2009_LAquila/`. (Sanity check on 2016-08-24 Amatrice M6.0 / AMT:
+`is_pulse=True`, `Tp ≈ 0.8 s`, `PGV ≈ 44 cm/s` — the known Amatrice pulse.)
 
 ## Baseline-correction methods
 
