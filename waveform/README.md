@@ -4,13 +4,16 @@ Bridges `00_BASC_Fling_rm/BASC/` (baseline correction) to
 `pulse_classification/` (Shahi & Baker wavelet pulse extraction).
 
 ```
-fetch.py      MiniSEED / FDSN
+fetch.py      MiniSEED / FDSN / read_cwa_freefield() (CWA "FreeField" .txt, gal)
 response.py     └─ resolve_response(): file → cache → FDSN → other-epoch → routed
                    → nominal sensitivity → assumed-physical → (else fail)
    │          instrument-response removal  →  acceleration [cm/s²]
    │
 qc.py         check_record(): response provenance / finite / sampling / duration /
               dead / clipping / spikes / units / event-present  →  pass|warn|fail
+   │          (QC always sees the untrimmed record)
+window.py     prepare(): optional Arias 5–95 % strong-motion window + optional
+              anti-alias decimation to a target rate  (before baseline correction)
    │
 basc.py       Kamai path:  detrend_poly(6) → taper → baseline_ka → (opt) flingstep_rm
 ebasco.py     eBASCO path: pre/strong/post-event trilinear detrend  (keeps permanent disp)
@@ -18,6 +21,7 @@ ebasco.py     eBASCO path: pre/strong/post-event trilinear detrend  (keeps perma
 classify.py   classify_velocity(vel_n, vel_e, dt) → the pulse dict  (standalone;
               the single PulseData→dict contract)
 pipeline.py   acc_to_velocity(method=…) → classify_velocity → JSON-friendly dict
+batch.py      batch_cwa_freefield(): a directory of CWA .txt → one CSV row / record
 ```
 
 `waveform/` is the entry point for new work. The legacy file-based tooling
@@ -83,10 +87,50 @@ print(out["any_pulse"], out["pulses"][0]["Tp"], out["pulses"][0]["PGV"])
 ```
 
 `out` is `{method, dt, npts, fling_removed, fling_params, vel_n, vel_e,
-pulses[…], any_pulse, qc, ebasco?}`.  `run_pulse_variants(...)` returns the same
-block twice under `out["variants"]["basc"]` (fling retained) and
-`out["variants"]["fling_removed"]`, with `qc` / `fling_params` / `method` /
-`dt` at the top.
+pulses[…], any_pulse, primary, select, picks, qc, preprocess, ebasco?}`.
+`run_pulse_variants(...)` returns the same block twice under
+`out["variants"]["basc"]` (fling retained) and `out["variants"]["fling_removed"]`,
+with `qc` / `preprocess` / `fling_params` / `method` / `dt` at the top.
+
+### Strong-motion window + decimation (`window` / `decimate_to`)
+
+Real accelerograms run 100–300 s at 100–200 Hz; the wavelet CWT is then slow and
+chases pre/post-event noise. Two optional, cheap fixes applied to the raw
+acceleration *before* baseline correction (QC still sees the full record):
+
+```python
+run_pulse(e, n, z, dt,
+          window="arias",      # Arias 5–95 % + 10 s lead / 15 s tail, on hypot(N,E)
+          decimate_to=50)      # anti-alias FIR downsample to 50 Hz (no-op if ≤ 50)
+```
+
+`window` also accepts a `strong_motion_window` kwarg dict (`p_lo`, `p_hi`,
+`pre`, `post`) or an explicit `(t0_s, t1_s)` tuple; `decimate_to` is a target
+rate in Hz. `out["preprocess"]` records what was done (`n_in`, `dt_in`,
+`window`, `decimate_factor`, `n_out`, `dt_out`). Velocity pulses have 0.25–15 s
+periods, so 50 Hz is ample: on the 2018 Hualien FreeField set this is ~30× faster
+with ΔTp ≤ 0.05 s, ΔPGV ≤ 1 cm/s and no `is_pulse` changes.
+
+## CWA "FreeField" records + batch mode
+
+`fetch.read_cwa_freefield(path)` reads one Taiwan CWA FreeField ASCII record
+(`#`-comment header + `Time U N E` columns, already DC-corrected acceleration in
+gal) into a `ThreeComponentAcc`; the station code is de-suffixed
+(`HWA057-ETL` → `HWA057`) and the response is tagged `assumed-physical` (no
+network lookup — the units are already physical).
+
+```bash
+python -m waveform.batch --cwa <dir-of-.txt> --out pulses.csv \
+    [--json-dir DIR] [--method kamai|ebasco] [--select strongest|earliest] \
+    [--qc gate|attach|off] [--no-window] [--decimate 50]   # --decimate 0 = off
+```
+
+Runs `run_pulse` per record with `window="arias"` + `decimate_to=50` by default
+and writes one CSV row each (`station, instrument, dt_in/out, npts_out, window
+bounds, qc, response, is_pulse, primary, Tp, PGV, pulse_indicator, PC,
+angle_deg, late, split, split_dt, …`); a bad record is logged with its error and
+does not stop the run. `batch_cwa_freefield(record_dir, out_csv, …)` is the
+library entry point and returns the row dicts.
 
 Near-real-time from a data centre:
 

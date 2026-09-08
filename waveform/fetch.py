@@ -1,5 +1,7 @@
-"""Waveform retrieval + instrument-response removal (ObsPy).
+"""Waveform retrieval + instrument-response removal.
 
+* :func:`read_cwa_freefield` -- read a CWA "FreeField" ASCII record
+  (``.txt``): already 3-component acceleration in gal, no ObsPy needed.
 * :func:`read_three_component` -- load a local 3-component record (MiniSEED,
   SAC, ...), resolve a response (see :mod:`waveform.response`), return
   acceleration in cm/s**2 ready for :func:`waveform.pipeline.acc_to_velocity`.
@@ -15,7 +17,9 @@ ObsPy is imported lazily so the BASC / classification code stays import-light.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
 
@@ -31,6 +35,62 @@ class ThreeComponentAcc:
     acc_z: np.ndarray
     dt: float
     meta: dict
+
+
+def read_cwa_freefield(path) -> ThreeComponentAcc:
+    """Read one CWA (Taiwan Central Weather Administration) FreeField ``.txt``
+    record: a ``#``-commented header then 4 columns ``Time  U  N  E``, already
+    3-component acceleration in **gal (= cm/s**2)**, DC-offset corrected.
+
+    ``response`` is tagged ``assumed-physical`` (units are already gal); the
+    station code is de-suffixed (``HWA057-ETL`` -> ``HWA057``).
+    """
+    p = Path(path)
+    lines = p.read_text().splitlines()
+    hdr, i = {}, 0
+    for i, ln in enumerate(lines):
+        if not ln.startswith("#"):
+            break
+        m = re.match(r"#\s*([^:]+):\s*(.*)", ln)
+        if m:
+            hdr[m.group(1).strip()] = m.group(2).strip()
+    data = np.array([[float(x) for x in ln.split()]
+                     for ln in lines[i:] if ln.strip()])
+    if data.ndim != 2 or data.shape[1] < 4:
+        raise ValueError(f"{p.name}: expected 4 columns (Time U N E), "
+                         f"got shape {data.shape}")
+
+    sr = float(hdr.get("SampleRate(Hz)", "0")) or None
+    dt = (1.0 / sr) if sr else float(np.median(np.diff(data[:, 0])))
+    u, n, e = data[:, 1], data[:, 2], data[:, 3]     # gal, U/N/E
+
+    raw_code = hdr.get("StationCode", p.stem)
+    sta = re.match(r"([A-Za-z]+\d+)", raw_code)
+    unit = hdr.get("AmplitudeUnit", "")
+    # CWA FreeField data is already DC-corrected gal; no StationXML exists for
+    # these codes, so skip the network lookups and let the physical-units
+    # heuristic tag it ``assumed-physical``.
+    info = resolve_response("", sta.group(1) if sta else raw_code, "", "",
+                            None, None, routing=False, data_sample=e)
+    meta = {
+        "format": "cwa-freefield", "path": str(p),
+        "station": sta.group(1) if sta else raw_code,
+        "station_code": raw_code,
+        "instrument_kind": hdr.get("InstrumentKind", "").split()[0]
+        if hdr.get("InstrumentKind") else None,
+        "start_time": hdr.get("StartTime"),
+        "record_length_s": float(hdr["RecordLength(sec)"])
+        if "RecordLength(sec)" in hdr else data[-1, 0] - data[0, 0],
+        "sampling_rate": 1.0 / dt,
+        "amplitude_unit": unit or "gal",
+        "response": info.to_dict(),
+        "response_removed": False,
+        "header": hdr,
+    }
+    return ThreeComponentAcc(
+        acc_e=np.asarray(e, dtype=float), acc_n=np.asarray(n, dtype=float),
+        acc_z=np.asarray(u, dtype=float), dt=float(dt), meta=meta,
+    )
 
 
 def _pick_components(st):

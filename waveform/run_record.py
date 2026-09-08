@@ -17,6 +17,10 @@ Input is either local files or an FDSN request:
 
 Fling parameters are auto-estimated per component; override with
 ``--fling t1 Tf Dsite`` (applied to both horizontals).
+
+Long, high-rate records: ``--window arias`` trims to the 5-95 %% Arias window
+and ``--decimate 50`` anti-alias downsamples to 50 Hz before baseline
+correction (QC still sees the untrimmed record).
 """
 
 from __future__ import annotations
@@ -88,6 +92,12 @@ def main(argv=None):
                     help="fixed fling params for both horizontals (else auto)")
     ap.add_argument("--qc", choices=["gate", "attach", "off"], default="gate",
                     help="gate: abort on QC fail (default); attach: report only; off")
+    ap.add_argument("--window", choices=["none", "arias"], default="none",
+                    help="arias: trim to the 5-95%% Arias window (+10/15 s) "
+                         "before baseline correction (default: none)")
+    ap.add_argument("--decimate", type=float, default=0.0, metavar="HZ",
+                    help="anti-alias downsample to this rate before baseline "
+                         "correction (0 = off)")
     ap.add_argument("--out", default=".", type=Path)
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args(argv)
@@ -111,17 +121,29 @@ def main(argv=None):
         fp = {"t1": args.fling[0], "Tf": args.fling[1], "Dsite": args.fling[2]}
 
     res = run_pulse_variants(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt,
-                             fling_params=fp, qc="off", verbose=not args.quiet)
+                             fling_params=fp, qc="off",
+                             window=None if args.window == "none" else args.window,
+                             decimate_to=args.decimate or None,
+                             verbose=not args.quiet)
     variants = res["variants"]
+    dt_out = res["dt"]
+    prep = res.get("preprocess") or {}
+    if prep.get("window") or prep.get("decimate_factor", 1) != 1:
+        w = prep.get("window")
+        print(f"preprocess: "
+              + (f"window {w['t0_s']:.1f}-{w['t1_s']:.1f}s  " if w else "")
+              + (f"decimate x{prep['decimate_factor']} -> dt={dt_out:g}"
+                 if prep.get("decimate_factor", 1) != 1 else ""))
 
-    _dump_variant(args.out, args.sta, "basc", variants["basc"], acc.dt)
-    _dump_variant(args.out, args.sta, "frm", variants["fling_removed"], acc.dt)
+    _dump_variant(args.out, args.sta, "basc", variants["basc"], dt_out)
+    _dump_variant(args.out, args.sta, "frm", variants["fling_removed"], dt_out)
     if qc.level != "pass":
         print(f"\n  NOTE: QC level = {qc.level} "
               f"({len(qc.warnings)} warning(s)) — results written but flagged")
 
     fp = res["fling_params"]
-    print(f"\nstation {args.sta}   dt={acc.dt}")
+    print(f"\nstation {args.sta}   dt={dt_out:g}"
+          + (f" (from {acc.dt:g})" if dt_out != acc.dt else ""))
     for c in ("e", "n"):
         print(f"  fling {c.upper()}: t1={fp[c]['t1']:.1f}s  Tf={fp[c]['Tf']:.1f}s  "
               f"Dsite={fp[c]['Dsite']:+.1f} cm")
