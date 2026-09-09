@@ -15,8 +15,15 @@ Input is either local files or an FDSN request:
     python -m waveform.run_record --sta NAR --net TK \
         --origin 2023-02-06T01:17:36 --client IRIS --out results/
 
+    python -m waveform.run_record --sta AMT --esm-event EMSC-20160824_0000006 \
+        --window arias --decimate 50 --out results/        # esm-db.eu (DYNA .ASC)
+
 Fling parameters are auto-estimated per component; override with
 ``--fling t1 Tf Dsite`` (applied to both horizontals).
+
+Long, high-rate records: ``--window arias`` trims to the 5-95 %% Arias window
+and ``--decimate 50`` anti-alias downsamples to 50 Hz before baseline
+correction (QC still sees the untrimmed record).
 """
 
 from __future__ import annotations
@@ -32,8 +39,15 @@ from .qc import QCError, check_record
 
 
 def _load(args):
-    from .fetch import fetch_event_acc, read_three_component
-    if args.mseed:
+    from .fetch import (fetch_esm_event, fetch_event_acc, read_esm_asc_zip,
+                        read_three_component)
+    if args.esm_zip:
+        acc = read_esm_asc_zip(args.esm_zip)
+    elif args.esm_event:
+        acc = fetch_esm_event(args.esm_event, args.sta,
+                              processing=args.esm_processing,
+                              network=args.net or None, token=args.esm_token)
+    elif args.mseed:
         acc = read_three_component(
             args.mseed, stationxml=args.stationxml,
             client=args.client if args.net else None,
@@ -41,7 +55,7 @@ def _load(args):
             nominal_sensitivity=args.nominal_sensitivity)
     else:
         if not (args.net and args.origin):
-            raise SystemExit("need --mseed, or --net and --origin for FDSN")
+            raise SystemExit("need --mseed, --esm-event, or --net and --origin")
         acc = fetch_event_acc(args.net, args.sta, args.origin,
                               location=args.loc, channel=args.chan,
                               client=args.client, routing=not args.no_routing,
@@ -79,6 +93,16 @@ def main(argv=None):
                     help="FDSN: do not try the federator / other nodes for metadata")
     ap.add_argument("--routing", action="store_true",
                     help="local files: DO try the FDSN federator / nodes for a missing response")
+    ap.add_argument("--esm-event", metavar="EVENTID",
+                    help="fetch from esm-db.eu for this ESM/EMSC event id "
+                         "(uses --sta as the station code)")
+    ap.add_argument("--esm-zip", metavar="PATH",
+                    help="a locally-saved ESM eventdata ZIP (3 DYNA .ASC files)")
+    ap.add_argument("--esm-processing", choices=["CV", "MP", "AP"], default="CV",
+                    help="ESM processing type: CV uncorrected (default), "
+                         "MP manual, AP auto")
+    ap.add_argument("--esm-token", metavar="PATH",
+                    help="ESM/ORFEUS auth token file (only for restricted networks)")
     ap.add_argument("--net")
     ap.add_argument("--origin", help="origin time for the FDSN request")
     ap.add_argument("--loc", default="*")
@@ -88,6 +112,12 @@ def main(argv=None):
                     help="fixed fling params for both horizontals (else auto)")
     ap.add_argument("--qc", choices=["gate", "attach", "off"], default="gate",
                     help="gate: abort on QC fail (default); attach: report only; off")
+    ap.add_argument("--window", choices=["none", "arias"], default="none",
+                    help="arias: trim to the 5-95%% Arias window (+10/15 s) "
+                         "before baseline correction (default: none)")
+    ap.add_argument("--decimate", type=float, default=0.0, metavar="HZ",
+                    help="anti-alias downsample to this rate before baseline "
+                         "correction (0 = off)")
     ap.add_argument("--out", default=".", type=Path)
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args(argv)
@@ -111,17 +141,29 @@ def main(argv=None):
         fp = {"t1": args.fling[0], "Tf": args.fling[1], "Dsite": args.fling[2]}
 
     res = run_pulse_variants(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt,
-                             fling_params=fp, qc="off", verbose=not args.quiet)
+                             fling_params=fp, qc="off",
+                             window=None if args.window == "none" else args.window,
+                             decimate_to=args.decimate or None,
+                             verbose=not args.quiet)
     variants = res["variants"]
+    dt_out = res["dt"]
+    prep = res.get("preprocess") or {}
+    if prep.get("window") or prep.get("decimate_factor", 1) != 1:
+        w = prep.get("window")
+        print(f"preprocess: "
+              + (f"window {w['t0_s']:.1f}-{w['t1_s']:.1f}s  " if w else "")
+              + (f"decimate x{prep['decimate_factor']} -> dt={dt_out:g}"
+                 if prep.get("decimate_factor", 1) != 1 else ""))
 
-    _dump_variant(args.out, args.sta, "basc", variants["basc"], acc.dt)
-    _dump_variant(args.out, args.sta, "frm", variants["fling_removed"], acc.dt)
+    _dump_variant(args.out, args.sta, "basc", variants["basc"], dt_out)
+    _dump_variant(args.out, args.sta, "frm", variants["fling_removed"], dt_out)
     if qc.level != "pass":
         print(f"\n  NOTE: QC level = {qc.level} "
               f"({len(qc.warnings)} warning(s)) — results written but flagged")
 
     fp = res["fling_params"]
-    print(f"\nstation {args.sta}   dt={acc.dt}")
+    print(f"\nstation {args.sta}   dt={dt_out:g}"
+          + (f" (from {acc.dt:g})" if dt_out != acc.dt else ""))
     for c in ("e", "n"):
         print(f"  fling {c.upper()}: t1={fp[c]['t1']:.1f}s  Tf={fp[c]['Tf']:.1f}s  "
               f"Dsite={fp[c]['Dsite']:+.1f} cm")

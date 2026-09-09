@@ -4,13 +4,17 @@ Bridges `00_BASC_Fling_rm/BASC/` (baseline correction) to
 `pulse_classification/` (Shahi & Baker wavelet pulse extraction).
 
 ```
-fetch.py      MiniSEED / FDSN
+fetch.py      MiniSEED / FDSN / read_cwa_freefield() (CWA .txt, gal)
+              fetch_esm_event() — esm-db.eu DYNA .ASC (cm/s², open for IT/RAN)
 response.py     └─ resolve_response(): file → cache → FDSN → other-epoch → routed
                    → nominal sensitivity → assumed-physical → (else fail)
    │          instrument-response removal  →  acceleration [cm/s²]
    │
 qc.py         check_record(): response provenance / finite / sampling / duration /
               dead / clipping / spikes / units / event-present  →  pass|warn|fail
+   │          (QC always sees the untrimmed record)
+window.py     prepare(): optional Arias 5–95 % strong-motion window + optional
+              anti-alias decimation to a target rate  (before baseline correction)
    │
 basc.py       Kamai path:  detrend_poly(6) → taper → baseline_ka → (opt) flingstep_rm
 ebasco.py     eBASCO path: pre/strong/post-event trilinear detrend  (keeps permanent disp)
@@ -18,6 +22,7 @@ ebasco.py     eBASCO path: pre/strong/post-event trilinear detrend  (keeps perma
 classify.py   classify_velocity(vel_n, vel_e, dt) → the pulse dict  (standalone;
               the single PulseData→dict contract)
 pipeline.py   acc_to_velocity(method=…) → classify_velocity → JSON-friendly dict
+batch.py      batch_cwa_freefield() / batch_esm_event(): many records → one CSV
 ```
 
 `waveform/` is the entry point for new work. The legacy file-based tooling
@@ -83,18 +88,146 @@ print(out["any_pulse"], out["pulses"][0]["Tp"], out["pulses"][0]["PGV"])
 ```
 
 `out` is `{method, dt, npts, fling_removed, fling_params, vel_n, vel_e,
-pulses[…], any_pulse, qc, ebasco?}`.  `run_pulse_variants(...)` returns the same
-block twice under `out["variants"]["basc"]` (fling retained) and
-`out["variants"]["fling_removed"]`, with `qc` / `fling_params` / `method` /
-`dt` at the top.
+pulses[…], any_pulse, primary, select, picks, qc, preprocess, ebasco?}`.
+`run_pulse_variants(...)` returns the same block twice under
+`out["variants"]["basc"]` (fling retained) and `out["variants"]["fling_removed"]`,
+with `qc` / `preprocess` / `fling_params` / `method` / `dt` at the top.
 
-Near-real-time from a data centre:
+### Strong-motion window + decimation (`window` / `decimate_to`)
+
+Real accelerograms run 100–300 s at 100–200 Hz; the wavelet CWT is then slow and
+chases pre/post-event noise. Two optional, cheap fixes applied to the raw
+acceleration *before* baseline correction (QC still sees the full record):
+
+```python
+run_pulse(e, n, z, dt,
+          window="arias",      # Arias 5–95 % + 10 s lead / 15 s tail, on hypot(N,E)
+          decimate_to=50)      # anti-alias FIR downsample to 50 Hz (no-op if ≤ 50)
+```
+
+`window` also accepts a `strong_motion_window` kwarg dict (`p_lo`, `p_hi`,
+`pre`, `post`) or an explicit `(t0_s, t1_s)` tuple; `decimate_to` is a target
+rate in Hz. `out["preprocess"]` records what was done (`n_in`, `dt_in`,
+`window`, `decimate_factor`, `n_out`, `dt_out`). Velocity pulses have 0.25–15 s
+periods, so 50 Hz is ample: on the 2018 Hualien FreeField set this is ~30× faster
+with ΔTp ≤ 0.05 s, ΔPGV ≤ 1 cm/s and no `is_pulse` changes.
+
+## CWA "FreeField" records + batch mode
+
+`fetch.read_cwa_freefield(path)` reads one Taiwan CWA FreeField ASCII record
+(`#`-comment header + `Time U N E` columns, already DC-corrected acceleration in
+gal) into a `ThreeComponentAcc`; the station code is de-suffixed
+(`HWA057-ETL` → `HWA057`) and the response is tagged `assumed-physical` (no
+network lookup — the units are already physical).
+
+```bash
+python -m waveform.batch --cwa <dir-of-.txt> --out pulses.csv \
+    [--json-dir DIR] [--method kamai|ebasco] [--select strongest|earliest] \
+    [--qc gate|attach|off] [--no-window] [--decimate 50]   # --decimate 0 = off
+```
+
+Runs `run_pulse` per record with `window="arias"` + `decimate_to=50` by default
+and writes one CSV row each (`station, instrument, dt_in/out, npts_out, window
+bounds, qc, response, is_pulse, primary, Tp, PGV, pulse_indicator, PC,
+angle_deg, late, split, split_dt, …`); a bad record is logged with its error and
+does not stop the run. `batch_cwa_freefield(record_dir, out_csv, …)` is the
+library entry point and returns the row dicts.
+
+Near-real-time from a data centre (any ObsPy FDSN id — `IRIS`, `GEONET`,
+`GFZ`, …; raw counts are deconvolved via StationXML from the same client):
 
 ```python
 from waveform.fetch import fetch_event_acc
 acc = fetch_event_acc("TK", "NAR", "2023-02-06T01:17:36", channel="HN?", client="IRIS")
 out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="ebasco")
+
+acc = fetch_event_acc("NZ", "GDLC", "2010-09-03T16:35:41",       # 2010 Darfield
+                      channel="HN?", client="GEONET", pre_seconds=30, post_seconds=140)
+out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="kamai",
+                response=acc.meta["response"], window="arias", decimate_to=50)
 ```
+
+## Engineering Strong Motion database (esm-db.eu)
+
+`esm_event_search(...)` wraps ESM's FDSN `event` service (no auth) to find an
+event id; `fetch_esm_event(eventid, station)` pulls that station's 3-component
+record from ESM's `esmws/eventdata` service as DYNA `.ASC` — already in cm/s²,
+so no StationXML / deconvolution (response is tagged `assumed-physical`).
+
+```python
+from waveform.fetch import esm_event_search, fetch_esm_event
+ev = esm_event_search("2016-08-24T01:36:00", "2016-08-24T01:37:00", minmag=5.5)[0]
+acc = fetch_esm_event(ev["ev_id"], "AMT", processing="CV")   # CV = uncorrected
+out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="kamai",
+                response=acc.meta["response"], window="arias", decimate_to=50)
+```
+
+`processing`: `"CV"` uncorrected (default — the right input for the BASC
+pipeline), `"MP"` manually processed, `"AP"` auto-processed. `acc.meta` carries
+the DYNA header — `network`, `vs30`, `ec8`, `event_lat/lon`, `magnitude`,
+`epicentral_distance_km`, `baseline_correction`, `data_license`, …. ESM streams
+named `HN1/HN2/HN3` are mapped `1→N, 2→E, 3→Z` (noted in `meta["component_map"]`;
+the classifier rotates over all azimuths so the E/N labelling does not affect
+`Tp`/`PGV`/`is_pulse`). IT/RAN and most European strong-motion data are open;
+`token=<ESM/ORFEUS token file>` covers access-restricted networks.
+`read_esm_asc_zip(path)` is the offline counterpart for a saved eventdata ZIP.
+`run_record --sta AMT --esm-event <id> [--esm-processing CV] [--esm-token f]`.
+
+`batch_esm_event(eventid, stations, out_csv)` (also
+`python -m waveform.batch --esm-event <id> --esm-stations AQV,AQK,AQA --out …`)
+pulls a list of stations for one event and writes one CSV row each, same schema
+as the CWA batch plus `Mw`, `Repi_km`, `vs30`, `ec8`.
+
+### Validation — vs Shahi & Baker (2014), `CV` → Kamai + Arias + 50 Hz
+
+Every SB2014 (`data/reference/table_SB2014.csv`) pulse record whose event is on
+ESM and whose station is nameable — pulled straight from esm-db.eu, no local
+files:
+
+| event | station | Mw | Tp SB2014 → here | PGV SB2014 → here | is_pulse |
+|---|---|---|---|---|---|
+| 2009 L'Aquila (`IT-2009-0009`) | AQV | 6.1 | 1.07 → 1.09 | 42.1 → 42.0 | ✓ |
+| | AQA | 6.1 | 1.18 → 1.20 | 31.6 → 31.1 | ✓ |
+| | AQK | 6.1 | 1.98 → 1.99 | 46.3 → 45.8 | ✓ |
+| 1980 Irpinia-01 (`IT-1980-0012`) | BGI | 6.9 | 1.71 → 1.74 | 38.1 → 38.4 | ✓ |
+| | STR | 6.9 | 3.27 → 3.31 | 71.1 → 72.8 | ✓ |
+| 1979 Montenegro (`ME-1979-0003`) | BAR | 6.9 | 1.44 → 1.43 | 62.7 → 60.5 | ✓ |
+| | ULO | 6.9 | 1.97 → 1.93 | 62.8 → 63.8 | ✓ |
+
+7/7 records (1979–2009, analog and digital instruments): median |ΔTp| 0.024 s
+(max 0.038), median |ΔPGV| 0.55 cm/s (max 2.2), is_pulse 7/7. Every far-field
+station in the wider per-event runs is correctly `is_pulse=0`. See
+`output/{2009_LAquila,1980_Irpinia,1979_Montenegro}/` and
+`output/esm_vs_SB2014_all.csv`. (Sanity check, 2016-08-24 Amatrice M6.0 / AMT:
+`is_pulse=True`, `Tp ≈ 0.8 s`, `PGV ≈ 44 cm/s` — the known Amatrice pulse.)
+Driver: `python tests/validate_esm.py [--refetch|--plots-only]`.
+
+### Validation — GeoNet FDSN (raw counts + StationXML) vs Shahi & Baker (2014)
+
+`fetch_event_acc(..., client="GEONET")` downloads raw counts and deconvolves
+the response from GeoNet's StationXML, so this exercises the full
+`counts → response → BASC → classifier` path (QC reports `pass`, not the
+`assumed-physical` `warn` the pre-processed ESM data gets). Two Canterbury
+events, every SB2014 pulse record fetched:
+
+| event | n | is_pulse | median \|ΔTp\| | median \|ΔPGV\| | notes |
+|---|---|---|---|---|---|
+| 2010 Darfield (Mw 7.0, Tp 6–13 s) | 13 | 12/13 | 0.05 s | 0.7 cm/s | LPCC (Rrup 26 km) borderline |
+| 2011 Christchurch (Mw 6.2) | 7 | 6/7 | 0.03 s | 0.7 cm/s | CCCC near-threshold (PI −0.1); CMHS excluded (gappy record) |
+| **combined** | **20** | **18/20** | **0.046 s** | **0.63 cm/s** | max \|ΔTp\| 1.03 s (TPLC), max \|ΔPGV\| 8.7 cm/s (GDLC, Rrup 1.2 km) |
+
+Long-period pulses (Darfield CBGS/REHS `Tp ≈ 12.6 s`) reproduce to <0.2 s. See
+`output/{2010_Darfield,2011_Christchurch}/` and `output/geonet_vs_*_all.csv`.
+Driver: `python tests/validate_geonet.py [--refetch|--plots-only]`.
+
+### Combined — 27 records, 5 events (1979–2011)
+
+`python tests/validate_summary.py` merges both caches into
+`output/validation_summary.csv` and a one-page figure (Tp & PGV 1:1 vs the
+reference, plus Tp & PGV vs Rrup). Overall: **is_pulse 25/27**, median
+|ΔTp| **0.032 s**, median |ΔPGV| **0.60 cm/s**; both `is_pulse` misses
+(Darfield LPCC, Christchurch CCCC) are near-threshold, the largest single
+deviations are Darfield TPLC (ΔTp 1.0 s) and GDLC (ΔPGV 8.7 cm/s, Rrup 1.2 km).
 
 ## Baseline-correction methods
 
