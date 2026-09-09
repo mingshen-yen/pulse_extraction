@@ -104,7 +104,8 @@ async function selectEvent(key) {
       origin: "reference", pulseOnly: s.pulseOnly,
       event: { name: e.name, lat: e.lat, lon: e.lon, depth_km: e.depth_km,
         mag: e.mag, mag_type: "M", time: e.year, source: s.label,
-        fault_type: e.fault_type },
+        fault_type: e.fault_type, fault: e.fault,
+        source_model: e.source_model, usgs_url: e.usgs_url },
       stations: e.stations, stats: e.stats, key,
       pipeline: s.label,
     };
@@ -162,9 +163,15 @@ function drawMap(d) {
   const ev = d.event, pts = [];
 
   if (ev.fault && ev.fault.polygon) {
-    const poly = ev.fault.polygon.map(([lon, lat]) => [lat, lon]);
-    L.polygon(poly, { color: FAULT, weight: 2, fillOpacity: 0.08 })
-      .bindTooltip(`rupture · strike ${fmt(ev.fault.strike, 0)}° · L ${fmt(ev.fault.length_km, 0)} km`,
+    const f = ev.fault, ff = /finite-fault/.test(f.model || "");
+    const poly = f.polygon.map(([lon, lat]) => [lat, lon]);
+    L.polygon(poly, { color: FAULT, weight: 2, dashArray: ff ? null : "5 4",
+      fillOpacity: ff ? 0.12 : 0.06 })
+      .bindTooltip(
+        `${ff ? "USGS finite-fault" : "rupture (mag-scaled)"}<br>` +
+        `strike ${fmt(f.strike, 0)}° · dip ${fmt(f.dip, 0)}° · ` +
+        `${fmt(f.length_km, 0)}×${fmt(f.width_km, 0)} km` +
+        (f.max_slip_m ? `<br>max slip ${fmt(f.max_slip_m, 1)} m` : ""),
         { sticky: true }).addTo(layer);
     poly.forEach((p) => pts.push(p));
   }
@@ -230,6 +237,13 @@ function drawHead(d) {
     `<div class="stat"><b>${fmt(s.PGV_median, 0)}</b><span>median PGV cm/s</span></div>` +
     `</div>` +
     (d.pipeline ? `<div class="kv">${d.pipeline}</div>` : "") +
+    (e.source_model
+      ? `<div class="kv">${e.source_model.source} · nodal plane ` +
+        `${fmt(e.source_model.np1[0], 0)}/${fmt(e.source_model.np1[1], 0)}/` +
+        `${fmt(e.source_model.np1[2], 0)}` +
+        (e.usgs_url ? ` · <a href="${e.usgs_url}" target="_blank" rel="noopener">USGS ↗</a>` : "") +
+        `</div>`
+      : "") +
     (nomap ? `<div class="kv muted">${withco}/${d.stations.length} stations located — ` +
       `full list below</div>` : "") +
     `<div id="crosslinks" class="kv"></div>`;

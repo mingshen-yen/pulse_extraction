@@ -23,23 +23,24 @@ pip install -r ../requirements.txt
 python ../scripts/build_site_data.py --curated          # rebuild the 6 curated events
 python ../scripts/build_site_data.py --event 2010_darfield   # just one
 python ../scripts/build_site_data.py --poll --min-mag 5.8    # append new live events (USGS)
-python ../scripts/import_reference_tables.py                 # rebuild data/reference/ from data/reference/*.csv
+python ../scripts/import_reference_tables.py                 # rebuild data/reference/ from the master table
 ```
 
-`import_reference_tables.py` builds two published catalogs:
+`import_reference_tables.py` builds three published catalogs from the single
+consolidated table `references/tables/pulse_records_with_coords.csv` (which
+already carries a resolved coordinate per record):
 
-* **NCREE Taiwan** from `../data/reference/Taiwan_NCREE.csv` (git-ignored,
-  local) — hypocentre + station coordinates, maps fully.
-* **Shahi & Baker (2014)** fetched from the canonical Pulse-like-records list
-  at jackwbaker.com (243 records; snapshot cached in
-  `site/data/reference/_cache/sb2014.html`). Station coordinates are joined by
-  name from NCREE (which carries the same descriptive station names for the
-  US/EU/JP events) and from GeoNet for the New Zealand codes — ~142/243
-  records map; the rest are shown as a record table. Each record links back to
-  its S&B summary page.
+* **Shahi & Baker (2014)** — `Baker(2014)` sheet, 243 records, 241 mapped, with
+  fault-normal-pulse flags; each record links to its jackwbaker.com page.
+* **NCREE Taiwan** — 340 records, all mapped, with event hypocentres.
+* **Yen et al. (2022)** — 84 near-fault pulse records, 83 mapped.
 
-`--no-net` rebuilds from the cached HTML only. The generated
-`site/data/reference/` JSON is committed; each catalog carries its citation.
+Each event also gets a **source model** from USGS ComCat: moment-tensor /
+focal-mechanism nodal planes and, where a finite-fault inversion exists, its
+geometry — used to draw the rupture polygon (solid = inversion, dashed =
+magnitude-scaled). USGS responses cache to `site/data/reference/_cache/`
+(git-ignored); `--no-net` reuses them. The generated `site/data/reference/*.json`
+is committed; each catalog carries its citation.
 
 Each event: fetch strong-motion waveforms (GeoNet FDSN / ESM) → `run_pulse`
 (Kamai baseline correction · Arias 5–95 % window · 50 Hz) → one `data/events/*.json`.

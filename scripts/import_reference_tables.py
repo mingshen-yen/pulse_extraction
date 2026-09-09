@@ -1,27 +1,24 @@
 #!/usr/bin/env python3
-"""Turn the published pulse tables in ``data/reference/*.csv`` into catalog JSON
-for the showcase site (``site/data/reference/<catalog>.json`` + ``index.json``).
+"""Build the showcase-site reference catalogs from the consolidated pulse table
+``references/tables/pulse_records_with_coords.csv``.
 
     python scripts/import_reference_tables.py
+    python scripts/import_reference_tables.py --no-net    # skip the USGS lookups
 
-    python scripts/import_reference_tables.py --no-net    # use cached fetches only
+The master CSV merges several published pulse tables into one row-per-record
+sheet with station coordinates already resolved (``latitude_deg`` /
+``longitude_deg`` / ``coord_status``).  One catalog is emitted per source sheet
+(``site/data/reference/<catalog>.json`` + ``index.json``):
 
-Catalogs
---------
-* ``taiwan_ncree``     -- NCREE Taiwan pulse database (``data/reference/
-                         Taiwan_NCREE.csv``): hypocentre + station coordinates,
-                         maps fully.
-* ``shahi_baker_2014`` -- fetched live from the canonical Pulse-like-records
-                         list at jackwbaker.com (cached to ``_cache/sb2014.html``).
-                         Station coordinates are joined from NCREE / GeoNet /
-                         ESM where the "Station Name" is a code; the rest are a
-                         table.  Each record links to its S&B summary page.
-* ``yen_2022`` / ``turkey_2023`` -- ``data/reference/*.csv``; station coords
-                         joined from NCREE (Taiwan), GeoNet (NZ), ESM's FDSN
-                         station service (AFAD / KOERI ``TK``/``KO``).
+* ``shahi_baker_2014`` -- ``Baker(2014)`` sheet: 243 records, NGA-West2, with
+  fault-normal-pulse flags; each record links to its jackwbaker.com page.
+* ``taiwan_ncree``     -- ``Taiwan database(NCREE)`` sheet: 340 records with
+  event hypocentres.
+* ``yen_2022``         -- ``Yen(2022)`` sheet: 84 near-fault pulse records.
 
-Epicentres for events NCREE does not cover come from a small hand lookup
-(``EXTRA_EPI``).  Every catalog JSON carries its ``citation`` + ``url``.
+Each event is also given a **source model** from USGS ComCat (cached in
+``_cache/usgs/``): moment-tensor / focal-mechanism nodal planes and, where a
+finite-fault inversion exists, its geometry -- used to draw the rupture polygon.
 """
 
 from __future__ import annotations
@@ -29,8 +26,11 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import re
 import sys
+import time
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -38,29 +38,35 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from waveform.site_export import haversine_km                     # noqa: E402
 
-REF = ROOT / "data" / "reference"
+MASTER = ROOT / "references" / "tables" / "pulse_records_with_coords.csv"
 OUT = ROOT / "site" / "data" / "reference"
 CACHE = OUT / "_cache"
-SB_URL = "https://www.jackwbaker.com/pulse_classification_v2/Pulse-like-records.html"
+JWB = "https://www.jackwbaker.com/pulse_classification_v2"
 
-CITATIONS = {
-    "taiwan_ncree": dict(
-        label="NCREE Taiwan pulse database", short="NCREE",
-        citation="Chao et al. — NCREE near-fault pulse-like ground-motion "
-                 "database, Taiwan (updated). Hypocentre & station coordinates "
-                 "included.",
-        url="https://www.ncree.org/"),
+CATALOGS = {
     "shahi_baker_2014": dict(
+        sheet="Baker(2014)", pulse_only=False,
         label="Shahi & Baker (2014)", short="S&B 2014",
         citation="Shahi, S.K. & Baker, J.W. (2014). An efficient algorithm to "
                  "identify strong-velocity pulses in multicomponent ground "
-                 "motions. BSSA 104(5). Pulse-like-records list, "
-                 "jackwbaker.com/pulse_classification_v2.",
-        url="https://www.jackwbaker.com/pulse_classification_v2/Pulse-like-records.html"),
+                 "motions. BSSA 104(5). Pulse-like-records list.",
+        url=f"{JWB}/Pulse-like-records.html"),
+    "taiwan_ncree": dict(
+        sheet="Taiwan database(NCREE)", pulse_only=False,
+        label="NCREE Taiwan pulse database", short="NCREE",
+        citation="NCREE near-fault pulse-like ground-motion database, Taiwan "
+                 "(updated). Hypocentre & station coordinates included.",
+        url="https://www.ncree.org/"),
+    "yen_2022": dict(
+        sheet="Yen(2022)", pulse_only=True,
+        label="Yen et al. (2022)", short="Yen 2022",
+        citation="Yen et al. (2022) near-fault velocity-pulse catalog "
+                 "(Darfield, Meinong, Hualien, Kumamoto, Iburi).",
+        url=""),
 }
 
-# epicentres for SB2014 events NOT covered by NCREE.
-# lat, lon, depth_km, mag  (well-constrained mainshock hypocentres)
+# fallback epicentres for events with no hypocentre in the table and none in
+# the NCREE sheet.  lat, lon, depth_km, mag
 EXTRA_EPI = {
     "loma_prieta|1989": (37.04, -121.88, 17.5, 6.93),
     "chuetsu_oki|2007": (37.54, 138.45, 10.0, 6.8),
@@ -83,8 +89,27 @@ EXTRA_EPI = {
     "northern_calif_03|1954": (40.29, -124.05, 15.0, 6.5),
     "northwest_china_03|1997": (35.07, 87.33, 10.0, 6.1),
     "imperial_valley_07|1979": (32.93, -115.51, 8.0, 5.01),
-    "taiwan_smart1_40|1986": (24.68, 121.77, 8.0, 6.32),   # Lotung SMART1 array
+    "taiwan_smart1_40|1986": (24.68, 121.77, 8.0, 6.32),
     "yountville|2000": (38.38, -122.41, 10.1, 5.0),
+    "kumafore|2016": (32.74, 130.81, 11.4, 6.1),
+    "iburi|2018": (42.69, 141.93, 37.0, 6.6),
+}
+
+# Shahi & Baker / Yen event key  ->  NCREE-sheet event key (for hypocentre join)
+_NCREE_ALIASES = {
+    "chi_chi_taiwan": "1999_chichi_taiwan", "chi_chi_taiwan_03": "1999_chichi_03_taiwan",
+    "chi_chi_taiwan_04": "1999_chichi_07_taiwan", "chi_chi_taiwan_06": "1999_chichi_05_taiwan",
+    "northridge_01": "1994_northridge_01_usa", "imperial_valley_06": "1979_imperialvalley_06_usa",
+    "parkfield_02_ca": "2004_parkfield_02_ca", "darfield_new_zealand": "2010_darfield_newzealand",
+    "christchurch_new_zealand": "2011_christchurch_newzealand", "kobe_japan": "1995_kobe_japan",
+    "kocaeli_turkey": "1999_kocaeli_turkey", "duzce_turkey": "1999_duzce_turkey",
+    "cape_mendocino": "1992_capemendocino_usa", "coyote_lake": "1979_coyotelake_usa",
+    "landers": "1992_landers_usa", "el_mayor_cucapah": "2010_elmayor_cucapah_mexico",
+    "superstition_hills_02": "1987_superstitionhills_02_usa", "l_aquila_italy": "2009_laquila_italy",
+    "montenegro_yugo": "1979_montenegro_yugoslavia", "irpinia_italy_01": "1980_irpinia_01_italy",
+    "denali_alaska": "2002_denali_alaska", "tabas_iran": "1978_tabas_iran", "bam_iran": "2003_bam_iran",
+    "kumamoto": "2016_kumamoto_japan", "meinong": "2016_meinong_taiwan",
+    "hualien": "2018_hualien_taiwan", "darfield": "2010_darfield_newzealand",
 }
 
 
@@ -100,36 +125,45 @@ def _f(x, d=None):
         return d
 
 
+def _bool(x):
+    v = str(x).strip().lower()
+    return True if v in ("true", "1", "1.0") else False if v in ("false", "0", "0.0") else None
+
+
+# --------------------------------------------------------------------------- #
+# stats (unchanged frontend contract)
+# --------------------------------------------------------------------------- #
+def _dist(s):
+    return s.get("rrup_km") if s.get("rrup_km") is not None else s.get("repi_km")
+
+
 def _stats(stations):
-    pul = [s for s in stations if s["is_pulse"]]
-    tps = sorted(s["Tp"] for s in pul if s["Tp"])
     import statistics as st
+    pul = [s for s in stations if s["is_pulse"]]
+    tps = sorted(s["Tp"] for s in pul if s.get("Tp"))
+    pgv = sorted(s["PGV"] for s in pul if s.get("PGV"))
     return {
         "n": len(stations), "n_pulse": len(pul),
         "pulse_fraction": round(len(pul) / len(stations), 3) if stations else None,
         "Tp_median": round(st.median(tps), 3) if tps else None,
-        "PGV_median": (round(st.median(sorted(s["PGV"] for s in pul)), 2)
-                       if pul else None),
+        "PGV_median": round(st.median(pgv), 2) if pgv else None,
         "Tp_range": [tps[0], tps[-1]] if tps else [None, None],
         "by_distance": _bins(stations),
         "scatter": [{"code": s["code"], "repi_km": s.get("repi_km"),
-                     "rrup_km": s.get("rrup_km"), "Tp": s["Tp"], "PGV": s["PGV"],
-                     "is_pulse": s["is_pulse"]}
-                    for s in stations
-                    if (s.get("rrup_km") or s.get("repi_km")) is not None],
+                     "rrup_km": s.get("rrup_km"), "Tp": s.get("Tp"),
+                     "PGV": s.get("PGV"), "is_pulse": s["is_pulse"]}
+                    for s in stations if _dist(s) is not None],
     }
 
 
 def _bins(stations, edges=(0, 5, 10, 20, 40, 80, 160)):
     out = []
     for lo, hi in zip(edges, edges[1:]):
-        g = [s for s in stations
-             if (s.get("rrup_km") or s.get("repi_km")) is not None
-             and lo <= (s.get("rrup_km") or s["repi_km"]) < hi]
+        g = [s for s in stations if _dist(s) is not None and lo <= _dist(s) < hi]
         if not g:
             continue
         npul = sum(1 for s in g if s["is_pulse"])
-        tps = sorted(s["Tp"] for s in g if s["is_pulse"] and s["Tp"])
+        tps = sorted(s["Tp"] for s in g if s["is_pulse"] and s.get("Tp"))
         out.append({"r_lo": lo, "r_hi": hi, "n": len(g), "n_pulse": npul,
                     "pulse_fraction": round(npul / len(g), 3),
                     "Tp_median": tps[len(tps) // 2] if tps else None})
@@ -137,11 +171,14 @@ def _bins(stations, edges=(0, 5, 10, 20, 40, 80, 160)):
 
 
 # --------------------------------------------------------------------------- #
-# fetching: the online Shahi & Baker table + station coordinates
+# USGS ComCat source model (moment tensor / focal mechanism / finite fault)
 # --------------------------------------------------------------------------- #
+USGS = "https://earthquake.usgs.gov/fdsnws/event/1/query"
+
+
 def _cached(name, fetch, no_net):
-    CACHE.mkdir(parents=True, exist_ok=True)
     p = CACHE / name
+    p.parent.mkdir(parents=True, exist_ok=True)
     if no_net and p.exists():
         return p.read_text()
     if not no_net:
@@ -160,226 +197,235 @@ def _get(url, timeout=60):
         return r.read().decode("utf-8", "replace")
 
 
-def fetch_sb2014_rows(no_net=False):
-    """The 243-row Pulse-like-records table from jackwbaker.com as dicts."""
-    html = _cached("sb2014.html", lambda: _get(SB_URL), no_net)
-    if not html:
-        raise SystemExit("no Shahi & Baker table (need network once)")
-    rows = re.findall(r"<tr[^>]*>(.*?)</tr>", html, re.S)
-    out = []
-    for r in rows[1:]:
-        c = [re.sub(r"<[^>]+>", "", x).strip()
-             for x in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", r, re.S)]
-        if len(c) < 13:
+def _rupture_rect(lat, lon, length, width, strike, dip):
+    half_l = length / 2.0
+    surf_half_w = (width / 2.0) * math.cos(math.radians(dip or 90))
+    kmlat, kmlon = 111.32, 111.32 * math.cos(math.radians(lat))
+    s = math.radians(strike)
+    ax, ay = math.sin(s), math.cos(s)
+    px, py = math.cos(s), -math.sin(s)
+    pts = []
+    for dl, dw in ((-half_l, -surf_half_w), (half_l, -surf_half_w),
+                   (half_l, surf_half_w), (-half_l, surf_half_w)):
+        pts.append([round(lon + (dl * ax + dw * px) / kmlon, 5),
+                    round(lat + (dl * ay + dw * py) / kmlat, 5)])
+    return pts + [pts[0]]
+
+
+def _mag_scaled_rect(lat, lon, mag, strike, dip):
+    length = 10 ** (-2.44 + 0.59 * mag)              # Wells & Coppersmith (1994)
+    width = 10 ** (-1.01 + 0.32 * mag)
+    return dict(strike=strike, dip=dip, length_km=round(length, 1),
+                width_km=round(width, 1),
+                model="Wells & Coppersmith (1994) scaling",
+                polygon=_rupture_rect(lat, lon, length, width, strike, dip))
+
+
+def _np(props, i):
+    try:
+        return [float(props[f"nodal-plane-{i}-strike"]),
+                float(props.get(f"nodal-plane-{i}-dip", 45)),
+                float(props.get(f"nodal-plane-{i}-rake", 0))]
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def usgs_source_model(lat, lon, year, mag, no_net=False):
+    if lat is None or year is None:
+        return None
+    # year-only window: a tight search radius pins the event by place so a
+    # nearby larger event in the same year (Kocaeli vs Düzce 1999) is not matched.
+    q = dict(format="geojson", orderby="magnitude", limit=1,
+             latitude=lat, longitude=lon, maxradiuskm=80,
+             minmagnitude=(mag or 5) - 0.6,
+             starttime=f"{year}-01-01", endtime=f"{int(year) + 1}-01-01")
+    tag = re.sub(r"\W+", "_", f"{lat}_{lon}_{year}_{mag}")
+    idx = _cached(f"usgs/find_{tag}.json",
+                  lambda: _get(f"{USGS}?{urllib.parse.urlencode(q)}"), no_net)
+    feats = json.loads(idx).get("features", []) if idx else []
+    if not feats:
+        return None
+    p = feats[0]["properties"]
+    c = feats[0]["geometry"]["coordinates"]
+    if mag and p.get("mag") and abs(p["mag"] - mag) > 1.1:
+        return None
+    if haversine_km(lat, lon, c[1], c[0]) > 100:         # matched a different event
+        return None
+    det = None
+    if p.get("detail"):
+        dtag = "usgs/" + re.sub(r"\W+", "_", p["detail"].split("query")[-1])[:120] + ".json"
+        dtxt = _cached(dtag, lambda: _get(p["detail"]), no_net)
+        det = json.loads(dtxt) if dtxt else None
+    prods = (det or feats[0]).get("properties", {}).get("products", {})
+
+    mech = None
+    for pk in ("moment-tensor", "focal-mechanism"):
+        pr = (prods.get(pk) or [{}])[0].get("properties", {})
+        if _np(pr, 1):
+            mech = dict(np1=_np(pr, 1), np2=_np(pr, 2), source=f"USGS {pk}",
+                        mag=_f(pr.get("derived-magnitude")) or p.get("mag"),
+                        mag_type=(pr.get("derived-magnitude-type") or "Mww"))
+            break
+
+    ff = (prods.get("finite-fault") or [{}])[0].get("properties", {})
+    if ff.get("model-length"):
+        L, W = float(ff["model-length"]), float(ff["model-width"])
+        strike = float(ff.get("segment-1-strike", ff.get("model-strike", 0)))
+        dip = float(ff.get("segment-1-dip", ff.get("model-dip", 45)))
+        fault = dict(strike=strike, dip=dip, rake=_f(ff.get("model-rake")),
+                     length_km=round(L, 1), width_km=round(W, 1),
+                     max_slip_m=_f(ff.get("maximum-slip")),
+                     model="USGS finite-fault inversion",
+                     url=f"https://earthquake.usgs.gov/earthquakes/eventpage/"
+                         f"{feats[0]['id']}/finite-fault",
+                     polygon=_rupture_rect(c[1], c[0], L, W, strike, dip))
+    elif mech:
+        fault = _mag_scaled_rect(c[1], c[0], p.get("mag") or mag or 6.0,
+                                 mech["np1"][0], mech["np1"][1])
+        fault["rake"] = mech["np1"][2]
+    else:
+        return None
+    return dict(mechanism=mech, fault=fault, usgs_url=p.get("url"))
+
+
+def attach_source_models(events, no_net=False):
+    n = 0
+    for ev in events:
+        sm = usgs_source_model(ev.get("lat"), ev.get("lon"), ev.get("year"),
+                               ev.get("mag"), no_net=no_net)
+        if not sm:
             continue
-        out.append(dict(
-            rsn=c[0], name=c[1], year=c[2], sta=c[3], mag=_f(c[4]),
-            rrup=_f(c[5]), rhypo=_f(c[6]), Tp=_f(c[7]), PGV=_f(c[8]),
-            ori_n=_f(c[9]), ori_fp=_f(c[10]),
-            is_pulse=c[11].strip() in ("1", "1.0"),
-            directivity=c[12].strip() in ("1", "1.0"),
-            summary_url=("https://www.jackwbaker.com/pulse_classification_v2/"
-                         + c[13]) if len(c) > 13 and c[13] else None))
-    return out
-
-
-def _ncree_station_index():
-    """{station name/code -> {lat, lon, vs30}} from the NCREE table.  NCREE
-    stores the *same* descriptive names as Shahi & Baker for the US / EU / JP
-    events, so an exact-name match geolocates most of them."""
-    idx = {}
-    for r in csv.DictReader(open(REF / "Taiwan_NCREE.csv", encoding="utf-8-sig")):
-        raw = r["sta id"].strip()
-        la, lo = _f(r["sta lat"]), _f(r["sta lon"])
-        if not raw or la is None:
-            continue
-        co = dict(lat=round(la, 4), lon=round(lo, 4), vs30=_f(r["vs30"]))
-        for k in {raw, re.sub(r"\s*\(.*?\)", "", raw).strip(),
-                  re.sub(r"[A-Z]$", "", raw) if raw.startswith("KMMH") else raw}:
-            idx.setdefault(k, co)
-    return idx
-
-
-def _geonet_coords(codes):
-    if not codes:
-        return {}
-    from obspy.clients.fdsn import Client
-    inv = Client("GEONET", timeout=60).get_stations(
-        network="NZ", station=",".join(sorted(codes)), level="station")
-    return {s.code: dict(lat=round(s.latitude, 4), lon=round(s.longitude, 4),
-                         vs30=None)
-            for n in inv for s in n}
-
-
-def build_station_index(sb_rows, no_net=False):
-    """{station code: {lat, lon, vs30}} for the code-named Shahi & Baker
-    stations -- NCREE covers the Taiwan codes, GeoNet the New Zealand ones."""
-    idx = dict(_ncree_station_index())
-    nz = {r["sta"].strip() for r in sb_rows
-          if r["sta"] and " " not in r["sta"] and len(r["sta"]) <= 6
-          and r["sta"] not in idx}
-    if nz and not no_net:
-        try:
-            idx.update(_geonet_coords(nz))
-        except Exception as exc:                                  # noqa: BLE001
-            print(f"  GeoNet station lookup failed: {exc}")
-    return idx
+        if sm.get("mechanism"):
+            ev["source_model"] = sm["mechanism"]
+        ev["fault"] = sm["fault"]
+        ev["usgs_url"] = sm.get("usgs_url")
+        n += 1
+        if not no_net:
+            time.sleep(0.25)
+    print(f"  source models: {n}/{len(events)} events")
 
 
 # --------------------------------------------------------------------------- #
-def build_ncree():
-    rows = list(csv.DictReader(open(REF / "Taiwan_NCREE.csv", encoding="utf-8-sig")))
-    events = {}
-    for r in rows:
-        ek = key(r["EQ_name"])
-        ev = events.setdefault(ek, dict(
-            key=ek, name=r["EQ_name"].replace("_", " "),
-            year=re.match(r"(\d{4})", r["EQ_name"]).group(1)
-            if re.match(r"\d{4}", r["EQ_name"]) else None,
-            lat=_f(r["Hypo lat"]), lon=_f(r["hypo lon"]),
-            depth_km=_f(r["hypo depth"]), mag=_f(r["Mw"]),
-            fault_type=r["fault type"] or None, stations=[]))
-        pgv = max(_f(r["PGV_EW"], 0), _f(r["PGV_NS"], 0)) or None
-        ev["stations"].append(dict(
-            code=r["sta id"], lat=_f(r["sta lat"]), lon=_f(r["sta lon"]),
-            vs30=_f(r["vs30"]), rrup_km=_f(r["rrup"]),
-            is_pulse=str(r["Ipulse_H"]).strip().upper() == "TRUE",
-            Tp=_f(r["Tp"]), PGV=pgv,
-            fling=str(r["fling"]).strip().upper() == "TRUE",
-            pga=max(_f(r["PGA_EW"], 0), _f(r["PGA_NS"], 0)) or None))
-    return _finish_events(events, use_rrup=True)
+# master CSV -> catalog
+# --------------------------------------------------------------------------- #
+def _rows(sheet):
+    return [r for r in csv.DictReader(open(MASTER, encoding="utf-8-sig"))
+            if r["source_sheet"] == sheet]
 
 
-def _events_from_rows(rows, sta_idx):
-    """rows: dicts with name, year, sta, mag, rrup, rhypo, Tp, PGV, ori_*,
-    is_pulse, optional summary_url.  Attach station coords from ``sta_idx``."""
+def _is_pulse(r, cid):
+    if cid == "taiwan_ncree":
+        return str(r["Ipulse_H"]).strip().lower() == "true"
+    if cid == "yen_2022":
+        return True
+    return str(r["fault_normal_pulse"]).strip() == "1"          # Baker
+
+
+def _station(r, cid):
+    pgv = _f(r["PGV_cm_s"]) or (max(_f(r["PGV_EW_original"], 0),
+                                    _f(r["PGV_NS_original"], 0)) or None)
+    rsn = (r["NGA_RSN"] or "").strip()
+    return dict(
+        code=r["station_original"].strip() or r["station_key"],
+        lat=_f(r["latitude_deg"]), lon=_f(r["longitude_deg"]),
+        vs30=_f(r["vs30_original"]),
+        rrup_km=_f(r["Rrup_km"]) if r["Rrup_km"] else _f(r["closest_distance_km"]),
+        rhyp_km=_f(r["Rhyp_km"]),
+        is_pulse=_is_pulse(r, cid),
+        Tp=_f(r["Tp_s"]) or _f(r["Tp_H_s"]),
+        PGV=pgv,
+        ori_n=_f(r["orientation_north_deg"]),
+        ori_fp=_f(r["orientation_fault_parallel_deg"]),
+        fling=_bool(r["fling"]),
+        directivity=True if str(r["directivity_effect"]).strip() == "1" else None,
+        rsn=rsn or None,
+        summary_url=f"{JWB}/{rsn}.html" if rsn and cid == "shahi_baker_2014" else None,
+        quality_flag=r["quality_flag"] or None,
+        coord_status=r["coord_status"] if r["coord_status"] != "matched" else None,
+    )
+
+
+def build_catalog(cid):
     events = {}
-    for r in rows:
-        nm, yr = r["name"].strip(), str(r.get("year") or "").strip()
+    for r in _rows(CATALOGS[cid]["sheet"]):
+        nm, yr = r["event_original"].strip(), (r["year"] or "").strip()
         ek = key(nm, yr)
         ev = events.setdefault(ek, dict(
-            key=ek, name=nm, year=yr or None, lat=None, lon=None,
-            depth_km=None, mag=r.get("mag"), fault_type=None, stations=[]))
-        co = sta_idx.get(str(r["sta"]).strip(), {})
-        ev["stations"].append(dict(
-            code=str(r["sta"]).strip(),
-            lat=co.get("lat"), lon=co.get("lon"), vs30=co.get("vs30"),
-            rrup_km=r.get("rrup"), rhyp_km=r.get("rhypo"),
-            is_pulse=bool(r.get("is_pulse", True)),
-            Tp=r.get("Tp"), PGV=r.get("PGV"),
-            ori_fp=r.get("ori_fp"), ori_n=r.get("ori_n"),
-            summary_url=r.get("summary_url")))
-    return events
+            key=ek, name=nm.replace("_", " "), year=yr or None,
+            lat=_f(r["hypo_lat_deg"]), lon=_f(r["hypo_lon_deg"]),
+            depth_km=_f(r["hypo_depth_original"]), mag=_f(r["Mw"]),
+            fault_type=r["mechanism_original"] or None, stations=[]))
+        ev["stations"].append(_station(r, cid))
+    return list(events.values())
 
 
-def build_from_rows(rows, ncree_epi, sta_idx):
-    events = _events_from_rows(rows, sta_idx)
-    for ek, ev in events.items():
-        epi = ncree_epi.get(_match_ncree(ev["name"], ev["year"])) or EXTRA_EPI.get(ek)
-        if epi:
-            ev["lat"], ev["lon"], ev["depth_km"], m = epi
-            ev["mag"] = ev["mag"] or m
-    return _finish_events(events, use_rrup=True)
-
-
-_NCREE_ALIASES = {
-    "chi_chi_taiwan": "1999_chichi_taiwan",
-    "chi_chi_taiwan_03": "1999_chichi_03_taiwan",
-    "chi_chi_taiwan_04": "1999_chichi_07_taiwan",
-    "chi_chi_taiwan_06": "1999_chichi_05_taiwan",
-    "northridge_01": "1994_northridge_01_usa",
-    "imperial_valley_06": "1979_imperialvalley_06_usa",
-    "parkfield_02_ca": "2004_parkfield_02_ca",
-    "darfield_new_zealand": "2010_darfield_newzealand",
-    "christchurch_new_zealand": "2011_christchurch_newzealand",
-    "kobe_japan": "1995_kobe_japan",
-    "kocaeli_turkey": "1999_kocaeli_turkey",
-    "duzce_turkey": "1999_duzce_turkey",
-    "cape_mendocino": "1992_capemendocino_usa",
-    "coyote_lake": "1979_coyotelake_usa",
-    "landers": "1992_landers_usa",
-    "el_mayor_cucapah": "2010_elmayor_cucapah_mexico",
-    "superstition_hills_02": "1987_superstitionhills_02_usa",
-    "l_aquila_italy": "2009_laquila_italy",
-    "montenegro_yugo": "1979_montenegro_yugoslavia",
-    "irpinia_italy_01": "1980_irpinia_01_italy",
-    "denali_alaska": "2002_denali_alaska",
-    "tabas_iran": "1978_tabas_iran",
-    "bam_iran": "2003_bam_iran",
-    "kumamoto": "2016_kumamoto_japan",
-    "meinong": "2016_meinong_taiwan",
-    "hualien": "2018_hualien_taiwan",
-    "darfield": "2010_darfield_newzealand",
-}
-
-
-def _match_ncree(name, year):
-    k = key(name)
-    return _NCREE_ALIASES.get(k, key(name, year))
-
-
-def _finish_events(events, *, use_rrup):
-    out = []
-    for ev in events.values():
+def _finish(events, ncree_hypo):
+    for ev in events:
+        if ev["lat"] is None:
+            epi = (ncree_hypo.get(_NCREE_ALIASES.get(key(ev["name"]), ev["key"]))
+                   or ncree_hypo.get(ev["key"]) or EXTRA_EPI.get(ev["key"]))
+            if epi:
+                ev["lat"], ev["lon"], ev["depth_km"], m = epi
+                ev["mag"] = ev["mag"] or m
         for s in ev["stations"]:
             if s.get("lat") is not None and ev["lat"] is not None:
                 s["repi_km"] = round(
                     haversine_km(ev["lat"], ev["lon"], s["lat"], s["lon"]), 2)
-            for k in ("Tp", "PGV", "rrup_km", "repi_km", "vs30", "pga",
-                      "ori_fp", "ori_n", "rhyp_km"):
+            for k in ("Tp", "PGV", "rrup_km", "rhyp_km", "repi_km", "vs30",
+                      "ori_n", "ori_fp"):
                 if isinstance(s.get(k), float):
                     s[k] = round(s[k], 3)
-            for k in [k for k, v in s.items() if v is None]:
-                if k not in ("lat", "lon"):
-                    s.pop(k)
+            for k in [k for k, v in list(s.items()) if v is None
+                      and k not in ("lat", "lon")]:
+                s.pop(k)
         ev["stats"] = _stats(ev["stations"])
         ev["n_mappable"] = sum(1 for s in ev["stations"] if s.get("lat"))
-        out.append(ev)
-    out.sort(key=lambda e: (e.get("year") or "", e["name"]))
-    return out
+    events.sort(key=lambda e: (e.get("year") or "", e["name"]))
+    return events
 
 
 def write_catalog(cid, events):
-    meta = CITATIONS[cid]
+    cfg = CATALOGS[cid]
     OUT.mkdir(parents=True, exist_ok=True)
-    doc = dict(schema="pulse-extraction/reference/1", catalog=cid,
-              **meta, n_events=len(events),
-              n_records=sum(e["stats"]["n"] for e in events),
-              pulse_only=cid != "shahi_baker_2014", events=events)
+    doc = dict(schema="pulse-extraction/reference/2", catalog=cid,
+               label=cfg["label"], short=cfg["short"], citation=cfg["citation"],
+               url=cfg["url"], pulse_only=cfg["pulse_only"],
+               n_events=len(events),
+               n_records=sum(e["stats"]["n"] for e in events), events=events)
     (OUT / f"{cid}.json").write_text(json.dumps(doc, indent=1))
-    print(f"{cid:18} {len(events):3} events  "
-          f"{doc['n_records']:4} records  "
-          f"{sum(e['n_mappable'] for e in events):4} mappable stations")
-    return dict(id=cid, label=meta["label"], short=meta["short"],
-               url=meta["url"], n_events=len(events), n_records=doc["n_records"],
-               pulse_only=cid != "shahi_baker_2014")
+    print(f"{cid:18} {len(events):3} events  {doc['n_records']:4} records  "
+          f"{sum(e['n_mappable'] for e in events):4} mapped")
+    return dict(id=cid, label=cfg["label"], short=cfg["short"], url=cfg["url"],
+               n_events=len(events), n_records=doc["n_records"],
+               pulse_only=cfg["pulse_only"])
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--no-net", action="store_true",
-                    help="use cached fetches only (site/data/reference/_cache)")
+                    help="use cached USGS responses only")
     args = ap.parse_args(argv)
+    if not MASTER.exists():
+        raise SystemExit(f"missing {MASTER}")
 
-    ncree = build_ncree()
-    ncree_epi = {e["key"]: (e["lat"], e["lon"], e["depth_km"], e["mag"])
-                 for e in ncree if e["lat"] is not None}
-    sb_rows = fetch_sb2014_rows(no_net=args.no_net)
-    sta_idx = build_station_index(sb_rows, no_net=args.no_net)
-    print(f"station index: {len(sta_idx)} coded stations")
+    # hypocentres from the NCREE sheet, for Baker / Yen events that lack one
+    ncree = _finish(build_catalog("taiwan_ncree"), {})
+    ncree_hypo = {e["key"]: (e["lat"], e["lon"], e["depth_km"], e["mag"])
+                  for e in ncree if e["lat"] is not None}
 
-    catalogs = [
-        write_catalog("taiwan_ncree", ncree),
-        write_catalog("shahi_baker_2014",
-                      build_from_rows(sb_rows, ncree_epi, sta_idx)),
-    ]
-    # drop any stale catalogs from earlier runs
+    index = []
+    for cid in CATALOGS:
+        events = ncree if cid == "taiwan_ncree" else _finish(build_catalog(cid), ncree_hypo)
+        print(f"{cid}:")
+        attach_source_models(events, no_net=args.no_net)
+        index.append(write_catalog(cid, events))
+
     for stale in OUT.glob("*.json"):
-        if stale.stem not in {"index", *(c["id"] for c in catalogs)}:
+        if stale.stem not in {"index", *CATALOGS}:
             stale.unlink()
-    (OUT / "index.json").write_text(json.dumps({"catalogs": catalogs}, indent=1))
-    print(f"\nwrote {OUT}/index.json  ({len(catalogs)} catalogs)")
+    (OUT / "index.json").write_text(json.dumps({"catalogs": index}, indent=1))
+    print(f"\nwrote {OUT}/index.json  ({len(index)} catalogs)")
 
 
 if __name__ == "__main__":
