@@ -3087,7 +3087,53 @@
      }
     ]
    },
-   "n_mappable": 6
+   "n_mappable": 6,
+   "source_model": {
+    "np1": [
+     12.0,
+     20.0,
+     95.0
+    ],
+    "np2": [
+     187.0,
+     70.0,
+     88.0
+    ],
+    "source": "USGS moment-tensor",
+    "mag": 6.5,
+    "mag_type": "Mww"
+   },
+   "fault": {
+    "strike": 12.0,
+    "dip": 20.0,
+    "length_km": 24.8,
+    "width_km": 11.7,
+    "model": "Wells & Coppersmith (1994) scaling",
+    "polygon": [
+     [
+      121.07968,
+      23.63922
+     ],
+     [
+      121.13034,
+      23.8574
+     ],
+     [
+      121.23632,
+      23.83678
+     ],
+     [
+      121.18566,
+      23.6186
+     ],
+     [
+      121.07968,
+      23.63922
+     ]
+    ],
+    "rake": 95.0
+   },
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp0009f1e"
   },
   {
    "key": "1999_chichi_07_taiwan|1999",
@@ -4756,7 +4802,53 @@
      }
     ]
    },
-   "n_mappable": 11
+   "n_mappable": 11,
+   "source_model": {
+    "np1": [
+     178.0,
+     49.0,
+     54.0
+    ],
+    "np2": [
+     46.0,
+     52.0,
+     125.0
+    ],
+    "source": "USGS moment-tensor",
+    "mag": 5.9,
+    "mag_type": "Mww"
+   },
+   "fault": {
+    "strike": 178.0,
+    "dip": 49.0,
+    "length_km": 11.0,
+    "width_km": 7.6,
+    "model": "Wells & Coppersmith (1994) scaling",
+    "polygon": [
+     [
+      120.52836,
+      23.49511
+     ],
+     [
+      120.53212,
+      23.39644
+     ],
+     [
+      120.48364,
+      23.39489
+     ],
+     [
+      120.47988,
+      23.49356
+     ],
+     [
+      120.52836,
+      23.49511
+     ]
+    ],
+    "rake": 54.0
+   },
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp0009gd0"
   },
   {
    "key": "1999_chiayi_02_taiwan|1999",
@@ -5004,7 +5096,53 @@
      }
     ]
    },
-   "n_mappable": 1
+   "n_mappable": 1,
+   "source_model": {
+    "np1": [
+     246.0,
+     89.0,
+     179.0
+    ],
+    "np2": [
+     336.0,
+     89.0,
+     1.0
+    ],
+    "source": "USGS moment-tensor",
+    "mag": 6.4,
+    "mag_type": "Mww"
+   },
+   "fault": {
+    "strike": 246.0,
+    "dip": 89.0,
+    "length_km": 21.7,
+    "width_km": 10.9,
+    "model": "Wells & Coppersmith (1994) scaling",
+    "polygon": [
+     [
+      121.06129,
+      23.42882
+     ],
+     [
+      120.86747,
+      23.34962
+     ],
+     [
+      120.86671,
+      23.35118
+     ],
+     [
+      121.06053,
+      23.43038
+     ],
+     [
+      121.06129,
+      23.42882
+     ]
+    ],
+    "rake": 179.0
+   },
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp0009erf"
   },
   {
    "key": "1999_duzce_turkey|1999",
@@ -5301,50 +5439,50 @@
    "n_mappable": 6,
    "source_model": {
     "np1": [
-     12.0,
-     20.0,
-     95.0
+     218.0,
+     38.0,
+     108.0
     ],
     "np2": [
-     187.0,
-     70.0,
-     88.0
+     15.0,
+     54.0,
+     76.0
     ],
     "source": "USGS moment-tensor",
-    "mag": 6.5,
+    "mag": 6.3,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 12.0,
-    "dip": 20.0,
-    "length_km": 24.8,
-    "width_km": 11.7,
+    "strike": 218.0,
+    "dip": 38.0,
+    "length_km": 18.9,
+    "width_km": 10.1,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      121.07968,
-      23.63922
+      121.60782,
+      23.42288
      ],
      [
-      121.13034,
-      23.8574
+      121.4938,
+      23.28893
      ],
      [
-      121.23632,
-      23.83678
+      121.43218,
+      23.33312
      ],
      [
-      121.18566,
-      23.6186
+      121.5462,
+      23.46707
      ],
      [
-      121.07968,
-      23.63922
+      121.60782,
+      23.42288
      ]
     ],
-    "rake": 95.0
+    "rake": 108.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp0009f1e"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp0009gyc"
   },
   {
    "key": "1999_kocaeli_turkey|1999",
@@ -5688,53 +5826,7 @@
      }
     ]
    },
-   "n_mappable": 1,
-   "source_model": {
-    "np1": [
-     80.0,
-     37.0,
-     -150.0
-    ],
-    "np2": [
-     325.0,
-     72.0,
-     -57.0
-    ],
-    "source": "USGS moment-tensor",
-    "mag": 5.4,
-    "mag_type": "Mww"
-   },
-   "fault": {
-    "strike": 80.0,
-    "dip": 37.0,
-    "length_km": 5.6,
-    "width_km": 5.2,
-    "model": "Wells & Coppersmith (1994) scaling",
-    "polygon": [
-     [
-      121.08368,
-      23.05111
-     ],
-     [
-      121.13725,
-      23.0598
-     ],
-     [
-      121.14432,
-      23.02289
-     ],
-     [
-      121.09075,
-      23.0142
-     ],
-     [
-      121.08368,
-      23.05111
-     ]
-    ],
-    "rake": -150.0
-   },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000agx3"
+   "n_mappable": 1
   },
   {
    "key": "2002_denali_alaska|2002",
@@ -6373,50 +6465,50 @@
    "n_mappable": 2,
    "source_model": {
     "np1": [
-     211.0,
-     53.0,
-     92.0
+     32.0,
+     41.0,
+     87.0
     ],
     "np2": [
-     26.0,
-     36.0,
-     86.0
+     216.0,
+     49.0,
+     93.0
     ],
     "source": "USGS moment-tensor",
-    "mag": 6.5,
+    "mag": 6.1,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 211.0,
-    "dip": 53.0,
-    "length_km": 28.4,
-    "width_km": 12.6,
+    "strike": 32.0,
+    "dip": 41.0,
+    "length_km": 14.4,
+    "width_km": 8.7,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      138.89844,
-      37.3179
+      138.74121,
+      37.27879
      ],
      [
-      138.73316,
-      37.09888
+      138.82753,
+      37.38865
      ],
      [
-      138.65956,
-      37.1341
+      138.89079,
+      37.35721
      ],
      [
-      138.82484,
-      37.35312
+      138.80447,
+      37.24735
      ],
      [
-      138.89844,
-      37.3179
+      138.74121,
+      37.27879
      ]
     ],
-    "rake": 92.0
+    "rake": 87.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000d6vk"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000d6vn"
   },
   {
    "key": "2004_parkfield_02_ca|2004",
@@ -6929,50 +7021,50 @@
    "n_mappable": 2,
    "source_model": {
     "np1": [
-     313.0,
-     20.0,
-     157.0
+     4.0,
+     66.0,
+     -156.0
     ],
     "np2": [
-     65.0,
-     82.0,
-     71.0
+     264.0,
+     68.0,
+     -26.0
     ],
     "source": "USGS moment-tensor",
-    "mag": 5.8,
+    "mag": 5.7,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 313.0,
-    "dip": 20.0,
-    "length_km": 9.6,
-    "width_km": 7.0,
+    "strike": 4.0,
+    "dip": 66.0,
+    "length_km": 8.4,
+    "width_km": 6.5,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      122.2034,
-      24.03296
+      121.91905,
+      24.6003
      ],
      [
-      122.13436,
-      24.09174
+      121.92482,
+      24.67536
      ],
      [
-      122.1786,
-      24.13504
+      121.95095,
+      24.6737
      ],
      [
-      122.24764,
-      24.07626
+      121.94518,
+      24.59864
      ],
      [
-      122.2034,
-      24.03296
+      121.91905,
+      24.6003
      ]
     ],
-    "rake": 157.0
+    "rake": -156.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000dyus"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000dhkn"
   },
   {
    "key": "2006_hengchun_offshore_01_taiwan|2006",
@@ -7177,50 +7269,50 @@
    "n_mappable": 3,
    "source_model": {
     "np1": [
-     319.0,
-     69.0,
-     257.0
+     151.0,
+     48.0,
+     0.0
     ],
     "np2": [
-     170.0,
-     23.0,
-     -60.0
+     61.0,
+     90.0,
+     138.0
     ],
     "source": "USGS moment-tensor",
-    "mag": 7.0,
+    "mag": 6.9,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 319.0,
-    "dip": 69.0,
-    "length_km": 56.1,
-    "width_km": 18.3,
+    "strike": 151.0,
+    "dip": 48.0,
+    "length_km": 42.8,
+    "width_km": 15.8,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      120.70114,
-      21.58951
+      120.43732,
+      22.16495
      ],
      [
-      120.34502,
-      21.96988
+      120.63812,
+      21.82902
      ],
      [
-      120.39286,
-      22.00849
+      120.54868,
+      21.78305
      ],
      [
-      120.74898,
-      21.62812
+      120.34788,
+      22.11898
      ],
      [
-      120.70114,
-      21.58951
+      120.43732,
+      22.16495
      ]
     ],
-    "rake": 257.0
+    "rake": 0.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000f114"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000f115"
   },
   {
    "key": "2006_taitung_taiwan|2006",
@@ -8067,50 +8159,50 @@
    "n_mappable": 2,
    "source_model": {
     "np1": [
-     233.0,
-     14.0,
-     114.0
+     344.0,
+     56.0,
+     39.0
     ],
     "np2": [
-     28.0,
-     76.0,
-     83.0
+     230.0,
+     59.0,
+     139.0
     ],
     "source": "USGS moment-tensor",
-    "mag": 6.1,
+    "mag": 5.6,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 233.0,
-    "dip": 14.0,
-    "length_km": 14.4,
-    "width_km": 8.7,
+    "strike": 344.0,
+    "dip": 56.0,
+    "length_km": 7.3,
+    "width_km": 6.1,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      121.53351,
-      23.63853
+      120.73792,
+      23.69524
      ],
      [
-      121.42058,
-      23.56056
+      120.71815,
+      23.75838
      ],
      [
-      121.37049,
-      23.62147
+      120.75008,
+      23.76676
      ],
      [
-      121.48342,
-      23.69944
+      120.76985,
+      23.70362
      ],
      [
-      121.53351,
-      23.63853
+      120.73792,
+      23.69524
      ]
     ],
-    "rake": 114.0
+    "rake": 39.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000h2b0"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000h3s7"
   },
   {
    "key": "2010_darfield_newzealand|2010",
@@ -9473,50 +9565,50 @@
    "n_mappable": 6,
    "source_model": {
     "np1": [
-     201.0,
-     45.0,
-     39.0
+     14.0,
+     29.0,
+     87.0
     ],
     "np2": [
-     81.0,
-     63.0,
-     128.0
+     198.0,
+     61.0,
+     92.0
     ],
     "source": "USGS moment-tensor",
-    "mag": 6.260907795889514,
+    "mag": 6.161615120548138,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 201.0,
-    "dip": 45.0,
-    "length_km": 18.9,
-    "width_km": 10.1,
+    "strike": 14.0,
+    "dip": 29.0,
+    "length_km": 16.5,
+    "width_km": 9.4,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      121.50264,
-      23.65821
+      121.08215,
+      23.72596
      ],
      [
-      121.43617,
-      23.49951
+      121.12138,
+      23.86995
      ],
      [
-      121.37056,
-      23.52259
+      121.19985,
+      23.85204
      ],
      [
-      121.43703,
-      23.68129
+      121.16062,
+      23.70805
      ],
      [
-      121.50264,
-      23.65821
+      121.08215,
+      23.72596
      ]
     ],
-    "rake": 39.0
+    "rake": 87.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usc000ksdy"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usb000hbrt"
   },
   {
    "key": "2013_nantou_02_taiwan|2013",
@@ -9673,53 +9765,7 @@
      }
     ]
    },
-   "n_mappable": 5,
-   "source_model": {
-    "np1": [
-     201.0,
-     45.0,
-     39.0
-    ],
-    "np2": [
-     81.0,
-     63.0,
-     128.0
-    ],
-    "source": "USGS moment-tensor",
-    "mag": 6.260907795889514,
-    "mag_type": "Mww"
-   },
-   "fault": {
-    "strike": 201.0,
-    "dip": 45.0,
-    "length_km": 18.9,
-    "width_km": 10.1,
-    "model": "Wells & Coppersmith (1994) scaling",
-    "polygon": [
-     [
-      121.50264,
-      23.65821
-     ],
-     [
-      121.43617,
-      23.49951
-     ],
-     [
-      121.37056,
-      23.52259
-     ],
-     [
-      121.43703,
-      23.68129
-     ],
-     [
-      121.50264,
-      23.65821
-     ]
-    ],
-    "rake": 39.0
-   },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usc000ksdy"
+   "n_mappable": 5
   },
   {
    "key": "2013_ruisui_taiwan|2013",
@@ -11675,50 +11721,50 @@
    "n_mappable": 20,
    "source_model": {
     "np1": [
-     112.24,
-     68.61,
-     161.27
+     298.31,
+     13.62,
+     137.84
     ],
     "np2": [
-     209.29,
-     72.6,
-     22.47
+     69.65,
+     80.91,
+     79.82
     ],
     "source": "USGS moment-tensor",
-    "mag": 6.4,
+    "mag": 6.1,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 112.24,
-    "dip": 68.61,
-    "length_km": 21.7,
-    "width_km": 10.9,
+    "strike": 298.31,
+    "dip": 13.62,
+    "length_km": 14.4,
+    "width_km": 8.7,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      121.56726,
-      24.1872
+      121.75045,
+      24.09285
      ],
      [
-      121.76477,
-      24.1135
+      121.62545,
+      24.15429
      ],
      [
-      121.74994,
-      24.0804
+      121.66515,
+      24.22155
      ],
      [
-      121.55243,
-      24.1541
+      121.79015,
+      24.16011
      ],
      [
-      121.56726,
-      24.1872
+      121.75045,
+      24.09285
      ]
     ],
-    "rake": 161.27
+    "rake": 137.84
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us1000chhc"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us1000cfn6"
   }
  ]
 }

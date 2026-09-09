@@ -235,22 +235,27 @@ def usgs_source_model(lat, lon, year, mag, no_net=False):
         return None
     # year-only window: a tight search radius pins the event by place so a
     # nearby larger event in the same year (Kocaeli vs Düzce 1999) is not matched.
-    q = dict(format="geojson", orderby="magnitude", limit=1,
-             latitude=lat, longitude=lon, maxradiuskm=80,
-             minmagnitude=(mag or 5) - 0.6,
+    q = dict(format="geojson", orderby="magnitude", limit=3,
+             latitude=lat, longitude=lon, maxradiuskm=60,
+             minmagnitude=(mag or 5) - 0.5,
              starttime=f"{year}-01-01", endtime=f"{int(year) + 1}-01-01")
-    tag = re.sub(r"\W+", "_", f"{lat}_{lon}_{year}_{mag}")
+    tag = re.sub(r"\W+", "_", f"{lat}_{lon}_{year}_{mag}_r60m05")
     idx = _cached(f"usgs/find_{tag}.json",
                   lambda: _get(f"{USGS}?{urllib.parse.urlencode(q)}"), no_net)
     feats = json.loads(idx).get("features", []) if idx else []
+    # keep the closest candidate within 55 km whose magnitude is within 0.6
+    feats = sorted(
+        (f for f in feats
+         if haversine_km(lat, lon, f["geometry"]["coordinates"][1],
+                         f["geometry"]["coordinates"][0]) <= 55
+         and (not mag or not f["properties"].get("mag")
+              or abs(f["properties"]["mag"] - mag) <= 0.6)),
+        key=lambda f: haversine_km(lat, lon, f["geometry"]["coordinates"][1],
+                                   f["geometry"]["coordinates"][0]))
     if not feats:
         return None
     p = feats[0]["properties"]
     c = feats[0]["geometry"]["coordinates"]
-    if mag and p.get("mag") and abs(p["mag"] - mag) > 1.1:
-        return None
-    if haversine_km(lat, lon, c[1], c[0]) > 100:         # matched a different event
-        return None
     det = None
     if p.get("detail"):
         dtag = "usgs/" + re.sub(r"\W+", "_", p["detail"].split("query")[-1])[:120] + ".json"
@@ -285,11 +290,12 @@ def usgs_source_model(lat, lon, year, mag, no_net=False):
         fault["rake"] = mech["np1"][2]
     else:
         return None
-    return dict(mechanism=mech, fault=fault, usgs_url=p.get("url"))
+    return dict(mechanism=mech, fault=fault, usgs_url=p.get("url"),
+                usgs_id=feats[0]["id"], usgs_epi=(c[1], c[0]))
 
 
 def attach_source_models(events, no_net=False):
-    n = 0
+    got = []
     for ev in events:
         sm = usgs_source_model(ev.get("lat"), ev.get("lon"), ev.get("year"),
                                ev.get("mag"), no_net=no_net)
@@ -299,10 +305,32 @@ def attach_source_models(events, no_net=False):
             ev["source_model"] = sm["mechanism"]
         ev["fault"] = sm["fault"]
         ev["usgs_url"] = sm.get("usgs_url")
-        n += 1
+        ev["_usgs_id"], ev["_usgs_epi"] = sm["usgs_id"], sm["usgs_epi"]
+        got.append(ev)
         if not no_net:
             time.sleep(0.25)
-    print(f"  source models: {n}/{len(events)} events")
+
+    # one USGS event matched to several distinct catalog events (aftershock
+    # sequences with no date in the source table) -> keep it only on the one
+    # whose hypocentre is closest; drop it from the others as unreliable.
+    by_id = {}
+    for ev in got:
+        by_id.setdefault(ev["_usgs_id"], []).append(ev)
+    dropped = 0
+    for evs in by_id.values():
+        if len(evs) < 2:
+            continue
+        evs.sort(key=lambda e: haversine_km(e["lat"], e["lon"], *e["_usgs_epi"]))
+        for ev in evs[1:]:
+            for k in ("source_model", "fault", "usgs_url"):
+                ev.pop(k, None)
+            dropped += 1
+    for ev in got:
+        ev.pop("_usgs_id", None)
+        ev.pop("_usgs_epi", None)
+    kept = len(got) - dropped
+    print(f"  source models: {kept}/{len(events)} events"
+          + (f"  ({dropped} dropped as ambiguous)" if dropped else ""))
 
 
 # --------------------------------------------------------------------------- #

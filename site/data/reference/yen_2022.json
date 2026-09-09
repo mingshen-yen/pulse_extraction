@@ -586,52 +586,50 @@
    "n_mappable": 12,
    "source_model": {
     "np1": [
-     224.0,
-     66.0,
-     -151.0
+     120.0,
+     87.0,
+     9.0
     ],
     "np2": [
-     122.0,
-     64.0,
-     -26.0
+     30.0,
+     81.0,
+     177.0
     ],
     "source": "USGS moment-tensor",
-    "mag": 7.0,
+    "mag": 6.0,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 224.0,
-    "dip": 66.0,
-    "rake": 208.0,
-    "length_km": 90.0,
-    "width_km": 26.1,
-    "max_slip_m": 4.0,
-    "model": "USGS finite-fault inversion",
-    "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20005iis/finite-fault",
+    "strike": 120.0,
+    "dip": 87.0,
+    "length_km": 12.6,
+    "width_km": 8.1,
+    "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      131.12914,
-      33.04826
+      130.66334,
+      32.72723
      ],
      [
-      130.46107,
-      32.46669
+      130.77973,
+      32.67068
      ],
      [
-      130.37946,
-      32.53294
+      130.77746,
+      32.66737
      ],
      [
-      131.04753,
-      33.11451
+      130.66107,
+      32.72392
      ],
      [
-      131.12914,
-      33.04826
+      130.66334,
+      32.72723
      ]
-    ]
+    ],
+    "rake": 9.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20005iis"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20005i1a"
   },
   {
    "key": "kumamoto|2016",

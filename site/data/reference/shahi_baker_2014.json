@@ -942,50 +942,50 @@
    "n_mappable": 1,
    "source_model": {
     "np1": [
-     10.0,
-     90.0,
-     30.0
+     170.0,
+     5.0,
+     80.0
     ],
     "np2": [
-     280.0,
-     60.0,
-     180.0
+     0.0,
+     85.0,
+     91.0
     ],
     "source": "USGS focal-mechanism",
-    "mag": 6.2,
+    "mag": 6.1,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 10.0,
-    "dip": 90.0,
-    "length_km": 16.5,
-    "width_km": 9.4,
+    "strike": 170.0,
+    "dip": 5.0,
+    "length_km": 14.4,
+    "width_km": 8.7,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      -118.82174,
-      37.43026
+      -118.77255,
+      37.62442
      ],
      [
-      -118.78926,
-      37.5764
+      -118.74418,
+      37.49684
      ],
      [
-      -118.78926,
-      37.5764
+      -118.84145,
+      37.48325
      ],
      [
-      -118.82174,
-      37.43026
+      -118.86982,
+      37.61082
      ],
      [
-      -118.82174,
-      37.43026
+      -118.77255,
+      37.62442
      ]
     ],
-    "rake": 30.0
+    "rake": 80.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc1053177"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc1053054"
   },
   {
    "key": "westmorland|1981",
@@ -1263,53 +1263,7 @@
      }
     ]
    },
-   "n_mappable": 1,
-   "source_model": {
-    "np1": [
-     125.0,
-     30.0,
-     80.0
-    ],
-    "np2": [
-     317.0,
-     61.0,
-     96.0
-    ],
-    "source": "USGS focal-mechanism",
-    "mag": 6.7,
-    "mag_type": "Mww"
-   },
-   "fault": {
-    "strike": 125.0,
-    "dip": 30.0,
-    "length_km": 32.6,
-    "width_km": 13.6,
-    "model": "Wells & Coppersmith (1994) scaling",
-    "polygon": [
-     [
-      -120.42297,
-      36.35899
-     ],
-     [
-      -120.12572,
-      36.1911
-     ],
-     [
-      -120.20103,
-      36.10434
-     ],
-     [
-      -120.49828,
-      36.27223
-     ],
-     [
-      -120.42297,
-      36.35899
-     ]
-    ],
-    "rake": 80.0
-   },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc1091100"
+   "n_mappable": 1
   },
   {
    "key": "coalinga_07|1983",
@@ -1368,7 +1322,53 @@
      }
     ]
    },
-   "n_mappable": 1
+   "n_mappable": 1,
+   "source_model": {
+    "np1": [
+     90.0,
+     50.0,
+     50.0
+    ],
+    "np2": [
+     323.0,
+     54.0,
+     127.0
+    ],
+    "source": "USGS focal-mechanism",
+    "mag": 5.47,
+    "mag_type": "Mww"
+   },
+   "fault": {
+    "strike": 90.0,
+    "dip": 50.0,
+    "length_km": 6.1,
+    "width_km": 5.5,
+    "model": "Wells & Coppersmith (1994) scaling",
+    "polygon": [
+     [
+      -120.31378,
+      36.23571
+     ],
+     [
+      -120.24555,
+      36.23571
+     ],
+     [
+      -120.24555,
+      36.20395
+     ],
+     [
+      -120.31378,
+      36.20395
+     ],
+     [
+      -120.31378,
+      36.23571
+     ]
+    ],
+    "rake": 50.0
+   },
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc1102223"
   },
   {
    "key": "morgan_hill|1984",
@@ -2553,50 +2553,50 @@
    "n_mappable": 29,
    "source_model": {
     "np1": [
-     214.0,
-     45.0,
-     67.0
+     53.0,
+     28.0,
+     -96.0
     ],
     "np2": [
-     65.0,
-     49.0,
-     111.0
+     240.0,
+     62.0,
+     -87.0
     ],
     "source": "USGS focal-mechanism",
-    "mag": 6.2,
+    "mag": 6,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 214.0,
-    "dip": 45.0,
-    "length_km": 16.5,
-    "width_km": 9.4,
+    "strike": 53.0,
+    "dip": 28.0,
+    "length_km": 12.6,
+    "width_km": 8.1,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      121.69164,
-      24.16979
+      121.9419,
+      24.76271
      ],
      [
-      121.60071,
-      24.04676
+      122.04137,
+      24.83077
      ],
      [
-      121.54636,
-      24.08021
+      122.0841,
+      24.77929
      ],
      [
-      121.63729,
-      24.20324
+      121.98463,
+      24.71123
      ],
      [
-      121.69164,
-      24.16979
+      121.9419,
+      24.76271
      ]
     ],
-    "rake": 67.0
+    "rake": -96.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp0002u79"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp0002q43"
   },
   {
    "key": "superstition_hills_02|1987",
@@ -3533,7 +3533,53 @@
      }
     ]
    },
-   "n_mappable": 1
+   "n_mappable": 1,
+   "source_model": {
+    "np1": [
+     81.0,
+     87.0,
+     -1.0
+    ],
+    "np2": [
+     171.0,
+     89.0,
+     -177.0
+    ],
+    "source": "USGS focal-mechanism",
+    "mag": 6.1,
+    "mag_type": "Mww"
+   },
+   "fault": {
+    "strike": 81.0,
+    "dip": 87.0,
+    "length_km": 14.4,
+    "width_km": 8.7,
+    "model": "Wells & Coppersmith (1994) scaling",
+    "polygon": [
+     [
+      -116.39452,
+      33.9519
+     ],
+     [
+      -116.24026,
+      33.97216
+     ],
+     [
+      -116.23948,
+      33.9681
+     ],
+     [
+      -116.39374,
+      33.94784
+     ],
+     [
+      -116.39452,
+      33.9519
+     ]
+    ],
+    "rake": -1.0
+   },
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci3019681"
   },
   {
    "key": "landers|1992",
@@ -6503,50 +6549,50 @@
    "n_mappable": 2,
    "source_model": {
     "np1": [
-     211.0,
-     53.0,
-     92.0
+     32.0,
+     41.0,
+     87.0
     ],
     "np2": [
-     26.0,
-     36.0,
-     86.0
+     216.0,
+     49.0,
+     93.0
     ],
     "source": "USGS moment-tensor",
-    "mag": 6.5,
+    "mag": 6.1,
     "mag_type": "Mww"
    },
    "fault": {
-    "strike": 211.0,
-    "dip": 53.0,
-    "length_km": 28.4,
-    "width_km": 12.6,
+    "strike": 32.0,
+    "dip": 41.0,
+    "length_km": 14.4,
+    "width_km": 8.7,
     "model": "Wells & Coppersmith (1994) scaling",
     "polygon": [
      [
-      138.89844,
-      37.3179
+      138.74121,
+      37.27879
      ],
      [
-      138.73316,
-      37.09888
+      138.82753,
+      37.38865
      ],
      [
-      138.65956,
-      37.1341
+      138.89079,
+      37.35721
      ],
      [
-      138.82484,
-      37.35312
+      138.80447,
+      37.24735
      ],
      [
-      138.89844,
-      37.3179
+      138.74121,
+      37.27879
      ]
     ],
-    "rake": 92.0
+    "rake": 87.0
    },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000d6vk"
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/usp000d6vn"
   },
   {
    "key": "parkfield_02_ca|2004",
