@@ -26,6 +26,27 @@ _PULSE_COLS = ["station", "is_pulse", "primary", "Tp", "PGV", "PGV_resid",
                "dt", "npts", "dist_km", "vs30", "qc"]
 
 
+def _dodge_labels(labels_by_ax, axes):
+    """Spread the per-axis station labels so they don't overlap.  Uses
+    ``adjustText`` when installed, otherwise a light vertical stagger."""
+    try:
+        from adjustText import adjust_text
+    except ImportError:                                   # pragma: no cover
+        for ax in axes:
+            for i, t in enumerate(sorted(labels_by_ax[ax],
+                                         key=lambda t: t.get_position()[0])):
+                t.set_position((t.get_position()[0],
+                                t.get_position()[1] * (1.06 if i % 2 else 0.94)))
+                t.set_ha("left")
+                t.set_fontsize(7)
+        return
+    for ax in axes:
+        adjust_text(labels_by_ax[ax], ax=ax, max_move=40,
+                    expand=(1.5, 1.9), force_text=(0.5, 1.0),
+                    force_static=(0.3, 0.5), iter_lim=400,
+                    arrowprops=dict(arrowstyle="-", color="0.55", lw=0.5))
+
+
 def compute_stats(data):
     """is_pulse hit-rate + median/max |ΔTp|,|ΔPGV| over the reference stations."""
     rows = [r for ev in data for r in data[ev] if r["sb_Tp"] is not None]
@@ -163,7 +184,8 @@ def plot_scaling(data, colors, out, *, prefix, title, ref_label, stats):
     from matplotlib.lines import Line2D
 
     pts = [(ev, r) for ev in data for r in data[ev] if r["sb_rrup"] is not None]
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(13, 5.6))
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(14.5, 6.4))
+    labels = {a1: [], a2: []}
     for ev, r in pts:
         c = colors[ev]
         x = r["sb_rrup"]
@@ -174,8 +196,8 @@ def plot_scaling(data, colors, out, *, prefix, title, ref_label, stats):
         a1.plot(x, r["Tp"], "o", ms=7, mfc=c, mec="k", mew=.5, zorder=4)
         a2.plot(x, r["PGV"], "o", ms=7, mfc=c, mec="k", mew=.5, zorder=4)
         for ax, y in ((a1, r["Tp"]), (a2, r["PGV"])):
-            ax.annotate(r["sta"], (x, y), fontsize=7.5, color=c,
-                        xytext=(6, -2), textcoords="offset points")
+            labels[ax].append(ax.text(x, y, r["sta"], fontsize=7.5, color=c,
+                                      zorder=5))
     a1.text(0.03, 0.04,
             f"median |ΔT$_p$| = {stats['med_dTp']:.02f} s   "
             f"(is_pulse {stats['is_pulse_hits']}/{stats['n']})",
@@ -186,10 +208,15 @@ def plot_scaling(data, colors, out, *, prefix, title, ref_label, stats):
             f"(is_pulse {stats['is_pulse_hits']}/{stats['n']})",
             transform=a2.transAxes, fontsize=8.5, style="italic",
             bbox=dict(boxstyle="round", fc="white", ec="0.7", alpha=.9))
-    for ax in (a1, a2):
+    for ax, ys in ((a1, [r["Tp"] for _, r in pts] + [r["sb_Tp"] for _, r in pts]),
+                   (a2, [r["PGV"] for _, r in pts] + [r["sb_PGV"] for _, r in pts])):
         ax.set_xscale("log"); ax.set_yscale("log")
         ax.set_xlabel(f"R$_{{rup}}$ [km]  ({ref_label})", fontsize=9.5)
         ax.grid(True, which="both", alpha=0.25)
+        xs = [r["sb_rrup"] for _, r in pts]
+        ax.set_xlim(min(xs) / 1.6, max(xs) * 1.7)         # headroom for labels
+        ax.set_ylim(min(ys) / 1.35, max(ys) * 1.35)
+    _dodge_labels(labels, (a1, a2))                        # after limits are set
     a1.set_ylabel("pulse period  T$_p$  [s]")
     a2.set_ylabel("pulse  PGV  [cm/s]")
     a1.set_title("T$_p$ vs R$_{rup}$", fontweight="bold")
