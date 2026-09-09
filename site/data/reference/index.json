@@ -17,24 +17,6 @@
    "n_events": 46,
    "n_records": 243,
    "pulse_only": false
-  },
-  {
-   "id": "yen_2022",
-   "label": "Yen et al. (2022)",
-   "short": "Yen 2022",
-   "url": "",
-   "n_events": 6,
-   "n_records": 84,
-   "pulse_only": true
-  },
-  {
-   "id": "turkey_2023",
-   "label": "2023 T\u00fcrkiye sequence",
-   "short": "T\u00fcrkiye 2023",
-   "url": "",
-   "n_events": 3,
-   "n_records": 34,
-   "pulse_only": true
   }
  ]
 }

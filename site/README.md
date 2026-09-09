@@ -10,7 +10,7 @@ site/
     index.json                    pipeline event list (built)
     events/<key>.json             per-event: event + fault + stations + stats + pulse traces
     reference/index.json          published-catalog list
-    reference/<catalog>.json      NCREE / Shahi & Baker 2014 / Yen 2022 / Türkiye 2023
+    reference/<catalog>.json      taiwan_ncree, shahi_baker_2014
 ```
 
 The "Data source" selector on the page switches between the pipeline results and
@@ -26,18 +26,20 @@ python ../scripts/build_site_data.py --poll --min-mag 5.8    # append new live e
 python ../scripts/import_reference_tables.py                 # rebuild data/reference/ from data/reference/*.csv
 ```
 
-`import_reference_tables.py` builds the four published catalogs:
+`import_reference_tables.py` builds two published catalogs:
 
-* **NCREE** and **Yen 2022 / Türkiye 2023** from `../data/reference/*.csv`
-  (git-ignored, local).
-* **Shahi & Baker (2014)** fetched live from the canonical Pulse-like-records
-  list at jackwbaker.com (snapshot cached in `data/reference/_cache/`); each
-  record links back to its S&B summary page.
+* **NCREE Taiwan** from `../data/reference/Taiwan_NCREE.csv` (git-ignored,
+  local) — hypocentre + station coordinates, maps fully.
+* **Shahi & Baker (2014)** fetched from the canonical Pulse-like-records list
+  at jackwbaker.com (243 records; snapshot cached in
+  `site/data/reference/_cache/sb2014.html`). Station coordinates are joined by
+  name from NCREE (which carries the same descriptive station names for the
+  US/EU/JP events) and from GeoNet for the New Zealand codes — ~142/243
+  records map; the rest are shown as a record table. Each record links back to
+  its S&B summary page.
 
-Station coordinates for the code-based catalogs are joined from NCREE (Taiwan),
-GeoNet (NZ) and ESM's FDSN station service (AFAD `TK`). `--no-net` rebuilds
-from the caches only. The generated `site/data/reference/` JSON is committed;
-each catalog carries its citation and is shown on the page.
+`--no-net` rebuilds from the cached HTML only. The generated
+`site/data/reference/` JSON is committed; each catalog carries its citation.
 
 Each event: fetch strong-motion waveforms (GeoNet FDSN / ESM) → `run_pulse`
 (Kamai baseline correction · Arias 5–95 % window · 50 Hz) → one `data/events/*.json`.

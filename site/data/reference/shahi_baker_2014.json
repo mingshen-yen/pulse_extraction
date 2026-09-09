@@ -78,8 +78,9 @@
    "stations": [
     {
      "code": "Pacoima Dam (upper left abut)",
-     "lat": null,
-     "lon": null,
+     "lat": 34.334,
+     "lon": -118.396,
+     "vs30": 2016.13,
      "rrup_km": 1.8,
      "rhyp_km": 17.6,
      "is_pulse": true,
@@ -87,7 +88,8 @@
      "PGV": 121.9,
      "ori_fp": 84.0,
      "ori_n": 189.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/77.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/77.html",
+     "repi_km": 11.86
     }
    ],
    "stats": {
@@ -113,7 +115,7 @@
     "scatter": [
      {
       "code": "Pacoima Dam (upper left abut)",
-      "repi_km": null,
+      "repi_km": 11.86,
       "rrup_km": 1.8,
       "Tp": 1.64,
       "PGV": 121.9,
@@ -121,7 +123,7 @@
      }
     ]
    },
-   "n_mappable": 0
+   "n_mappable": 1
   },
   {
    "key": "tabas_iran|1978",
@@ -790,8 +792,9 @@
     },
     {
      "code": "Sturno (STN)",
-     "lat": null,
-     "lon": null,
+     "lat": 41.0184,
+     "lon": 15.1117,
+     "vs30": 382.0,
      "rrup_km": 10.8,
      "rhyp_km": 31.8,
      "is_pulse": false,
@@ -799,7 +802,8 @@
      "PGV": 71.1,
      "ori_fp": 46.0,
      "ori_n": 87.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/292.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/292.html",
+     "repi_km": 30.29
     }
    ],
    "stats": {
@@ -841,7 +845,7 @@
      },
      {
       "code": "Sturno (STN)",
-      "repi_km": null,
+      "repi_km": 30.29,
       "rrup_km": 10.8,
       "Tp": 3.27,
       "PGV": 71.1,
@@ -849,7 +853,7 @@
      }
     ]
    },
-   "n_mappable": 1
+   "n_mappable": 2
   },
   {
    "key": "mammoth_lakes_06|1980",
@@ -2127,8 +2131,9 @@
    "stations": [
     {
      "code": "Kornbloom Road (temp)",
-     "lat": null,
-     "lon": null,
+     "lat": 33.125,
+     "lon": -115.665,
+     "vs30": 266.01,
      "rrup_km": 18.5,
      "rhyp_km": 21.3,
      "is_pulse": false,
@@ -2136,7 +2141,8 @@
      "PGV": 33.1,
      "ori_fp": 14.0,
      "ori_n": 321.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/722.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/722.html",
+     "repi_km": 19.26
     },
     {
      "code": "Parachute Test Site",
@@ -2198,7 +2204,7 @@
     "scatter": [
      {
       "code": "Kornbloom Road (temp)",
-      "repi_km": null,
+      "repi_km": 19.26,
       "rrup_km": 18.5,
       "Tp": 2.13,
       "PGV": 33.1,
@@ -2222,7 +2228,7 @@
      }
     ]
    },
-   "n_mappable": 1
+   "n_mappable": 2
   },
   {
    "key": "whittier_narrows_01|1987",
@@ -3140,8 +3146,9 @@
     },
     {
      "code": "Pacoima Dam (downstr)",
-     "lat": null,
-     "lon": null,
+     "lat": 34.334,
+     "lon": -118.396,
+     "vs30": 2016.13,
      "rrup_km": 7.0,
      "rhyp_km": 26.9,
      "is_pulse": false,
@@ -3149,12 +3156,14 @@
      "PGV": 50.2,
      "ori_fp": 83.0,
      "ori_n": 205.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/1050.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/1050.html",
+     "repi_km": 20.35
     },
     {
      "code": "Pacoima Dam (upper left)",
-     "lat": null,
-     "lon": null,
+     "lat": 34.334,
+     "lon": -118.396,
+     "vs30": 2016.13,
      "rrup_km": 7.0,
      "rhyp_km": 26.9,
      "is_pulse": true,
@@ -3162,7 +3171,8 @@
      "PGV": 106.1,
      "ori_fp": 81.0,
      "ori_n": 41.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/1051.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/1051.html",
+     "repi_km": 20.35
     },
     {
      "code": "Pacoima Kagel Canyon",
@@ -3342,7 +3352,7 @@
      },
      {
       "code": "Pacoima Dam (downstr)",
-      "repi_km": null,
+      "repi_km": 20.35,
       "rrup_km": 7.0,
       "Tp": 0.59,
       "PGV": 50.2,
@@ -3350,7 +3360,7 @@
      },
      {
       "code": "Pacoima Dam (upper left)",
-      "repi_km": null,
+      "repi_km": 20.35,
       "rrup_km": 7.0,
       "Tp": 0.84,
       "PGV": 106.1,
@@ -3406,7 +3416,7 @@
      }
     ]
    },
-   "n_mappable": 10
+   "n_mappable": 12
   },
   {
    "key": "kobe_japan|1995",
@@ -3435,8 +3445,9 @@
     },
     {
      "code": "Port Island (0 m)",
-     "lat": null,
-     "lon": null,
+     "lat": 34.67,
+     "lon": 135.201,
+     "vs30": 198.0,
      "rrup_km": 3.3,
      "rhyp_km": 26.3,
      "is_pulse": true,
@@ -3444,7 +3455,8 @@
      "PGV": 103.0,
      "ori_fp": 78.0,
      "ori_n": 332.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/1114.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/1114.html",
+     "repi_km": 19.23
     },
     {
      "code": "Takarazuka",
@@ -3521,7 +3533,7 @@
      },
      {
       "code": "Port Island (0 m)",
-      "repi_km": null,
+      "repi_km": 19.23,
       "rrup_km": 3.3,
       "Tp": 2.83,
       "PGV": 103.0,
@@ -3553,7 +3565,7 @@
      }
     ]
    },
-   "n_mappable": 3
+   "n_mappable": 4
   },
   {
    "key": "northwest_china_03|1997",
@@ -6644,8 +6656,8 @@
    "stations": [
     {
      "code": "CBGS",
-     "lat": null,
-     "lon": null,
+     "lat": -43.5293,
+     "lon": 172.6199,
      "rrup_km": 18.1,
      "rhyp_km": 48.2,
      "is_pulse": true,
@@ -6653,12 +6665,14 @@
      "PGV": 59.9,
      "ori_fp": 81.0,
      "ori_n": 346.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/6887.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/6887.html",
+     "repi_km": 46.97
     },
     {
      "code": "DSLC",
-     "lat": -43.6675,
-     "lon": 172.1979,
+     "lat": -43.6692,
+     "lon": 172.1978,
+     "vs30": 295.74,
      "rrup_km": 8.5,
      "rhyp_km": 17.3,
      "is_pulse": true,
@@ -6667,12 +6681,13 @@
      "ori_fp": 41.0,
      "ori_n": 44.0,
      "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/6897.html",
-     "repi_km": 13.33
+     "repi_km": 13.4
     },
     {
      "code": "GDLC",
-     "lat": -43.5862,
-     "lon": 172.0888,
+     "lat": -43.588,
+     "lon": 172.0893,
+     "vs30": 344.02,
      "rrup_km": 1.2,
      "rhyp_km": 11.8,
      "is_pulse": false,
@@ -6681,12 +6696,13 @@
      "ori_fp": 30.0,
      "ori_n": 295.0,
      "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/6906.html",
-     "repi_km": 4.53
+     "repi_km": 4.42
     },
     {
      "code": "HORC",
-     "lat": -43.5396,
-     "lon": 171.9599,
+     "lat": -43.5413,
+     "lon": 171.9598,
+     "vs30": 326.01,
      "rrup_km": 7.3,
      "rhyp_km": 15.4,
      "is_pulse": true,
@@ -6695,12 +6711,13 @@
      "ori_fp": 69.0,
      "ori_n": 16.0,
      "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/6911.html",
-     "repi_km": 11.04
+     "repi_km": 10.9
     },
     {
      "code": "LINC",
-     "lat": -43.6232,
-     "lon": 172.468,
+     "lat": -43.6248,
+     "lon": 172.4679,
+     "vs30": 263.2,
      "rrup_km": 7.1,
      "rhyp_km": 35.5,
      "is_pulse": true,
@@ -6770,8 +6787,9 @@
     },
     {
      "code": "ROLC",
-     "lat": -43.5928,
-     "lon": 172.3811,
+     "lat": -43.5945,
+     "lon": 172.381,
+     "vs30": 295.74,
      "rrup_km": 1.5,
      "rhyp_km": 29.0,
      "is_pulse": true,
@@ -6780,7 +6798,7 @@
      "ori_fp": 66.0,
      "ori_n": 151.0,
      "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/6962.html",
-     "repi_km": 26.85
+     "repi_km": 26.83
     },
     {
      "code": "SHLC",
@@ -6812,8 +6830,9 @@
     },
     {
      "code": "TPLC",
-     "lat": -43.55,
-     "lon": 172.472,
+     "lat": -43.5517,
+     "lon": 172.4718,
+     "vs30": 249.28,
      "rrup_km": 6.1,
      "rhyp_km": 36.5,
      "is_pulse": true,
@@ -6822,7 +6841,7 @@
      "ori_fp": 89.0,
      "ori_n": 354.0,
      "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/6975.html",
-     "repi_km": 34.83
+     "repi_km": 34.77
     }
    ],
    "stats": {
@@ -6872,7 +6891,7 @@
     "scatter": [
      {
       "code": "CBGS",
-      "repi_km": null,
+      "repi_km": 46.97,
       "rrup_km": 18.1,
       "Tp": 12.62,
       "PGV": 59.9,
@@ -6880,7 +6899,7 @@
      },
      {
       "code": "DSLC",
-      "repi_km": 13.33,
+      "repi_km": 13.4,
       "rrup_km": 8.5,
       "Tp": 7.83,
       "PGV": 65.9,
@@ -6888,7 +6907,7 @@
      },
      {
       "code": "GDLC",
-      "repi_km": 4.53,
+      "repi_km": 4.42,
       "rrup_km": 1.2,
       "Tp": 6.23,
       "PGV": 128.5,
@@ -6896,7 +6915,7 @@
      },
      {
       "code": "HORC",
-      "repi_km": 11.04,
+      "repi_km": 10.9,
       "rrup_km": 7.3,
       "Tp": 9.92,
       "PGV": 106.1,
@@ -6944,7 +6963,7 @@
      },
      {
       "code": "ROLC",
-      "repi_km": 26.85,
+      "repi_km": 26.83,
       "rrup_km": 1.5,
       "Tp": 7.14,
       "PGV": 85.7,
@@ -6968,7 +6987,7 @@
      },
      {
       "code": "TPLC",
-      "repi_km": 34.83,
+      "repi_km": 34.77,
       "rrup_km": 6.1,
       "Tp": 8.93,
       "PGV": 74.1,
@@ -6976,7 +6995,7 @@
      }
     ]
    },
-   "n_mappable": 12
+   "n_mappable": 13
   },
   {
    "key": "el_mayor_cucapah|2010",
@@ -7099,8 +7118,8 @@
    "stations": [
     {
      "code": "CCCC",
-     "lat": null,
-     "lon": null,
+     "lat": -43.5381,
+     "lon": 172.6474,
      "rrup_km": 3.3,
      "rhyp_km": 8.3,
      "is_pulse": false,
@@ -7108,12 +7127,13 @@
      "PGV": 66.9,
      "ori_fp": 27.0,
      "ori_n": 266.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8064.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8064.html",
+     "repi_km": 5.78
     },
     {
      "code": "CHHC",
-     "lat": null,
-     "lon": null,
+     "lat": -43.5359,
+     "lon": 172.6275,
      "rrup_km": 4.8,
      "rhyp_km": 9.5,
      "is_pulse": false,
@@ -7121,12 +7141,13 @@
      "PGV": 81.3,
      "ori_fp": 2.0,
      "ori_n": 57.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8066.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8066.html",
+     "repi_km": 7.23
     },
     {
      "code": "CMHS",
-     "lat": null,
-     "lon": null,
+     "lat": -43.5656,
+     "lon": 172.6242,
      "rrup_km": 4.5,
      "rhyp_km": 8.8,
      "is_pulse": false,
@@ -7134,12 +7155,13 @@
      "PGV": 48.1,
      "ori_fp": 38.0,
      "ori_n": 21.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8067.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8067.html",
+     "repi_km": 6.38
     },
     {
      "code": "HPSC",
-     "lat": null,
-     "lon": null,
+     "lat": -43.5016,
+     "lon": 172.7022,
      "rrup_km": 4.3,
      "rhyp_km": 9.8,
      "is_pulse": false,
@@ -7147,12 +7169,13 @@
      "PGV": 48.3,
      "ori_fp": 52.0,
      "ori_n": 291.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8090.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8090.html",
+     "repi_km": 7.72
     },
     {
      "code": "PRPC",
-     "lat": null,
-     "lon": null,
+     "lat": -43.5258,
+     "lon": 172.6828,
      "rrup_km": 2.0,
      "rhyp_km": 7.7,
      "is_pulse": true,
@@ -7160,7 +7183,8 @@
      "PGV": 123.1,
      "ori_fp": 76.0,
      "ori_n": 135.0,
-     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8119.html"
+     "summary_url": "https://www.jackwbaker.com/pulse_classification_v2/8119.html",
+     "repi_km": 5.28
     },
     {
      "code": "REHS",
@@ -7237,7 +7261,7 @@
     "scatter": [
      {
       "code": "CCCC",
-      "repi_km": null,
+      "repi_km": 5.78,
       "rrup_km": 3.3,
       "Tp": 1.72,
       "PGV": 66.9,
@@ -7245,7 +7269,7 @@
      },
      {
       "code": "CHHC",
-      "repi_km": null,
+      "repi_km": 7.23,
       "rrup_km": 4.8,
       "Tp": 1.96,
       "PGV": 81.3,
@@ -7253,7 +7277,7 @@
      },
      {
       "code": "CMHS",
-      "repi_km": null,
+      "repi_km": 6.38,
       "rrup_km": 4.5,
       "Tp": 2.04,
       "PGV": 48.1,
@@ -7261,7 +7285,7 @@
      },
      {
       "code": "HPSC",
-      "repi_km": null,
+      "repi_km": 7.72,
       "rrup_km": 4.3,
       "Tp": 6.85,
       "PGV": 48.3,
@@ -7269,7 +7293,7 @@
      },
      {
       "code": "PRPC",
-      "repi_km": null,
+      "repi_km": 5.28,
       "rrup_km": 2.0,
       "Tp": 4.82,
       "PGV": 123.1,
@@ -7301,7 +7325,7 @@
      }
     ]
    },
-   "n_mappable": 3
+   "n_mappable": 8
   }
  ]
 }
