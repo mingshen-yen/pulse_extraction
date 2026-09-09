@@ -25,10 +25,13 @@ Always confirm against `usgs_event_url` in the CSV.
 
 ## What the geometry means
 
+The site draws **one schematic surface rupture trace** (a line) per event, not a
+rupture area.
+
 | `fault_kind` | count | what to trust |
 |---|---|---|
-| `USGS finite-fault (slip-model outline)` | 7 | The map polygon is the **convex hull of the USGS finite-fault slip model's subfaults with slip ≥ 15 % of peak** — a schematic footprint of the actual published model (`finite_fault_url`), not a rectangle. `fault_L_km` × `fault_W_km` and strike/dip are the model's reported values, `max_slip_m` is the model peak. Still one polygon, so shallow thrusts (2015 Gorkha, W ≈ 168 km down-dip) still project to a large surface area. |
-| `mag-scaled from NP1` | 60 | Only the **orientation** (`NP1_strike/dip/rake`, from the USGS moment tensor or focal mechanism) is real. `fault_L_km` × `fault_W_km` is **Wells & Coppersmith (1994)** magnitude scaling — a schematic size, not a rupture model. Which nodal plane is the fault plane is **not** resolved (NP1 is used arbitrarily; NP2 is in the CSV). |
+| `USGS finite-fault (slip-model)` | 7 | The trace is the USGS finite-fault slip model's extent **projected onto the model strike** (from the `FFM.geojson` subfaults with slip ≥ 15 % of peak), through the footprint centroid. `fault_L_km` × `fault_W_km`, strike, dip are the model's reported values; `max_slip_m` is the model peak. |
+| `mag-scaled from NP1` | 60 | The trace is a straight line through the epicentre, bearing = `NP1_strike` (USGS moment tensor / focal mechanism), length = `fault_L_km` from **Wells & Coppersmith (1994)** magnitude scaling. Which nodal plane is the fault plane is **not** resolved (NP1 used; NP2 in the CSV). Epicentre-centred, so a unilateral rupture is misplaced along the line. |
 
 The 7 finite-fault events:
 

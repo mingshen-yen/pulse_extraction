@@ -18,9 +18,10 @@ sheet with station coordinates already resolved (``latitude_deg`` /
 
 Each event is also given a **schematic source model** from USGS ComCat (cached
 in ``_cache/``): moment-tensor / focal-mechanism nodal planes, and a single
-rupture-footprint polygon -- the convex hull of the USGS finite-fault slip
-model's high-slip subfaults where one exists (7 events), otherwise a
-magnitude-scaled rectangle (Wells & Coppersmith 1994) oriented by nodal plane 1.
+surface rupture trace (``fault["trace"] = [[lon,lat], [lon,lat]]``) -- the
+along-strike extent of the USGS finite-fault slip model where one exists
+(7 events), otherwise a line of the magnitude-scaled length (Wells &
+Coppersmith 1994) through the epicentre, bearing nodal plane 1's strike.
 """
 
 from __future__ import annotations
@@ -199,28 +200,40 @@ def _get(url, timeout=60):
         return r.read().decode("utf-8", "replace")
 
 
-def _rupture_rect(lat, lon, length, width, strike, dip):
-    half_l = length / 2.0
-    surf_half_w = (width / 2.0) * math.cos(math.radians(dip or 90))
+def _trace_along_strike(lat, lon, strike, length_km):
+    """A straight surface rupture trace: ``[[lon,lat], [lon,lat]]`` of
+    ``length_km``, bearing ``strike``, centred on ``lat, lon``."""
     kmlat, kmlon = 111.32, 111.32 * math.cos(math.radians(lat))
     s = math.radians(strike)
-    ax, ay = math.sin(s), math.cos(s)
-    px, py = math.cos(s), -math.sin(s)
-    pts = []
-    for dl, dw in ((-half_l, -surf_half_w), (half_l, -surf_half_w),
-                   (half_l, surf_half_w), (-half_l, surf_half_w)):
-        pts.append([round(lon + (dl * ax + dw * px) / kmlon, 5),
-                    round(lat + (dl * ay + dw * py) / kmlat, 5)])
-    return pts + [pts[0]]
+    dx, dy = math.sin(s), math.cos(s)                 # unit strike vector (E, N)
+    h = length_km / 2.0
+    return [[round(lon - h * dx / kmlon, 5), round(lat - h * dy / kmlat, 5)],
+            [round(lon + h * dx / kmlon, 5), round(lat + h * dy / kmlat, 5)]]
 
 
-def _mag_scaled_rect(lat, lon, mag, strike, dip):
+def _hull_trace(hull, strike, cen_lat):
+    """Surface trace of a fault footprint = its extent projected onto the
+    strike direction, drawn through the footprint centroid."""
+    kmlat = 111.32
+    kmlon = 111.32 * math.cos(math.radians(cen_lat))
+    s = math.radians(strike)
+    ux, uy = math.sin(s), math.cos(s)                 # unit strike (E, N)
+    cx = sum(p[0] for p in hull[:-1]) / (len(hull) - 1)
+    cy = sum(p[1] for p in hull[:-1]) / (len(hull) - 1)
+    proj = [((p[0] - cx) * kmlon * ux + (p[1] - cy) * kmlat * uy)
+            for p in hull[:-1]]
+    lo, hi = min(proj), max(proj)
+    return [[round(cx + lo * ux / kmlon, 5), round(cy + lo * uy / kmlat, 5)],
+            [round(cx + hi * ux / kmlon, 5), round(cy + hi * uy / kmlat, 5)]]
+
+
+def _mag_scaled_trace(lat, lon, mag, strike, dip):
     length = 10 ** (-2.44 + 0.59 * mag)              # Wells & Coppersmith (1994)
     width = 10 ** (-1.01 + 0.32 * mag)
     return dict(strike=strike, dip=dip, length_km=round(length, 1),
                 width_km=round(width, 1),
                 model="Wells & Coppersmith (1994) scaling",
-                polygon=_rupture_rect(lat, lon, length, width, strike, dip))
+                trace=_trace_along_strike(lat, lon, strike, length))
 
 
 def _convex_hull(pts):
@@ -338,17 +351,18 @@ def usgs_source_model(lat, lon, year, mag, no_net=False):
                      model="USGS finite-fault inversion",
                      url=f"https://earthquake.usgs.gov/earthquakes/eventpage/"
                          f"{feats[0]['id']}/finite-fault",
-                     polygon=_rupture_rect(c[1], c[0], L, W, strike, dip))
-        # schematic footprint straight from the published slip model
+                     trace=_trace_along_strike(c[1], c[0], strike, L))
+        # trace straight from the published slip-model footprint
         got = ffm_outline(feats[0]["id"], ffp.get("contents", {}), no_net)
         if got:
-            fault["polygon"], smax = got
-            fault["model"] = "USGS finite-fault (slip-model outline)"
+            hull, smax = got
+            fault["trace"] = _hull_trace(hull, strike, c[1])
+            fault["model"] = "USGS finite-fault (slip-model)"
             if smax:
                 fault["max_slip_m"] = smax
     elif mech:
-        fault = _mag_scaled_rect(c[1], c[0], p.get("mag") or mag or 6.0,
-                                 mech["np1"][0], mech["np1"][1])
+        fault = _mag_scaled_trace(c[1], c[0], p.get("mag") or mag or 6.0,
+                                  mech["np1"][0], mech["np1"][1])
         fault["rake"] = mech["np1"][2]
     else:
         return None

@@ -162,22 +162,22 @@ function drawMap(d) {
   layer.clearLayers();
   const ev = d.event, pts = [];
 
-  if (ev.fault && ev.fault.polygon) {
+  if (ev.fault && ev.fault.trace) {
     const f = ev.fault, ff = /finite-fault/.test(f.model || "");
-    const poly = f.polygon.map(([lon, lat]) => [lat, lon]);
-    L.polygon(poly, { color: FAULT, weight: 2, dashArray: ff ? null : "5 4",
-      fillOpacity: ff ? 0.1 : 0.06 })
+    const line = f.trace.map(([lon, lat]) => [lat, lon]);
+    L.polyline(line, { color: FAULT, weight: ff ? 4 : 3,
+      dashArray: ff ? null : "6 5", opacity: 0.9, lineCap: "round" })
       .bindTooltip(
-        `${ff ? "USGS finite-fault model — schematic outline"
-              : "rupture — magnitude-scaled (schematic)"}<br>` +
+        `${ff ? "surface rupture trace — USGS finite-fault model"
+              : "surface rupture trace — magnitude-scaled (schematic)"}<br>` +
         `strike ${fmt(f.strike, 0)}° · dip ${fmt(f.dip, 0)}° · ` +
-        `${fmt(f.length_km, 0)}×${fmt(f.width_km, 0)} km` +
+        `length ${fmt(f.length_km, 0)} km` +
         (f.max_slip_m ? `<br>max slip ${fmt(f.max_slip_m, 1)} m` : "") +
         (f.url ? "<br><i>click for the USGS model</i>" : ""),
         { sticky: true })
       .on("click", () => f.url && window.open(f.url, "_blank", "noopener"))
       .addTo(layer);
-    poly.forEach((p) => pts.push(p));
+    line.forEach((p) => pts.push(p));
   }
 
   if (ev.lat != null) {
