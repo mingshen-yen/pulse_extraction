@@ -1,0 +1,833 @@
+{
+ "schema": "pulse-extraction/reference/1",
+ "catalog": "turkey_2023",
+ "label": "2023 T\u00fcrkiye sequence",
+ "short": "T\u00fcrkiye 2023",
+ "citation": "Pulse metrics for the 2023 Kahramanmara\u015f (T\u00fcrkiye) doublet and 2022 D\u00fczce, from a regional study.",
+ "url": "",
+ "n_events": 3,
+ "n_records": 34,
+ "pulse_only": true,
+ "events": [
+  {
+   "key": "duzce|2022",
+   "name": "Duzce",
+   "year": "2022",
+   "lat": 40.83,
+   "lon": 31.08,
+   "depth_km": 10.0,
+   "mag": 6.0,
+   "fault_type": null,
+   "stations": [
+    {
+     "code": "8101",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": null,
+     "rhyp_km": 10.67,
+     "is_pulse": true,
+     "Tp": 1.9,
+     "PGV": 40.89,
+     "ori_fp": 7.0,
+     "ori_n": 69.0
+    },
+    {
+     "code": "8102",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": null,
+     "rhyp_km": 11.79,
+     "is_pulse": true,
+     "Tp": 1.61,
+     "PGV": 79.25,
+     "ori_fp": 0.0,
+     "ori_n": 76.0
+    },
+    {
+     "code": "8104",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": null,
+     "rhyp_km": 13.74,
+     "is_pulse": true,
+     "Tp": 1.92,
+     "PGV": 40.78,
+     "ori_fp": 35.0,
+     "ori_n": 41.0
+    },
+    {
+     "code": "8109",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": null,
+     "rhyp_km": 4.75,
+     "is_pulse": true,
+     "Tp": 1.75,
+     "PGV": 44.0,
+     "ori_fp": 76.0,
+     "ori_n": 0.0
+    }
+   ],
+   "stats": {
+    "n": 4,
+    "n_pulse": 4,
+    "pulse_fraction": 1.0,
+    "Tp_median": 1.825,
+    "PGV_median": 42.45,
+    "Tp_range": [
+     1.61,
+     1.92
+    ],
+    "by_distance": [],
+    "scatter": []
+   },
+   "n_mappable": 0
+  },
+  {
+   "key": "turkey_1|2023",
+   "name": "turkey-1",
+   "year": "2023",
+   "lat": 37.17,
+   "lon": 37.03,
+   "depth_km": 8.6,
+   "mag": 7.8,
+   "fault_type": null,
+   "stations": [
+    {
+     "code": "3123",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 1.5,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 2.6,
+     "PGV": 179.2,
+     "ori_fp": 7.0,
+     "ori_n": 18.0
+    },
+    {
+     "code": "2712",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 1.7,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 7.1,
+     "PGV": 126.7,
+     "ori_fp": 56.0,
+     "ori_n": -31.0
+    },
+    {
+     "code": "2718",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 1.8,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 6.0,
+     "PGV": 114.4,
+     "ori_fp": 76.0,
+     "ori_n": -79.0
+    },
+    {
+     "code": "3145",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 1.8,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 4.2,
+     "PGV": 147.9,
+     "ori_fp": 50.0,
+     "ori_n": 75.0
+    },
+    {
+     "code": "4616",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 1.9,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 8.4,
+     "PGV": 102.2,
+     "ori_fp": 70.0,
+     "ori_n": -50.0
+    },
+    {
+     "code": "3138",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.1,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 7.5,
+     "PGV": 173.2,
+     "ori_fp": 49.0,
+     "ori_n": 74.0
+    },
+    {
+     "code": "3144",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.1,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 8.3,
+     "PGV": 145.4,
+     "ori_fp": 32.0,
+     "ori_n": 57.0
+    },
+    {
+     "code": "3131",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.3,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 7.9,
+     "PGV": 59.8,
+     "ori_fp": 54.0,
+     "ori_n": -29.0
+    },
+    {
+     "code": "2708",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.6,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 3.1,
+     "PGV": 155.4,
+     "ori_fp": 89.0,
+     "ori_n": -66.0
+    },
+    {
+     "code": "3143",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 3.1,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 7.3,
+     "PGV": 157.6,
+     "ori_fp": 72.0,
+     "ori_n": -47.0
+    },
+    {
+     "code": "4615",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 3.6,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 5.6,
+     "PGV": 156.6,
+     "ori_fp": 48.0,
+     "ori_n": -20.0
+    },
+    {
+     "code": "3139",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 4.0,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 3.0,
+     "PGV": 149.6,
+     "ori_fp": 43.0,
+     "ori_n": -18.0
+    },
+    {
+     "code": "3142",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 4.1,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 13.5,
+     "PGV": 77.1,
+     "ori_fp": 88.0,
+     "ori_n": -67.0
+    },
+    {
+     "code": "NAR",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 4.2,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 4.8,
+     "PGV": 121.8,
+     "ori_fp": 25.0,
+     "ori_n": 53.0
+    },
+    {
+     "code": "KHMN",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 4.2,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 4.8,
+     "PGV": 120.9,
+     "ori_fp": 31.0,
+     "ori_n": 56.0
+    },
+    {
+     "code": "3137",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 4.8,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 9.2,
+     "PGV": 98.5,
+     "ori_fp": 58.0,
+     "ori_n": -33.0
+    },
+    {
+     "code": "3136",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 12.1,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 13.5,
+     "PGV": 56.9,
+     "ori_fp": 87.0,
+     "ori_n": -62.0
+    },
+    {
+     "code": "2715",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 12.6,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 6.6,
+     "PGV": 56.8,
+     "ori_fp": 87.0,
+     "ori_n": -68.0
+    },
+    {
+     "code": "2716",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 12.8,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 6.8,
+     "PGV": 71.0,
+     "ori_fp": 84.0,
+     "ori_n": -59.0
+    },
+    {
+     "code": "2717",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 13.0,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 6.9,
+     "PGV": 60.6,
+     "ori_fp": 86.0,
+     "ori_n": -69.0
+    },
+    {
+     "code": "8002",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 13.4,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 9.0,
+     "PGV": 41.4,
+     "ori_fp": 86.0,
+     "ori_n": -61.0
+    },
+    {
+     "code": "3116",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 14.8,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 14.4,
+     "PGV": 47.5,
+     "ori_fp": 1.0,
+     "ori_n": 26.0
+    },
+    {
+     "code": "3134",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 24.9,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 11.7,
+     "PGV": 48.7,
+     "ori_fp": 75.0,
+     "ori_n": -50.0
+    }
+   ],
+   "stats": {
+    "n": 23,
+    "n_pulse": 23,
+    "pulse_fraction": 1.0,
+    "Tp_median": 7.1,
+    "PGV_median": 114.4,
+    "Tp_range": [
+     2.6,
+     14.4
+    ],
+    "by_distance": [
+     {
+      "r_lo": 0,
+      "r_hi": 5,
+      "n": 16,
+      "n_pulse": 16,
+      "pulse_fraction": 1.0,
+      "Tp_median": 7.1
+     },
+     {
+      "r_lo": 10,
+      "r_hi": 20,
+      "n": 6,
+      "n_pulse": 6,
+      "pulse_fraction": 1.0,
+      "Tp_median": 9.0
+     },
+     {
+      "r_lo": 20,
+      "r_hi": 40,
+      "n": 1,
+      "n_pulse": 1,
+      "pulse_fraction": 1.0,
+      "Tp_median": 11.7
+     }
+    ],
+    "scatter": [
+     {
+      "code": "3123",
+      "repi_km": null,
+      "rrup_km": 1.5,
+      "Tp": 2.6,
+      "PGV": 179.2,
+      "is_pulse": true
+     },
+     {
+      "code": "2712",
+      "repi_km": null,
+      "rrup_km": 1.7,
+      "Tp": 7.1,
+      "PGV": 126.7,
+      "is_pulse": true
+     },
+     {
+      "code": "2718",
+      "repi_km": null,
+      "rrup_km": 1.8,
+      "Tp": 6.0,
+      "PGV": 114.4,
+      "is_pulse": true
+     },
+     {
+      "code": "3145",
+      "repi_km": null,
+      "rrup_km": 1.8,
+      "Tp": 4.2,
+      "PGV": 147.9,
+      "is_pulse": true
+     },
+     {
+      "code": "4616",
+      "repi_km": null,
+      "rrup_km": 1.9,
+      "Tp": 8.4,
+      "PGV": 102.2,
+      "is_pulse": true
+     },
+     {
+      "code": "3138",
+      "repi_km": null,
+      "rrup_km": 2.1,
+      "Tp": 7.5,
+      "PGV": 173.2,
+      "is_pulse": true
+     },
+     {
+      "code": "3144",
+      "repi_km": null,
+      "rrup_km": 2.1,
+      "Tp": 8.3,
+      "PGV": 145.4,
+      "is_pulse": true
+     },
+     {
+      "code": "3131",
+      "repi_km": null,
+      "rrup_km": 2.3,
+      "Tp": 7.9,
+      "PGV": 59.8,
+      "is_pulse": true
+     },
+     {
+      "code": "2708",
+      "repi_km": null,
+      "rrup_km": 2.6,
+      "Tp": 3.1,
+      "PGV": 155.4,
+      "is_pulse": true
+     },
+     {
+      "code": "3143",
+      "repi_km": null,
+      "rrup_km": 3.1,
+      "Tp": 7.3,
+      "PGV": 157.6,
+      "is_pulse": true
+     },
+     {
+      "code": "4615",
+      "repi_km": null,
+      "rrup_km": 3.6,
+      "Tp": 5.6,
+      "PGV": 156.6,
+      "is_pulse": true
+     },
+     {
+      "code": "3139",
+      "repi_km": null,
+      "rrup_km": 4.0,
+      "Tp": 3.0,
+      "PGV": 149.6,
+      "is_pulse": true
+     },
+     {
+      "code": "3142",
+      "repi_km": null,
+      "rrup_km": 4.1,
+      "Tp": 13.5,
+      "PGV": 77.1,
+      "is_pulse": true
+     },
+     {
+      "code": "NAR",
+      "repi_km": null,
+      "rrup_km": 4.2,
+      "Tp": 4.8,
+      "PGV": 121.8,
+      "is_pulse": true
+     },
+     {
+      "code": "KHMN",
+      "repi_km": null,
+      "rrup_km": 4.2,
+      "Tp": 4.8,
+      "PGV": 120.9,
+      "is_pulse": true
+     },
+     {
+      "code": "3137",
+      "repi_km": null,
+      "rrup_km": 4.8,
+      "Tp": 9.2,
+      "PGV": 98.5,
+      "is_pulse": true
+     },
+     {
+      "code": "3136",
+      "repi_km": null,
+      "rrup_km": 12.1,
+      "Tp": 13.5,
+      "PGV": 56.9,
+      "is_pulse": true
+     },
+     {
+      "code": "2715",
+      "repi_km": null,
+      "rrup_km": 12.6,
+      "Tp": 6.6,
+      "PGV": 56.8,
+      "is_pulse": true
+     },
+     {
+      "code": "2716",
+      "repi_km": null,
+      "rrup_km": 12.8,
+      "Tp": 6.8,
+      "PGV": 71.0,
+      "is_pulse": true
+     },
+     {
+      "code": "2717",
+      "repi_km": null,
+      "rrup_km": 13.0,
+      "Tp": 6.9,
+      "PGV": 60.6,
+      "is_pulse": true
+     },
+     {
+      "code": "8002",
+      "repi_km": null,
+      "rrup_km": 13.4,
+      "Tp": 9.0,
+      "PGV": 41.4,
+      "is_pulse": true
+     },
+     {
+      "code": "3116",
+      "repi_km": null,
+      "rrup_km": 14.8,
+      "Tp": 14.4,
+      "PGV": 47.5,
+      "is_pulse": true
+     },
+     {
+      "code": "3134",
+      "repi_km": null,
+      "rrup_km": 24.9,
+      "Tp": 11.7,
+      "PGV": 48.7,
+      "is_pulse": true
+     }
+    ]
+   },
+   "n_mappable": 0
+  },
+  {
+   "key": "turkey_2|2023",
+   "name": "turkey-2",
+   "year": "2023",
+   "lat": 38.02,
+   "lon": 37.2,
+   "depth_km": 7.0,
+   "mag": 7.5,
+   "fault_type": null,
+   "stations": [
+    {
+     "code": "4612",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 3.0,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 6.2,
+     "PGV": 180.9,
+     "ori_fp": 88.0,
+     "ori_n": -18.0
+    },
+    {
+     "code": "131",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 15.4,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 11.7,
+     "PGV": 37.4,
+     "ori_fp": 76.0,
+     "ori_n": -34.0
+    },
+    {
+     "code": "132",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 15.5,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 11.8,
+     "PGV": 24.2,
+     "ori_fp": 87.0,
+     "ori_n": -23.0
+    },
+    {
+     "code": "4611",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 27.4,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 10.8,
+     "PGV": 40.3,
+     "ori_fp": 22.0,
+     "ori_n": 74.0
+    },
+    {
+     "code": "4614",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 55.9,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 9.3,
+     "PGV": 34.5,
+     "ori_fp": 11.0,
+     "ori_n": 86.0
+    },
+    {
+     "code": "NAR",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 68.2,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 9.6,
+     "PGV": 26.5,
+     "ori_fp": 7.0,
+     "ori_n": 89.0
+    },
+    {
+     "code": "4615",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 69.1,
+     "rhyp_km": null,
+     "is_pulse": true,
+     "Tp": 9.4,
+     "PGV": 30.4,
+     "ori_fp": 13.0,
+     "ori_n": 83.0
+    }
+   ],
+   "stats": {
+    "n": 7,
+    "n_pulse": 7,
+    "pulse_fraction": 1.0,
+    "Tp_median": 9.6,
+    "PGV_median": 34.5,
+    "Tp_range": [
+     6.2,
+     11.8
+    ],
+    "by_distance": [
+     {
+      "r_lo": 0,
+      "r_hi": 5,
+      "n": 1,
+      "n_pulse": 1,
+      "pulse_fraction": 1.0,
+      "Tp_median": 6.2
+     },
+     {
+      "r_lo": 10,
+      "r_hi": 20,
+      "n": 2,
+      "n_pulse": 2,
+      "pulse_fraction": 1.0,
+      "Tp_median": 11.8
+     },
+     {
+      "r_lo": 20,
+      "r_hi": 40,
+      "n": 1,
+      "n_pulse": 1,
+      "pulse_fraction": 1.0,
+      "Tp_median": 10.8
+     },
+     {
+      "r_lo": 40,
+      "r_hi": 80,
+      "n": 3,
+      "n_pulse": 3,
+      "pulse_fraction": 1.0,
+      "Tp_median": 9.4
+     }
+    ],
+    "scatter": [
+     {
+      "code": "4612",
+      "repi_km": null,
+      "rrup_km": 3.0,
+      "Tp": 6.2,
+      "PGV": 180.9,
+      "is_pulse": true
+     },
+     {
+      "code": "131",
+      "repi_km": null,
+      "rrup_km": 15.4,
+      "Tp": 11.7,
+      "PGV": 37.4,
+      "is_pulse": true
+     },
+     {
+      "code": "132",
+      "repi_km": null,
+      "rrup_km": 15.5,
+      "Tp": 11.8,
+      "PGV": 24.2,
+      "is_pulse": true
+     },
+     {
+      "code": "4611",
+      "repi_km": null,
+      "rrup_km": 27.4,
+      "Tp": 10.8,
+      "PGV": 40.3,
+      "is_pulse": true
+     },
+     {
+      "code": "4614",
+      "repi_km": null,
+      "rrup_km": 55.9,
+      "Tp": 9.3,
+      "PGV": 34.5,
+      "is_pulse": true
+     },
+     {
+      "code": "NAR",
+      "repi_km": null,
+      "rrup_km": 68.2,
+      "Tp": 9.6,
+      "PGV": 26.5,
+      "is_pulse": true
+     },
+     {
+      "code": "4615",
+      "repi_km": null,
+      "rrup_km": 69.1,
+      "Tp": 9.4,
+      "PGV": 30.4,
+      "is_pulse": true
+     }
+    ]
+   },
+   "n_mappable": 0
+  }
+ ]
+}

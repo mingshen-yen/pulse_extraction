@@ -24,8 +24,24 @@ main {
 
 aside, section { background: #fff; overflow-y: auto; }
 aside { padding: 12px 14px; }
-aside h2 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase;
+aside h2 { margin: 12px 0 8px; font-size: 13px; text-transform: uppercase;
   letter-spacing: .05em; color: #667; }
+.lbl { display: block; font-size: 11px; text-transform: uppercase;
+  letter-spacing: .05em; color: #778; margin-bottom: 3px; }
+#source { width: 100%; padding: 5px 6px; border: 1px solid var(--line);
+  border-radius: 6px; background: #fff; font: inherit; }
+#source-note { margin: 6px 0 0; line-height: 1.4; }
+#crosslinks { margin-top: 6px; }
+#crosslinks a { margin: 0 2px; }
+table.rec-table { width: 100%; border-collapse: collapse; margin-top: 8px;
+  font-size: 12px; }
+table.rec-table th { text-align: right; color: #778; font-weight: 600;
+  border-bottom: 1px solid var(--line); padding: 3px 5px; }
+table.rec-table th:first-child { text-align: left; }
+table.rec-table td { text-align: right; padding: 3px 5px; border-bottom: 1px solid #eef1f4;
+  cursor: pointer; }
+table.rec-table td:first-child { text-align: left; }
+table.rec-table tr:hover td { background: var(--bg); }
 
 #event-list { list-style: none; margin: 0; padding: 0; }
 #event-list li {
@@ -55,6 +71,7 @@ aside h2 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase;
 .bar { width: 16px; height: 8px; border-radius: 4px;
   background: linear-gradient(90deg, #bcd, #d62728); }
 .fault { width: 16px; height: 0; border-top: 3px solid var(--fault); }
+.ring { width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--fault); }
 
 #event-head h3 { margin: 2px 0 2px; font-size: 15px; }
 #event-head .kv { color: #667; font-size: 12.5px; }

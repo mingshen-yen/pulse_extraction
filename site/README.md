@@ -7,9 +7,14 @@ Leaflet + Chart.js from CDNs, reading JSON in `data/`.
 site/
   index.html  style.css  app.js
   data/
-    index.json            event list (built)
-    events/<key>.json      per-event: event + fault + stations + stats + pulse traces
+    index.json                    pipeline event list (built)
+    events/<key>.json             per-event: event + fault + stations + stats + pulse traces
+    reference/index.json          published-catalog list
+    reference/<catalog>.json      NCREE / Shahi & Baker 2014 / Yen 2022 / Türkiye 2023
 ```
+
+The "Data source" selector on the page switches between the pipeline results and
+each published catalog; events that appear in more than one are cross-linked.
 
 ## Build the data
 
@@ -18,7 +23,13 @@ pip install -r ../requirements.txt
 python ../scripts/build_site_data.py --curated          # rebuild the 6 curated events
 python ../scripts/build_site_data.py --event 2010_darfield   # just one
 python ../scripts/build_site_data.py --poll --min-mag 5.8    # append new live events (USGS)
+python ../scripts/import_reference_tables.py                 # rebuild data/reference/ from data/reference/*.csv
 ```
+
+`import_reference_tables.py` reads the published pulse tables in
+`../data/reference/*.csv` (git-ignored, local) and writes the catalog JSON.
+Run it locally when those tables change; the generated `site/data/reference/`
+JSON is committed. Each catalog carries its citation and is shown on the page.
 
 Each event: fetch strong-motion waveforms (GeoNet FDSN / ESM) → `run_pulse`
 (Kamai baseline correction · Arias 5–95 % window · 50 Hz) → one `data/events/*.json`.

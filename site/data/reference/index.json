@@ -1,0 +1,40 @@
+{
+ "catalogs": [
+  {
+   "id": "taiwan_ncree",
+   "label": "NCREE Taiwan pulse database",
+   "short": "NCREE",
+   "url": "https://www.ncree.org/",
+   "n_events": 55,
+   "n_records": 333,
+   "pulse_only": true
+  },
+  {
+   "id": "shahi_baker_2014",
+   "label": "Shahi & Baker (2014)",
+   "short": "S&B 2014",
+   "url": "https://doi.org/10.1785/0120130191",
+   "n_events": 46,
+   "n_records": 242,
+   "pulse_only": false
+  },
+  {
+   "id": "yen_2022",
+   "label": "Yen et al. (2022)",
+   "short": "Yen 2022",
+   "url": "",
+   "n_events": 6,
+   "n_records": 84,
+   "pulse_only": true
+  },
+  {
+   "id": "turkey_2023",
+   "label": "2023 T\u00fcrkiye sequence",
+   "short": "T\u00fcrkiye 2023",
+   "url": "",
+   "n_events": 3,
+   "n_records": 34,
+   "pulse_only": true
+  }
+ ]
+}

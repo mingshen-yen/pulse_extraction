@@ -26,9 +26,11 @@
 
 <main>
   <aside id="events">
+    <label for="source" class="lbl">Data source</label>
+    <select id="source"></select>
+    <p class="muted" id="source-note"></p>
     <h2>Events</h2>
     <ul id="event-list"></ul>
-    <p class="muted" id="index-meta"></p>
   </aside>
 
   <section id="map-wrap">
@@ -37,7 +39,8 @@
       <span><i class="dot pulse"></i> pulse</span>
       <span><i class="dot nopulse"></i> no pulse</span>
       <span><i class="bar"></i> marker size &prop; PGV</span>
-      <span><i class="fault"></i> rupture (W&amp;C scaling)</span>
+      <span><i class="ring"></i> fling step</span>
+      <span><i class="fault"></i> rupture (schematic)</span>
     </div>
   </section>
 
@@ -47,7 +50,7 @@
     <div id="charts">
       <figure><figcaption>T<sub>p</sub> vs distance</figcaption><canvas id="c-tp"></canvas></figure>
       <figure><figcaption>PGV vs distance</figcaption><canvas id="c-pgv"></canvas></figure>
-      <figure><figcaption>pulse fraction by distance</figcaption><canvas id="c-frac"></canvas></figure>
+      <figure><figcaption id="frac-cap">pulse fraction by distance</figcaption><canvas id="c-frac"></canvas></figure>
     </div>
   </aside>
 </main>

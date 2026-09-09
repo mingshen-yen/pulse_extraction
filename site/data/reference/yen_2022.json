@@ -1,0 +1,2065 @@
+{
+ "schema": "pulse-extraction/reference/1",
+ "catalog": "yen_2022",
+ "label": "Yen et al. (2022)",
+ "short": "Yen 2022",
+ "citation": "Yen et al. (2022) near-fault velocity-pulse catalog (Kumamoto, Iburi, Meinong, Hualien, Darfield).",
+ "url": "",
+ "n_events": 6,
+ "n_records": 84,
+ "pulse_only": true,
+ "events": [
+  {
+   "key": "darfield|2010",
+   "name": "Darfield",
+   "year": "2010",
+   "lat": -43.615,
+   "lon": 172.049,
+   "depth_km": 10.9,
+   "mag": 7.0,
+   "fault_type": null,
+   "stations": [
+    {
+     "code": "DSLC",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 8.5,
+     "rhyp_km": 17.9,
+     "is_pulse": true,
+     "Tp": 7.8,
+     "PGV": 65.6,
+     "ori_fp": 41.0,
+     "ori_n": 44.0
+    },
+    {
+     "code": "GDLC",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.5,
+     "rhyp_km": 12.0,
+     "is_pulse": true,
+     "Tp": 2.3,
+     "PGV": 141.0,
+     "ori_fp": 11.0,
+     "ori_n": 74.0
+    },
+    {
+     "code": "HORC",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 7.8,
+     "rhyp_km": 15.0,
+     "is_pulse": true,
+     "Tp": 2.7,
+     "PGV": 99.5,
+     "ori_fp": 66.0,
+     "ori_n": 19.0
+    },
+    {
+     "code": "LINC",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 5.7,
+     "rhyp_km": 36.3,
+     "is_pulse": true,
+     "Tp": 7.2,
+     "PGV": 114.5,
+     "ori_fp": 79.0,
+     "ori_n": 6.0
+    },
+    {
+     "code": "NNBS",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 15.1,
+     "rhyp_km": 57.5,
+     "is_pulse": true,
+     "Tp": 10.7,
+     "PGV": 54.6,
+     "ori_fp": 68.0,
+     "ori_n": 333.0
+    },
+    {
+     "code": "REHS",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 8.0,
+     "rhyp_km": 50.4,
+     "is_pulse": true,
+     "Tp": 12.0,
+     "PGV": 256.2,
+     "ori_fp": 82.0,
+     "ori_n": 347.0
+    },
+    {
+     "code": "RHSC",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 4.2,
+     "rhyp_km": 44.6,
+     "is_pulse": true,
+     "Tp": 9.4,
+     "PGV": 64.0,
+     "ori_fp": 89.0,
+     "ori_n": 354.0
+    },
+    {
+     "code": "ROLC",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.4,
+     "rhyp_km": 29.8,
+     "is_pulse": true,
+     "Tp": 6.9,
+     "PGV": 82.2,
+     "ori_fp": 78.0,
+     "ori_n": 343.0
+    },
+    {
+     "code": "SHLC",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 10.9,
+     "rhyp_km": 53.0,
+     "is_pulse": true,
+     "Tp": 8.4,
+     "PGV": 62.3,
+     "ori_fp": 69.0,
+     "ori_n": 334.0
+    },
+    {
+     "code": "SMTC",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 12.2,
+     "rhyp_km": 50.4,
+     "is_pulse": true,
+     "Tp": 9.2,
+     "PGV": 61.8,
+     "ori_fp": 67.0,
+     "ori_n": 332.0
+    },
+    {
+     "code": "TPLC",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 3.4,
+     "rhyp_km": 37.3,
+     "is_pulse": true,
+     "Tp": 7.9,
+     "PGV": 74.8,
+     "ori_fp": 85.0,
+     "ori_n": 0.0
+    }
+   ],
+   "stats": {
+    "n": 11,
+    "n_pulse": 11,
+    "pulse_fraction": 1.0,
+    "Tp_median": 7.9,
+    "PGV_median": 74.8,
+    "Tp_range": [
+     2.3,
+     12.0
+    ],
+    "by_distance": [
+     {
+      "r_lo": 0,
+      "r_hi": 5,
+      "n": 4,
+      "n_pulse": 4,
+      "pulse_fraction": 1.0,
+      "Tp_median": 7.9
+     },
+     {
+      "r_lo": 5,
+      "r_hi": 10,
+      "n": 4,
+      "n_pulse": 4,
+      "pulse_fraction": 1.0,
+      "Tp_median": 7.8
+     },
+     {
+      "r_lo": 10,
+      "r_hi": 20,
+      "n": 3,
+      "n_pulse": 3,
+      "pulse_fraction": 1.0,
+      "Tp_median": 9.2
+     }
+    ],
+    "scatter": [
+     {
+      "code": "DSLC",
+      "repi_km": null,
+      "rrup_km": 8.5,
+      "Tp": 7.8,
+      "PGV": 65.6,
+      "is_pulse": true
+     },
+     {
+      "code": "GDLC",
+      "repi_km": null,
+      "rrup_km": 2.5,
+      "Tp": 2.3,
+      "PGV": 141.0,
+      "is_pulse": true
+     },
+     {
+      "code": "HORC",
+      "repi_km": null,
+      "rrup_km": 7.8,
+      "Tp": 2.7,
+      "PGV": 99.5,
+      "is_pulse": true
+     },
+     {
+      "code": "LINC",
+      "repi_km": null,
+      "rrup_km": 5.7,
+      "Tp": 7.2,
+      "PGV": 114.5,
+      "is_pulse": true
+     },
+     {
+      "code": "NNBS",
+      "repi_km": null,
+      "rrup_km": 15.1,
+      "Tp": 10.7,
+      "PGV": 54.6,
+      "is_pulse": true
+     },
+     {
+      "code": "REHS",
+      "repi_km": null,
+      "rrup_km": 8.0,
+      "Tp": 12.0,
+      "PGV": 256.2,
+      "is_pulse": true
+     },
+     {
+      "code": "RHSC",
+      "repi_km": null,
+      "rrup_km": 4.2,
+      "Tp": 9.4,
+      "PGV": 64.0,
+      "is_pulse": true
+     },
+     {
+      "code": "ROLC",
+      "repi_km": null,
+      "rrup_km": 2.4,
+      "Tp": 6.9,
+      "PGV": 82.2,
+      "is_pulse": true
+     },
+     {
+      "code": "SHLC",
+      "repi_km": null,
+      "rrup_km": 10.9,
+      "Tp": 8.4,
+      "PGV": 62.3,
+      "is_pulse": true
+     },
+     {
+      "code": "SMTC",
+      "repi_km": null,
+      "rrup_km": 12.2,
+      "Tp": 9.2,
+      "PGV": 61.8,
+      "is_pulse": true
+     },
+     {
+      "code": "TPLC",
+      "repi_km": null,
+      "rrup_km": 3.4,
+      "Tp": 7.9,
+      "PGV": 74.8,
+      "is_pulse": true
+     }
+    ]
+   },
+   "n_mappable": 0
+  },
+  {
+   "key": "kumafore|2016",
+   "name": "KumaFore",
+   "year": "2016",
+   "lat": 32.74,
+   "lon": 130.81,
+   "depth_km": 11.4,
+   "mag": 6.1,
+   "fault_type": null,
+   "stations": [
+    {
+     "code": "KMMH14",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 1.9,
+     "rhyp_km": 9.7,
+     "is_pulse": true,
+     "Tp": 1.8,
+     "PGV": 52.3,
+     "ori_fp": 37.0,
+     "ori_n": 348.0
+    },
+    {
+     "code": "93020",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 7.7,
+     "rhyp_km": 13.2,
+     "is_pulse": true,
+     "Tp": 1.3,
+     "PGV": 39.0,
+     "ori_fp": 40.0,
+     "ori_n": 345.0
+    },
+    {
+     "code": "93021",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 4.4,
+     "rhyp_km": 7.3,
+     "is_pulse": true,
+     "Tp": 1.8,
+     "PGV": 57.8,
+     "ori_fp": 0.0,
+     "ori_n": 25.0
+    },
+    {
+     "code": "93024",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 8.1,
+     "rhyp_km": 15.2,
+     "is_pulse": true,
+     "Tp": 1.7,
+     "PGV": 59.0,
+     "ori_fp": 74.0,
+     "ori_n": 311.0
+    },
+    {
+     "code": "93025",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 1.8,
+     "rhyp_km": 9.6,
+     "is_pulse": true,
+     "Tp": 1.7,
+     "PGV": 64.5,
+     "ori_fp": 39.0,
+     "ori_n": 346.0
+    },
+    {
+     "code": "93050",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 3.5,
+     "rhyp_km": 7.3,
+     "is_pulse": true,
+     "Tp": 2.5,
+     "PGV": 43.2,
+     "ori_fp": 51.0,
+     "ori_n": 334.0
+    },
+    {
+     "code": "93051",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 4.6,
+     "rhyp_km": 12.1,
+     "is_pulse": true,
+     "Tp": 1.2,
+     "PGV": 74.6,
+     "ori_fp": 47.0,
+     "ori_n": 72.0
+    },
+    {
+     "code": "93055",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 17.2,
+     "rhyp_km": 23.8,
+     "is_pulse": true,
+     "Tp": 1.8,
+     "PGV": 26.3,
+     "ori_fp": 65.0,
+     "ori_n": 320.0
+    },
+    {
+     "code": "93056",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 13.9,
+     "rhyp_km": 20.5,
+     "is_pulse": true,
+     "Tp": 1.8,
+     "PGV": 37.6,
+     "ori_fp": 61.0,
+     "ori_n": 324.0
+    },
+    {
+     "code": "93057",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 10.7,
+     "rhyp_km": 17.5,
+     "is_pulse": true,
+     "Tp": 1.5,
+     "PGV": 54.3,
+     "ori_fp": 59.0,
+     "ori_n": 326.0
+    },
+    {
+     "code": "93058",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 12.6,
+     "rhyp_km": 19.5,
+     "is_pulse": true,
+     "Tp": 1.4,
+     "PGV": 25.5,
+     "ori_fp": 63.0,
+     "ori_n": 322.0
+    },
+    {
+     "code": "9CF",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 6.4,
+     "rhyp_km": 12.0,
+     "is_pulse": true,
+     "Tp": 1.4,
+     "PGV": 51.3,
+     "ori_fp": 39.0,
+     "ori_n": 346.0
+    }
+   ],
+   "stats": {
+    "n": 12,
+    "n_pulse": 12,
+    "pulse_fraction": 1.0,
+    "Tp_median": 1.7,
+    "PGV_median": 51.8,
+    "Tp_range": [
+     1.2,
+     2.5
+    ],
+    "by_distance": [
+     {
+      "r_lo": 0,
+      "r_hi": 5,
+      "n": 5,
+      "n_pulse": 5,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.8
+     },
+     {
+      "r_lo": 5,
+      "r_hi": 10,
+      "n": 3,
+      "n_pulse": 3,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.4
+     },
+     {
+      "r_lo": 10,
+      "r_hi": 20,
+      "n": 4,
+      "n_pulse": 4,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.8
+     }
+    ],
+    "scatter": [
+     {
+      "code": "KMMH14",
+      "repi_km": null,
+      "rrup_km": 1.9,
+      "Tp": 1.8,
+      "PGV": 52.3,
+      "is_pulse": true
+     },
+     {
+      "code": "93020",
+      "repi_km": null,
+      "rrup_km": 7.7,
+      "Tp": 1.3,
+      "PGV": 39.0,
+      "is_pulse": true
+     },
+     {
+      "code": "93021",
+      "repi_km": null,
+      "rrup_km": 4.4,
+      "Tp": 1.8,
+      "PGV": 57.8,
+      "is_pulse": true
+     },
+     {
+      "code": "93024",
+      "repi_km": null,
+      "rrup_km": 8.1,
+      "Tp": 1.7,
+      "PGV": 59.0,
+      "is_pulse": true
+     },
+     {
+      "code": "93025",
+      "repi_km": null,
+      "rrup_km": 1.8,
+      "Tp": 1.7,
+      "PGV": 64.5,
+      "is_pulse": true
+     },
+     {
+      "code": "93050",
+      "repi_km": null,
+      "rrup_km": 3.5,
+      "Tp": 2.5,
+      "PGV": 43.2,
+      "is_pulse": true
+     },
+     {
+      "code": "93051",
+      "repi_km": null,
+      "rrup_km": 4.6,
+      "Tp": 1.2,
+      "PGV": 74.6,
+      "is_pulse": true
+     },
+     {
+      "code": "93055",
+      "repi_km": null,
+      "rrup_km": 17.2,
+      "Tp": 1.8,
+      "PGV": 26.3,
+      "is_pulse": true
+     },
+     {
+      "code": "93056",
+      "repi_km": null,
+      "rrup_km": 13.9,
+      "Tp": 1.8,
+      "PGV": 37.6,
+      "is_pulse": true
+     },
+     {
+      "code": "93057",
+      "repi_km": null,
+      "rrup_km": 10.7,
+      "Tp": 1.5,
+      "PGV": 54.3,
+      "is_pulse": true
+     },
+     {
+      "code": "93058",
+      "repi_km": null,
+      "rrup_km": 12.6,
+      "Tp": 1.4,
+      "PGV": 25.5,
+      "is_pulse": true
+     },
+     {
+      "code": "9CF",
+      "repi_km": null,
+      "rrup_km": 6.4,
+      "Tp": 1.4,
+      "PGV": 51.3,
+      "is_pulse": true
+     }
+    ]
+   },
+   "n_mappable": 0
+  },
+  {
+   "key": "kumamoto|2016",
+   "name": "Kumamoto",
+   "year": "2016",
+   "lat": 32.791,
+   "lon": 130.754,
+   "depth_km": 15.1,
+   "mag": 7.0,
+   "fault_type": null,
+   "stations": [
+    {
+     "code": "93002",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 8.3,
+     "rhyp_km": 37.7,
+     "is_pulse": true,
+     "Tp": 11.2,
+     "PGV": 62.2,
+     "ori_fp": 37.0,
+     "ori_n": 348.0
+    },
+    {
+     "code": "93009",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 10.3,
+     "rhyp_km": 33.4,
+     "is_pulse": true,
+     "Tp": 4.3,
+     "PGV": 70.4,
+     "ori_fp": 7.0,
+     "ori_n": 18.0
+    },
+    {
+     "code": "93010",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 8.1,
+     "rhyp_km": 29.2,
+     "is_pulse": true,
+     "Tp": 4.3,
+     "PGV": 44.9,
+     "ori_fp": 3.0,
+     "ori_n": 22.0
+    },
+    {
+     "code": "93011",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 3.4,
+     "rhyp_km": 28.1,
+     "is_pulse": true,
+     "Tp": 3.1,
+     "PGV": 93.4,
+     "ori_fp": 29.0,
+     "ori_n": 356.0
+    },
+    {
+     "code": "93020",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 12.5,
+     "rhyp_km": 19.6,
+     "is_pulse": true,
+     "Tp": 1.2,
+     "PGV": 69.3,
+     "ori_fp": 51.0,
+     "ori_n": 334.0
+    },
+    {
+     "code": "93025",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 8.6,
+     "rhyp_km": 18.1,
+     "is_pulse": true,
+     "Tp": 2.0,
+     "PGV": 87.6,
+     "ori_fp": 20.0,
+     "ori_n": 5.0
+    },
+    {
+     "code": "93029",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 25.0,
+     "rhyp_km": 26.5,
+     "is_pulse": true,
+     "Tp": 1.9,
+     "PGV": 53.3,
+     "ori_fp": 32.0,
+     "ori_n": 353.0
+    },
+    {
+     "code": "93030",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 21.5,
+     "rhyp_km": 23.3,
+     "is_pulse": true,
+     "Tp": 2.0,
+     "PGV": 68.8,
+     "ori_fp": 36.0,
+     "ori_n": 349.0
+    },
+    {
+     "code": "93041",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 18.7,
+     "rhyp_km": 26.6,
+     "is_pulse": true,
+     "Tp": 3.2,
+     "PGV": 46.5,
+     "ori_fp": 39.0,
+     "ori_n": 64.0
+    },
+    {
+     "code": "93042",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 12.5,
+     "rhyp_km": 25.9,
+     "is_pulse": true,
+     "Tp": 1.8,
+     "PGV": 126.8,
+     "ori_fp": 14.0,
+     "ori_n": 11.0
+    },
+    {
+     "code": "93044",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 6.8,
+     "rhyp_km": 18.2,
+     "is_pulse": true,
+     "Tp": 2.7,
+     "PGV": 59.6,
+     "ori_fp": 29.0,
+     "ori_n": 54.0
+    },
+    {
+     "code": "93048",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.1,
+     "rhyp_km": 20.1,
+     "is_pulse": true,
+     "Tp": 3.6,
+     "PGV": 150.1,
+     "ori_fp": 57.0,
+     "ori_n": 82.0
+    },
+    {
+     "code": "93051",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.2,
+     "rhyp_km": 14.0,
+     "is_pulse": true,
+     "Tp": 1.5,
+     "PGV": 172.0,
+     "ori_fp": 42.0,
+     "ori_n": 67.0
+    },
+    {
+     "code": "93055",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 23.9,
+     "rhyp_km": 30.3,
+     "is_pulse": true,
+     "Tp": 1.8,
+     "PGV": 40.2,
+     "ori_fp": 80.0,
+     "ori_n": 305.0
+    },
+    {
+     "code": "93056",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 20.5,
+     "rhyp_km": 27.2,
+     "is_pulse": true,
+     "Tp": 1.4,
+     "PGV": 52.4,
+     "ori_fp": 52.0,
+     "ori_n": 333.0
+    },
+    {
+     "code": "93057",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 17.3,
+     "rhyp_km": 24.5,
+     "is_pulse": true,
+     "Tp": 1.8,
+     "PGV": 65.5,
+     "ori_fp": 69.0,
+     "ori_n": 316.0
+    },
+    {
+     "code": "93096",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 6.3,
+     "rhyp_km": 21.0,
+     "is_pulse": true,
+     "Tp": 3.1,
+     "PGV": 75.6,
+     "ori_fp": 45.0,
+     "ori_n": 340.0
+    },
+    {
+     "code": "9CF",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 11.2,
+     "rhyp_km": 18.7,
+     "is_pulse": true,
+     "Tp": 1.6,
+     "PGV": 78.3,
+     "ori_fp": 38.0,
+     "ori_n": 347.0
+    },
+    {
+     "code": "EED",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 5.5,
+     "rhyp_km": 34.6,
+     "is_pulse": true,
+     "Tp": 5.8,
+     "PGV": 65.8,
+     "ori_fp": 61.0,
+     "ori_n": 86.0
+    },
+    {
+     "code": "KMM004",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 10.1,
+     "rhyp_km": 40.9,
+     "is_pulse": true,
+     "Tp": 4.0,
+     "PGV": 81.2,
+     "ori_fp": 67.0,
+     "ori_n": 318.0
+    },
+    {
+     "code": "KMM005",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 6.0,
+     "rhyp_km": 21.2,
+     "is_pulse": true,
+     "Tp": 2.9,
+     "PGV": 60.6,
+     "ori_fp": 71.0,
+     "ori_n": 314.0
+    },
+    {
+     "code": "KMM006",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 4.2,
+     "rhyp_km": 13.2,
+     "is_pulse": true,
+     "Tp": 2.0,
+     "PGV": 80.0,
+     "ori_fp": 32.0,
+     "ori_n": 57.0
+    },
+    {
+     "code": "KMM007",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 12.4,
+     "rhyp_km": 36.9,
+     "is_pulse": true,
+     "Tp": 5.5,
+     "PGV": 34.5,
+     "ori_fp": 6.0,
+     "ori_n": 19.0
+    },
+    {
+     "code": "KMMH03",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 18.4,
+     "rhyp_km": 30.4,
+     "is_pulse": true,
+     "Tp": 1.3,
+     "PGV": 76.8,
+     "ori_fp": 18.0,
+     "ori_n": 7.0
+    },
+    {
+     "code": "KMMH04",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 6.2,
+     "rhyp_km": 34.8,
+     "is_pulse": true,
+     "Tp": 10.1,
+     "PGV": 127.9,
+     "ori_fp": 67.0,
+     "ori_n": 318.0
+    }
+   ],
+   "stats": {
+    "n": 25,
+    "n_pulse": 25,
+    "pulse_fraction": 1.0,
+    "Tp_median": 2.7,
+    "PGV_median": 69.3,
+    "Tp_range": [
+     1.2,
+     11.2
+    ],
+    "by_distance": [
+     {
+      "r_lo": 0,
+      "r_hi": 5,
+      "n": 4,
+      "n_pulse": 4,
+      "pulse_fraction": 1.0,
+      "Tp_median": 3.1
+     },
+     {
+      "r_lo": 5,
+      "r_hi": 10,
+      "n": 8,
+      "n_pulse": 8,
+      "pulse_fraction": 1.0,
+      "Tp_median": 4.3
+     },
+     {
+      "r_lo": 10,
+      "r_hi": 20,
+      "n": 9,
+      "n_pulse": 9,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.8
+     },
+     {
+      "r_lo": 20,
+      "r_hi": 40,
+      "n": 4,
+      "n_pulse": 4,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.9
+     }
+    ],
+    "scatter": [
+     {
+      "code": "93002",
+      "repi_km": null,
+      "rrup_km": 8.3,
+      "Tp": 11.2,
+      "PGV": 62.2,
+      "is_pulse": true
+     },
+     {
+      "code": "93009",
+      "repi_km": null,
+      "rrup_km": 10.3,
+      "Tp": 4.3,
+      "PGV": 70.4,
+      "is_pulse": true
+     },
+     {
+      "code": "93010",
+      "repi_km": null,
+      "rrup_km": 8.1,
+      "Tp": 4.3,
+      "PGV": 44.9,
+      "is_pulse": true
+     },
+     {
+      "code": "93011",
+      "repi_km": null,
+      "rrup_km": 3.4,
+      "Tp": 3.1,
+      "PGV": 93.4,
+      "is_pulse": true
+     },
+     {
+      "code": "93020",
+      "repi_km": null,
+      "rrup_km": 12.5,
+      "Tp": 1.2,
+      "PGV": 69.3,
+      "is_pulse": true
+     },
+     {
+      "code": "93025",
+      "repi_km": null,
+      "rrup_km": 8.6,
+      "Tp": 2.0,
+      "PGV": 87.6,
+      "is_pulse": true
+     },
+     {
+      "code": "93029",
+      "repi_km": null,
+      "rrup_km": 25.0,
+      "Tp": 1.9,
+      "PGV": 53.3,
+      "is_pulse": true
+     },
+     {
+      "code": "93030",
+      "repi_km": null,
+      "rrup_km": 21.5,
+      "Tp": 2.0,
+      "PGV": 68.8,
+      "is_pulse": true
+     },
+     {
+      "code": "93041",
+      "repi_km": null,
+      "rrup_km": 18.7,
+      "Tp": 3.2,
+      "PGV": 46.5,
+      "is_pulse": true
+     },
+     {
+      "code": "93042",
+      "repi_km": null,
+      "rrup_km": 12.5,
+      "Tp": 1.8,
+      "PGV": 126.8,
+      "is_pulse": true
+     },
+     {
+      "code": "93044",
+      "repi_km": null,
+      "rrup_km": 6.8,
+      "Tp": 2.7,
+      "PGV": 59.6,
+      "is_pulse": true
+     },
+     {
+      "code": "93048",
+      "repi_km": null,
+      "rrup_km": 2.1,
+      "Tp": 3.6,
+      "PGV": 150.1,
+      "is_pulse": true
+     },
+     {
+      "code": "93051",
+      "repi_km": null,
+      "rrup_km": 2.2,
+      "Tp": 1.5,
+      "PGV": 172.0,
+      "is_pulse": true
+     },
+     {
+      "code": "93055",
+      "repi_km": null,
+      "rrup_km": 23.9,
+      "Tp": 1.8,
+      "PGV": 40.2,
+      "is_pulse": true
+     },
+     {
+      "code": "93056",
+      "repi_km": null,
+      "rrup_km": 20.5,
+      "Tp": 1.4,
+      "PGV": 52.4,
+      "is_pulse": true
+     },
+     {
+      "code": "93057",
+      "repi_km": null,
+      "rrup_km": 17.3,
+      "Tp": 1.8,
+      "PGV": 65.5,
+      "is_pulse": true
+     },
+     {
+      "code": "93096",
+      "repi_km": null,
+      "rrup_km": 6.3,
+      "Tp": 3.1,
+      "PGV": 75.6,
+      "is_pulse": true
+     },
+     {
+      "code": "9CF",
+      "repi_km": null,
+      "rrup_km": 11.2,
+      "Tp": 1.6,
+      "PGV": 78.3,
+      "is_pulse": true
+     },
+     {
+      "code": "EED",
+      "repi_km": null,
+      "rrup_km": 5.5,
+      "Tp": 5.8,
+      "PGV": 65.8,
+      "is_pulse": true
+     },
+     {
+      "code": "KMM004",
+      "repi_km": null,
+      "rrup_km": 10.1,
+      "Tp": 4.0,
+      "PGV": 81.2,
+      "is_pulse": true
+     },
+     {
+      "code": "KMM005",
+      "repi_km": null,
+      "rrup_km": 6.0,
+      "Tp": 2.9,
+      "PGV": 60.6,
+      "is_pulse": true
+     },
+     {
+      "code": "KMM006",
+      "repi_km": null,
+      "rrup_km": 4.2,
+      "Tp": 2.0,
+      "PGV": 80.0,
+      "is_pulse": true
+     },
+     {
+      "code": "KMM007",
+      "repi_km": null,
+      "rrup_km": 12.4,
+      "Tp": 5.5,
+      "PGV": 34.5,
+      "is_pulse": true
+     },
+     {
+      "code": "KMMH03",
+      "repi_km": null,
+      "rrup_km": 18.4,
+      "Tp": 1.3,
+      "PGV": 76.8,
+      "is_pulse": true
+     },
+     {
+      "code": "KMMH04",
+      "repi_km": null,
+      "rrup_km": 6.2,
+      "Tp": 10.1,
+      "PGV": 127.9,
+      "is_pulse": true
+     }
+    ]
+   },
+   "n_mappable": 0
+  },
+  {
+   "key": "meinong|2016",
+   "name": "Meinong",
+   "year": "2016",
+   "lat": 22.922,
+   "lon": 120.544,
+   "depth_km": 14.6,
+   "mag": 6.4,
+   "fault_type": null,
+   "stations": [
+    {
+     "code": "CHY020",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 28.4,
+     "rhyp_km": 46.6,
+     "is_pulse": true,
+     "Tp": 2.4,
+     "PGV": 51.0,
+     "ori_fp": 21.0,
+     "ori_n": 274.0
+    },
+    {
+     "code": "CHY058",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 23.6,
+     "rhyp_km": 38.3,
+     "is_pulse": true,
+     "Tp": 2.1,
+     "PGV": 53.2,
+     "ori_fp": 50.0,
+     "ori_n": 345.0
+    },
+    {
+     "code": "CHY060",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 24.0,
+     "rhyp_km": 40.6,
+     "is_pulse": true,
+     "Tp": 1.8,
+     "PGV": 57.6,
+     "ori_fp": 7.0,
+     "ori_n": 288.0
+    },
+    {
+     "code": "CHY062",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 21.6,
+     "rhyp_km": 28.2,
+     "is_pulse": true,
+     "Tp": 0.9,
+     "PGV": 40.1,
+     "ori_fp": 25.0,
+     "ori_n": 320.0
+    },
+    {
+     "code": "CHY063",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 16.6,
+     "rhyp_km": 27.8,
+     "is_pulse": true,
+     "Tp": 1.4,
+     "PGV": 71.2,
+     "ori_fp": 4.0,
+     "ori_n": 291.0
+    },
+    {
+     "code": "CHY067",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 21.4,
+     "rhyp_km": 40.1,
+     "is_pulse": true,
+     "Tp": 2.6,
+     "PGV": 42.8,
+     "ori_fp": 32.0,
+     "ori_n": 83.0
+    },
+    {
+     "code": "CHY069",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 20.5,
+     "rhyp_km": 39.9,
+     "is_pulse": true,
+     "Tp": 2.0,
+     "PGV": 51.2,
+     "ori_fp": 8.0,
+     "ori_n": 287.0
+    },
+    {
+     "code": "CHY070",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 17.0,
+     "rhyp_km": 35.6,
+     "is_pulse": true,
+     "Tp": 1.7,
+     "PGV": 58.6,
+     "ori_fp": 25.0,
+     "ori_n": 270.0
+    },
+    {
+     "code": "CHY071",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 25.6,
+     "rhyp_km": 43.8,
+     "is_pulse": true,
+     "Tp": 2.3,
+     "PGV": 50.5,
+     "ori_fp": 7.0,
+     "ori_n": 288.0
+    },
+    {
+     "code": "CHY085",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 20.4,
+     "rhyp_km": 38.9,
+     "is_pulse": true,
+     "Tp": 1.1,
+     "PGV": 39.8,
+     "ori_fp": 44.0,
+     "ori_n": 71.0
+    },
+    {
+     "code": "CHY089",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 18.9,
+     "rhyp_km": 29.4,
+     "is_pulse": true,
+     "Tp": 2.6,
+     "PGV": 61.8,
+     "ori_fp": 78.0,
+     "ori_n": 13.0
+    },
+    {
+     "code": "CHY097",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 20.6,
+     "rhyp_km": 38.6,
+     "is_pulse": true,
+     "Tp": 1.5,
+     "PGV": 37.7,
+     "ori_fp": 42.0,
+     "ori_n": 73.0
+    },
+    {
+     "code": "CHY098",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 23.5,
+     "rhyp_km": 42.6,
+     "is_pulse": true,
+     "Tp": 3.2,
+     "PGV": 51.1,
+     "ori_fp": 14.0,
+     "ori_n": 281.0
+    },
+    {
+     "code": "CHY115",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 35.7,
+     "rhyp_km": 55.0,
+     "is_pulse": true,
+     "Tp": 2.3,
+     "PGV": 34.5,
+     "ori_fp": 20.0,
+     "ori_n": 275.0
+    },
+    {
+     "code": "CHY116",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 30.4,
+     "rhyp_km": 49.3,
+     "is_pulse": true,
+     "Tp": 2.4,
+     "PGV": 45.5,
+     "ori_fp": 25.0,
+     "ori_n": 320.0
+    },
+    {
+     "code": "CHY125",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 23.0,
+     "rhyp_km": 42.3,
+     "is_pulse": true,
+     "Tp": 2.9,
+     "PGV": 51.4,
+     "ori_fp": 18.0,
+     "ori_n": 277.0
+    },
+    {
+     "code": "CHY131",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 20.9,
+     "rhyp_km": 32.5,
+     "is_pulse": true,
+     "Tp": 1.9,
+     "PGV": 57.8,
+     "ori_fp": 71.0,
+     "ori_n": 6.0
+    },
+    {
+     "code": "TRB029",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 22.4,
+     "rhyp_km": 37.1,
+     "is_pulse": true,
+     "Tp": 2.3,
+     "PGV": 66.5,
+     "ori_fp": 53.0,
+     "ori_n": 348.0
+    }
+   ],
+   "stats": {
+    "n": 18,
+    "n_pulse": 18,
+    "pulse_fraction": 1.0,
+    "Tp_median": 2.2,
+    "PGV_median": 51.15,
+    "Tp_range": [
+     0.9,
+     3.2
+    ],
+    "by_distance": [
+     {
+      "r_lo": 10,
+      "r_hi": 20,
+      "n": 3,
+      "n_pulse": 3,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.7
+     },
+     {
+      "r_lo": 20,
+      "r_hi": 40,
+      "n": 15,
+      "n_pulse": 15,
+      "pulse_fraction": 1.0,
+      "Tp_median": 2.3
+     }
+    ],
+    "scatter": [
+     {
+      "code": "CHY020",
+      "repi_km": null,
+      "rrup_km": 28.4,
+      "Tp": 2.4,
+      "PGV": 51.0,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY058",
+      "repi_km": null,
+      "rrup_km": 23.6,
+      "Tp": 2.1,
+      "PGV": 53.2,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY060",
+      "repi_km": null,
+      "rrup_km": 24.0,
+      "Tp": 1.8,
+      "PGV": 57.6,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY062",
+      "repi_km": null,
+      "rrup_km": 21.6,
+      "Tp": 0.9,
+      "PGV": 40.1,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY063",
+      "repi_km": null,
+      "rrup_km": 16.6,
+      "Tp": 1.4,
+      "PGV": 71.2,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY067",
+      "repi_km": null,
+      "rrup_km": 21.4,
+      "Tp": 2.6,
+      "PGV": 42.8,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY069",
+      "repi_km": null,
+      "rrup_km": 20.5,
+      "Tp": 2.0,
+      "PGV": 51.2,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY070",
+      "repi_km": null,
+      "rrup_km": 17.0,
+      "Tp": 1.7,
+      "PGV": 58.6,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY071",
+      "repi_km": null,
+      "rrup_km": 25.6,
+      "Tp": 2.3,
+      "PGV": 50.5,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY085",
+      "repi_km": null,
+      "rrup_km": 20.4,
+      "Tp": 1.1,
+      "PGV": 39.8,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY089",
+      "repi_km": null,
+      "rrup_km": 18.9,
+      "Tp": 2.6,
+      "PGV": 61.8,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY097",
+      "repi_km": null,
+      "rrup_km": 20.6,
+      "Tp": 1.5,
+      "PGV": 37.7,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY098",
+      "repi_km": null,
+      "rrup_km": 23.5,
+      "Tp": 3.2,
+      "PGV": 51.1,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY115",
+      "repi_km": null,
+      "rrup_km": 35.7,
+      "Tp": 2.3,
+      "PGV": 34.5,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY116",
+      "repi_km": null,
+      "rrup_km": 30.4,
+      "Tp": 2.4,
+      "PGV": 45.5,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY125",
+      "repi_km": null,
+      "rrup_km": 23.0,
+      "Tp": 2.9,
+      "PGV": 51.4,
+      "is_pulse": true
+     },
+     {
+      "code": "CHY131",
+      "repi_km": null,
+      "rrup_km": 20.9,
+      "Tp": 1.9,
+      "PGV": 57.8,
+      "is_pulse": true
+     },
+     {
+      "code": "TRB029",
+      "repi_km": null,
+      "rrup_km": 22.4,
+      "Tp": 2.3,
+      "PGV": 66.5,
+      "is_pulse": true
+     }
+    ]
+   },
+   "n_mappable": 0
+  },
+  {
+   "key": "hualien|2018",
+   "name": "Hualien",
+   "year": "2018",
+   "lat": 24.1162,
+   "lon": 121.7225,
+   "depth_km": 4.89,
+   "mag": 6.4,
+   "fault_type": null,
+   "stations": [
+    {
+     "code": "HWA007",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.3,
+     "rhyp_km": 19.6,
+     "is_pulse": true,
+     "Tp": 4.0,
+     "PGV": 80.9,
+     "ori_fp": 47.0,
+     "ori_n": 83.0
+    },
+    {
+     "code": "HWA008",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.1,
+     "rhyp_km": 20.0,
+     "is_pulse": true,
+     "Tp": 3.3,
+     "PGV": 93.7,
+     "ori_fp": 56.0,
+     "ori_n": 272.0
+    },
+    {
+     "code": "HWA009",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.2,
+     "rhyp_km": 19.3,
+     "is_pulse": true,
+     "Tp": 4.1,
+     "PGV": 96.3,
+     "ori_fp": 66.0,
+     "ori_n": 282.0
+    },
+    {
+     "code": "HWA010",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.1,
+     "rhyp_km": 20.9,
+     "is_pulse": true,
+     "Tp": 3.3,
+     "PGV": 125.1,
+     "ori_fp": 46.0,
+     "ori_n": 82.0
+    },
+    {
+     "code": "HWA011",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 3.0,
+     "rhyp_km": 19.6,
+     "is_pulse": true,
+     "Tp": 3.8,
+     "PGV": 88.0,
+     "ori_fp": 32.0,
+     "ori_n": 4.0
+    },
+    {
+     "code": "HWA012",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.7,
+     "rhyp_km": 19.0,
+     "is_pulse": true,
+     "Tp": 4.5,
+     "PGV": 68.8,
+     "ori_fp": 45.0,
+     "ori_n": 81.0
+    },
+    {
+     "code": "HWA013",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.3,
+     "rhyp_km": 21.2,
+     "is_pulse": true,
+     "Tp": 2.7,
+     "PGV": 110.6,
+     "ori_fp": 30.0,
+     "ori_n": 66.0
+    },
+    {
+     "code": "HWA014",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.2,
+     "rhyp_km": 21.4,
+     "is_pulse": true,
+     "Tp": 3.6,
+     "PGV": 142.8,
+     "ori_fp": 60.0,
+     "ori_n": 276.0
+    },
+    {
+     "code": "HWA019",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 1.9,
+     "rhyp_km": 20.9,
+     "is_pulse": true,
+     "Tp": 3.3,
+     "PGV": 144.1,
+     "ori_fp": 71.0,
+     "ori_n": 287.0
+    },
+    {
+     "code": "HWA028",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.6,
+     "rhyp_km": 28.0,
+     "is_pulse": true,
+     "Tp": 4.0,
+     "PGV": 56.4,
+     "ori_fp": 13.0,
+     "ori_n": 23.0
+    },
+    {
+     "code": "HWA050",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.9,
+     "rhyp_km": 20.3,
+     "is_pulse": true,
+     "Tp": 2.3,
+     "PGV": 85.8,
+     "ori_fp": 1.0,
+     "ori_n": 35.0
+    },
+    {
+     "code": "HWA062",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 1.9,
+     "rhyp_km": 20.6,
+     "is_pulse": true,
+     "Tp": 3.6,
+     "PGV": 93.3,
+     "ori_fp": 38.0,
+     "ori_n": 74.0
+    },
+    {
+     "code": "HWA063",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 3.0,
+     "rhyp_km": 18.9,
+     "is_pulse": true,
+     "Tp": 2.3,
+     "PGV": 85.6,
+     "ori_fp": 28.0,
+     "ori_n": 8.0
+    },
+    {
+     "code": "TRB042",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 2.8,
+     "rhyp_km": 16.9,
+     "is_pulse": true,
+     "Tp": 3.2,
+     "PGV": 72.5,
+     "ori_fp": 66.0,
+     "ori_n": 330.0
+    }
+   ],
+   "stats": {
+    "n": 14,
+    "n_pulse": 14,
+    "pulse_fraction": 1.0,
+    "Tp_median": 3.45,
+    "PGV_median": 90.65,
+    "Tp_range": [
+     2.3,
+     4.5
+    ],
+    "by_distance": [
+     {
+      "r_lo": 0,
+      "r_hi": 5,
+      "n": 14,
+      "n_pulse": 14,
+      "pulse_fraction": 1.0,
+      "Tp_median": 3.6
+     }
+    ],
+    "scatter": [
+     {
+      "code": "HWA007",
+      "repi_km": null,
+      "rrup_km": 2.3,
+      "Tp": 4.0,
+      "PGV": 80.9,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA008",
+      "repi_km": null,
+      "rrup_km": 2.1,
+      "Tp": 3.3,
+      "PGV": 93.7,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA009",
+      "repi_km": null,
+      "rrup_km": 2.2,
+      "Tp": 4.1,
+      "PGV": 96.3,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA010",
+      "repi_km": null,
+      "rrup_km": 2.1,
+      "Tp": 3.3,
+      "PGV": 125.1,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA011",
+      "repi_km": null,
+      "rrup_km": 3.0,
+      "Tp": 3.8,
+      "PGV": 88.0,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA012",
+      "repi_km": null,
+      "rrup_km": 2.7,
+      "Tp": 4.5,
+      "PGV": 68.8,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA013",
+      "repi_km": null,
+      "rrup_km": 2.3,
+      "Tp": 2.7,
+      "PGV": 110.6,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA014",
+      "repi_km": null,
+      "rrup_km": 2.2,
+      "Tp": 3.6,
+      "PGV": 142.8,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA019",
+      "repi_km": null,
+      "rrup_km": 1.9,
+      "Tp": 3.3,
+      "PGV": 144.1,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA028",
+      "repi_km": null,
+      "rrup_km": 2.6,
+      "Tp": 4.0,
+      "PGV": 56.4,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA050",
+      "repi_km": null,
+      "rrup_km": 2.9,
+      "Tp": 2.3,
+      "PGV": 85.8,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA062",
+      "repi_km": null,
+      "rrup_km": 1.9,
+      "Tp": 3.6,
+      "PGV": 93.3,
+      "is_pulse": true
+     },
+     {
+      "code": "HWA063",
+      "repi_km": null,
+      "rrup_km": 3.0,
+      "Tp": 2.3,
+      "PGV": 85.6,
+      "is_pulse": true
+     },
+     {
+      "code": "TRB042",
+      "repi_km": null,
+      "rrup_km": 2.8,
+      "Tp": 3.2,
+      "PGV": 72.5,
+      "is_pulse": true
+     }
+    ]
+   },
+   "n_mappable": 0
+  },
+  {
+   "key": "iburi|2018",
+   "name": "Iburi",
+   "year": "2018",
+   "lat": 42.69,
+   "lon": 141.93,
+   "depth_km": 37.0,
+   "mag": 6.7,
+   "fault_type": null,
+   "stations": [
+    {
+     "code": "HKD126",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 18.8,
+     "rhyp_km": 26.2,
+     "is_pulse": true,
+     "Tp": 1.85,
+     "PGV": 151.48,
+     "ori_fp": null,
+     "ori_n": 83.0
+    },
+    {
+     "code": "HKD128",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 20.5,
+     "rhyp_km": 29.1,
+     "is_pulse": true,
+     "Tp": 1.23,
+     "PGV": 102.46,
+     "ori_fp": null,
+     "ori_n": 54.0
+    },
+    {
+     "code": "IBUH01",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 22.2,
+     "rhyp_km": 34.4,
+     "is_pulse": true,
+     "Tp": 0.57,
+     "PGV": 127.86,
+     "ori_fp": null,
+     "ori_n": 42.0
+    },
+    {
+     "code": "47004",
+     "lat": null,
+     "lon": null,
+     "vs30": null,
+     "rrup_km": 18.7,
+     "rhyp_km": 24.9,
+     "is_pulse": true,
+     "Tp": 1.75,
+     "PGV": 130.73,
+     "ori_fp": null,
+     "ori_n": 273.0
+    }
+   ],
+   "stats": {
+    "n": 4,
+    "n_pulse": 4,
+    "pulse_fraction": 1.0,
+    "Tp_median": 1.49,
+    "PGV_median": 129.29,
+    "Tp_range": [
+     0.57,
+     1.85
+    ],
+    "by_distance": [
+     {
+      "r_lo": 10,
+      "r_hi": 20,
+      "n": 2,
+      "n_pulse": 2,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.85
+     },
+     {
+      "r_lo": 20,
+      "r_hi": 40,
+      "n": 2,
+      "n_pulse": 2,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.23
+     }
+    ],
+    "scatter": [
+     {
+      "code": "HKD126",
+      "repi_km": null,
+      "rrup_km": 18.8,
+      "Tp": 1.85,
+      "PGV": 151.48,
+      "is_pulse": true
+     },
+     {
+      "code": "HKD128",
+      "repi_km": null,
+      "rrup_km": 20.5,
+      "Tp": 1.23,
+      "PGV": 102.46,
+      "is_pulse": true
+     },
+     {
+      "code": "IBUH01",
+      "repi_km": null,
+      "rrup_km": 22.2,
+      "Tp": 0.57,
+      "PGV": 127.86,
+      "is_pulse": true
+     },
+     {
+      "code": "47004",
+      "repi_km": null,
+      "rrup_km": 18.7,
+      "Tp": 1.75,
+      "PGV": 130.73,
+      "is_pulse": true
+     }
+    ]
+   },
+   "n_mappable": 0
+  }
+ ]
+}
