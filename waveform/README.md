@@ -220,6 +220,15 @@ Long-period pulses (Darfield CBGS/REHS `Tp ≈ 12.6 s`) reproduce to <0.2 s. See
 `output/{2010_Darfield,2011_Christchurch}/` and `output/geonet_vs_*_all.csv`.
 Driver: `python tests/validate_geonet.py [--refetch|--plots-only]`.
 
+### Combined — 27 records, 5 events (1979–2011)
+
+`python tests/validate_summary.py` merges both caches into
+`output/validation_summary.csv` and a one-page figure (Tp & PGV 1:1 vs the
+reference, plus Tp & PGV vs Rrup). Overall: **is_pulse 25/27**, median
+|ΔTp| **0.032 s**, median |ΔPGV| **0.60 cm/s**; both `is_pulse` misses
+(Darfield LPCC, Christchurch CCCC) are near-threshold, the largest single
+deviations are Darfield TPLC (ΔTp 1.0 s) and GDLC (ΔPGV 8.7 cm/s, Rrup 1.2 km).
+
 ## Baseline-correction methods
 
 | `method`   | source | notes |
