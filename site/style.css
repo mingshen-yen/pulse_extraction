@@ -1,0 +1,82 @@
+:root {
+  --pulse: #d62728; --nopulse: #6b7f99; --fault: #ff7f0e; --ink: #1c2733;
+  --line: #dfe4ea; --bg: #f7f8fa;
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: var(--bg); }
+a { color: #1f77b4; }
+
+header { padding: 14px 20px; background: #fff; border-bottom: 1px solid var(--line); }
+header h1 { margin: 0 0 4px; font-size: 18px; }
+header p { margin: 0; max-width: 90ch; color: #445; }
+
+main {
+  display: grid;
+  grid-template-columns: 230px 1fr 340px;
+  gap: 1px; background: var(--line);
+  height: calc(100vh - 92px - 34px);
+}
+@media (max-width: 1000px) {
+  main { grid-template-columns: 1fr; height: auto; }
+  #map { height: 55vh; }
+}
+
+aside, section { background: #fff; overflow-y: auto; }
+aside { padding: 12px 14px; }
+aside h2 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase;
+  letter-spacing: .05em; color: #667; }
+
+#event-list { list-style: none; margin: 0; padding: 0; }
+#event-list li {
+  padding: 7px 9px; border-radius: 7px; cursor: pointer; margin-bottom: 3px;
+  border: 1px solid transparent;
+}
+#event-list li:hover { background: var(--bg); }
+#event-list li.active { background: #eef4fb; border-color: #cfe0f2; }
+#event-list .ev-name { font-weight: 600; }
+#event-list .ev-sub { color: #778; font-size: 12px; }
+#event-list .ev-badge {
+  float: right; font-size: 11px; font-weight: 600; color: var(--pulse);
+}
+
+#map-wrap { position: relative; }
+#map { position: absolute; inset: 0; }
+#legend {
+  position: absolute; left: 10px; bottom: 10px; z-index: 500;
+  background: rgba(255,255,255,.94); border: 1px solid var(--line);
+  border-radius: 8px; padding: 7px 10px; font-size: 12px;
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+#legend i { display: inline-block; vertical-align: middle; margin-right: 4px; }
+.dot { width: 11px; height: 11px; border-radius: 50%; border: 1px solid #333; }
+.dot.pulse { background: var(--pulse); }
+.dot.nopulse { background: #fff; }
+.bar { width: 16px; height: 8px; border-radius: 4px;
+  background: linear-gradient(90deg, #bcd, #d62728); }
+.fault { width: 16px; height: 0; border-top: 3px solid var(--fault); }
+
+#event-head h3 { margin: 2px 0 2px; font-size: 15px; }
+#event-head .kv { color: #667; font-size: 12.5px; }
+#event-head .stat-row { display: flex; gap: 16px; margin: 8px 0 4px; }
+#event-head .stat b { font-size: 17px; display: block; }
+#event-head .stat span { font-size: 11px; color: #778; }
+
+#charts figure { margin: 14px 0 0; }
+#charts figcaption { font-size: 12px; color: #667; margin-bottom: 2px; }
+#charts canvas { max-height: 150px; }
+
+#station-detail { margin: 12px 0; border-top: 1px solid var(--line); padding-top: 10px; }
+#station-detail h4 { margin: 0 0 4px; }
+#station-detail .sd-grid {
+  display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 12.5px;
+}
+#station-detail .sd-grid span:nth-child(odd) { color: #778; }
+#spark { width: 100%; height: 70px; display: block; margin-top: 8px;
+  background: var(--bg); border-radius: 6px; }
+
+.muted { color: #889; font-size: 12px; }
+footer { padding: 8px 20px; background: #fff; border-top: 1px solid var(--line);
+  max-width: none; }
+.leaflet-popup-content { font-size: 12.5px; margin: 8px 12px; }
+.leaflet-popup-content b { font-size: 13px; }

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Near-fault velocity-pulse extraction — live map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Near-fault velocity-pulse extraction</h1>
+  <p>
+    Python port of the Shahi&nbsp;&amp; Baker stratified-wavelet pulse classifier,
+    fed by near-real-time strong-motion waveforms:
+    <b>fetch&nbsp;&rarr; baseline correction &rarr; Arias window &rarr; classifier</b>.
+    Each event below is pulled from a strong-motion archive (GeoNet FDSN, ESM),
+    processed end-to-end, and mapped.
+  </p>
+  <p class="muted">
+    Reproduces the Shahi&nbsp;&amp; Baker (2014) pulse table to
+    <b>25&nbsp;/&nbsp;27 records</b> across 5 events (median&nbsp;|&Delta;T<sub>p</sub>|&nbsp;0.03&nbsp;s).
+    <a href="https://github.com/mingshen-yen/pulse_extraction" target="_blank" rel="noopener">source&nbsp;&amp;&nbsp;validation&nbsp;&rarr;</a>
+  </p>
+</header>
+
+<main>
+  <aside id="events">
+    <h2>Events</h2>
+    <ul id="event-list"></ul>
+    <p class="muted" id="index-meta"></p>
+  </aside>
+
+  <section id="map-wrap">
+    <div id="map"></div>
+    <div id="legend">
+      <span><i class="dot pulse"></i> pulse</span>
+      <span><i class="dot nopulse"></i> no pulse</span>
+      <span><i class="bar"></i> marker size &prop; PGV</span>
+      <span><i class="fault"></i> rupture (W&amp;C scaling)</span>
+    </div>
+  </section>
+
+  <aside id="panel">
+    <div id="event-head"></div>
+    <div id="station-detail" class="muted">Select a station on the map.</div>
+    <div id="charts">
+      <figure><figcaption>T<sub>p</sub> vs distance</figcaption><canvas id="c-tp"></canvas></figure>
+      <figure><figcaption>PGV vs distance</figcaption><canvas id="c-pgv"></canvas></figure>
+      <figure><figcaption>pulse fraction by distance</figcaption><canvas id="c-frac"></canvas></figure>
+    </div>
+  </aside>
+</main>
+
+<footer class="muted">
+  Distances: R<sub>epi</sub> computed from hypocentre; R<sub>rup</sub> shown where a
+  published value exists. Rupture rectangles are schematic (moment-tensor nodal
+  plane + magnitude scaling), not finite-fault inversions.
+  Data © GeoNet / GNS Science (CC-BY 4.0), ESM / INGV (CC-BY).
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
