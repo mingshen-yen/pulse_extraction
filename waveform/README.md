@@ -133,12 +133,18 @@ angle_deg, late, split, split_dt, …`); a bad record is logged with its error a
 does not stop the run. `batch_cwa_freefield(record_dir, out_csv, …)` is the
 library entry point and returns the row dicts.
 
-Near-real-time from a data centre:
+Near-real-time from a data centre (any ObsPy FDSN id — `IRIS`, `GEONET`,
+`GFZ`, …; raw counts are deconvolved via StationXML from the same client):
 
 ```python
 from waveform.fetch import fetch_event_acc
 acc = fetch_event_acc("TK", "NAR", "2023-02-06T01:17:36", channel="HN?", client="IRIS")
 out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="ebasco")
+
+acc = fetch_event_acc("NZ", "GDLC", "2010-09-03T16:35:41",       # 2010 Darfield
+                      channel="HN?", client="GEONET", pre_seconds=30, post_seconds=140)
+out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="kamai",
+                response=acc.meta["response"], window="arias", decimate_to=50)
 ```
 
 ## Engineering Strong Motion database (esm-db.eu)
@@ -194,6 +200,25 @@ station in the wider per-event runs is correctly `is_pulse=0`. See
 `output/{2009_LAquila,1980_Irpinia,1979_Montenegro}/` and
 `output/esm_vs_SB2014_all.csv`. (Sanity check, 2016-08-24 Amatrice M6.0 / AMT:
 `is_pulse=True`, `Tp ≈ 0.8 s`, `PGV ≈ 44 cm/s` — the known Amatrice pulse.)
+Driver: `python tests/validate_esm.py [--refetch|--plots-only]`.
+
+### Validation — GeoNet FDSN (raw counts + StationXML) vs Shahi & Baker (2014)
+
+`fetch_event_acc(..., client="GEONET")` downloads raw counts and deconvolves
+the response from GeoNet's StationXML, so this exercises the full
+`counts → response → BASC → classifier` path (QC reports `pass`, not the
+`assumed-physical` `warn` the pre-processed ESM data gets). Two Canterbury
+events, every SB2014 pulse record fetched:
+
+| event | n | is_pulse | median \|ΔTp\| | median \|ΔPGV\| | notes |
+|---|---|---|---|---|---|
+| 2010 Darfield (Mw 7.0, Tp 6–13 s) | 13 | 12/13 | 0.05 s | 0.7 cm/s | LPCC (Rrup 26 km) borderline |
+| 2011 Christchurch (Mw 6.2) | 7 | 6/7 | 0.03 s | 0.7 cm/s | CCCC near-threshold (PI −0.1); CMHS excluded (gappy record) |
+| **combined** | **20** | **18/20** | **0.046 s** | **0.63 cm/s** | max \|ΔTp\| 1.03 s (TPLC), max \|ΔPGV\| 8.7 cm/s (GDLC, Rrup 1.2 km) |
+
+Long-period pulses (Darfield CBGS/REHS `Tp ≈ 12.6 s`) reproduce to <0.2 s. See
+`output/{2010_Darfield,2011_Christchurch}/` and `output/geonet_vs_*_all.csv`.
+Driver: `python tests/validate_geonet.py [--refetch|--plots-only]`.
 
 ## Baseline-correction methods
 
