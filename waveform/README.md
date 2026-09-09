@@ -22,7 +22,7 @@ ebasco.py     eBASCO path: pre/strong/post-event trilinear detrend  (keeps perma
 classify.py   classify_velocity(vel_n, vel_e, dt) → the pulse dict  (standalone;
               the single PulseData→dict contract)
 pipeline.py   acc_to_velocity(method=…) → classify_velocity → JSON-friendly dict
-batch.py      batch_cwa_freefield() / batch_esm_event(): many records → one CSV
+batch.py      batch_{cwa_freefield,esm_event,fdsn_event}(): many records → one CSV
 ```
 
 `waveform/` is the entry point for new work. The legacy file-based tooling
@@ -176,7 +176,9 @@ the classifier rotates over all azimuths so the E/N labelling does not affect
 `batch_esm_event(eventid, stations, out_csv)` (also
 `python -m waveform.batch --esm-event <id> --esm-stations AQV,AQK,AQA --out …`)
 pulls a list of stations for one event and writes one CSV row each, same schema
-as the CWA batch plus `Mw`, `Repi_km`, `vs30`, `ec8`.
+as the CWA batch plus `Mw`, `Repi_km`, `vs30`, `ec8`.  `batch_fdsn_event(net,
+stations, origin, out_csv, client="GEONET")` is the same for any FDSN node
+(`python -m waveform.batch --fdsn-net NZ --fdsn-origin <t> --fdsn-stations … --fdsn-client GEONET`).
 
 ### Validation — vs Shahi & Baker (2014), `CV` → Kamai + Arias + 50 Hz
 

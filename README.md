@@ -14,6 +14,47 @@ reproducing the original MATLAB results; for anything new, feed acceleration
 through `waveform.run_pulse` / `run_pulse_variants`, or run only the classifier
 on a corrected velocity pair with `waveform.classify_velocity(vel_n, vel_e, dt)`.
 
+## Waveform pipeline (`waveform/`)
+
+```bash
+pip install -r requirements.txt
+```
+
+```python
+from waveform.fetch import fetch_event_acc
+from waveform.pipeline import run_pulse
+
+acc = fetch_event_acc("NZ", "GDLC", "2010-09-03T16:35:41",      # 2010 Darfield
+                      channel="HN?", client="GEONET")
+out = run_pulse(acc.acc_e, acc.acc_n, acc.acc_z, acc.dt, method="kamai",
+                response=acc.meta["response"],
+                window="arias", decimate_to=50)      # strong-motion window + 50 Hz
+print(out["any_pulse"], out["pulses"][out["primary"] - 1]["Tp"])
+```
+
+`run_pulse` runs **QC gate → baseline correction (Kamai or eBASCO) → optional
+Arias strong-motion window + decimation → wavelet classifier** and returns a
+JSON-friendly dict. Acceleration can come from:
+
+| source | reader |
+|---|---|
+| local MiniSEED / SAC (+ StationXML) | `fetch.read_three_component` |
+| any FDSN node — IRIS, GEONET, GFZ, … (raw counts, response removed) | `fetch.fetch_event_acc` |
+| ESM / esm-db.eu (DYNA `.ASC`, already cm/s²) | `fetch.fetch_esm_event`, `fetch.esm_event_search` |
+| CWA Taiwan "FreeField" `.txt` (gal) | `fetch.read_cwa_freefield` |
+
+Batch a whole event to one CSV: `python -m waveform.batch` with `--cwa DIR`,
+`--esm-event ID --esm-stations …`, or `--fdsn-net … --fdsn-origin … --fdsn-stations …`
+(also `batch_cwa_freefield` / `batch_esm_event` / `batch_fdsn_event`). Single
+record + both fling variants: `python -m waveform.run_record`.
+
+**Live-fetch validation** — the full pipeline vs the Shahi & Baker (2014) pulse
+table, every record pulled from the archive, no local files: **25 / 27 `is_pulse`
+across 5 events (1979–2011)**, median |ΔTp| 0.032 s, median |ΔPGV| 0.60 cm/s
+(2009 L'Aquila, 1980 Irpinia, 1979 Montenegro via ESM; 2010 Darfield, 2011
+Christchurch via GeoNet). Drivers: `tests/validate_{esm,geonet,summary}.py`.
+Full detail in [waveform/README](waveform/README.md).
+
 ## Layout
 
 | Python | replaces MATLAB | notes |
@@ -26,11 +67,10 @@ on a corrected velocity pair with `waveform.classify_velocity(vel_n, vel_e, dt)`
 | `pulse_classification/plotting.py` | `make_plot.m` | matplotlib |
 | `pulse_classification/main.py` | `classify_record_main.m` | CLI driver |
 
-## Run
+## Run — classifier port (legacy, MATLAB parity)
 
-```bash
-pip install numpy scipy PyWavelets pandas matplotlib      # + obspy only for miniSEED
-```
+For reproducing `../classification_matlab/` results from `*_VEL_[NE].txt` files.
+New work should use the `waveform/` pipeline above.
 
 ### 1. Pre-process raw records → `*_VEL_[NE].txt` (optional)
 

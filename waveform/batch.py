@@ -1,14 +1,18 @@
 """Batch pulse extraction over many records -> one CSV row per record.
 
-Two sources:
+Three sources:
 
 * a directory of CWA "FreeField" ``.txt`` records (:func:`batch_cwa_freefield`)
 * a list of stations for one event on the Engineering Strong Motion database
   (:func:`batch_esm_event`, esm-db.eu)
+* a list of stations for one event from any FDSN data centre, raw counts +
+  StationXML deconvolution (:func:`batch_fdsn_event`)
 
     python -m waveform.batch --cwa data/.../FreeField/Record --out pulses.csv
     python -m waveform.batch --esm-event IT-2009-0009 --esm-stations AQV,AQK,AQA \
         --out laquila.csv
+    python -m waveform.batch --fdsn-net NZ --fdsn-origin 2010-09-03T16:35:41 \
+        --fdsn-stations GDLC,LINC,HORC --fdsn-client GEONET --out darfield.csv
 """
 
 from __future__ import annotations
@@ -101,26 +105,27 @@ def _run_one(acc, *, window, decimate_to, method, select, qc, want_waveforms):
                      select=select, qc=qc, include_waveforms=want_waveforms)
 
 
-def batch_cwa_freefield(record_dir, out_csv, *, window="arias", decimate_to=50.0,
-                        method="kamai", select="strongest", qc="attach",
-                        json_dir=None, verbose=True):
-    """Run the pipeline over every ``*.txt`` in ``record_dir``; write ``out_csv``.
-    Returns the list of row dicts."""
-    from .fetch import read_cwa_freefield
+def _as_list(stations):
+    if isinstance(stations, str):
+        return [s.strip() for s in stations.split(",") if s.strip()]
+    return list(stations)
+
+
+def _batch(items, fetch, out_csv, *, window="arias", decimate_to=50.0,
+           method="kamai", select="strongest", qc="attach",
+           json_dir=None, verbose=True):
+    """Core loop: for each ``(record_id, fetch_arg)`` in ``items`` call
+    ``fetch(fetch_arg) -> ThreeComponentAcc``, run the pipeline, collect one row.
+    A per-record failure is logged into the row's ``error`` and does not stop
+    the run.  Writes ``out_csv`` and returns the row dicts."""
     from .qc import QCError
 
-    record_dir = Path(record_dir)
-    files = sorted(record_dir.glob("*.txt"))
-    if not files:
-        raise SystemExit(f"no .txt records in {record_dir}")
     if json_dir:
         Path(json_dir).mkdir(parents=True, exist_ok=True)
-
     rows = []
-    for f in files:
-        rec = f.stem
+    for rec, arg in items:
         try:
-            acc = read_cwa_freefield(f)
+            acc = fetch(arg)
             out = _run_one(acc, window=window, decimate_to=decimate_to,
                            method=method, select=select, qc=qc,
                            want_waveforms=bool(json_dir))
@@ -129,7 +134,8 @@ def batch_cwa_freefield(record_dir, out_csv, *, window="arias", decimate_to=50.0
                 _pulse_json(json_dir, row["station"] or rec, row, out)
         except (QCError, ValueError, OSError, KeyError) as exc:  # noqa: BLE001
             row = {c: "" for c in _COLS}
-            row.update(record=rec, error=f"{type(exc).__name__}: {exc}")
+            row.update(record=rec, station=rec,
+                       error=f"{type(exc).__name__}: {exc}")
         rows.append(row)
         if verbose:
             _log(rec, row)
@@ -138,42 +144,46 @@ def batch_cwa_freefield(record_dir, out_csv, *, window="arias", decimate_to=50.0
     return rows
 
 
+def batch_cwa_freefield(record_dir, out_csv, **kw):
+    """Run the pipeline over every ``*.txt`` in ``record_dir``; write ``out_csv``.
+    Returns the list of row dicts.  ``**kw`` -> :func:`_batch`."""
+    from .fetch import read_cwa_freefield
+
+    files = sorted(Path(record_dir).glob("*.txt"))
+    if not files:
+        raise SystemExit(f"no .txt records in {record_dir}")
+    return _batch(((f.stem, f) for f in files), read_cwa_freefield, out_csv, **kw)
+
+
 def batch_esm_event(eventid, stations, out_csv, *, processing="CV",
-                    network=None, token=None,
-                    window="arias", decimate_to=50.0, method="kamai",
-                    select="strongest", qc="attach", json_dir=None, verbose=True):
-    """Pull each station in ``stations`` for ESM event ``eventid``, run the
-    pipeline, write ``out_csv``.  ``stations`` is a list or a comma string.
-    Returns the row dicts."""
+                    network=None, token=None, **kw):
+    """Pull each station in ``stations`` for ESM event ``eventid`` (esm-db.eu),
+    run the pipeline, write ``out_csv``.  ``stations`` is a list or comma string.
+    Returns the row dicts.  ``**kw`` -> :func:`_batch`."""
     from .fetch import fetch_esm_event
-    from .qc import QCError
 
-    if isinstance(stations, str):
-        stations = [s.strip() for s in stations.split(",") if s.strip()]
-    if json_dir:
-        Path(json_dir).mkdir(parents=True, exist_ok=True)
+    def fetch(sta):
+        return fetch_esm_event(eventid, sta, processing=processing,
+                               network=network, token=token)
 
-    rows = []
-    for sta in stations:
-        try:
-            acc = fetch_esm_event(eventid, sta, processing=processing,
-                                  network=network, token=token)
-            out = _run_one(acc, window=window, decimate_to=decimate_to,
-                           method=method, select=select, qc=qc,
-                           want_waveforms=bool(json_dir))
-            row = _row(sta, acc, out)
-            if json_dir:
-                _pulse_json(json_dir, sta, row, out)
-        except (QCError, ValueError, OSError, KeyError) as exc:  # noqa: BLE001
-            row = {c: "" for c in _COLS}
-            row.update(record=sta, station=sta,
-                       error=f"{type(exc).__name__}: {exc}")
-        rows.append(row)
-        if verbose:
-            _log(sta, row)
+    return _batch(((s, s) for s in _as_list(stations)), fetch, out_csv, **kw)
 
-    _write(rows, out_csv, verbose)
-    return rows
+
+def batch_fdsn_event(network, stations, origin, out_csv, *, client="IRIS",
+                     channel="HN?", location="*", pre_seconds=30.0,
+                     post_seconds=120.0, **kw):
+    """Download each station in ``stations`` around ``origin`` from FDSN
+    ``client`` (raw counts + StationXML deconvolution via
+    :func:`waveform.fetch.fetch_event_acc`), run the pipeline, write ``out_csv``.
+    ``stations`` is a list or comma string.  ``**kw`` -> :func:`_batch`."""
+    from .fetch import fetch_event_acc
+
+    def fetch(sta):
+        return fetch_event_acc(network, sta, origin, location=location,
+                               channel=channel, client=client,
+                               pre_seconds=pre_seconds, post_seconds=post_seconds)
+
+    return _batch(((s, s) for s in _as_list(stations)), fetch, out_csv, **kw)
 
 
 def main(argv=None):
@@ -183,10 +193,17 @@ def main(argv=None):
     src.add_argument("--cwa", help="directory of CWA FreeField .txt")
     src.add_argument("--esm-event", metavar="EVENTID",
                      help="ESM/EMSC event id (needs --esm-stations)")
+    src.add_argument("--fdsn-net", metavar="NET",
+                     help="FDSN network code (needs --fdsn-origin, --fdsn-stations)")
     ap.add_argument("--esm-stations", help="comma-separated station codes")
     ap.add_argument("--esm-processing", default="CV", choices=["CV", "MP", "AP"])
     ap.add_argument("--esm-token", help="ESM/ORFEUS auth token file")
     ap.add_argument("--net", help="ESM: network code to disambiguate")
+    ap.add_argument("--fdsn-origin", metavar="TIME", help="FDSN: event origin time")
+    ap.add_argument("--fdsn-stations", help="FDSN: comma-separated station codes")
+    ap.add_argument("--fdsn-client", default="IRIS",
+                    help="FDSN client id or base URL (default IRIS; e.g. GEONET)")
+    ap.add_argument("--fdsn-channel", default="HN?", help="FDSN channel glob")
     ap.add_argument("--out", required=True, help="output CSV path")
     ap.add_argument("--json-dir", help="also write a per-record pulse JSON here")
     ap.add_argument("--method", default="kamai", choices=["kamai", "ebasco"])
@@ -209,12 +226,18 @@ def main(argv=None):
 
     if args.cwa:
         batch_cwa_freefield(args.cwa, args.out, **common)
-    else:
+    elif args.esm_event:
         if not args.esm_stations:
             ap.error("--esm-event needs --esm-stations")
         batch_esm_event(args.esm_event, args.esm_stations, args.out,
                         processing=args.esm_processing, network=args.net,
                         token=args.esm_token, **common)
+    else:
+        if not (args.fdsn_origin and args.fdsn_stations):
+            ap.error("--fdsn-net needs --fdsn-origin and --fdsn-stations")
+        batch_fdsn_event(args.fdsn_net, args.fdsn_stations, args.fdsn_origin,
+                         args.out, client=args.fdsn_client,
+                         channel=args.fdsn_channel, **common)
 
 
 if __name__ == "__main__":
