@@ -162,24 +162,6 @@ function drawMap(d) {
   layer.clearLayers();
   const ev = d.event, pts = [];
 
-  if (ev.fault && ev.fault.trace) {
-    const f = ev.fault, ff = /finite-fault/.test(f.model || "");
-    const line = f.trace.map(([lon, lat]) => [lat, lon]);
-    L.polyline(line, { color: FAULT, weight: ff ? 4 : 3,
-      dashArray: ff ? null : "6 5", opacity: 0.9, lineCap: "round" })
-      .bindTooltip(
-        `${ff ? "surface rupture trace — USGS finite-fault model"
-              : "surface rupture trace — magnitude-scaled (schematic)"}<br>` +
-        `strike ${fmt(f.strike, 0)}° · dip ${fmt(f.dip, 0)}° · ` +
-        `length ${fmt(f.length_km, 0)} km` +
-        (f.max_slip_m ? `<br>max slip ${fmt(f.max_slip_m, 1)} m` : "") +
-        (f.url ? "<br><i>click for the USGS model</i>" : ""),
-        { sticky: true })
-      .on("click", () => f.url && window.open(f.url, "_blank", "noopener"))
-      .addTo(layer);
-    line.forEach((p) => pts.push(p));
-  }
-
   if (ev.lat != null) {
     L.marker([ev.lat, ev.lon], {
       icon: L.divIcon({ className: "epi", html: "★", iconSize: [22, 22], iconAnchor: [11, 11] }),
