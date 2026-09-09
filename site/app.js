@@ -214,7 +214,8 @@ function addTick(s) {
 /* ---------- head + charts + detail ------------------------------------- */
 function drawHead(d) {
   const e = d.event, s = d.stats;
-  const nomap = d.stations.length && !d.stations.some((x) => x.lat != null);
+  const withco = d.stations.filter((x) => x.lat != null).length;
+  const nomap = d.stations.length && withco < d.stations.length;
   $("#event-head").innerHTML =
     `<h3>${e.name}</h3>` +
     `<div class="kv">${e.mag_type || "M"} ${fmt(e.mag, 1)} · ` +
@@ -229,7 +230,8 @@ function drawHead(d) {
     `<div class="stat"><b>${fmt(s.PGV_median, 0)}</b><span>median PGV cm/s</span></div>` +
     `</div>` +
     (d.pipeline ? `<div class="kv">${d.pipeline}</div>` : "") +
-    (nomap ? `<div class="kv muted">station coordinates not in this table — records listed below</div>` : "") +
+    (nomap ? `<div class="kv muted">${withco}/${d.stations.length} stations located — ` +
+      `full list below</div>` : "") +
     `<div id="crosslinks" class="kv"></div>`;
 }
 
@@ -307,14 +309,17 @@ function stationDetail(s) {
     g("V<sub>s30</sub>", s.vs30 ? `${fmt(s.vs30, 0)} m/s` : null) +
     g("fling", s.fling === true ? "yes" : s.fling === false ? "no" : null) +
     g("QC", s.qc) +
+    (s.summary_url ? g("", `<a href="${s.summary_url}" target="_blank" ` +
+      `rel="noopener">S&amp;B record page ↗</a>`) : "") +
     `</div>` + (s.pulse_trace ? `<canvas id="spark"></canvas>` : "");
   if (s.pulse_trace) spark(s.pulse_trace);
 }
 
-/* clickable record list when stations have no coordinates */
+/* full record list (shown whenever some stations lack coordinates) */
 function fillRecordTable(d) {
   document.querySelectorAll("#panel table.rec-table").forEach((t) => t.remove());
-  if (!d.stations.length || d.stations.some((x) => x.lat != null)) return;
+  const withco = d.stations.filter((x) => x.lat != null).length;
+  if (!d.stations.length || withco === d.stations.length) return;
   const rows = [...d.stations].sort((a, b) =>
     (a.rrup_km ?? 999) - (b.rrup_km ?? 999));
   const t = document.createElement("table");
@@ -324,9 +329,9 @@ function fillRecordTable(d) {
   const tb = document.createElement("tbody");
   rows.forEach((s) => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${s.code}</td><td>${fmt(s.rrup_km, 1)}</td>` +
-      `<td>${fmt(s.Tp, 2)}</td><td>${fmt(s.PGV, 0)}</td>` +
-      `<td>${s.is_pulse ? "●" : "○"}</td>`;
+    tr.innerHTML = `<td>${s.lat != null ? "📍 " : ""}${s.code}</td>` +
+      `<td>${fmt(s.rrup_km, 1)}</td><td>${fmt(s.Tp, 2)}</td>` +
+      `<td>${fmt(s.PGV, 0)}</td><td>${s.is_pulse ? "●" : "○"}</td>`;
     tr.onclick = () => stationDetail(s);
     tb.appendChild(tr);
   });

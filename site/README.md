@@ -26,10 +26,18 @@ python ../scripts/build_site_data.py --poll --min-mag 5.8    # append new live e
 python ../scripts/import_reference_tables.py                 # rebuild data/reference/ from data/reference/*.csv
 ```
 
-`import_reference_tables.py` reads the published pulse tables in
-`../data/reference/*.csv` (git-ignored, local) and writes the catalog JSON.
-Run it locally when those tables change; the generated `site/data/reference/`
-JSON is committed. Each catalog carries its citation and is shown on the page.
+`import_reference_tables.py` builds the four published catalogs:
+
+* **NCREE** and **Yen 2022 / Türkiye 2023** from `../data/reference/*.csv`
+  (git-ignored, local).
+* **Shahi & Baker (2014)** fetched live from the canonical Pulse-like-records
+  list at jackwbaker.com (snapshot cached in `data/reference/_cache/`); each
+  record links back to its S&B summary page.
+
+Station coordinates for the code-based catalogs are joined from NCREE (Taiwan),
+GeoNet (NZ) and ESM's FDSN station service (AFAD `TK`). `--no-net` rebuilds
+from the caches only. The generated `site/data/reference/` JSON is committed;
+each catalog carries its citation and is shown on the page.
 
 Each event: fetch strong-motion waveforms (GeoNet FDSN / ESM) → `run_pulse`
 (Kamai baseline correction · Arias 5–95 % window · 50 Hz) → one `data/events/*.json`.

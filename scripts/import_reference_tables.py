@@ -4,25 +4,34 @@ for the showcase site (``site/data/reference/<catalog>.json`` + ``index.json``).
 
     python scripts/import_reference_tables.py
 
+    python scripts/import_reference_tables.py --no-net    # use cached fetches only
+
 Catalogs
 --------
-* ``taiwan_ncree``       -- NCREE Taiwan pulse database: hypocentre + station
-                           coordinates, so it maps fully.
-* ``shahi_baker_2014``   -- Shahi & Baker (2014), NGA-West2: station *names*
-                           only, so records are a table; epicentres from NCREE
-                           where the event overlaps, else a small lookup.
-* ``yen_2022`` / ``turkey_2023`` -- small pulse catalogs, same treatment.
+* ``taiwan_ncree``     -- NCREE Taiwan pulse database (``data/reference/
+                         Taiwan_NCREE.csv``): hypocentre + station coordinates,
+                         maps fully.
+* ``shahi_baker_2014`` -- fetched live from the canonical Pulse-like-records
+                         list at jackwbaker.com (cached to ``_cache/sb2014.html``).
+                         Station coordinates are joined from NCREE / GeoNet /
+                         ESM where the "Station Name" is a code; the rest are a
+                         table.  Each record links to its S&B summary page.
+* ``yen_2022`` / ``turkey_2023`` -- ``data/reference/*.csv``; station coords
+                         joined from NCREE (Taiwan), GeoNet (NZ), ESM's FDSN
+                         station service (AFAD / KOERI ``TK``/``KO``).
 
-These are third-party research tables; every catalog JSON carries its
-``citation`` and ``url`` and the site shows them.
+Epicentres for events NCREE does not cover come from a small hand lookup
+(``EXTRA_EPI``).  Every catalog JSON carries its ``citation`` + ``url``.
 """
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import re
 import sys
+import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,6 +40,9 @@ from waveform.site_export import haversine_km                     # noqa: E402
 
 REF = ROOT / "data" / "reference"
 OUT = ROOT / "site" / "data" / "reference"
+CACHE = OUT / "_cache"
+SB_URL = "https://www.jackwbaker.com/pulse_classification_v2/Pulse-like-records.html"
+ESM_STA = "https://esm-db.eu/fdsnws/station/1/query"
 
 CITATIONS = {
     "taiwan_ncree": dict(
@@ -43,8 +55,9 @@ CITATIONS = {
         label="Shahi & Baker (2014)", short="S&B 2014",
         citation="Shahi, S.K. & Baker, J.W. (2014). An efficient algorithm to "
                  "identify strong-velocity pulses in multicomponent ground "
-                 "motions. Bull. Seismol. Soc. Am. 104(5). NGA-West2 records.",
-        url="https://doi.org/10.1785/0120130191"),
+                 "motions. BSSA 104(5). Pulse-like-records list, "
+                 "jackwbaker.com/pulse_classification_v2.",
+        url="https://www.jackwbaker.com/pulse_classification_v2/Pulse-like-records.html"),
     "yen_2022": dict(
         label="Yen et al. (2022)", short="Yen 2022",
         citation="Yen et al. (2022) near-fault velocity-pulse catalog "
@@ -140,6 +153,113 @@ def _bins(stations, edges=(0, 5, 10, 20, 40, 80, 160)):
 
 
 # --------------------------------------------------------------------------- #
+# fetching: the online Shahi & Baker table + station coordinates
+# --------------------------------------------------------------------------- #
+def _cached(name, fetch, no_net):
+    CACHE.mkdir(parents=True, exist_ok=True)
+    p = CACHE / name
+    if no_net and p.exists():
+        return p.read_text()
+    if not no_net:
+        try:
+            txt = fetch()
+            p.write_text(txt)
+            return txt
+        except Exception as exc:                                  # noqa: BLE001
+            print(f"  fetch {name} failed ({exc}); using cache")
+    return p.read_text() if p.exists() else ""
+
+
+def _get(url, timeout=60):
+    req = urllib.request.Request(url, headers={"User-Agent": "pulse-extraction/site"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:       # noqa: S310
+        return r.read().decode("utf-8", "replace")
+
+
+def fetch_sb2014_rows(no_net=False):
+    """The 243-row Pulse-like-records table from jackwbaker.com as dicts."""
+    html = _cached("sb2014.html", lambda: _get(SB_URL), no_net)
+    if not html:
+        raise SystemExit("no Shahi & Baker table (need network once)")
+    rows = re.findall(r"<tr[^>]*>(.*?)</tr>", html, re.S)
+    out = []
+    for r in rows[1:]:
+        c = [re.sub(r"<[^>]+>", "", x).strip()
+             for x in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", r, re.S)]
+        if len(c) < 13:
+            continue
+        out.append(dict(
+            rsn=c[0], name=c[1], year=c[2], sta=c[3], mag=_f(c[4]),
+            rrup=_f(c[5]), rhypo=_f(c[6]), Tp=_f(c[7]), PGV=_f(c[8]),
+            ori_n=_f(c[9]), ori_fp=_f(c[10]),
+            is_pulse=c[11].strip() in ("1", "1.0"),
+            directivity=c[12].strip() in ("1", "1.0"),
+            summary_url=("https://www.jackwbaker.com/pulse_classification_v2/"
+                         + c[13]) if len(c) > 13 and c[13] else None))
+    return out
+
+
+def _ncree_station_index():
+    idx = {}
+    for r in csv.DictReader(open(REF / "Taiwan_NCREE.csv", encoding="utf-8-sig")):
+        code = re.sub(r"\(.*?\)", "", r["sta id"]).strip()
+        code = re.sub(r"[A-Z]$", "", code) if code.startswith("KMMH") else code
+        la, lo = _f(r["sta lat"]), _f(r["sta lon"])
+        if code and la is not None:
+            idx.setdefault(code, dict(lat=round(la, 4), lon=round(lo, 4),
+                                      vs30=_f(r["vs30"])))
+    return idx
+
+
+def _geonet_coords(codes):
+    if not codes:
+        return {}
+    from obspy.clients.fdsn import Client
+    inv = Client("GEONET", timeout=60).get_stations(
+        network="NZ", station=",".join(sorted(codes)), level="station")
+    return {s.code: dict(lat=round(s.latitude, 4), lon=round(s.longitude, 4),
+                         vs30=None)
+            for n in inv for s in n}
+
+
+def _esm_tk_coords(codes, no_net):
+    """AFAD / KOERI station coords from ESM's FDSN station service (no network
+    filter -- these codes span TK and KO)."""
+    if not codes:
+        return {}
+    q = f"{ESM_STA}?station={','.join(sorted(codes))}&level=station&format=text"
+    txt = _cached("esm_tk.txt", lambda: _get(q), no_net)
+    out = {}
+    for ln in txt.splitlines():
+        f = ln.split("|")
+        if len(f) >= 5 and f[0] in ("TK", "KO") and f[2] in codes:
+            out.setdefault(f[2], dict(lat=round(float(f[3]), 4),
+                                      lon=round(float(f[4]), 4), vs30=None))
+    return out
+
+
+def build_station_index(no_net=False):
+    """{station code: {lat, lon, vs30}} for the Yen / Türkiye stations."""
+    ncree = _ncree_station_index()
+    nz = {r["sta"].strip() for r in csv.DictReader(
+        open(REF / "table_YEN2022.csv", encoding="utf-8-sig"))
+        if r.get("Earthquake Name") == "Darfield"}
+    tk = {r["sta"].strip() for fn in ("table_turkey2023.csv",)
+          for r in csv.DictReader(open(REF / fn, encoding="utf-8-sig"))
+          if r.get("sta")}
+    tk |= {r["sta"].strip() for r in csv.DictReader(
+        open(REF / "table_YEN2022.csv", encoding="utf-8-sig"))
+        if (r.get("Earthquake Name") or "").lower() in ("duzce",)}
+    idx = dict(ncree)
+    try:
+        idx.update(_geonet_coords(nz) if not no_net else {})
+    except Exception as exc:                                      # noqa: BLE001
+        print(f"  GeoNet station lookup failed: {exc}")
+    idx.update(_esm_tk_coords(tk, no_net))
+    return idx
+
+
+# --------------------------------------------------------------------------- #
 def build_ncree():
     rows = list(csv.DictReader(open(REF / "Taiwan_NCREE.csv", encoding="utf-8-sig")))
     events = {}
@@ -163,28 +283,43 @@ def build_ncree():
     return _finish_events(events, use_rrup=True)
 
 
-def _generic_table(fname, name_col="Earthquake Name", year_col="Year"):
-    rows = [r for r in csv.DictReader(open(REF / fname, encoding="utf-8-sig"))
-            if r.get(name_col)]
+def _events_from_rows(rows, sta_idx):
+    """rows: dicts with name, year, sta, mag, rrup, rhypo, Tp, PGV, ori_*,
+    is_pulse, optional summary_url.  Attach station coords from ``sta_idx``."""
     events = {}
     for r in rows:
-        nm, yr = r[name_col].strip(), (r.get(year_col) or "").strip()
+        nm, yr = r["name"].strip(), str(r.get("year") or "").strip()
         ek = key(nm, yr)
         ev = events.setdefault(ek, dict(
             key=ek, name=nm, year=yr or None, lat=None, lon=None,
-            depth_km=None, mag=_f(r.get("mag")), fault_type=None, stations=[]))
+            depth_km=None, mag=r.get("mag"), fault_type=None, stations=[]))
+        co = sta_idx.get(str(r["sta"]).strip(), {})
         ev["stations"].append(dict(
-            code=str(r["sta"]).strip(), lat=None, lon=None, vs30=None,
-            rrup_km=_f(r.get("rrup")), rhyp_km=_f(r.get("rhypo")),
-            is_pulse=(str(r.get("Fault Normal Pulse", "1")).strip() in ("1", "1.0")
-                      if "Fault Normal Pulse" in r else True),
-            Tp=_f(r.get("Tp")), PGV=_f(r.get("PGV")),
-            ori_fp=_f(r.get("Ori_FP")), ori_n=_f(r.get("Ori_N"))))
+            code=str(r["sta"]).strip(),
+            lat=co.get("lat"), lon=co.get("lon"), vs30=co.get("vs30"),
+            rrup_km=r.get("rrup"), rhyp_km=r.get("rhypo"),
+            is_pulse=bool(r.get("is_pulse", True)),
+            Tp=r.get("Tp"), PGV=r.get("PGV"),
+            ori_fp=r.get("ori_fp"), ori_n=r.get("ori_n"),
+            summary_url=r.get("summary_url")))
     return events
 
 
-def build_from_table(fname, ncree_epi):
-    events = _generic_table(fname)
+def _csv_rows(fname):
+    for r in csv.DictReader(open(REF / fname, encoding="utf-8-sig")):
+        if not r.get("Earthquake Name"):
+            continue
+        yield dict(name=r["Earthquake Name"], year=r.get("Year"),
+                   sta=r.get("sta"), mag=_f(r.get("mag")),
+                   rrup=_f(r.get("rrup")), rhypo=_f(r.get("rhypo")),
+                   Tp=_f(r.get("Tp")), PGV=_f(r.get("PGV")),
+                   ori_fp=_f(r.get("Ori_FP")), ori_n=_f(r.get("Ori_N")),
+                   is_pulse=(str(r.get("Fault Normal Pulse", "1")).strip()
+                             in ("1", "1.0")))
+
+
+def build_from_rows(rows, ncree_epi, sta_idx):
+    events = _events_from_rows(rows, sta_idx)
     for ek, ev in events.items():
         epi = ncree_epi.get(_match_ncree(ev["name"], ev["year"])) or EXTRA_EPI.get(ek)
         if epi:
@@ -240,6 +375,9 @@ def _finish_events(events, *, use_rrup):
                       "ori_fp", "ori_n", "rhyp_km"):
                 if isinstance(s.get(k), float):
                     s[k] = round(s[k], 3)
+            for k in [k for k, v in s.items() if v is None]:
+                if k not in ("lat", "lon"):
+                    s.pop(k)
         ev["stats"] = _stats(ev["stations"])
         ev["n_mappable"] = sum(1 for s in ev["stations"] if s.get("lat"))
         out.append(ev)
@@ -263,17 +401,30 @@ def write_catalog(cid, events):
                pulse_only=cid != "shahi_baker_2014")
 
 
-def main():
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--no-net", action="store_true",
+                    help="use cached fetches only (site/data/reference/_cache)")
+    args = ap.parse_args(argv)
+
     ncree = build_ncree()
     ncree_epi = {e["key"]: (e["lat"], e["lon"], e["depth_km"], e["mag"])
                  for e in ncree if e["lat"] is not None}
+    sta_idx = build_station_index(no_net=args.no_net)
+    print(f"station index: {len(sta_idx)} coded stations")
+
+    sb_rows = fetch_sb2014_rows(no_net=args.no_net)
     catalogs = [
         write_catalog("taiwan_ncree", ncree),
         write_catalog("shahi_baker_2014",
-                      build_from_table("table_SB2014.csv", ncree_epi)),
-        write_catalog("yen_2022", build_from_table("table_YEN2022.csv", ncree_epi)),
+                      build_from_rows(sb_rows, ncree_epi, sta_idx)),
+        write_catalog("yen_2022",
+                      build_from_rows(list(_csv_rows("table_YEN2022.csv")),
+                                      ncree_epi, sta_idx)),
         write_catalog("turkey_2023",
-                      build_from_table("table_turkey2023.csv", ncree_epi)),
+                      build_from_rows(list(_csv_rows("table_turkey2023.csv")),
+                                      ncree_epi, sta_idx)),
     ]
     (OUT / "index.json").write_text(json.dumps({"catalogs": catalogs}, indent=1))
     print(f"\nwrote {OUT}/index.json  ({len(catalogs)} catalogs)")
