@@ -16,9 +16,11 @@ sheet with station coordinates already resolved (``latitude_deg`` /
   event hypocentres.
 * ``yen_2022``         -- ``Yen(2022)`` sheet: 84 near-fault pulse records.
 
-Each event is also given a **source model** from USGS ComCat (cached in
-``_cache/usgs/``): moment-tensor / focal-mechanism nodal planes and, where a
-finite-fault inversion exists, its geometry -- used to draw the rupture polygon.
+Each event is also given a **schematic source model** from USGS ComCat (cached
+in ``_cache/``): moment-tensor / focal-mechanism nodal planes, and a single
+rupture-footprint polygon -- the convex hull of the USGS finite-fault slip
+model's high-slip subfaults where one exists (7 events), otherwise a
+magnitude-scaled rectangle (Wells & Coppersmith 1994) oriented by nodal plane 1.
 """
 
 from __future__ import annotations
@@ -221,6 +223,58 @@ def _mag_scaled_rect(lat, lon, mag, strike, dip):
                 polygon=_rupture_rect(lat, lon, length, width, strike, dip))
 
 
+def _convex_hull(pts):
+    """Andrew's monotone chain: outline of a [lon,lat] point cloud, closed ring."""
+    pts = sorted(set((round(x, 4), round(y, 4)) for x, y in pts))
+    if len(pts) < 3:
+        return [list(p) for p in pts]
+
+    def cross(o, a, b):
+        return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+
+    lo, hi = [], []
+    for p in pts:
+        while len(lo) >= 2 and cross(lo[-2], lo[-1], p) <= 0:
+            lo.pop()
+        lo.append(p)
+    for p in reversed(pts):
+        while len(hi) >= 2 and cross(hi[-2], hi[-1], p) <= 0:
+            hi.pop()
+        hi.append(p)
+    ring = lo[:-1] + hi[:-1]
+    return [list(p) for p in ring] + [list(ring[0])]
+
+
+def ffm_outline(usgs_id, contents, no_net):
+    """USGS finite-fault ``FFM.geojson`` -> a single **schematic footprint**
+    polygon (convex hull of the subfaults with slip >= 15 % of the peak) plus
+    the peak slip.  ``None`` if the model can't be read."""
+    geo_key = next((k for k in contents if k.lower().endswith(".geojson")), None)
+    if not geo_key:
+        return None
+    raw = _cached(f"ffm/{usgs_id}.geojson",
+                  lambda: _get(contents[geo_key]["url"], timeout=90), no_net)
+    if not raw:
+        return None
+    try:
+        feats = json.loads(raw).get("features", [])
+    except json.JSONDecodeError:
+        return None
+    quads, smax = [], 0.0
+    for ft in feats:
+        slip = _f(ft.get("properties", {}).get("slip"))
+        ring = (ft.get("geometry") or {}).get("coordinates", [[]])[0]
+        if slip is None or len(ring) < 4:
+            continue
+        smax = max(smax, slip)
+        quads.append((slip, [(x, y) for x, y, *_ in ring]))
+    if not quads:
+        return None
+    pts = [xy for slip, r in quads if slip >= 0.15 * smax for xy in r] \
+        or [xy for _, r in quads for xy in r]
+    return _convex_hull(pts), round(smax, 2)
+
+
 def _np(props, i):
     try:
         return [float(props[f"nodal-plane-{i}-strike"]),
@@ -272,7 +326,8 @@ def usgs_source_model(lat, lon, year, mag, no_net=False):
                         mag_type=(pr.get("derived-magnitude-type") or "Mww"))
             break
 
-    ff = (prods.get("finite-fault") or [{}])[0].get("properties", {})
+    ffp = (prods.get("finite-fault") or [{}])[0]
+    ff = ffp.get("properties", {})
     if ff.get("model-length"):
         L, W = float(ff["model-length"]), float(ff["model-width"])
         strike = float(ff.get("segment-1-strike", ff.get("model-strike", 0)))
@@ -284,6 +339,13 @@ def usgs_source_model(lat, lon, year, mag, no_net=False):
                      url=f"https://earthquake.usgs.gov/earthquakes/eventpage/"
                          f"{feats[0]['id']}/finite-fault",
                      polygon=_rupture_rect(c[1], c[0], L, W, strike, dip))
+        # schematic footprint straight from the published slip model
+        got = ffm_outline(feats[0]["id"], ffp.get("contents", {}), no_net)
+        if got:
+            fault["polygon"], smax = got
+            fault["model"] = "USGS finite-fault (slip-model outline)"
+            if smax:
+                fault["max_slip_m"] = smax
     elif mech:
         fault = _mag_scaled_rect(c[1], c[0], p.get("mag") or mag or 6.0,
                                  mech["np1"][0], mech["np1"][1])

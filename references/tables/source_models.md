@@ -27,7 +27,7 @@ Always confirm against `usgs_event_url` in the CSV.
 
 | `fault_kind` | count | what to trust |
 |---|---|---|
-| `USGS finite-fault` | 7 | `fault_L_km` × `fault_W_km`, strike, dip, `max_slip_m` are from the USGS **finite-fault inversion** (`finite_fault_url`). Still drawn as one rectangle, so multi-segment ruptures (2016 Kaikōura, 2008 Wenchuan) are under-represented, and shallow thrusts (2015 Gorkha, W ≈ 168 km down-dip) project to an over-large surface polygon. |
+| `USGS finite-fault (slip-model outline)` | 7 | The map polygon is the **convex hull of the USGS finite-fault slip model's subfaults with slip ≥ 15 % of peak** — a schematic footprint of the actual published model (`finite_fault_url`), not a rectangle. `fault_L_km` × `fault_W_km` and strike/dip are the model's reported values, `max_slip_m` is the model peak. Still one polygon, so shallow thrusts (2015 Gorkha, W ≈ 168 km down-dip) still project to a large surface area. |
 | `mag-scaled from NP1` | 60 | Only the **orientation** (`NP1_strike/dip/rake`, from the USGS moment tensor or focal mechanism) is real. `fault_L_km` × `fault_W_km` is **Wells & Coppersmith (1994)** magnitude scaling — a schematic size, not a rupture model. Which nodal plane is the fault plane is **not** resolved (NP1 is used arbitrarily; NP2 is in the CSV). |
 
 The 7 finite-fault events:
