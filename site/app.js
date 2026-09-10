@@ -409,67 +409,8 @@ function scatterCfg(rows, yKey, yLabel) {
 function drawCharts(d) {
   Object.values(charts).forEach((c) => c.destroy());
   const rows = d.stats.scatter || [];
-  $("#c-frac").closest("figure").hidden = false;
   charts.tp = new Chart($("#c-tp"), scatterCfg(rows, "Tp", "Tp [s]"));
   charts.pgv = new Chart($("#c-pgv"), scatterCfg(rows, "PGV", "PGV [cm/s]"));
-
-  if (d.pulseOnly) {
-    $("#frac-cap").textContent = "Tₚ distribution";
-    const tps = rows.map((r) => r.Tp).filter((t) => t > 0);
-    const edges = [0, 1, 2, 3, 4, 6, 8, 12, 20];
-    const counts = edges
-      .slice(1)
-      .map((hi, i) => tps.filter((t) => t >= edges[i] && t < hi).length);
-    charts.frac = new Chart($("#c-frac"), {
-      type: "bar",
-      data: {
-        labels: edges.slice(1).map((hi, i) => `${edges[i]}–${hi}`),
-        datasets: [{ data: counts, backgroundColor: PULSE }],
-      },
-      options: {
-        animation: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          y: { title: { display: true, text: "records" } },
-          x: { title: { display: true, text: "Tp bin [s]" } },
-        },
-        maintainAspectRatio: false,
-      },
-    });
-    return;
-  }
-
-  $("#frac-cap").textContent = "pulse fraction by R_rup";
-  const b = d.stats.by_distance || [];
-  if (b.length === 0) return;
-  charts.frac = new Chart($("#c-frac"), {
-    type: "bar",
-    data: {
-      labels: b.map((x) => `${x.r_lo}–${x.r_hi}`),
-      datasets: [
-        { data: b.map((x) => x.pulse_fraction), backgroundColor: PULSE },
-      ],
-    },
-    options: {
-      animation: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (c) => {
-              const x = b[c.dataIndex];
-              return `${x.n_pulse}/${x.n} pulse · med Tp ${fmt(x.Tp_median, 1)} s`;
-            },
-          },
-        },
-      },
-      scales: {
-        y: { min: 0, max: 1, title: { display: true, text: "fraction" } },
-        x: { title: { display: true, text: "R_rup bin [km]" } },
-      },
-      maintainAspectRatio: false,
-    },
-  });
 }
 
 function stationDetail(s) {

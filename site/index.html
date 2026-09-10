@@ -12,18 +12,21 @@
   </head>
   <body>
     <header>
-      <h1>Near-fault pulse extraction pipeline</h1>
+      <h1>Near-fault Pulse Database</h1>
       <p>
-        Python port of the Shahi&nbsp;&amp; Baker (2014) pulse classifier, fed
-        by near-real-time strong-motion waveforms:
-        <b
-          >fetch&nbsp;&rarr; baseline correction &rarr; Arias window
-          &rarr;classifier</b
-        >.
+        <b>Automatic pulse extraction pipeline</b>
+        based on the Shahi&nbsp;&amp; Baker (2014) pulse classifier, fed by
+        near-real-time waveforms from a strong-motion archive (GeoNet FDSN,
+        ESM):
       </p>
       <p>
-        Each event in Pipeline results is pulled from a strong-motion archive
-        (GeoNet FDSN, ESM), processed end-to-end, and mapped.
+        <b
+          >fetch&nbsp;&rarr; baseline correction &rarr; Arias window &rarr;
+          classifier</b
+        >.
+      </p>
+      <p class="muted">
+        Each waveforms in Pipeline results is processed end-to-end, and mapped.
       </p>
       <a
         href="https://github.com/mingshen-yen/pulse_extraction"
@@ -66,10 +69,6 @@
           <figure>
             <figcaption>PGV vs R<sub>rup</sub></figcaption>
             <canvas id="c-pgv"></canvas>
-          </figure>
-          <figure>
-            <figcaption id="frac-cap">pulse fraction by distance</figcaption>
-            <canvas id="c-frac"></canvas>
           </figure>
         </div>
       </aside>
