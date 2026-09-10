@@ -28,11 +28,15 @@ XLSX = ROOT / "references" / "tables" / "pulse_table_audited.xlsx"
 SEED = ROOT / "db" / "seed.sql"
 JWB = "https://www.jackwbaker.com/pulse_classification_v2"
 
-# source_sheet  ->  catalog id shown on the site  (others are loaded but hidden)
+# source_sheet  ->  catalog id shown on the site  (others are loaded but hidden).
+# The YEN catalog is Yen(2022) + the fling-corrected 2023 additions (Türkiye,
+# Düzce 2022) -- together the curated Yen(2025) list, 118 records / 9 events.
+# Yen_uncorr_fling(2023) is the uncorrected duplicate set and stays hidden.
 CATALOG_MAP = {
     "Baker(2014)": "shahi_baker_2014",
     "Taiwan database(NCREE)": "taiwan_ncree",
     "Yen(2022)": "yen_2022",
+    "Yen_corr_fling(2023)": "yen_2022",
 }
 # Catalog display metadata (the workbook has no catalog-label sheet).  label =
 # compact form in the "Data source" selector; citation = text under it.
