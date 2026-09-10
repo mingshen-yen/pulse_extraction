@@ -1,9 +1,9 @@
 {
  "schema": "pulse-extraction/reference/2",
  "catalog": "yen_2022",
- "label": "Yen et al. (2022)",
- "short": "Yen 2022",
- "citation": "Yen et al. (2022) near-fault velocity-pulse catalog (Darfield, Meinong, Hualien, Kumamoto, Iburi).",
+  "label": "YEN",
+  "short": "YEN",
+  "citation": "Identified pulses from Yen et al.(2022), Türker et al. (2024) and Yen et al. (2025), using the Shahi and Baker (2014) model.",
  "url": "",
  "pulse_only": true,
  "n_events": 6,
