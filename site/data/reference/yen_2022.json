@@ -192,6 +192,7 @@
      {
       "code": "DSLC",
       "repi_km": null,
+      "rhyp_km": 17.9,
       "rrup_km": 8.5,
       "Tp": 7.77,
       "PGV": 65.57,
@@ -200,6 +201,7 @@
      {
       "code": "GDLC",
       "repi_km": null,
+      "rhyp_km": 12.0,
       "rrup_km": 2.5,
       "Tp": 2.25,
       "PGV": 141.03,
@@ -208,6 +210,7 @@
      {
       "code": "HORC",
       "repi_km": null,
+      "rhyp_km": 15.0,
       "rrup_km": 7.8,
       "Tp": 2.69,
       "PGV": 99.49,
@@ -216,6 +219,7 @@
      {
       "code": "LINC",
       "repi_km": null,
+      "rhyp_km": 36.3,
       "rrup_km": 5.7,
       "Tp": 7.15,
       "PGV": 114.49,
@@ -224,6 +228,7 @@
      {
       "code": "NNBS",
       "repi_km": null,
+      "rhyp_km": 57.5,
       "rrup_km": 15.1,
       "Tp": 10.67,
       "PGV": 54.61,
@@ -232,6 +237,7 @@
      {
       "code": "REHS",
       "repi_km": null,
+      "rhyp_km": 50.4,
       "rrup_km": 8.0,
       "Tp": 12.02,
       "PGV": 256.2,
@@ -240,6 +246,7 @@
      {
       "code": "RHSC",
       "repi_km": null,
+      "rhyp_km": 44.6,
       "rrup_km": 4.2,
       "Tp": 9.35,
       "PGV": 63.96,
@@ -248,6 +255,7 @@
      {
       "code": "ROLC",
       "repi_km": null,
+      "rhyp_km": 29.8,
       "rrup_km": 2.4,
       "Tp": 6.9,
       "PGV": 82.22,
@@ -256,6 +264,7 @@
      {
       "code": "SHLC",
       "repi_km": null,
+      "rhyp_km": 53.0,
       "rrup_km": 10.9,
       "Tp": 8.37,
       "PGV": 62.3,
@@ -264,6 +273,7 @@
      {
       "code": "SMTC",
       "repi_km": null,
+      "rhyp_km": 50.4,
       "rrup_km": 12.2,
       "Tp": 9.23,
       "PGV": 61.8,
@@ -272,6 +282,7 @@
      {
       "code": "TPLC",
       "repi_km": null,
+      "rhyp_km": 37.3,
       "rrup_km": 3.4,
       "Tp": 7.88,
       "PGV": 74.81,
@@ -488,6 +499,7 @@
      {
       "code": "KMMH14",
       "repi_km": 12.88,
+      "rhyp_km": 9.7,
       "rrup_km": 1.9,
       "Tp": 1.82,
       "PGV": 52.27,
@@ -496,6 +508,7 @@
      {
       "code": "93020",
       "repi_km": 16.9,
+      "rhyp_km": 13.2,
       "rrup_km": 7.7,
       "Tp": 1.26,
       "PGV": 39.01,
@@ -504,6 +517,7 @@
      {
       "code": "93021",
       "repi_km": 8.3,
+      "rhyp_km": 7.3,
       "rrup_km": 4.4,
       "Tp": 1.81,
       "PGV": 57.82,
@@ -512,6 +526,7 @@
      {
       "code": "93024",
       "repi_km": 19.36,
+      "rhyp_km": 15.2,
       "rrup_km": 8.1,
       "Tp": 1.69,
       "PGV": 59.01,
@@ -520,6 +535,7 @@
      {
       "code": "93025",
       "repi_km": 12.77,
+      "rhyp_km": 9.6,
       "rrup_km": 1.8,
       "Tp": 1.69,
       "PGV": 64.49,
@@ -528,6 +544,7 @@
      {
       "code": "93050",
       "repi_km": 4.79,
+      "rhyp_km": 7.3,
       "rrup_km": 3.5,
       "Tp": 2.45,
       "PGV": 43.2,
@@ -536,6 +553,7 @@
      {
       "code": "93051",
       "repi_km": 5.4,
+      "rhyp_km": 12.1,
       "rrup_km": 4.6,
       "Tp": 1.16,
       "PGV": 74.62,
@@ -544,6 +562,7 @@
      {
       "code": "93055",
       "repi_km": 28.44,
+      "rhyp_km": 23.8,
       "rrup_km": 17.2,
       "Tp": 1.75,
       "PGV": 26.27,
@@ -552,6 +571,7 @@
      {
       "code": "93056",
       "repi_km": 25.03,
+      "rhyp_km": 20.5,
       "rrup_km": 13.9,
       "Tp": 1.81,
       "PGV": 37.59,
@@ -560,6 +580,7 @@
      {
       "code": "93057",
       "repi_km": 21.86,
+      "rhyp_km": 17.5,
       "rrup_km": 10.7,
       "Tp": 1.5,
       "PGV": 54.32,
@@ -568,6 +589,7 @@
      {
       "code": "93058",
       "repi_km": 23.96,
+      "rhyp_km": 19.5,
       "rrup_km": 12.6,
       "Tp": 1.39,
       "PGV": 25.47,
@@ -576,6 +598,7 @@
      {
       "code": "9CF",
       "repi_km": 15.61,
+      "rhyp_km": 12.0,
       "rrup_km": 6.4,
       "Tp": 1.39,
       "PGV": 51.28,
@@ -978,6 +1001,7 @@
      {
       "code": "93002",
       "repi_km": null,
+      "rhyp_km": 37.7,
       "rrup_km": 8.3,
       "Tp": 11.16,
       "PGV": 62.24,
@@ -986,6 +1010,7 @@
      {
       "code": "93009",
       "repi_km": null,
+      "rhyp_km": 33.4,
       "rrup_km": 10.3,
       "Tp": 4.28,
       "PGV": 70.43,
@@ -994,6 +1019,7 @@
      {
       "code": "93010",
       "repi_km": null,
+      "rhyp_km": 29.2,
       "rrup_km": 8.1,
       "Tp": 4.28,
       "PGV": 44.94,
@@ -1002,6 +1028,7 @@
      {
       "code": "93011",
       "repi_km": null,
+      "rhyp_km": 28.1,
       "rrup_km": 3.4,
       "Tp": 3.08,
       "PGV": 93.36,
@@ -1010,6 +1037,7 @@
      {
       "code": "93020",
       "repi_km": null,
+      "rhyp_km": 19.6,
       "rrup_km": 12.5,
       "Tp": 1.16,
       "PGV": 69.27,
@@ -1018,6 +1046,7 @@
      {
       "code": "93025",
       "repi_km": null,
+      "rhyp_km": 18.1,
       "rrup_km": 8.6,
       "Tp": 2.03,
       "PGV": 87.6,
@@ -1026,6 +1055,7 @@
      {
       "code": "93029",
       "repi_km": null,
+      "rhyp_km": 26.5,
       "rrup_km": 25.0,
       "Tp": 1.88,
       "PGV": 53.31,
@@ -1034,6 +1064,7 @@
      {
       "code": "93030",
       "repi_km": null,
+      "rhyp_km": 23.3,
       "rrup_km": 21.5,
       "Tp": 2.0,
       "PGV": 68.8,
@@ -1042,6 +1073,7 @@
      {
       "code": "93041",
       "repi_km": null,
+      "rhyp_km": 26.6,
       "rrup_km": 18.7,
       "Tp": 3.23,
       "PGV": 46.52,
@@ -1050,6 +1082,7 @@
      {
       "code": "93042",
       "repi_km": null,
+      "rhyp_km": 25.9,
       "rrup_km": 12.5,
       "Tp": 1.79,
       "PGV": 126.79,
@@ -1058,6 +1091,7 @@
      {
       "code": "93044",
       "repi_km": null,
+      "rhyp_km": 18.2,
       "rrup_km": 6.8,
       "Tp": 2.65,
       "PGV": 59.56,
@@ -1066,6 +1100,7 @@
      {
       "code": "93048",
       "repi_km": null,
+      "rhyp_km": 20.1,
       "rrup_km": 2.1,
       "Tp": 3.57,
       "PGV": 150.14,
@@ -1074,6 +1109,7 @@
      {
       "code": "93051",
       "repi_km": null,
+      "rhyp_km": 14.0,
       "rrup_km": 2.2,
       "Tp": 1.48,
       "PGV": 171.99,
@@ -1082,6 +1118,7 @@
      {
       "code": "93055",
       "repi_km": null,
+      "rhyp_km": 30.3,
       "rrup_km": 23.9,
       "Tp": 1.82,
       "PGV": 40.2,
@@ -1090,6 +1127,7 @@
      {
       "code": "93056",
       "repi_km": null,
+      "rhyp_km": 27.2,
       "rrup_km": 20.5,
       "Tp": 1.44,
       "PGV": 52.35,
@@ -1098,6 +1136,7 @@
      {
       "code": "93057",
       "repi_km": null,
+      "rhyp_km": 24.5,
       "rrup_km": 17.3,
       "Tp": 1.78,
       "PGV": 65.51,
@@ -1106,6 +1145,7 @@
      {
       "code": "93096",
       "repi_km": null,
+      "rhyp_km": 21.0,
       "rrup_km": 6.3,
       "Tp": 3.05,
       "PGV": 75.62,
@@ -1114,6 +1154,7 @@
      {
       "code": "9CF",
       "repi_km": null,
+      "rhyp_km": 18.7,
       "rrup_km": 11.2,
       "Tp": 1.55,
       "PGV": 78.28,
@@ -1122,6 +1163,7 @@
      {
       "code": "EED",
       "repi_km": null,
+      "rhyp_km": 34.6,
       "rrup_km": 5.5,
       "Tp": 5.82,
       "PGV": 65.76,
@@ -1130,6 +1172,7 @@
      {
       "code": "KMM004",
       "repi_km": null,
+      "rhyp_km": 40.9,
       "rrup_km": 10.1,
       "Tp": 3.98,
       "PGV": 81.15,
@@ -1138,6 +1181,7 @@
      {
       "code": "KMM005",
       "repi_km": null,
+      "rhyp_km": 21.2,
       "rrup_km": 6.0,
       "Tp": 2.9,
       "PGV": 60.55,
@@ -1146,6 +1190,7 @@
      {
       "code": "KMM006",
       "repi_km": null,
+      "rhyp_km": 13.2,
       "rrup_km": 4.2,
       "Tp": 2.03,
       "PGV": 80.0,
@@ -1154,6 +1199,7 @@
      {
       "code": "KMM007",
       "repi_km": null,
+      "rhyp_km": 36.9,
       "rrup_km": 12.4,
       "Tp": 5.45,
       "PGV": 34.46,
@@ -1162,6 +1208,7 @@
      {
       "code": "KMMH03",
       "repi_km": null,
+      "rhyp_km": 30.4,
       "rrup_km": 18.4,
       "Tp": 1.29,
       "PGV": 76.84,
@@ -1170,6 +1217,7 @@
      {
       "code": "KMMH04",
       "repi_km": null,
+      "rhyp_km": 34.8,
       "rrup_km": 6.2,
       "Tp": 10.07,
       "PGV": 127.93,
@@ -1438,6 +1486,7 @@
      {
       "code": "CHY020",
       "repi_km": null,
+      "rhyp_km": 46.6,
       "rrup_km": 28.4,
       "Tp": 2.39,
       "PGV": 50.95,
@@ -1446,6 +1495,7 @@
      {
       "code": "CHY058",
       "repi_km": null,
+      "rhyp_km": 38.3,
       "rrup_km": 23.6,
       "Tp": 2.13,
       "PGV": 53.18,
@@ -1454,6 +1504,7 @@
      {
       "code": "CHY060",
       "repi_km": null,
+      "rhyp_km": 40.6,
       "rrup_km": 24.0,
       "Tp": 1.78,
       "PGV": 57.55,
@@ -1462,6 +1513,7 @@
      {
       "code": "CHY062",
       "repi_km": null,
+      "rhyp_km": 28.2,
       "rrup_km": 21.6,
       "Tp": 0.9,
       "PGV": 40.06,
@@ -1470,6 +1522,7 @@
      {
       "code": "CHY063",
       "repi_km": null,
+      "rhyp_km": 27.8,
       "rrup_km": 16.6,
       "Tp": 1.43,
       "PGV": 71.18,
@@ -1478,6 +1531,7 @@
      {
       "code": "CHY067",
       "repi_km": null,
+      "rhyp_km": 40.1,
       "rrup_km": 21.4,
       "Tp": 2.61,
       "PGV": 42.77,
@@ -1486,6 +1540,7 @@
      {
       "code": "CHY069",
       "repi_km": null,
+      "rhyp_km": 39.9,
       "rrup_km": 20.5,
       "Tp": 2.01,
       "PGV": 51.2,
@@ -1494,6 +1549,7 @@
      {
       "code": "CHY070",
       "repi_km": null,
+      "rhyp_km": 35.6,
       "rrup_km": 17.0,
       "Tp": 1.65,
       "PGV": 58.63,
@@ -1502,6 +1558,7 @@
      {
       "code": "CHY071",
       "repi_km": null,
+      "rhyp_km": 43.8,
       "rrup_km": 25.6,
       "Tp": 2.34,
       "PGV": 50.54,
@@ -1510,6 +1567,7 @@
      {
       "code": "CHY085",
       "repi_km": null,
+      "rhyp_km": 38.9,
       "rrup_km": 20.4,
       "Tp": 1.13,
       "PGV": 39.84,
@@ -1518,6 +1576,7 @@
      {
       "code": "CHY089",
       "repi_km": null,
+      "rhyp_km": 29.4,
       "rrup_km": 18.9,
       "Tp": 2.59,
       "PGV": 61.76,
@@ -1526,6 +1585,7 @@
      {
       "code": "CHY097",
       "repi_km": null,
+      "rhyp_km": 38.6,
       "rrup_km": 20.6,
       "Tp": 1.51,
       "PGV": 37.69,
@@ -1534,6 +1594,7 @@
      {
       "code": "CHY098",
       "repi_km": null,
+      "rhyp_km": 42.6,
       "rrup_km": 23.5,
       "Tp": 3.2,
       "PGV": 51.05,
@@ -1542,6 +1603,7 @@
      {
       "code": "CHY115",
       "repi_km": null,
+      "rhyp_km": 55.0,
       "rrup_km": 35.7,
       "Tp": 2.34,
       "PGV": 34.47,
@@ -1550,6 +1612,7 @@
      {
       "code": "CHY116",
       "repi_km": null,
+      "rhyp_km": 49.3,
       "rrup_km": 30.4,
       "Tp": 2.35,
       "PGV": 45.48,
@@ -1558,6 +1621,7 @@
      {
       "code": "CHY125",
       "repi_km": null,
+      "rhyp_km": 42.3,
       "rrup_km": 23.0,
       "Tp": 2.93,
       "PGV": 51.42,
@@ -1566,6 +1630,7 @@
      {
       "code": "CHY131",
       "repi_km": null,
+      "rhyp_km": 32.5,
       "rrup_km": 20.9,
       "Tp": 1.85,
       "PGV": 57.83,
@@ -1574,6 +1639,7 @@
      {
       "code": "TRB029",
       "repi_km": null,
+      "rhyp_km": 37.1,
       "rrup_km": 22.4,
       "Tp": 2.29,
       "PGV": 66.48,
@@ -1786,6 +1852,7 @@
      {
       "code": "HWA007",
       "repi_km": null,
+      "rhyp_km": 19.6,
       "rrup_km": 2.3,
       "Tp": 3.95,
       "PGV": 80.92,
@@ -1794,6 +1861,7 @@
      {
       "code": "HWA008",
       "repi_km": null,
+      "rhyp_km": 20.0,
       "rrup_km": 2.1,
       "Tp": 3.28,
       "PGV": 93.73,
@@ -1802,6 +1870,7 @@
      {
       "code": "HWA009",
       "repi_km": null,
+      "rhyp_km": 19.3,
       "rrup_km": 2.2,
       "Tp": 4.14,
       "PGV": 96.34,
@@ -1810,6 +1879,7 @@
      {
       "code": "HWA010",
       "repi_km": null,
+      "rhyp_km": 20.9,
       "rrup_km": 2.1,
       "Tp": 3.27,
       "PGV": 125.14,
@@ -1818,6 +1888,7 @@
      {
       "code": "HWA011",
       "repi_km": null,
+      "rhyp_km": 19.6,
       "rrup_km": 3.0,
       "Tp": 3.83,
       "PGV": 87.95,
@@ -1826,6 +1897,7 @@
      {
       "code": "HWA012",
       "repi_km": null,
+      "rhyp_km": 19.0,
       "rrup_km": 2.7,
       "Tp": 4.54,
       "PGV": 68.81,
@@ -1834,6 +1906,7 @@
      {
       "code": "HWA013",
       "repi_km": null,
+      "rhyp_km": 21.2,
       "rrup_km": 2.3,
       "Tp": 2.72,
       "PGV": 110.63,
@@ -1842,6 +1915,7 @@
      {
       "code": "HWA014",
       "repi_km": null,
+      "rhyp_km": 21.4,
       "rrup_km": 2.2,
       "Tp": 3.64,
       "PGV": 142.75,
@@ -1850,6 +1924,7 @@
      {
       "code": "HWA019",
       "repi_km": null,
+      "rhyp_km": 20.9,
       "rrup_km": 1.9,
       "Tp": 3.32,
       "PGV": 144.08,
@@ -1858,6 +1933,7 @@
      {
       "code": "HWA028",
       "repi_km": null,
+      "rhyp_km": 28.0,
       "rrup_km": 2.6,
       "Tp": 3.95,
       "PGV": 56.39,
@@ -1866,6 +1942,7 @@
      {
       "code": "HWA050",
       "repi_km": null,
+      "rhyp_km": 20.3,
       "rrup_km": 2.9,
       "Tp": 2.29,
       "PGV": 85.76,
@@ -1874,6 +1951,7 @@
      {
       "code": "HWA062",
       "repi_km": null,
+      "rhyp_km": 20.6,
       "rrup_km": 1.9,
       "Tp": 3.58,
       "PGV": 93.29,
@@ -1882,6 +1960,7 @@
      {
       "code": "HWA063",
       "repi_km": null,
+      "rhyp_km": 18.9,
       "rrup_km": 3.0,
       "Tp": 2.33,
       "PGV": 85.55,
@@ -1890,6 +1969,7 @@
      {
       "code": "TRB042",
       "repi_km": null,
+      "rhyp_km": 16.93,
       "rrup_km": 2.8,
       "Tp": 3.19,
       "PGV": 72.47,
@@ -1990,6 +2070,7 @@
      {
       "code": "HKD126",
       "repi_km": 12.79,
+      "rhyp_km": 26.2,
       "rrup_km": 18.8,
       "Tp": 1.85,
       "PGV": 151.48,
@@ -1998,6 +2079,7 @@
      {
       "code": "HKD128",
       "repi_km": 12.17,
+      "rhyp_km": 29.1,
       "rrup_km": 20.5,
       "Tp": 1.23,
       "PGV": 102.46,
@@ -2006,6 +2088,7 @@
      {
       "code": "IBUH01",
       "repi_km": 22.36,
+      "rhyp_km": 34.4,
       "rrup_km": 22.2,
       "Tp": 0.57,
       "PGV": 127.86,
@@ -2014,6 +2097,7 @@
      {
       "code": "47004",
       "repi_km": null,
+      "rhyp_km": 24.9,
       "rrup_km": 18.7,
       "Tp": 1.75,
       "PGV": 130.73,

@@ -137,7 +137,8 @@ def _bool(x):
 # stats (unchanged frontend contract)
 # --------------------------------------------------------------------------- #
 def _dist(s):
-    return s.get("rrup_km") if s.get("rrup_km") is not None else s.get("repi_km")
+    """Distance used in every plot: Rrup, else Rhyp when Rrup is missing."""
+    return s.get("rrup_km") if s.get("rrup_km") is not None else s.get("rhyp_km")
 
 
 def _stats(stations):
@@ -153,8 +154,9 @@ def _stats(stations):
         "Tp_range": [tps[0], tps[-1]] if tps else [None, None],
         "by_distance": _bins(stations),
         "scatter": [{"code": s["code"], "repi_km": s.get("repi_km"),
-                     "rrup_km": s.get("rrup_km"), "Tp": s.get("Tp"),
-                     "PGV": s.get("PGV"), "is_pulse": s["is_pulse"]}
+                     "rhyp_km": s.get("rhyp_km"), "rrup_km": s.get("rrup_km"),
+                     "Tp": s.get("Tp"), "PGV": s.get("PGV"),
+                     "is_pulse": s["is_pulse"]}
                     for s in stations if _dist(s) is not None],
     }
 

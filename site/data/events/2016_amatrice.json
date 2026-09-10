@@ -295,7 +295,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 11.75
   },
   {
    "code": "NRC",
@@ -542,7 +543,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 17.34
   },
   {
    "code": "MSCT",
@@ -789,7 +791,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 22.84
   },
   {
    "code": "ASP",
@@ -1050,7 +1053,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 38.56
   },
   {
    "code": "LSS",
@@ -1303,7 +1307,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 27.87
   },
   {
    "code": "RQT",
@@ -1530,7 +1535,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 16.38
   },
   {
    "code": "TERO",
@@ -1765,7 +1771,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 32.46
   },
   {
    "code": "MNF",
@@ -2020,7 +2027,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 41.17
   },
   {
    "code": "CLF",
@@ -2262,7 +2270,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 46.18
   },
   {
    "code": "SNO",
@@ -2510,7 +2519,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 38.96
   },
   {
    "code": "FEMA",
@@ -2751,7 +2761,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 33.92
   },
   {
    "code": "PCB",
@@ -3006,7 +3017,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 19.55
   },
   {
    "code": "SPM",
@@ -3243,7 +3255,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 40.32
   }
  ],
  "stats": {
@@ -3258,25 +3271,17 @@
   ],
   "by_distance": [
    {
-    "r_lo": 5,
-    "r_hi": 10,
-    "n": 1,
-    "n_pulse": 1,
-    "pulse_fraction": 1.0,
-    "Tp_median": 0.784
-   },
-   {
     "r_lo": 10,
     "r_hi": 20,
-    "n": 3,
-    "n_pulse": 0,
-    "pulse_fraction": 0.0,
-    "Tp_median": null
+    "n": 4,
+    "n_pulse": 1,
+    "pulse_fraction": 0.25,
+    "Tp_median": 0.784
    },
    {
     "r_lo": 20,
     "r_hi": 40,
-    "n": 7,
+    "n": 6,
     "n_pulse": 0,
     "pulse_fraction": 0.0,
     "Tp_median": null
@@ -3284,7 +3289,7 @@
    {
     "r_lo": 40,
     "r_hi": 80,
-    "n": 2,
+    "n": 3,
     "n_pulse": 0,
     "pulse_fraction": 0.0,
     "Tp_median": null
@@ -3294,6 +3299,7 @@
    {
     "code": "AMT",
     "repi_km": 8.51,
+    "rhyp_km": 11.75,
     "rrup_km": null,
     "Tp": 0.784,
     "PGV": 43.82,
@@ -3302,6 +3308,7 @@
    {
     "code": "NRC",
     "repi_km": 15.33,
+    "rhyp_km": 17.34,
     "rrup_km": null,
     "Tp": 2.072,
     "PGV": 26.6,
@@ -3310,6 +3317,7 @@
    {
     "code": "MSCT",
     "repi_km": 21.36,
+    "rhyp_km": 22.84,
     "rrup_km": null,
     "Tp": 1.036,
     "PGV": 8.45,
@@ -3318,6 +3326,7 @@
    {
     "code": "ASP",
     "repi_km": 37.7,
+    "rhyp_km": 38.56,
     "rrup_km": null,
     "Tp": 3.276,
     "PGV": 3.76,
@@ -3326,6 +3335,7 @@
    {
     "code": "LSS",
     "repi_km": 26.67,
+    "rhyp_km": 27.87,
     "rrup_km": null,
     "Tp": 3.948,
     "PGV": 2.62,
@@ -3334,6 +3344,7 @@
    {
     "code": "RQT",
     "repi_km": 14.24,
+    "rhyp_km": 16.38,
     "rrup_km": null,
     "Tp": 4.844,
     "PGV": 15.85,
@@ -3342,6 +3353,7 @@
    {
     "code": "TERO",
     "repi_km": 31.43,
+    "rhyp_km": 32.46,
     "rrup_km": null,
     "Tp": 3.948,
     "PGV": 4.17,
@@ -3350,6 +3362,7 @@
    {
     "code": "MNF",
     "repi_km": 40.37,
+    "rhyp_km": 41.17,
     "rrup_km": null,
     "Tp": 1.4,
     "PGV": 4.63,
@@ -3358,6 +3371,7 @@
    {
     "code": "CLF",
     "repi_km": 45.46,
+    "rhyp_km": 46.18,
     "rrup_km": null,
     "Tp": 1.288,
     "PGV": 12.98,
@@ -3366,6 +3380,7 @@
    {
     "code": "SNO",
     "repi_km": 38.11,
+    "rhyp_km": 38.96,
     "rrup_km": null,
     "Tp": 2.688,
     "PGV": 4.06,
@@ -3374,6 +3389,7 @@
    {
     "code": "FEMA",
     "repi_km": 32.94,
+    "rhyp_km": 33.92,
     "rrup_km": null,
     "Tp": 0.56,
     "PGV": 15.09,
@@ -3382,6 +3398,7 @@
    {
     "code": "PCB",
     "repi_km": 17.79,
+    "rhyp_km": 19.55,
     "rrup_km": null,
     "Tp": 1.204,
     "PGV": 13.88,
@@ -3390,6 +3407,7 @@
    {
     "code": "SPM",
     "repi_km": 39.5,
+    "rhyp_km": 40.32,
     "rrup_km": null,
     "Tp": 4.928,
     "PGV": 3.28,

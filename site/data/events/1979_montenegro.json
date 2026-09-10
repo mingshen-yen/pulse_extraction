@@ -254,7 +254,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 15.49
   },
   {
    "code": "ULO",
@@ -492,7 +493,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 16.63
   },
   {
    "code": "ULA",
@@ -727,7 +729,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 15.88
   },
   {
    "code": "HRZ",
@@ -978,7 +981,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 74.7
   }
  ],
  "stats": {
@@ -993,12 +997,20 @@
   ],
   "by_distance": [
    {
+    "r_lo": 5,
+    "r_hi": 10,
+    "n": 2,
+    "n_pulse": 2,
+    "pulse_fraction": 1.0,
+    "Tp_median": 1.932
+   },
+   {
     "r_lo": 10,
     "r_hi": 20,
-    "n": 3,
-    "n_pulse": 2,
-    "pulse_fraction": 0.667,
-    "Tp_median": 1.68
+    "n": 1,
+    "n_pulse": 0,
+    "pulse_fraction": 0.0,
+    "Tp_median": null
    },
    {
     "r_lo": 40,
@@ -1013,6 +1025,7 @@
    {
     "code": "BAR",
     "repi_km": 12.61,
+    "rhyp_km": 15.49,
     "rrup_km": 7.0,
     "Tp": 1.428,
     "PGV": 60.5,
@@ -1021,6 +1034,7 @@
    {
     "code": "ULO",
     "repi_km": 13.98,
+    "rhyp_km": 16.63,
     "rrup_km": 5.8,
     "Tp": 1.932,
     "PGV": 63.75,
@@ -1029,6 +1043,7 @@
    {
     "code": "ULA",
     "repi_km": 13.08,
+    "rhyp_km": 15.88,
     "rrup_km": null,
     "Tp": 2.072,
     "PGV": 29.15,
@@ -1037,6 +1052,7 @@
    {
     "code": "HRZ",
     "repi_km": 74.16,
+    "rhyp_km": 74.7,
     "rrup_km": null,
     "Tp": 8.624,
     "PGV": 12.59,

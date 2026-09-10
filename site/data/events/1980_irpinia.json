@@ -294,7 +294,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 36.52
   },
   {
    "code": "BGI",
@@ -554,7 +555,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 26.5
   },
   {
    "code": "CLT",
@@ -802,7 +804,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 24.1
   },
   {
    "code": "BSC",
@@ -1063,7 +1066,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 32.05
   },
   {
    "code": "BRN",
@@ -1312,7 +1316,8 @@
      -0.001,
      -0.0
     ]
-   }
+   },
+   "rhyp_km": 45.13
   },
   {
    "code": "MRT",
@@ -1573,7 +1578,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 49.36
   },
   {
    "code": "RCC",
@@ -1797,7 +1803,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 126.97
   },
   {
    "code": "TDG",
@@ -2052,7 +2059,8 @@
      0.0,
      0.0
     ]
-   }
+   },
+   "rhyp_km": 79.59
   }
  ],
  "stats": {
@@ -2067,20 +2075,28 @@
   ],
   "by_distance": [
    {
+    "r_lo": 5,
+    "r_hi": 10,
+    "n": 1,
+    "n_pulse": 1,
+    "pulse_fraction": 1.0,
+    "Tp_median": 1.736
+   },
+   {
     "r_lo": 10,
     "r_hi": 20,
     "n": 1,
-    "n_pulse": 0,
-    "pulse_fraction": 0.0,
-    "Tp_median": null
+    "n_pulse": 1,
+    "pulse_fraction": 1.0,
+    "Tp_median": 3.307
    },
    {
     "r_lo": 20,
     "r_hi": 40,
-    "n": 3,
-    "n_pulse": 2,
-    "pulse_fraction": 0.667,
-    "Tp_median": 2.522
+    "n": 2,
+    "n_pulse": 0,
+    "pulse_fraction": 0.0,
+    "Tp_median": null
    },
    {
     "r_lo": 40,
@@ -2103,6 +2119,7 @@
    {
     "code": "STR",
     "repi_km": 33.3,
+    "rhyp_km": 36.52,
     "rrup_km": 10.8,
     "Tp": 3.307,
     "PGV": 72.83,
@@ -2111,6 +2128,7 @@
    {
     "code": "BGI",
     "repi_km": 21.84,
+    "rhyp_km": 26.5,
     "rrup_km": 8.2,
     "Tp": 1.736,
     "PGV": 38.38,
@@ -2119,6 +2137,7 @@
    {
     "code": "CLT",
     "repi_km": 18.86,
+    "rhyp_km": 24.1,
     "rrup_km": null,
     "Tp": 1.038,
     "PGV": 38.1,
@@ -2127,6 +2146,7 @@
    {
     "code": "BSC",
     "repi_km": 28.32,
+    "rhyp_km": 32.05,
     "rrup_km": null,
     "Tp": 7.749,
     "PGV": 22.62,
@@ -2135,6 +2155,7 @@
    {
     "code": "BRN",
     "repi_km": 42.56,
+    "rhyp_km": 45.13,
     "rrup_km": null,
     "Tp": 16.133,
     "PGV": 12.8,
@@ -2143,6 +2164,7 @@
    {
     "code": "MRT",
     "repi_km": 47.03,
+    "rhyp_km": 49.36,
     "rrup_km": null,
     "Tp": 10.413,
     "PGV": 14.5,
@@ -2151,6 +2173,7 @@
    {
     "code": "RCC",
     "repi_km": 126.08,
+    "rhyp_km": 126.97,
     "rrup_km": null,
     "Tp": 1.995,
     "PGV": 5.95,
@@ -2159,6 +2182,7 @@
    {
     "code": "TDG",
     "repi_km": 78.16,
+    "rhyp_km": 79.59,
     "rrup_km": null,
     "Tp": 7.162,
     "PGV": 9.99,

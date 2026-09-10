@@ -46,12 +46,17 @@ def _median(xs):
     return round(_st.median(xs), 3) if xs else None
 
 
+def _dist(s):
+    """Distance used in every plot: Rrup, else Rhyp when Rrup is missing."""
+    return s.get("rrup_km") if s.get("rrup_km") is not None else s.get("rhyp_km")
+
+
 def _distance_bins(stations, edges=(0, 5, 10, 20, 40, 80, 160)):
-    """Pulse fraction + median Tp per epicentral-distance bin."""
+    """Pulse fraction + median Tp per source-distance bin."""
     out = []
     for lo, hi in zip(edges, edges[1:]):
         grp = [s for s in stations
-               if s["repi_km"] is not None and lo <= s["repi_km"] < hi]
+               if _dist(s) is not None and lo <= _dist(s) < hi]
         if not grp:
             continue
         npul = sum(1 for s in grp if s["is_pulse"])
@@ -80,14 +85,18 @@ def event_summary(event: dict, stations: list, *, trace_points: int = 240,
     ev = dict(event)
     elat, elon = ev.get("lat"), ev.get("lon")
 
+    edep = ev.get("depth_km")
     st_out = []
     for s in stations:
         slat, slon = s.get("lat"), s.get("lon")
         repi = haversine_km(elat, elon, slat, slon)
+        rhyp = (round(math.hypot(repi, edep), 2)
+                if repi is not None and edep is not None else None)
         rec = {
             "code": s["code"], "network": s.get("network"),
             "lat": slat, "lon": slon, "vs30": s.get("vs30"),
             "repi_km": round(repi, 2) if repi is not None else None,
+            "rhyp_km": rhyp,
             "rrup_km": s.get("rrup_km"),
             "is_pulse": bool(s["is_pulse"]),
             "Tp": round(s["Tp"], 3), "PGV": round(s["PGV"], 2),
@@ -109,9 +118,9 @@ def event_summary(event: dict, stations: list, *, trace_points: int = 240,
                      max((s["Tp"] for s in pul), default=None)],
         "by_distance": _distance_bins(st_out),
         "scatter": [{"code": s["code"], "repi_km": s["repi_km"],
-                     "rrup_km": s["rrup_km"], "Tp": s["Tp"], "PGV": s["PGV"],
-                     "is_pulse": s["is_pulse"]}
-                    for s in st_out if s["repi_km"] is not None],
+                     "rhyp_km": s["rhyp_km"], "rrup_km": s["rrup_km"],
+                     "Tp": s["Tp"], "PGV": s["PGV"], "is_pulse": s["is_pulse"]}
+                    for s in st_out if _dist(s) is not None],
     }
 
     return {

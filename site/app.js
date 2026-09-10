@@ -9,17 +9,29 @@ const evKey = (n, y) =>
   String(n).toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "") + (y ? "|" + y : "");
 
 const map = L.map("map", { zoomControl: true }).setView([20, 0], 2);
-L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
-  { attribution: "Tiles &copy; Esri", maxZoom: 16 }).addTo(map);
-L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-  { maxZoom: 16, opacity: 0.9 }).addTo(map);
+
+const OSM_ATTR =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const bases = {
+  "Gray": L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+    { attribution: "Tiles &copy; Esri", maxZoom: 16 }),
+  "OpenStreetMap": L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    { attribution: OSM_ATTR, maxZoom: 19 }),
+};
+bases["Gray"].addTo(map);
+L.control.layers(bases, null, { position: "topright", collapsed: false }).addTo(map);
 
 const layer = L.layerGroup().addTo(map);
-let charts = {}, current = null, fitTarget = null;
+const oriLayer = L.layerGroup().addTo(map);
+let charts = {}, current = null, fitTarget = null, oriData = [];
 const sources = {};        // id -> { label, kind:'pipeline'|'reference', list:[…], docs, citation }
 let activeSource = "pipeline";
+
+/* newest event first: full ISO time if present, else the 4-digit year */
+const evWhen = (e) => String(e.time || e.year || "");
+const byNewest = (events) =>
+  [...events].sort((a, b) => (evWhen(b) < evWhen(a) ? -1 : evWhen(b) > evWhen(a) ? 1 : 0));
 
 /* ---------- boot ---------------------------------------------------------- */
 async function boot() {
@@ -30,14 +42,14 @@ async function boot() {
 
   sources.pipeline = {
     label: "Pipeline results", kind: "pipeline", citation: null,
-    list: pipe.events, generated: pipe.generated,
+    list: byNewest(pipe.events), generated: pipe.generated,
   };
   await Promise.all(refIdx.catalogs.map(async (c) => {
     const doc = await fetch(`data/reference/${c.id}.json`).then((r) => r.json());
     sources[c.id] = {
       label: c.label, kind: "reference", url: c.url, meta: c,
       pulseOnly: !!c.pulse_only,
-      list: doc.events, citation: doc.citation,
+      list: byNewest(doc.events), citation: doc.citation,
       docs: Object.fromEntries(doc.events.map((e) => [e.key, e])),
     };
   }));
@@ -170,6 +182,7 @@ function drawMap(d) {
     pts.push([ev.lat, ev.lon]);
   }
 
+  oriData = [];
   d.stations.forEach((s) => {
     if (s.lat == null) return;
     const m = L.circleMarker([s.lat, s.lon], {
@@ -184,25 +197,40 @@ function drawMap(d) {
       (s.rrup_km != null ? `<br>R<sub>rup</sub> ${fmt(s.rrup_km, 1)} km` : "") +
       (s.repi_km != null ? ` · R<sub>epi</sub> ${fmt(s.repi_km, 0)} km` : ""));
     m.on("click", () => stationDetail(s));
-    if (s.is_pulse && s.angle_deg != null) addTick(s);
     if (s.fling) L.circleMarker([s.lat, s.lon], {
       radius: pgvRadius(s.PGV) + 3, color: FAULT, weight: 1.5, fill: false,
     }).bindTooltip("fling step", { sticky: true }).addTo(layer);
+    const ori = s.angle_deg != null ? s.angle_deg : s.ori_n;
+    if (s.is_pulse && ori != null) oriData.push([s, ori]);
     pts.push([s.lat, s.lon]);
   });
+  redrawTicks();
 
   const onlyEpi = pts.length === 1;
   fitTarget = pts.length ? L.latLngBounds(pts).pad(0.15) : null;
   if (fitTarget) map.fitBounds(fitTarget, { padding: [24, 24], maxZoom: onlyEpi ? 8 : 13 });
 }
 
-function addTick(s) {
-  const a = (s.angle_deg * Math.PI) / 180, km = 4;
-  const dlat = (km * Math.cos(a)) / 111.3;
-  const dlon = (km * Math.sin(a)) / (111.3 * Math.cos((s.lat * Math.PI) / 180));
-  L.polyline([[s.lat - dlat, s.lon - dlon], [s.lat + dlat, s.lon + dlon]],
-    { color: PULSE, weight: 2, opacity: 0.7 }).addTo(layer);
+/* screen-constant double-ended bar through each pulse marker, along the pulse
+   (fault-normal) polarization axis.  oriDeg is the azimuth from North. */
+function redrawTicks() {
+  oriLayer.clearLayers();
+  if (map.getZoom() < 5) return;
+  oriData.forEach(([s, oriDeg]) => {
+    const a = (oriDeg * Math.PI) / 180;
+    const c = map.latLngToLayerPoint([s.lat, s.lon]);
+    const half = pgvRadius(s.PGV) + 7;                  // px
+    const dx = half * Math.sin(a), dy = -half * Math.cos(a);
+    const p = [map.layerPointToLatLng([c.x - dx, c.y - dy]),
+              map.layerPointToLatLng([c.x + dx, c.y + dy])];
+    const az = ((Math.round(oriDeg) % 180) + 180) % 180;
+    L.polyline(p, { color: "#fff", weight: 4, opacity: 0.9, lineCap: "round" }).addTo(oriLayer);
+    L.polyline(p, { color: "#1c2733", weight: 2, opacity: 0.95, lineCap: "round" })
+      .bindTooltip(`${s.code} · pulse orientation ${az}° from N`, { sticky: true })
+      .addTo(oriLayer);
+  });
 }
+map.on("zoomend", redrawTicks);
 
 /* ---------- head + charts + detail ------------------------------------- */
 function drawHead(d) {
@@ -235,9 +263,12 @@ function drawHead(d) {
     `<div id="crosslinks" class="kv"></div>`;
 }
 
+/* distance for every plot: Rrup, or Rhyp when a station has no Rrup */
+const plotDist = (r) => (r.rrup_km != null ? r.rrup_km : r.rhyp_km);
+
 function scatterCfg(rows, yKey, yLabel) {
   const split = (v) => rows.filter((r) => r.is_pulse === v)
-    .map((r) => ({ x: r.rrup_km ?? r.repi_km, y: r[yKey] }))
+    .map((r) => ({ x: plotDist(r), y: r[yKey] }))
     .filter((p) => p.x > 0 && p.y > 0);
   return {
     type: "scatter",
@@ -247,7 +278,7 @@ function scatterCfg(rows, yKey, yLabel) {
         borderColor: NOPULSE, borderWidth: 1, pointRadius: 3.5 }] },
     options: { animation: false, plugins: { legend: { display: false } },
       scales: {
-        x: { type: "logarithmic", title: { display: true, text: "R_rup / R_epi [km]" } },
+        x: { type: "logarithmic", title: { display: true, text: "R_rup [km]" } },
         y: { type: "logarithmic", title: { display: true, text: yLabel } } },
       maintainAspectRatio: false },
   };
@@ -256,6 +287,7 @@ function scatterCfg(rows, yKey, yLabel) {
 function drawCharts(d) {
   Object.values(charts).forEach((c) => c.destroy());
   const rows = d.stats.scatter || [];
+  $("#c-frac").closest("figure").hidden = false;
   charts.tp = new Chart($("#c-tp"), scatterCfg(rows, "Tp", "Tp [s]"));
   charts.pgv = new Chart($("#c-pgv"), scatterCfg(rows, "PGV", "PGV [cm/s]"));
 
@@ -277,8 +309,9 @@ function drawCharts(d) {
     return;
   }
 
-  $("#frac-cap").textContent = "pulse fraction by distance";
+  $("#frac-cap").textContent = "pulse fraction by R_rup";
   const b = d.stats.by_distance || [];
+  if (b.length === 0) return;
   charts.frac = new Chart($("#c-frac"), {
     type: "bar",
     data: { labels: b.map((x) => `${x.r_lo}–${x.r_hi}`),
@@ -288,7 +321,7 @@ function drawCharts(d) {
         const x = b[c.dataIndex];
         return `${x.n_pulse}/${x.n} pulse · med Tp ${fmt(x.Tp_median, 1)} s`; } } } },
       scales: { y: { min: 0, max: 1, title: { display: true, text: "fraction" } },
-        x: { title: { display: true, text: "distance bin [km]" } } },
+        x: { title: { display: true, text: "R_rup bin [km]" } } },
       maintainAspectRatio: false },
   });
 }
@@ -302,8 +335,10 @@ function stationDetail(s) {
     g("T<sub>p</sub>", s.Tp ? `${fmt(s.Tp, 2)} s` : null) +
     g("PGV", s.PGV ? `${fmt(s.PGV, 1)} cm/s` : null) +
     g("pulse indicator", s.PI != null ? fmt(s.PI, 2) : null) +
-    g("orientation", s.angle_deg != null ? `${fmt(s.angle_deg, 0)}°`
-      : s.ori_fp != null ? `FN ${fmt(s.ori_fp, 0)}°` : null) +
+    g("orientation", (s.angle_deg != null ? s.angle_deg : s.ori_n) != null
+      ? `${fmt(((Math.round(s.angle_deg != null ? s.angle_deg : s.ori_n) % 180) + 180) % 180, 0)}° from N`
+        + (s.ori_fp != null ? ` · ${fmt(s.ori_fp, 0)}° from FP` : "")
+      : null) +
     g("R<sub>rup</sub>", s.rrup_km != null ? `${fmt(s.rrup_km, 1)} km` : null) +
     g("R<sub>epi</sub>", s.repi_km != null ? `${fmt(s.repi_km, 1)} km` : null) +
     g("V<sub>s30</sub>", s.vs30 ? `${fmt(s.vs30, 0)} m/s` : null) +

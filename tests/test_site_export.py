@@ -18,10 +18,10 @@ def test_haversine_known_distance():
     assert haversine_km(None, 1, 2, 3) is None
 
 
-def _station(code, lat, lon, is_pulse, Tp, PGV, PI, n=400):
+def _station(code, lat, lon, is_pulse, Tp, PGV, PI, n=400, rrup=None):
     return dict(code=code, network="NZ", lat=lat, lon=lon, vs30=400.0,
-                is_pulse=is_pulse, Tp=Tp, PGV=PGV, PI=PI, angle_deg=12.3,
-                late=False, qc="pass", dt=0.02,
+                rrup_km=rrup, is_pulse=is_pulse, Tp=Tp, PGV=PGV, PI=PI,
+                angle_deg=12.3, late=False, qc="pass", dt=0.02,
                 pulse=[0.0] * (n // 2) + [1.0, -1.0] * (n // 4))
 
 
@@ -31,9 +31,9 @@ EVENT = dict(id="test1", time="2010-09-03T16:35:41Z", lat=-43.55, lon=172.18,
 
 def test_event_summary_shape_and_stats():
     stations = [
-        _station("AAA", -43.53, 172.20, True, 6.2, 120.0, 5.0),
-        _station("BBB", -43.60, 172.05, True, 8.1, 60.0, 3.0),
-        _station("CCC", -43.90, 171.50, False, 2.0, 8.0, -5.0),
+        _station("AAA", -43.53, 172.20, True, 6.2, 120.0, 5.0, rrup=3.0),
+        _station("BBB", -43.60, 172.05, True, 8.1, 60.0, 3.0, rrup=12.0),
+        _station("CCC", -43.90, 171.50, False, 2.0, 8.0, -5.0),      # no Rrup
     ]
     out = event_summary(EVENT, stations)
 
@@ -42,6 +42,7 @@ def test_event_summary_shape_and_stats():
     assert len(out["stations"]) == 3
     a = out["stations"][0]
     assert a["repi_km"] is not None and a["repi_km"] < 10
+    assert a["rhyp_km"] == pytest.approx((a["repi_km"] ** 2 + 100) ** 0.5, abs=0.1)
     assert "pulse_trace" in a and a["pulse_trace"]["v"]          # downsampled
     assert len(a["pulse_trace"]["v"]) <= 240
 
@@ -49,8 +50,11 @@ def test_event_summary_shape_and_stats():
     assert s["n"] == 3 and s["n_pulse"] == 2
     assert s["pulse_fraction"] == pytest.approx(2 / 3, abs=1e-3)
     assert s["Tp_median"] == pytest.approx(7.15, abs=0.01)       # median(6.2, 8.1)
+    # plots key on Rrup, falling back to Rhyp -> every located station is kept
+    assert {p["code"] for p in s["scatter"]} == {"AAA", "BBB", "CCC"}
+    ccc = next(p for p in s["scatter"] if p["code"] == "CCC")     # no Rrup
+    assert ccc["rrup_km"] is None and ccc["rhyp_km"] is not None
     assert s["by_distance"] and all("pulse_fraction" in b for b in s["by_distance"])
-    assert len(s["scatter"]) == 3
 
 
 def test_event_summary_downsamples_only_when_long():

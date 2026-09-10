@@ -57,6 +57,7 @@
      {
       "code": "Pacoima Dam (upper left abut)",
       "repi_km": 11.86,
+      "rhyp_km": null,
       "rrup_km": 0.9,
       "Tp": 1.638,
       "PGV": 114.503,
@@ -114,6 +115,7 @@
      {
       "code": "Tabas",
       "repi_km": 55.2,
+      "rhyp_km": null,
       "rrup_km": 2.05,
       "Tp": 6.188,
       "PGV": 123.589,
@@ -252,6 +254,7 @@
      {
       "code": "Gilroy Array 2",
       "repi_km": 10.93,
+      "rhyp_km": null,
       "rrup_km": 9.02,
       "Tp": 1.463,
       "PGV": 31.976,
@@ -260,6 +263,7 @@
      {
       "code": "Gilroy Array 3",
       "repi_km": 9.59,
+      "rhyp_km": null,
       "rrup_km": 7.42,
       "Tp": 1.155,
       "PGV": 29.59,
@@ -268,6 +272,7 @@
      {
       "code": "Gilroy Array 4",
       "repi_km": 7.66,
+      "rhyp_km": null,
       "rrup_km": 5.7,
       "Tp": 1.351,
       "PGV": 31.858,
@@ -276,6 +281,7 @@
      {
       "code": "Gilroy Array 6",
       "repi_km": 4.37,
+      "rhyp_km": null,
       "rrup_km": 3.11,
       "Tp": 1.232,
       "PGV": 44.359,
@@ -526,6 +532,7 @@
      {
       "code": "Agrarias",
       "repi_km": 2.62,
+      "rhyp_km": null,
       "rrup_km": 0.65,
       "Tp": 2.338,
       "PGV": 41.819,
@@ -534,6 +541,7 @@
      {
       "code": "Brawley Airport",
       "repi_km": 43.12,
+      "rhyp_km": null,
       "rrup_km": 10.42,
       "Tp": 4.396,
       "PGV": 40.942,
@@ -542,6 +550,7 @@
      {
       "code": "EC County Center FF",
       "repi_km": 29.04,
+      "rhyp_km": null,
       "rrup_km": 7.31,
       "Tp": 4.417,
       "PGV": 73.407,
@@ -550,6 +559,7 @@
      {
       "code": "El Centro Meloland Geot. Array",
       "repi_km": 19.43,
+      "rhyp_km": null,
       "rrup_km": 0.07,
       "Tp": 3.423,
       "PGV": 92.624,
@@ -558,6 +568,7 @@
      {
       "code": "El Centro Array 10",
       "repi_km": 28.77,
+      "rhyp_km": null,
       "rrup_km": 8.6,
       "Tp": 4.515,
       "PGV": 50.69,
@@ -566,6 +577,7 @@
      {
       "code": "El Centro Array 3",
       "repi_km": 28.62,
+      "rhyp_km": null,
       "rrup_km": 12.85,
       "Tp": 4.501,
       "PGV": 47.981,
@@ -574,6 +586,7 @@
      {
       "code": "El Centro Array 4",
       "repi_km": 27.11,
+      "rhyp_km": null,
       "rrup_km": 7.05,
       "Tp": 4.788,
       "PGV": 80.423,
@@ -582,6 +595,7 @@
      {
       "code": "El Centro Array 5",
       "repi_km": 27.78,
+      "rhyp_km": null,
       "rrup_km": 3.95,
       "Tp": 4.13,
       "PGV": 96.917,
@@ -590,6 +604,7 @@
      {
       "code": "El Centro Array 6",
       "repi_km": 27.45,
+      "rhyp_km": null,
       "rrup_km": 1.35,
       "Tp": 3.773,
       "PGV": 113.554,
@@ -598,6 +613,7 @@
      {
       "code": "El Centro Array 7",
       "repi_km": 27.62,
+      "rhyp_km": null,
       "rrup_km": 0.56,
       "Tp": 4.375,
       "PGV": 113.148,
@@ -606,6 +622,7 @@
      {
       "code": "El Centro Differential Array",
       "repi_km": 27.21,
+      "rhyp_km": null,
       "rrup_km": 5.09,
       "Tp": 6.265,
       "PGV": 75.6,
@@ -614,6 +631,7 @@
      {
       "code": "Holtville Post Office",
       "repi_km": 19.78,
+      "rhyp_km": null,
       "rrup_km": 7.5,
       "Tp": 4.823,
       "PGV": 53.153,
@@ -718,6 +736,7 @@
      {
       "code": "Bar-Skupstina Opstine",
       "repi_km": 10.88,
+      "rhyp_km": null,
       "rrup_km": 6.98,
       "Tp": 1.442,
       "PGV": 52.894,
@@ -726,6 +745,7 @@
      {
       "code": "Ulcinj - Hotel Olimpic",
       "repi_km": 14.7,
+      "rhyp_km": null,
       "rrup_km": 5.76,
       "Tp": 1.974,
       "PGV": 51.641,
@@ -804,6 +824,7 @@
      {
       "code": "Bagnoli Irpinio",
       "repi_km": 22.63,
+      "rhyp_km": null,
       "rrup_km": 8.18,
       "Tp": 1.713,
       "PGV": 34.706,
@@ -812,6 +833,7 @@
      {
       "code": "Sturno (STN)",
       "repi_km": 30.29,
+      "rhyp_km": null,
       "rrup_km": 10.84,
       "Tp": 3.273,
       "PGV": 71.957,
@@ -903,6 +925,7 @@
      {
       "code": "Parachute Test Site",
       "repi_km": 20.46,
+      "rhyp_km": null,
       "rrup_km": 16.66,
       "Tp": 4.389,
       "PGV": 55.583,
@@ -1015,6 +1038,7 @@
      {
       "code": "Coyote Lake Dam - Southwest Abutment",
       "repi_km": 24.53,
+      "rhyp_km": null,
       "rrup_km": 0.53,
       "Tp": 1.071,
       "PGV": 78.5,
@@ -1023,6 +1047,7 @@
      {
       "code": "Gilroy Array 6",
       "repi_km": 36.32,
+      "rhyp_km": null,
       "rrup_km": 9.87,
       "Tp": 1.232,
       "PGV": 36.495,
@@ -1113,6 +1138,7 @@
      {
       "code": "Kalamata (bsmt) (2nd trigger)",
       "repi_km": 9.96,
+      "rhyp_km": null,
       "rrup_km": 5.6,
       "Tp": null,
       "PGV": 12.792,
@@ -1217,6 +1243,7 @@
      {
       "code": "Geotech Investig Center",
       "repi_km": 7.92,
+      "rhyp_km": null,
       "rrup_km": 6.3,
       "Tp": 0.805,
       "PGV": 79.935,
@@ -1225,6 +1252,7 @@
      {
       "code": "National Geografical Inst",
       "repi_km": 9.54,
+      "rhyp_km": null,
       "rrup_km": 6.99,
       "Tp": 1.127,
       "PGV": 73.008,
@@ -1337,6 +1365,7 @@
      {
       "code": "Kornbloom Road (temp)",
       "repi_km": 19.26,
+      "rhyp_km": null,
       "rrup_km": 18.48,
       "Tp": 2.128,
       "PGV": 29.636,
@@ -1345,6 +1374,7 @@
      {
       "code": "Parachute Test Site",
       "repi_km": 15.98,
+      "rhyp_km": null,
       "rrup_km": 0.95,
       "Tp": 2.394,
       "PGV": 134.422,
@@ -1509,6 +1539,7 @@
      {
       "code": "Gilroy - Historic Bldg.",
       "repi_km": 28.09,
+      "rhyp_km": null,
       "rrup_km": 10.97,
       "Tp": 1.638,
       "PGV": 43.398,
@@ -1517,6 +1548,7 @@
      {
       "code": "Gilroy Array 2",
       "repi_km": 29.75,
+      "rhyp_km": null,
       "rrup_km": 11.07,
       "Tp": 1.729,
       "PGV": 40.408,
@@ -1525,6 +1557,7 @@
      {
       "code": "Gilroy Array 3",
       "repi_km": 31.37,
+      "rhyp_km": null,
       "rrup_km": 12.82,
       "Tp": 2.639,
       "PGV": 45.438,
@@ -1533,6 +1566,7 @@
      {
       "code": "Los Gatos - Lexington Dam",
       "repi_km": 20.34,
+      "rhyp_km": null,
       "rrup_km": 5.02,
       "Tp": 1.568,
       "PGV": 95.857,
@@ -1541,6 +1575,7 @@
      {
       "code": "Saratoga - Aloha Ave",
       "repi_km": 27.21,
+      "rhyp_km": null,
       "rrup_km": 8.5,
       "Tp": 4.571,
       "PGV": 45.984,
@@ -1549,6 +1584,7 @@
      {
       "code": "Saratoga - W Valley Coll.",
       "repi_km": 27.03,
+      "rhyp_km": null,
       "rrup_km": 9.31,
       "Tp": 5.649,
       "PGV": 64.912,
@@ -1674,6 +1710,7 @@
      {
       "code": "Bunker Hill FAA",
       "repi_km": 19.67,
+      "rhyp_km": null,
       "rrup_km": 12.24,
       "Tp": 5.362,
       "PGV": 67.876,
@@ -1682,6 +1719,7 @@
      {
       "code": "Centerville Beach_ Naval Fac",
       "repi_km": 27.99,
+      "rhyp_km": null,
       "rrup_km": 18.31,
       "Tp": 1.967,
       "PGV": 51.22,
@@ -1690,6 +1728,7 @@
      {
       "code": "Petrolia",
       "repi_km": 4.51,
+      "rhyp_km": null,
       "rrup_km": 8.18,
       "Tp": 2.996,
       "PGV": 88.976,
@@ -1815,6 +1854,7 @@
      {
       "code": "Barstow",
       "repi_km": 94.7,
+      "rhyp_km": null,
       "rrup_km": 34.86,
       "Tp": 9.128,
       "PGV": 25.036,
@@ -1823,6 +1863,7 @@
      {
       "code": "Lucerne",
       "repi_km": 43.99,
+      "rhyp_km": null,
       "rrup_km": 2.19,
       "Tp": 5.124,
       "PGV": 133.607,
@@ -1831,6 +1872,7 @@
      {
       "code": "Yermo Fire Station",
       "repi_km": 85.93,
+      "rhyp_km": null,
       "rrup_km": 23.62,
       "Tp": 7.504,
       "PGV": 51.182,
@@ -2091,6 +2133,7 @@
      {
       "code": "Jensen Filter Plant Administrative Building",
       "repi_km": 12.96,
+      "rhyp_km": null,
       "rrup_km": 5.43,
       "Tp": 3.157,
       "PGV": 111.481,
@@ -2099,6 +2142,7 @@
      {
       "code": "Jensen Filter Plant Generator Building",
       "repi_km": 12.99,
+      "rhyp_km": null,
       "rrup_km": 5.43,
       "Tp": 3.535,
       "PGV": 76.159,
@@ -2107,6 +2151,7 @@
      {
       "code": "LA - Sepulveda VA Hospital",
       "repi_km": 8.4,
+      "rhyp_km": null,
       "rrup_km": 8.44,
       "Tp": 0.931,
       "PGV": 77.71,
@@ -2115,6 +2160,7 @@
      {
       "code": "LA Dam",
       "repi_km": 11.78,
+      "rhyp_km": null,
       "rrup_km": 5.92,
       "Tp": 1.617,
       "PGV": 74.848,
@@ -2123,6 +2169,7 @@
      {
       "code": "Newhall - Fire Sta",
       "repi_km": 20.25,
+      "rhyp_km": null,
       "rrup_km": 5.92,
       "Tp": 1.372,
       "PGV": 97.449,
@@ -2131,6 +2178,7 @@
      {
       "code": "Newhall - W Pico Canyon Rd.",
       "repi_km": 21.53,
+      "rhyp_km": null,
       "rrup_km": 5.48,
       "Tp": 2.982,
       "PGV": 118.231,
@@ -2139,6 +2187,7 @@
      {
       "code": "Pacoima Dam (downstr)",
       "repi_km": 20.35,
+      "rhyp_km": null,
       "rrup_km": 7.01,
       "Tp": 0.588,
       "PGV": 45.04,
@@ -2147,6 +2196,7 @@
      {
       "code": "Pacoima Dam (upper left)",
       "repi_km": 20.35,
+      "rhyp_km": null,
       "rrup_km": 7.01,
       "Tp": 0.84,
       "PGV": 103.6,
@@ -2155,6 +2205,7 @@
      {
       "code": "Pacoima Kagel Canyon",
       "repi_km": 19.27,
+      "rhyp_km": null,
       "rrup_km": 7.26,
       "Tp": 0.728,
       "PGV": 51.734,
@@ -2163,6 +2214,7 @@
      {
       "code": "Pardee - SCE",
       "repi_km": 25.63,
+      "rhyp_km": null,
       "rrup_km": 7.46,
       "Tp": 1.232,
       "PGV": 76.095,
@@ -2171,6 +2223,7 @@
      {
       "code": "Rinaldi Receiving Sta",
       "repi_km": 10.9,
+      "rhyp_km": null,
       "rrup_km": 6.5,
       "Tp": 1.246,
       "PGV": 148.2,
@@ -2179,6 +2232,7 @@
      {
       "code": "Sylmar - Converter Sta",
       "repi_km": 13.1,
+      "rhyp_km": null,
       "rrup_km": 5.35,
       "Tp": 2.982,
       "PGV": 116.311,
@@ -2187,6 +2241,7 @@
      {
       "code": "Sylmar - Converter Sta East",
       "repi_km": 13.59,
+      "rhyp_km": null,
       "rrup_km": 5.19,
       "Tp": 3.528,
       "PGV": 120.972,
@@ -2195,6 +2250,7 @@
      {
       "code": "Sylmar - Olive View Med FF",
       "repi_km": 16.76,
+      "rhyp_km": null,
       "rrup_km": 5.3,
       "Tp": 2.436,
       "PGV": 130.382,
@@ -2325,6 +2381,7 @@
      {
       "code": "KJMA",
       "repi_km": 18.26,
+      "rhyp_km": null,
       "rrup_km": 0.96,
       "Tp": 1.092,
       "PGV": 91.671,
@@ -2333,6 +2390,7 @@
      {
       "code": "Port Island (0 m)",
       "repi_km": 19.23,
+      "rhyp_km": null,
       "rrup_km": 3.31,
       "Tp": 2.828,
       "PGV": 90.685,
@@ -2341,6 +2399,7 @@
      {
       "code": "Takarazuka",
       "repi_km": 38.57,
+      "rhyp_km": null,
       "rrup_km": 0.27,
       "Tp": 1.806,
       "PGV": 86.341,
@@ -2349,6 +2408,7 @@
      {
       "code": "Takatori",
       "repi_km": 13.11,
+      "rhyp_km": null,
       "rrup_km": 1.47,
       "Tp": 1.554,
       "PGV": 123.007,
@@ -2461,6 +2521,7 @@
      {
       "code": "CHY011",
       "repi_km": 2.26,
+      "rhyp_km": null,
       "rrup_km": 5.523,
       "Tp": 0.801,
       "PGV": 73.895,
@@ -2469,6 +2530,7 @@
      {
       "code": "CHY048",
       "repi_km": 22.29,
+      "rhyp_km": null,
       "rrup_km": 18.421,
       "Tp": 0.75,
       "PGV": 27.438,
@@ -2666,6 +2728,7 @@
      {
       "code": "CHY024",
       "repi_km": 24.61,
+      "rhyp_km": null,
       "rrup_km": 18.733,
       "Tp": 3.213,
       "PGV": 31.572,
@@ -2674,6 +2737,7 @@
      {
       "code": "CHY035",
       "repi_km": 41.73,
+      "rhyp_km": null,
       "rrup_km": 34.141,
       "Tp": 1.071,
       "PGV": 29.031,
@@ -2682,6 +2746,7 @@
      {
       "code": "CHY080",
       "repi_km": 29.51,
+      "rhyp_km": null,
       "rrup_km": 22.398,
       "Tp": 1.379,
       "PGV": 70.622,
@@ -2690,6 +2755,7 @@
      {
       "code": "TCU065",
       "repi_km": 31.34,
+      "rhyp_km": null,
       "rrup_km": 25.457,
       "Tp": 1.526,
       "PGV": 28.777,
@@ -2698,6 +2764,7 @@
      {
       "code": "TCU076",
       "repi_km": 20.05,
+      "rhyp_km": null,
       "rrup_km": 13.984,
       "Tp": 0.938,
       "PGV": 59.993,
@@ -2706,6 +2773,7 @@
      {
       "code": "TCU078",
       "repi_km": 0.38,
+      "rhyp_km": null,
       "rrup_km": 7.768,
       "Tp": null,
       "PGV": 51.573,
@@ -2714,6 +2782,7 @@
      {
       "code": "TCU116",
       "repi_km": 27.05,
+      "rhyp_km": null,
       "rrup_km": 21.297,
       "Tp": 2.436,
       "PGV": 36.622,
@@ -2722,6 +2791,7 @@
      {
       "code": "TCU138",
       "repi_km": 27.98,
+      "rhyp_km": null,
       "rrup_km": 21.404,
       "Tp": 2.117,
       "PGV": 27.051,
@@ -2860,6 +2930,7 @@
      {
       "code": "TCU065",
       "repi_km": 40.54,
+      "rhyp_km": null,
       "rrup_km": 34.324,
       "Tp": 1.806,
       "PGV": 39.634,
@@ -2868,6 +2939,7 @@
      {
       "code": "TCU067",
       "repi_km": 40.33,
+      "rhyp_km": null,
       "rrup_km": 34.237,
       "Tp": 1.379,
       "PGV": 41.771,
@@ -2876,6 +2948,7 @@
      {
       "code": "TCU071",
       "repi_km": 28.14,
+      "rhyp_km": null,
       "rrup_km": 23.749,
       "Tp": 1.736,
       "PGV": 36.048,
@@ -2884,6 +2957,7 @@
      {
       "code": "TCU079",
       "repi_km": 14.31,
+      "rhyp_km": null,
       "rrup_km": 17.002,
       "Tp": 0.616,
       "PGV": 35.182,
@@ -2892,6 +2966,7 @@
      {
       "code": "TCU084",
       "repi_km": 13.48,
+      "rhyp_km": null,
       "rrup_km": 15.919,
       "Tp": 1.435,
       "PGV": 50.557,
@@ -2900,6 +2975,7 @@
      {
       "code": "TCU133",
       "repi_km": 48.87,
+      "rhyp_km": null,
       "rrup_km": 42.084,
       "Tp": 0.896,
       "PGV": 34.903,
@@ -3038,6 +3114,7 @@
      {
       "code": "CHY101",
       "repi_km": 49.27,
+      "rhyp_km": null,
       "rrup_km": 35.2,
       "Tp": 2.772,
       "PGV": 34.437,
@@ -3046,6 +3123,7 @@
      {
       "code": "TCU078",
       "repi_km": 17.22,
+      "rhyp_km": null,
       "rrup_km": 11.127,
       "Tp": 4.151,
       "PGV": 40.342,
@@ -3054,6 +3132,7 @@
      {
       "code": "TCU079",
       "repi_km": 11.57,
+      "rhyp_km": null,
       "rrup_km": 10.002,
       "Tp": 0.791,
       "PGV": 49.352,
@@ -3062,6 +3141,7 @@
      {
       "code": "TCU080",
       "repi_km": 8.06,
+      "rhyp_km": null,
       "rrup_km": 10.383,
       "Tp": 1.022,
       "PGV": 36.129,
@@ -3848,6 +3928,7 @@
      {
       "code": "CHY006",
       "repi_km": 40.06,
+      "rhyp_km": null,
       "rrup_km": 9.158,
       "Tp": 2.57,
       "PGV": 60.194,
@@ -3856,6 +3937,7 @@
      {
       "code": "CHY024",
       "repi_km": 23.3,
+      "rhyp_km": null,
       "rrup_km": 8.646,
       "Tp": 6.629,
       "PGV": 51.419,
@@ -3864,6 +3946,7 @@
      {
       "code": "CHY101",
       "repi_km": 31.37,
+      "rhyp_km": null,
       "rrup_km": 9.15,
       "Tp": 5.341,
       "PGV": 108.677,
@@ -3872,6 +3955,7 @@
      {
       "code": "NST",
       "repi_km": 88.78,
+      "rhyp_km": null,
       "rrup_km": 38.544,
       "Tp": 7.875,
       "PGV": 30.86,
@@ -3880,6 +3964,7 @@
      {
       "code": "TCU006",
       "repi_km": 122.44,
+      "rhyp_km": null,
       "rrup_km": 72.634,
       "Tp": 9.149,
       "PGV": 33.764,
@@ -3888,6 +3973,7 @@
      {
       "code": "TCU015",
       "repi_km": 101.53,
+      "rhyp_km": null,
       "rrup_km": 49.865,
       "Tp": 8.232,
       "PGV": 42.779,
@@ -3896,6 +3982,7 @@
      {
       "code": "TCU017",
       "repi_km": 105.2,
+      "rhyp_km": null,
       "rrup_km": 54.397,
       "Tp": 8.925,
       "PGV": 37.595,
@@ -3904,6 +3991,7 @@
      {
       "code": "TCU018",
       "repi_km": 116.95,
+      "rhyp_km": null,
       "rrup_km": 66.314,
       "Tp": 10.479,
       "PGV": 37.577,
@@ -3912,6 +4000,7 @@
      {
       "code": "TCU026",
       "repi_km": 106.13,
+      "rhyp_km": null,
       "rrup_km": 56.184,
       "Tp": 8.372,
       "PGV": 37.872,
@@ -3920,6 +4009,7 @@
      {
       "code": "TCU029",
       "repi_km": 78.94,
+      "rhyp_km": null,
       "rrup_km": 27.655,
       "Tp": 5.271,
       "PGV": 51.708,
@@ -3928,6 +4018,7 @@
      {
       "code": "TCU031",
       "repi_km": 79.66,
+      "rhyp_km": null,
       "rrup_km": 29.543,
       "Tp": 5.929,
       "PGV": 54.046,
@@ -3936,6 +4027,7 @@
      {
       "code": "TCU033",
       "repi_km": 92.82,
+      "rhyp_km": null,
       "rrup_km": 40.695,
       "Tp": 8.974,
       "PGV": 41.55,
@@ -3944,6 +4036,7 @@
      {
       "code": "TCU034",
       "repi_km": 87.74,
+      "rhyp_km": null,
       "rrup_km": 35.611,
       "Tp": 8.869,
       "PGV": 43.212,
@@ -3952,6 +4045,7 @@
      {
       "code": "TCU036",
       "repi_km": 67.39,
+      "rhyp_km": null,
       "rrup_km": 19.331,
       "Tp": 5.383,
       "PGV": 60.257,
@@ -3960,6 +4054,7 @@
      {
       "code": "TCU038",
       "repi_km": 72.81,
+      "rhyp_km": null,
       "rrup_km": 24.999,
       "Tp": 9.576,
       "PGV": 56.907,
@@ -3968,6 +4063,7 @@
      {
       "code": "TCU039",
       "repi_km": 71.19,
+      "rhyp_km": null,
       "rrup_km": 19.483,
       "Tp": 9.331,
       "PGV": 57.278,
@@ -3976,6 +4072,7 @@
      {
       "code": "TCU040",
       "repi_km": 68.66,
+      "rhyp_km": null,
       "rrup_km": 21.484,
       "Tp": 6.412,
       "PGV": 56.601,
@@ -3984,6 +4081,7 @@
      {
       "code": "TCU042",
       "repi_km": 78.13,
+      "rhyp_km": null,
       "rrup_km": 26.059,
       "Tp": 9.856,
       "PGV": 41.645,
@@ -3992,6 +4090,7 @@
      {
       "code": "TCU045",
       "repi_km": 77.38,
+      "rhyp_km": null,
       "rrup_km": 26.06,
       "Tp": 9.331,
       "PGV": 49.635,
@@ -4000,6 +4099,7 @@
      {
       "code": "TCU046",
       "repi_km": 68.64,
+      "rhyp_km": null,
       "rrup_km": 16.595,
       "Tp": 10.402,
       "PGV": 28.918,
@@ -4008,6 +4108,7 @@
      {
       "code": "TCU047",
       "repi_km": 86.31,
+      "rhyp_km": null,
       "rrup_km": 35.095,
       "Tp": 12.313,
       "PGV": 42.224,
@@ -4016,6 +4117,7 @@
      {
       "code": "TCU049",
       "repi_km": 38.4,
+      "rhyp_km": null,
       "rrup_km": 2.794,
       "Tp": 10.22,
       "PGV": 59.389,
@@ -4024,6 +4126,7 @@
      {
       "code": "TCU050",
       "repi_km": 40.92,
+      "rhyp_km": null,
       "rrup_km": 8.681,
       "Tp": null,
       "PGV": 43.431,
@@ -4032,6 +4135,7 @@
      {
       "code": "TCU051",
       "repi_km": 38.11,
+      "rhyp_km": null,
       "rrup_km": 6.829,
       "Tp": 10.381,
       "PGV": 51.336,
@@ -4040,6 +4144,7 @@
      {
       "code": "TCU052",
       "repi_km": 39.14,
+      "rhyp_km": null,
       "rrup_km": 1.04,
       "Tp": 12.292,
       "PGV": 220.622,
@@ -4048,6 +4153,7 @@
      {
       "code": "TCU053",
       "repi_km": 40.61,
+      "rhyp_km": null,
       "rrup_km": 4.933,
       "Tp": 13.118,
       "PGV": 44.304,
@@ -4056,6 +4162,7 @@
      {
       "code": "TCU054",
       "repi_km": 37.1,
+      "rhyp_km": null,
       "rrup_km": 4.283,
       "Tp": 11.837,
       "PGV": 51.269,
@@ -4064,6 +4171,7 @@
      {
       "code": "TCU055",
       "repi_km": 35.28,
+      "rhyp_km": null,
       "rrup_km": 5.284,
       "Tp": null,
       "PGV": 36.327,
@@ -4072,6 +4180,7 @@
      {
       "code": "TCU056",
       "repi_km": 39.04,
+      "rhyp_km": null,
       "rrup_km": 9.484,
       "Tp": 9.03,
       "PGV": 41.148,
@@ -4080,6 +4189,7 @@
      {
       "code": "TCU059",
       "repi_km": 52.77,
+      "rhyp_km": null,
       "rrup_km": 16.256,
       "Tp": 7.784,
       "PGV": 53.844,
@@ -4088,6 +4198,7 @@
      {
       "code": "TCU063",
       "repi_km": 34.92,
+      "rhyp_km": null,
       "rrup_km": 9.069,
       "Tp": 6.552,
       "PGV": 82.262,
@@ -4096,6 +4207,7 @@
      {
       "code": "TCU064",
       "repi_km": 58.64,
+      "rhyp_km": null,
       "rrup_km": 15.701,
       "Tp": 8.456,
       "PGV": 55.674,
@@ -4104,6 +4216,7 @@
      {
       "code": "TCU065",
       "repi_km": 25.97,
+      "rhyp_km": null,
       "rrup_km": 0.176,
       "Tp": 5.74,
       "PGV": 132.557,
@@ -4112,6 +4225,7 @@
      {
       "code": "TCU067",
       "repi_km": 28.27,
+      "rhyp_km": null,
       "rrup_km": 0.107,
       "Tp": null,
       "PGV": 97.56,
@@ -4120,6 +4234,7 @@
      {
       "code": "TCU068",
       "repi_km": 47.61,
+      "rhyp_km": null,
       "rrup_km": 0.429,
       "Tp": 12.285,
       "PGV": 305.719,
@@ -4128,6 +4243,7 @@
      {
       "code": "TCU071",
       "repi_km": 15.11,
+      "rhyp_km": null,
       "rrup_km": 4.728,
       "Tp": null,
       "PGV": 51.631,
@@ -4136,6 +4252,7 @@
      {
       "code": "TCU075",
       "repi_km": 19.87,
+      "rhyp_km": null,
       "rrup_km": 0.067,
       "Tp": 4.984,
       "PGV": 116.413,
@@ -4144,6 +4261,7 @@
      {
       "code": "TCU076",
       "repi_km": 15.23,
+      "rhyp_km": null,
       "rrup_km": 1.953,
       "Tp": 4.081,
       "PGV": 65.219,
@@ -4152,6 +4270,7 @@
      {
       "code": "TCU081",
       "repi_km": 110.55,
+      "rhyp_km": null,
       "rrup_km": 59.485,
       "Tp": 9.618,
       "PGV": 41.31,
@@ -4160,6 +4279,7 @@
      {
       "code": "TCU082",
       "repi_km": 35.65,
+      "rhyp_km": null,
       "rrup_km": 4.325,
       "Tp": 8.099,
       "PGV": 51.504,
@@ -4168,6 +4288,7 @@
      {
       "code": "TCU087",
       "repi_km": 55.35,
+      "rhyp_km": null,
       "rrup_km": 6.215,
       "Tp": 10.395,
       "PGV": 45.184,
@@ -4176,6 +4297,7 @@
      {
       "code": "TCU094",
       "repi_km": 104.78,
+      "rhyp_km": null,
       "rrup_km": 54.568,
       "Tp": 8.589,
       "PGV": 37.709,
@@ -4184,6 +4306,7 @@
      {
       "code": "TCU095",
       "repi_km": 95.45,
+      "rhyp_km": null,
       "rrup_km": 45.076,
       "Tp": 8.687,
       "PGV": 57.994,
@@ -4192,6 +4315,7 @@
      {
       "code": "TCU096",
       "repi_km": 105.82,
+      "rhyp_km": null,
       "rrup_km": 54.29,
       "Tp": 8.456,
       "PGV": 26.441,
@@ -4200,6 +4324,7 @@
      {
       "code": "TCU098",
       "repi_km": 99.58,
+      "rhyp_km": null,
       "rrup_km": 47.612,
       "Tp": 9.485,
       "PGV": 44.222,
@@ -4208,6 +4333,7 @@
      {
       "code": "TCU100",
       "repi_km": 42.07,
+      "rhyp_km": null,
       "rrup_km": 10.38,
       "Tp": null,
       "PGV": 41.826,
@@ -4216,6 +4342,7 @@
      {
       "code": "TCU101",
       "repi_km": 44.53,
+      "rhyp_km": null,
       "rrup_km": 1.244,
       "Tp": 10.318,
       "PGV": 76.814,
@@ -4224,6 +4351,7 @@
      {
       "code": "TCU102",
       "repi_km": 45.11,
+      "rhyp_km": null,
       "rrup_km": 0.666,
       "Tp": 9.646,
       "PGV": 87.717,
@@ -4232,6 +4360,7 @@
      {
       "code": "TCU103",
       "repi_km": 51.98,
+      "rhyp_km": null,
       "rrup_km": 5.28,
       "Tp": 8.687,
       "PGV": 68.589,
@@ -4240,6 +4369,7 @@
      {
       "code": "TCU104",
       "repi_km": 48.8,
+      "rhyp_km": null,
       "rrup_km": 12.1,
       "Tp": 7.189,
       "PGV": 48.777,
@@ -4248,6 +4378,7 @@
      {
       "code": "TCU128",
       "repi_km": 62.98,
+      "rhyp_km": null,
       "rrup_km": 12.468,
       "Tp": 9.044,
       "PGV": 62.641,
@@ -4256,6 +4387,7 @@
      {
       "code": "TCU129",
       "repi_km": 13.3,
+      "rhyp_km": null,
       "rrup_km": 0.99,
       "Tp": 8.127,
       "PGV": 68.899,
@@ -4264,6 +4396,7 @@
      {
       "code": "TCU133",
       "repi_km": 35.58,
+      "rhyp_km": null,
       "rrup_km": 6.854,
       "Tp": 7.403,
       "PGV": 81.422,
@@ -4272,6 +4405,7 @@
      {
       "code": "TCU136",
       "repi_km": 48.27,
+      "rhyp_km": null,
       "rrup_km": 7.528,
       "Tp": 8.882,
       "PGV": 53.161,
@@ -4280,6 +4414,7 @@
      {
       "code": "TCU137",
       "repi_km": 38.73,
+      "rhyp_km": null,
       "rrup_km": 7.872,
       "Tp": 15.081,
       "PGV": 82.099,
@@ -4511,6 +4646,7 @@
      {
       "code": "CHY006",
       "repi_km": 12.49,
+      "rhyp_km": null,
       "rrup_km": 14.084,
       "Tp": 0.722,
       "PGV": 27.174,
@@ -4519,6 +4655,7 @@
      {
       "code": "CHY009",
       "repi_km": 7.19,
+      "rhyp_km": null,
       "rrup_km": 7.418,
       "Tp": 1.187,
       "PGV": 39.615,
@@ -4527,6 +4664,7 @@
      {
       "code": "CHY010",
       "repi_km": 12.78,
+      "rhyp_km": null,
       "rrup_km": 16.384,
       "Tp": 0.577,
       "PGV": 42.148,
@@ -4535,6 +4673,7 @@
      {
       "code": "CHY034",
       "repi_km": 10.43,
+      "rhyp_km": null,
       "rrup_km": 14.408,
       "Tp": 1.35,
       "PGV": 39.404,
@@ -4543,6 +4682,7 @@
      {
       "code": "CHY036",
       "repi_km": 9.27,
+      "rhyp_km": null,
       "rrup_km": 9.498,
       "Tp": 1.099,
       "PGV": 26.007,
@@ -4551,6 +4691,7 @@
      {
       "code": "CHY037",
       "repi_km": 3.56,
+      "rhyp_km": null,
       "rrup_km": 7.352,
       "Tp": 1.204,
       "PGV": 43.624,
@@ -4559,6 +4700,7 @@
      {
       "code": "CHY038",
       "repi_km": 0.76,
+      "rhyp_km": null,
       "rrup_km": 7.768,
       "Tp": 0.734,
       "PGV": 41.713,
@@ -4567,6 +4709,7 @@
      {
       "code": "CHY046",
       "repi_km": 6.35,
+      "rhyp_km": null,
       "rrup_km": 9.697,
       "Tp": 1.463,
       "PGV": 31.497,
@@ -4575,6 +4718,7 @@
      {
       "code": "CHY047",
       "repi_km": 3.98,
+      "rhyp_km": null,
       "rrup_km": 8.403,
       "Tp": 0.694,
       "PGV": 35.501,
@@ -4583,6 +4727,7 @@
      {
       "code": "CHY073",
       "repi_km": 4.09,
+      "rhyp_km": null,
       "rrup_km": 7.549,
       "Tp": 1.127,
       "PGV": 49.02,
@@ -4591,6 +4736,7 @@
      {
       "code": "CHY106",
       "repi_km": 10.96,
+      "rhyp_km": null,
       "rrup_km": 8.71,
       "Tp": 1.445,
       "PGV": 41.607,
@@ -4768,6 +4914,7 @@
      {
       "code": "CHY008",
       "repi_km": 16.57,
+      "rhyp_km": null,
       "rrup_km": 18.481,
       "Tp": 1.014,
       "PGV": 25.246,
@@ -4776,6 +4923,7 @@
      {
       "code": "CHY009",
       "repi_km": 6.88,
+      "rhyp_km": null,
       "rrup_km": 15.452,
       "Tp": 0.918,
       "PGV": 23.165,
@@ -4784,6 +4932,7 @@
      {
       "code": "CHY013",
       "repi_km": 25.37,
+      "rhyp_km": null,
       "rrup_km": 26.8,
       "Tp": 0.834,
       "PGV": 26.49,
@@ -4792,6 +4941,7 @@
      {
       "code": "CHY032",
       "repi_km": 14.02,
+      "rhyp_km": null,
       "rrup_km": 19.698,
       "Tp": 1.176,
       "PGV": 18.653,
@@ -4800,6 +4950,7 @@
      {
       "code": "CHY039",
       "repi_km": 8.26,
+      "rhyp_km": null,
       "rrup_km": 15.923,
       "Tp": 1.022,
       "PGV": 24.55,
@@ -4808,6 +4959,7 @@
      {
       "code": "CHY095",
       "repi_km": 13.33,
+      "rhyp_km": null,
       "rrup_km": 18.007,
       "Tp": 0.997,
       "PGV": 24.733,
@@ -4816,6 +4968,7 @@
      {
       "code": "CHY106",
       "repi_km": 10.89,
+      "rhyp_km": null,
       "rrup_km": 12.958,
       "Tp": 1.014,
       "PGV": 27.006,
@@ -4873,6 +5026,7 @@
      {
       "code": "CHY074",
       "repi_km": 10.22,
+      "rhyp_km": null,
       "rrup_km": 5.614,
       "Tp": 2.436,
       "PGV": 43.517,
@@ -4985,6 +5139,7 @@
      {
       "code": "Bolu",
       "repi_km": 41.24,
+      "rhyp_km": null,
       "rrup_km": 12.04,
       "Tp": 0.882,
       "PGV": 65.936,
@@ -4993,6 +5148,7 @@
      {
       "code": "IRIGM 487",
       "repi_km": 22.74,
+      "rhyp_km": null,
       "rrup_km": 2.65,
       "Tp": 10.052,
       "PGV": 38.95,
@@ -5149,6 +5305,7 @@
      {
       "code": "HWA011",
       "repi_km": 70.38,
+      "rhyp_km": null,
       "rrup_km": 65.466,
       "Tp": 1.82,
       "PGV": 24.17,
@@ -5157,6 +5314,7 @@
      {
       "code": "HWA033",
       "repi_km": 41.13,
+      "rhyp_km": null,
       "rrup_km": 50.002,
       "Tp": 2.289,
       "PGV": 29.963,
@@ -5165,6 +5323,7 @@
      {
       "code": "HWA049",
       "repi_km": 70.65,
+      "rhyp_km": null,
       "rrup_km": 66.087,
       "Tp": 1.758,
       "PGV": 23.042,
@@ -5173,6 +5332,7 @@
      {
       "code": "HWA051",
       "repi_km": 57.18,
+      "rhyp_km": null,
       "rrup_km": 56.635,
       "Tp": 1.21,
       "PGV": 36.355,
@@ -5181,6 +5341,7 @@
      {
       "code": "HWA055",
       "repi_km": 36.43,
+      "rhyp_km": null,
       "rrup_km": 44.864,
       "Tp": 2.106,
       "PGV": 23.41,
@@ -5189,6 +5350,7 @@
      {
       "code": "HWA059",
       "repi_km": 58.92,
+      "rhyp_km": null,
       "rrup_km": 58.751,
       "Tp": 1.351,
       "PGV": 28.888,
@@ -5335,6 +5497,7 @@
      {
       "code": "Arcelik",
       "repi_km": 53.64,
+      "rhyp_km": null,
       "rrup_km": 13.49,
       "Tp": 7.791,
       "PGV": 40.076,
@@ -5343,6 +5506,7 @@
      {
       "code": "Gebze",
       "repi_km": 46.99,
+      "rhyp_km": null,
       "rrup_km": 10.92,
       "Tp": 5.992,
       "PGV": 44.606,
@@ -5351,6 +5515,7 @@
      {
       "code": "Izmit",
       "repi_km": 5.31,
+      "rhyp_km": null,
       "rrup_km": 7.21,
       "Tp": 5.369,
       "PGV": 38.28,
@@ -5359,6 +5524,7 @@
      {
       "code": "Yarimca",
       "repi_km": 19.29,
+      "rhyp_km": null,
       "rrup_km": 4.83,
       "Tp": 4.949,
       "PGV": 71.894,
@@ -5452,6 +5618,7 @@
      {
       "code": "TTR008",
       "repi_km": 16.5,
+      "rhyp_km": null,
       "rrup_km": 6.88,
       "Tp": 1.54,
       "PGV": 54.24,
@@ -5543,6 +5710,7 @@
      {
       "code": "CHY014",
       "repi_km": 6.93,
+      "rhyp_km": null,
       "rrup_km": 6.69,
       "Tp": 0.638,
       "PGV": 26.241,
@@ -5600,6 +5768,7 @@
      {
       "code": "TAPS Pump Station 10",
       "repi_km": 84.36,
+      "rhyp_km": null,
       "rrup_km": 2.74,
       "Tp": 3.157,
       "PGV": 115.734,
@@ -5844,6 +6013,7 @@
      {
       "code": "ILA027",
       "repi_km": 71.7,
+      "rhyp_km": null,
       "rrup_km": 73.768,
       "Tp": 2.1,
       "PGV": 29.691,
@@ -5852,6 +6022,7 @@
      {
       "code": "ILA028",
       "repi_km": 78.33,
+      "rhyp_km": null,
       "rrup_km": 79.337,
       "Tp": 1.456,
       "PGV": 36.626,
@@ -5860,6 +6031,7 @@
      {
       "code": "ILA038",
       "repi_km": 75.82,
+      "rhyp_km": null,
       "rrup_km": 77.308,
       "Tp": 2.1,
       "PGV": 26.89,
@@ -5868,6 +6040,7 @@
      {
       "code": "ILA040",
       "repi_km": 77.84,
+      "rhyp_km": null,
       "rrup_km": 78.676,
       "Tp": 1.613,
       "PGV": 37.752,
@@ -5876,6 +6049,7 @@
      {
       "code": "ILA049",
       "repi_km": 79.21,
+      "rhyp_km": null,
       "rrup_km": 80.07,
       "Tp": 1.477,
       "PGV": 27.385,
@@ -5884,6 +6058,7 @@
      {
       "code": "TAP013",
       "repi_km": 118.73,
+      "rhyp_km": null,
       "rrup_km": 116.341,
       "Tp": 3.024,
       "PGV": 23.391,
@@ -5892,6 +6067,7 @@
      {
       "code": "TAP017",
       "repi_km": 122.75,
+      "rhyp_km": null,
       "rrup_km": 120.363,
       "Tp": 3.507,
       "PGV": 27.446,
@@ -5900,6 +6076,7 @@
      {
       "code": "TAP020",
       "repi_km": 116.95,
+      "rhyp_km": null,
       "rrup_km": 114.671,
       "Tp": 2.863,
       "PGV": 32.099,
@@ -5908,6 +6085,7 @@
      {
       "code": "TAP037",
       "repi_km": 122.08,
+      "rhyp_km": null,
       "rrup_km": 119.804,
       "Tp": 3.171,
       "PGV": 24.486,
@@ -5916,6 +6094,7 @@
      {
       "code": "TAP040",
       "repi_km": 134.61,
+      "rhyp_km": null,
       "rrup_km": 131.425,
       "Tp": 3.521,
       "PGV": 21.614,
@@ -5924,6 +6103,7 @@
      {
       "code": "TAP041",
       "repi_km": 136.41,
+      "rhyp_km": null,
       "rrup_km": 133.177,
       "Tp": 3.934,
       "PGV": 24.276,
@@ -5932,6 +6112,7 @@
      {
       "code": "TAP100",
       "repi_km": 117.39,
+      "rhyp_km": null,
       "rrup_km": 115.131,
       "Tp": 2.772,
       "PGV": 24.748,
@@ -6023,6 +6204,7 @@
      {
       "code": "Bam",
       "repi_km": 12.58,
+      "rhyp_km": null,
       "rrup_km": 1.7,
       "Tp": 2.023,
       "PGV": 124.145,
@@ -6135,6 +6317,7 @@
      {
       "code": "NIG021",
       "repi_km": 21.5,
+      "rhyp_km": null,
       "rrup_km": 11.26,
       "Tp": 0.322,
       "PGV": 54.547,
@@ -6143,6 +6326,7 @@
      {
       "code": "NIGH11",
       "repi_km": 17.3,
+      "rhyp_km": null,
       "rrup_km": 8.93,
       "Tp": 1.799,
       "PGV": 58.146,
@@ -6372,6 +6556,7 @@
      {
       "code": "Parkfield - Cholame 1E",
       "repi_km": 11.43,
+      "rhyp_km": null,
       "rrup_km": 3.0,
       "Tp": 1.33,
       "PGV": 40.187,
@@ -6380,6 +6565,7 @@
      {
       "code": "Parkfield - Cholame 2WA",
       "repi_km": 11.53,
+      "rhyp_km": null,
       "rrup_km": 3.01,
       "Tp": 1.078,
       "PGV": 63.967,
@@ -6388,6 +6574,7 @@
      {
       "code": "Parkfield - Cholame 3E",
       "repi_km": 11.86,
+      "rhyp_km": null,
       "rrup_km": 5.55,
       "Tp": 0.518,
       "PGV": 27.789,
@@ -6396,6 +6583,7 @@
      {
       "code": "Parkfield - Cholame 3W",
       "repi_km": 12.16,
+      "rhyp_km": null,
       "rrup_km": 3.63,
       "Tp": 1.022,
       "PGV": 37.83,
@@ -6404,6 +6592,7 @@
      {
       "code": "Parkfield - Cholame 4W",
       "repi_km": 12.31,
+      "rhyp_km": null,
       "rrup_km": 4.23,
       "Tp": 0.7,
       "PGV": 32.343,
@@ -6412,6 +6601,7 @@
      {
       "code": "PARKFIELD - EADES",
       "repi_km": 9.94,
+      "rhyp_km": null,
       "rrup_km": 2.85,
       "Tp": 1.218,
       "PGV": 26.85,
@@ -6420,6 +6610,7 @@
      {
       "code": "Parkfield - Fault Zone 1",
       "repi_km": 8.39,
+      "rhyp_km": null,
       "rrup_km": 2.51,
       "Tp": 1.19,
       "PGV": 81.398,
@@ -6428,6 +6619,7 @@
      {
       "code": "Parkfield - Fault Zone 12",
       "repi_km": 10.99,
+      "rhyp_km": null,
       "rrup_km": 2.65,
       "Tp": 1.19,
       "PGV": 46.902,
@@ -6436,6 +6628,7 @@
      {
       "code": "Parkfield - Fault Zone 9",
       "repi_km": 9.98,
+      "rhyp_km": null,
       "rrup_km": 2.85,
       "Tp": 1.134,
       "PGV": 23.92,
@@ -6444,6 +6637,7 @@
      {
       "code": "Parkfield - Stone Corral 1E",
       "repi_km": 7.17,
+      "rhyp_km": null,
       "rrup_km": 3.79,
       "Tp": 0.574,
       "PGV": 39.859,
@@ -6452,6 +6646,7 @@
      {
       "code": "Slack Canyon",
       "repi_km": 31.51,
+      "rhyp_km": null,
       "rrup_km": 2.99,
       "Tp": 0.854,
       "PGV": 53.183,
@@ -6543,6 +6738,7 @@
      {
       "code": "TTN045",
       "repi_km": 35.16,
+      "rhyp_km": null,
       "rrup_km": 28.52,
       "Tp": 2.261,
       "PGV": 23.316,
@@ -6655,6 +6851,7 @@
      {
       "code": "ILA027",
       "repi_km": 5.9,
+      "rhyp_km": null,
       "rrup_km": 8.748,
       "Tp": 1.085,
       "PGV": 23.805,
@@ -6663,6 +6860,7 @@
      {
       "code": "ILA038",
       "repi_km": 9.88,
+      "rhyp_km": null,
       "rrup_km": 11.277,
       "Tp": 1.218,
       "PGV": 22.162,
@@ -6754,6 +6952,7 @@
      {
       "code": "KAU046",
       "repi_km": 22.39,
+      "rhyp_km": null,
       "rrup_km": 40.848,
       "Tp": 2.1,
       "PGV": 38.87,
@@ -6871,6 +7070,7 @@
      {
       "code": "KAU046",
       "repi_km": 35.23,
+      "rhyp_km": null,
       "rrup_km": 34.816,
       "Tp": 2.037,
       "PGV": 34.176,
@@ -6879,6 +7079,7 @@
      {
       "code": "KAU081",
       "repi_km": 35.14,
+      "rhyp_km": null,
       "rrup_km": 34.978,
       "Tp": 2.023,
       "PGV": 35.154,
@@ -6887,6 +7088,7 @@
      {
       "code": "KAU082",
       "repi_km": 35.16,
+      "rhyp_km": null,
       "rrup_km": 31.884,
       "Tp": 2.401,
       "PGV": 39.775,
@@ -7051,6 +7253,7 @@
      {
       "code": "TTN011",
       "repi_km": 12.41,
+      "rhyp_km": null,
       "rrup_km": 11.115,
       "Tp": 1.176,
       "PGV": 49.392,
@@ -7059,6 +7262,7 @@
      {
       "code": "TTN012",
       "repi_km": 15.2,
+      "rhyp_km": null,
       "rrup_km": 12.358,
       "Tp": 0.945,
       "PGV": 35.007,
@@ -7067,6 +7271,7 @@
      {
       "code": "TTN027",
       "repi_km": 8.71,
+      "rhyp_km": null,
       "rrup_km": 9.104,
       "Tp": 1.274,
       "PGV": 56.862,
@@ -7075,6 +7280,7 @@
      {
       "code": "TTN048",
       "repi_km": 12.4,
+      "rhyp_km": null,
       "rrup_km": 12.711,
       "Tp": 1.554,
       "PGV": 63.103,
@@ -7083,6 +7289,7 @@
      {
       "code": "TTN049",
       "repi_km": 17.29,
+      "rhyp_km": null,
       "rrup_km": 16.663,
       "Tp": 2.142,
       "PGV": 33.932,
@@ -7091,6 +7298,7 @@
      {
       "code": "TTN054",
       "repi_km": 15.33,
+      "rhyp_km": null,
       "rrup_km": 12.161,
       "Tp": 0.868,
       "PGV": 50.514,
@@ -7182,6 +7390,7 @@
      {
       "code": "Joetsu Kakizakiku Kakizaki",
       "repi_km": 35.41,
+      "rhyp_km": null,
       "rrup_km": 11.94,
       "Tp": 1.4,
       "PGV": 89.153,
@@ -7273,6 +7482,7 @@
      {
       "code": "TTN048",
       "repi_km": 14.34,
+      "rhyp_km": null,
       "rrup_km": 13.601,
       "Tp": 0.805,
       "PGV": 24.483,
@@ -7416,6 +7626,7 @@
      {
       "code": "HWA015",
       "repi_km": 21.6,
+      "rhyp_km": null,
       "rrup_km": 37.69,
       "Tp": 1.631,
       "PGV": 34.972,
@@ -7424,6 +7635,7 @@
      {
       "code": "HWA016",
       "repi_km": 20.37,
+      "rhyp_km": null,
       "rrup_km": 37.212,
       "Tp": 1.925,
       "PGV": 29.249,
@@ -7432,6 +7644,7 @@
      {
       "code": "HWA027",
       "repi_km": 28.96,
+      "rhyp_km": null,
       "rrup_km": 41.092,
       "Tp": 1.435,
       "PGV": 25.448,
@@ -7440,6 +7653,7 @@
      {
       "code": "HWA028",
       "repi_km": 24.45,
+      "rhyp_km": null,
       "rrup_km": 38.814,
       "Tp": 1.568,
       "PGV": 23.739,
@@ -7448,6 +7662,7 @@
      {
       "code": "HWA048",
       "repi_km": 24.69,
+      "rhyp_km": null,
       "rrup_km": 38.945,
       "Tp": 1.47,
       "PGV": 36.183,
@@ -7456,6 +7671,7 @@
      {
       "code": "HWA050",
       "repi_km": 22.07,
+      "rhyp_km": null,
       "rrup_km": 37.798,
       "Tp": 1.834,
       "PGV": 38.478,
@@ -7464,6 +7680,7 @@
      {
       "code": "HWA061",
       "repi_km": 24.82,
+      "rhyp_km": null,
       "rrup_km": 38.991,
       "Tp": 1.645,
       "PGV": 24.82,
@@ -7581,6 +7798,7 @@
      {
       "code": "L'Aquila - Parking",
       "repi_km": 1.75,
+      "rhyp_km": null,
       "rrup_km": 5.38,
       "Tp": 1.981,
       "PGV": 36.427,
@@ -7589,6 +7807,7 @@
      {
       "code": "L'Aquila - V. Aterno - Centro Valle",
       "repi_km": 4.41,
+      "rhyp_km": null,
       "rrup_km": 6.27,
       "Tp": 1.071,
       "PGV": 42.856,
@@ -7597,6 +7816,7 @@
      {
       "code": "L'Aquila - V. Aterno -F. Aterno",
       "repi_km": 4.62,
+      "rhyp_km": null,
       "rrup_km": 6.55,
       "Tp": 1.176,
       "PGV": 32.064,
@@ -7709,6 +7929,7 @@
      {
       "code": "TCU079",
       "repi_km": 18.52,
+      "rhyp_km": null,
       "rrup_km": 16.829,
       "Tp": 0.805,
       "PGV": 20.039,
@@ -7717,6 +7938,7 @@
      {
       "code": "TCU124",
       "repi_km": 14.49,
+      "rhyp_km": null,
       "rrup_km": 23.785,
       "Tp": 0.602,
       "PGV": 20.211,
@@ -7988,6 +8210,7 @@
      {
       "code": "Christchurch Botanical Gardens",
       "repi_km": 46.91,
+      "rhyp_km": null,
       "rrup_km": 18.05,
       "Tp": 12.621,
       "PGV": 60.622,
@@ -7996,6 +8219,7 @@
      {
       "code": "Christchurch Resthaven",
       "repi_km": 48.29,
+      "rhyp_km": null,
       "rrup_km": 19.48,
       "Tp": 12.019,
       "PGV": 62.179,
@@ -8004,6 +8228,7 @@
      {
       "code": "DSLC",
       "repi_km": 13.4,
+      "rhyp_km": null,
       "rrup_km": 8.46,
       "Tp": 7.826,
       "PGV": 67.282,
@@ -8012,6 +8237,7 @@
      {
       "code": "GDLC",
       "repi_km": 4.42,
+      "rhyp_km": null,
       "rrup_km": 1.22,
       "Tp": 6.23,
       "PGV": 116.124,
@@ -8020,6 +8246,7 @@
      {
       "code": "HORC",
       "repi_km": 10.9,
+      "rhyp_km": null,
       "rrup_km": 7.29,
       "Tp": 9.919,
       "PGV": 105.982,
@@ -8028,6 +8255,7 @@
      {
       "code": "LINC",
       "repi_km": 33.74,
+      "rhyp_km": null,
       "rrup_km": 7.11,
       "Tp": 7.371,
       "PGV": 108.806,
@@ -8036,6 +8264,7 @@
      {
       "code": "LPCC",
       "repi_km": 54.22,
+      "rhyp_km": null,
       "rrup_km": 25.67,
       "Tp": 10.633,
       "PGV": 30.305,
@@ -8044,6 +8273,7 @@
      {
       "code": "NNBS North New Brighton School",
       "repi_km": 55.47,
+      "rhyp_km": null,
       "rrup_km": 26.76,
       "Tp": 8.043,
       "PGV": 56.521,
@@ -8052,6 +8282,7 @@
      {
       "code": "Riccarton High School",
       "repi_km": 42.43,
+      "rhyp_km": null,
       "rrup_km": 13.64,
       "Tp": 9.394,
       "PGV": 62.722,
@@ -8060,6 +8291,7 @@
      {
       "code": "ROLC",
       "repi_km": 26.83,
+      "rhyp_km": null,
       "rrup_km": 1.54,
       "Tp": 7.14,
       "PGV": 85.754,
@@ -8068,6 +8300,7 @@
      {
       "code": "Shirley Library",
       "repi_km": 50.99,
+      "rhyp_km": null,
       "rrup_km": 22.33,
       "Tp": 8.757,
       "PGV": 57.837,
@@ -8076,6 +8309,7 @@
      {
       "code": "Styx Mill Transfer Station",
       "repi_km": 48.4,
+      "rhyp_km": null,
       "rrup_km": 20.86,
       "Tp": 9.352,
       "PGV": 60.162,
@@ -8084,6 +8318,7 @@
      {
       "code": "TPLC",
       "repi_km": 34.77,
+      "rhyp_km": null,
       "rrup_km": 6.11,
       "Tp": 8.932,
       "PGV": 76.333,
@@ -8188,6 +8423,7 @@
      {
       "code": "El Centro Array 12",
       "repi_km": 58.0,
+      "rhyp_km": null,
       "rrup_km": 11.26,
       "Tp": 8.722,
       "PGV": 72.612,
@@ -8196,6 +8432,7 @@
      {
       "code": "Westside Elementary School",
       "repi_km": 67.1,
+      "rhyp_km": null,
       "rrup_km": 11.44,
       "Tp": 7.084,
       "PGV": 55.314,
@@ -8579,6 +8816,7 @@
      {
       "code": "CHY008",
       "repi_km": 72.81,
+      "rhyp_km": null,
       "rrup_km": 50.913,
       "Tp": 1.379,
       "PGV": 22.958,
@@ -8587,6 +8825,7 @@
      {
       "code": "CHY016",
       "repi_km": 64.07,
+      "rhyp_km": null,
       "rrup_km": 32.506,
       "Tp": 2.051,
       "PGV": 30.348,
@@ -8595,6 +8834,7 @@
      {
       "code": "CHY017",
       "repi_km": 53.32,
+      "rhyp_km": null,
       "rrup_km": 24.775,
       "Tp": 1.855,
       "PGV": 36.831,
@@ -8603,6 +8843,7 @@
      {
       "code": "CHY044",
       "repi_km": 72.59,
+      "rhyp_km": null,
       "rrup_km": 46.147,
       "Tp": 1.176,
       "PGV": 38.718,
@@ -8611,6 +8852,7 @@
      {
       "code": "CHY049",
       "repi_km": 56.91,
+      "rhyp_km": null,
       "rrup_km": 35.81,
       "Tp": 1.512,
       "PGV": 34.374,
@@ -8619,6 +8861,7 @@
      {
       "code": "CHY055",
       "repi_km": 56.57,
+      "rhyp_km": null,
       "rrup_km": 30.038,
       "Tp": 1.736,
       "PGV": 32.561,
@@ -8627,6 +8870,7 @@
      {
       "code": "CHY056",
       "repi_km": 68.28,
+      "rhyp_km": null,
       "rrup_km": 37.542,
       "Tp": 1.981,
       "PGV": 25.943,
@@ -8635,6 +8879,7 @@
      {
       "code": "CHY058",
       "repi_km": 46.57,
+      "rhyp_km": null,
       "rrup_km": 18.227,
       "Tp": 1.113,
       "PGV": 49.885,
@@ -8643,6 +8888,7 @@
      {
       "code": "CHY059",
       "repi_km": 67.39,
+      "rhyp_km": null,
       "rrup_km": 34.125,
       "Tp": 1.498,
       "PGV": 25.043,
@@ -8651,6 +8897,7 @@
      {
       "code": "CHY063",
       "repi_km": 39.45,
+      "rhyp_km": null,
       "rrup_km": 4.806,
       "Tp": 1.155,
       "PGV": 61.765,
@@ -8659,6 +8906,7 @@
      {
       "code": "CHY089",
       "repi_km": 39.11,
+      "rhyp_km": null,
       "rrup_km": 7.24,
       "Tp": 2.38,
       "PGV": 36.218,
@@ -8667,6 +8915,7 @@
      {
       "code": "CHY095",
       "repi_km": 67.02,
+      "rhyp_km": null,
       "rrup_km": 46.047,
       "Tp": 1.484,
       "PGV": 25.165,
@@ -8675,6 +8924,7 @@
      {
       "code": "CHY107",
       "repi_km": 56.66,
+      "rhyp_km": null,
       "rrup_km": 31.794,
       "Tp": 1.862,
       "PGV": 32.658,
@@ -8683,6 +8933,7 @@
      {
       "code": "CHY113",
       "repi_km": 72.16,
+      "rhyp_km": null,
       "rrup_km": 47.687,
       "Tp": 1.148,
       "PGV": 36.389,
@@ -8691,6 +8942,7 @@
      {
       "code": "CHY115",
       "repi_km": 68.66,
+      "rhyp_km": null,
       "rrup_km": 34.501,
       "Tp": 1.568,
       "PGV": 22.388,
@@ -8699,6 +8951,7 @@
      {
       "code": "CHY122",
       "repi_km": 57.66,
+      "rhyp_km": null,
       "rrup_km": 33.795,
       "Tp": 1.708,
       "PGV": 32.353,
@@ -8707,6 +8960,7 @@
      {
       "code": "CHY123",
       "repi_km": 75.33,
+      "rhyp_km": null,
       "rrup_km": 52.574,
       "Tp": 1.162,
       "PGV": 26.652,
@@ -8715,6 +8969,7 @@
      {
       "code": "CHY128",
       "repi_km": 49.74,
+      "rhyp_km": null,
       "rrup_km": 28.142,
       "Tp": 2.989,
       "PGV": 35.753,
@@ -8723,6 +8978,7 @@
      {
       "code": "CHY129",
       "repi_km": 60.85,
+      "rhyp_km": null,
       "rrup_km": 33.986,
       "Tp": 1.806,
       "PGV": 32.187,
@@ -8731,6 +8987,7 @@
      {
       "code": "CHY131",
       "repi_km": 40.99,
+      "rhyp_km": null,
       "rrup_km": 11.535,
       "Tp": 2.891,
       "PGV": 31.088,
@@ -8739,6 +8996,7 @@
      {
       "code": "CHY134",
       "repi_km": 66.21,
+      "rhyp_km": null,
       "rrup_km": 40.275,
       "Tp": 1.372,
       "PGV": 30.001,
@@ -8851,6 +9109,7 @@
      {
       "code": "Christchurch Resthaven",
       "repi_km": 7.6,
+      "rhyp_km": null,
       "rrup_km": 5.13,
       "Tp": 1.554,
       "PGV": 86.572,
@@ -8859,6 +9118,7 @@
      {
       "code": "Pages Road Pumping Station",
       "repi_km": 4.89,
+      "rhyp_km": null,
       "rrup_km": 1.98,
       "Tp": 4.823,
       "PGV": 96.657,
@@ -9023,6 +9283,7 @@
      {
       "code": "TCU065",
       "repi_km": 39.91,
+      "rhyp_km": null,
       "rrup_km": 29.757,
       "Tp": 1.876,
       "PGV": 21.44,
@@ -9031,6 +9292,7 @@
      {
       "code": "TCU077",
       "repi_km": 28.29,
+      "rhyp_km": null,
       "rrup_km": 22.296,
       "Tp": 1.169,
       "PGV": 27.337,
@@ -9039,6 +9301,7 @@
      {
       "code": "TCU084",
       "repi_km": 14.94,
+      "rhyp_km": null,
       "rrup_km": 14.908,
       "Tp": 1.148,
       "PGV": 31.748,
@@ -9047,6 +9310,7 @@
      {
       "code": "TCU124",
       "repi_km": 36.82,
+      "rhyp_km": null,
       "rrup_km": 29.404,
       "Tp": 0.868,
       "PGV": 25.346,
@@ -9055,6 +9319,7 @@
      {
       "code": "TCU125",
       "repi_km": 37.38,
+      "rhyp_km": null,
       "rrup_km": 29.179,
       "Tp": 0.903,
       "PGV": 34.675,
@@ -9063,6 +9328,7 @@
      {
       "code": "TCU143",
       "repi_km": 29.62,
+      "rhyp_km": null,
       "rrup_km": 23.626,
       "Tp": 1.274,
       "PGV": 61.593,
@@ -9222,6 +9488,7 @@
      {
       "code": "CHY083",
       "repi_km": 42.51,
+      "rhyp_km": null,
       "rrup_km": 27.398,
       "Tp": 1.778,
       "PGV": 40.19,
@@ -9230,6 +9497,7 @@
      {
       "code": "TCU074",
       "repi_km": 11.47,
+      "rhyp_km": null,
       "rrup_km": 13.389,
       "Tp": 0.917,
       "PGV": 31.171,
@@ -9238,6 +9506,7 @@
      {
       "code": "TCU077",
       "repi_km": 19.52,
+      "rhyp_km": null,
       "rrup_km": 9.343,
       "Tp": 1.876,
       "PGV": 39.685,
@@ -9246,6 +9515,7 @@
      {
       "code": "TCU126",
       "repi_km": 31.33,
+      "rhyp_km": null,
       "rrup_km": 17.531,
       "Tp": 1.113,
       "PGV": 35.407,
@@ -9254,6 +9524,7 @@
      {
       "code": "TCU167",
       "repi_km": 30.19,
+      "rhyp_km": null,
       "rrup_km": 14.518,
       "Tp": 1.19,
       "PGV": 59.736,
@@ -9384,6 +9655,7 @@
      {
       "code": "HWA005",
       "repi_km": 13.05,
+      "rhyp_km": null,
       "rrup_km": 7.732,
       "Tp": 2.072,
       "PGV": 40.271,
@@ -9392,6 +9664,7 @@
      {
       "code": "HWA006",
       "repi_km": 13.95,
+      "rhyp_km": null,
       "rrup_km": 7.945,
       "Tp": 1.162,
       "PGV": 27.97,
@@ -9400,6 +9673,7 @@
      {
       "code": "HWA030",
       "repi_km": 26.5,
+      "rhyp_km": null,
       "rrup_km": 11.158,
       "Tp": 1.12,
       "PGV": 23.39,
@@ -9408,6 +9682,7 @@
      {
       "code": "HWA032",
       "repi_km": 17.32,
+      "rhyp_km": null,
       "rrup_km": 9.203,
       "Tp": 1.841,
       "PGV": 33.927,
@@ -9416,6 +9691,7 @@
      {
       "code": "HWA035",
       "repi_km": 20.66,
+      "rhyp_km": null,
       "rrup_km": 8.608,
       "Tp": 1.463,
       "PGV": 27.809,
@@ -9424,6 +9700,7 @@
      {
       "code": "HWA044",
       "repi_km": 21.48,
+      "rhyp_km": null,
       "rrup_km": 10.652,
       "Tp": 0.882,
       "PGV": 28.876,
@@ -9514,6 +9791,7 @@
      {
       "code": "Kanti Path",
       "repi_km": 81.38,
+      "rhyp_km": null,
       "rrup_km": 13.21,
       "Tp": 6.559,
       "PGV": 114.55,
@@ -9628,6 +9906,7 @@
      {
       "code": "Kaikoura",
       "repi_km": 61.98,
+      "rhyp_km": null,
       "rrup_km": 0.7,
       "Tp": 5.74,
       "PGV": 72.062,
@@ -9636,6 +9915,7 @@
      {
       "code": "Seddon Fire Station",
       "repi_km": 145.29,
+      "rhyp_km": null,
       "rrup_km": 23.2,
       "Tp": 10.997,
       "PGV": 75.546,
@@ -9802,6 +10082,7 @@
      {
       "code": "KMM004",
       "repi_km": 37.73,
+      "rhyp_km": null,
       "rrup_km": 10.61,
       "Tp": 3.962,
       "PGV": 80.751,
@@ -9810,6 +10091,7 @@
      {
       "code": "KMM005",
       "repi_km": 14.92,
+      "rhyp_km": null,
       "rrup_km": 3.27,
       "Tp": 3.024,
       "PGV": 67.549,
@@ -9818,6 +10100,7 @@
      {
       "code": "KMM006",
       "repi_km": 2.18,
+      "rhyp_km": null,
       "rrup_km": 2.69,
       "Tp": 6.146,
       "PGV": 100.063,
@@ -9826,6 +10109,7 @@
      {
       "code": "KMM007",
       "repi_km": 34.68,
+      "rhyp_km": null,
       "rrup_km": 18.54,
       "Tp": 5.404,
       "PGV": 43.702,
@@ -9834,6 +10118,7 @@
      {
       "code": "KMMH03S(0m)",
       "repi_km": 24.13,
+      "rhyp_km": null,
       "rrup_km": 13.83,
       "Tp": 1.288,
       "PGV": 76.599,
@@ -9842,6 +10127,7 @@
      {
       "code": "KMMH16D(-252m)",
       "repi_km": 6.19,
+      "rhyp_km": null,
       "rrup_km": 2.71,
       "Tp": 6.314,
       "PGV": 68.605,
@@ -10378,6 +10664,7 @@
      {
       "code": "CHY005",
       "repi_km": 77.52,
+      "rhyp_km": null,
       "rrup_km": 63.165,
       "Tp": 1.148,
       "PGV": 29.764,
@@ -10386,6 +10673,7 @@
      {
       "code": "CHY012",
       "repi_km": 60.06,
+      "rhyp_km": null,
       "rrup_km": 42.788,
       "Tp": 1.848,
       "PGV": 21.28,
@@ -10394,6 +10682,7 @@
      {
       "code": "CHY017",
       "repi_km": 42.4,
+      "rhyp_km": null,
       "rrup_km": 28.653,
       "Tp": 1.561,
       "PGV": 48.605,
@@ -10402,6 +10691,7 @@
      {
       "code": "CHY018",
       "repi_km": 36.5,
+      "rhyp_km": null,
       "rrup_km": 26.496,
       "Tp": 0.938,
       "PGV": 27.508,
@@ -10410,6 +10700,7 @@
      {
       "code": "CHY020",
       "repi_km": 44.27,
+      "rhyp_km": null,
       "rrup_km": 37.144,
       "Tp": 2.394,
       "PGV": 51.078,
@@ -10418,6 +10709,7 @@
      {
       "code": "CHY037",
       "repi_km": 71.3,
+      "rhyp_km": null,
       "rrup_km": 57.415,
       "Tp": 1.218,
       "PGV": 25.588,
@@ -10426,6 +10718,7 @@
      {
       "code": "CHY039",
       "repi_km": 69.28,
+      "rhyp_km": null,
       "rrup_km": 53.892,
       "Tp": 1.099,
       "PGV": 28.018,
@@ -10434,6 +10727,7 @@
      {
       "code": "CHY051",
       "repi_km": 40.57,
+      "rhyp_km": null,
       "rrup_km": 31.778,
       "Tp": 1.029,
       "PGV": 21.587,
@@ -10442,6 +10736,7 @@
      {
       "code": "CHY055",
       "repi_km": 47.25,
+      "rhyp_km": null,
       "rrup_km": 32.39,
       "Tp": 1.785,
       "PGV": 29.117,
@@ -10450,6 +10745,7 @@
      {
       "code": "CHY056",
       "repi_km": 56.08,
+      "rhyp_km": null,
       "rrup_km": 45.304,
       "Tp": 1.764,
       "PGV": 29.583,
@@ -10458,6 +10754,7 @@
      {
       "code": "CHY058",
       "repi_km": 35.51,
+      "rhyp_km": null,
       "rrup_km": 24.433,
       "Tp": 2.128,
       "PGV": 50.818,
@@ -10466,6 +10763,7 @@
      {
       "code": "CHY060",
       "repi_km": 37.86,
+      "rhyp_km": null,
       "rrup_km": 25.699,
       "Tp": 1.778,
       "PGV": 52.015,
@@ -10474,6 +10772,7 @@
      {
       "code": "CHY062",
       "repi_km": 23.83,
+      "rhyp_km": null,
       "rrup_km": 21.519,
       "Tp": 0.896,
       "PGV": 38.737,
@@ -10482,6 +10781,7 @@
      {
       "code": "CHY063",
       "repi_km": 23.02,
+      "rhyp_km": null,
       "rrup_km": 16.829,
       "Tp": 1.435,
       "PGV": 69.728,
@@ -10490,6 +10790,7 @@
      {
       "code": "CHY065",
       "repi_km": 19.79,
+      "rhyp_km": null,
       "rrup_km": 14.825,
       "Tp": 1.645,
       "PGV": 32.78,
@@ -10498,6 +10799,7 @@
      {
       "code": "CHY067",
       "repi_km": 36.97,
+      "rhyp_km": null,
       "rrup_km": 23.508,
       "Tp": 2.611,
       "PGV": 43.067,
@@ -10506,6 +10808,7 @@
      {
       "code": "CHY068",
       "repi_km": 34.98,
+      "rhyp_km": null,
       "rrup_km": 21.732,
       "Tp": 1.498,
       "PGV": 36.989,
@@ -10514,6 +10817,7 @@
      {
       "code": "CHY069",
       "repi_km": 36.72,
+      "rhyp_km": null,
       "rrup_km": 22.678,
       "Tp": 2.023,
       "PGV": 51.285,
@@ -10522,6 +10826,7 @@
      {
       "code": "CHY070",
       "repi_km": 31.85,
+      "rhyp_km": null,
       "rrup_km": 18.817,
       "Tp": 1.645,
       "PGV": 58.618,
@@ -10530,6 +10835,7 @@
      {
       "code": "CHY071",
       "repi_km": 41.1,
+      "rhyp_km": null,
       "rrup_km": 27.835,
       "Tp": 2.338,
       "PGV": 48.901,
@@ -10538,6 +10844,7 @@
      {
       "code": "CHY080",
       "repi_km": 76.29,
+      "rhyp_km": null,
       "rrup_km": 65.916,
       "Tp": 0.847,
       "PGV": 39.839,
@@ -10546,6 +10853,7 @@
      {
       "code": "CHY085",
       "repi_km": 35.63,
+      "rhyp_km": null,
       "rrup_km": 22.399,
       "Tp": 1.134,
       "PGV": 39.395,
@@ -10554,6 +10862,7 @@
      {
       "code": "CHY089",
       "repi_km": 25.1,
+      "rhyp_km": null,
       "rrup_km": 19.013,
       "Tp": 2.576,
       "PGV": 57.387,
@@ -10562,6 +10871,7 @@
      {
       "code": "CHY097",
       "repi_km": 35.39,
+      "rhyp_km": null,
       "rrup_km": 22.598,
       "Tp": 1.512,
       "PGV": 36.422,
@@ -10570,6 +10880,7 @@
      {
       "code": "CHY098",
       "repi_km": 39.66,
+      "rhyp_km": null,
       "rrup_km": 25.702,
       "Tp": 3.199,
       "PGV": 52.34,
@@ -10578,6 +10889,7 @@
      {
       "code": "CHY105",
       "repi_km": 73.22,
+      "rhyp_km": null,
       "rrup_km": 57.583,
       "Tp": 1.19,
       "PGV": 24.185,
@@ -10586,6 +10898,7 @@
      {
       "code": "CHY107",
       "repi_km": 48.7,
+      "rhyp_km": null,
       "rrup_km": 33.886,
       "Tp": 2.128,
       "PGV": 32.595,
@@ -10594,6 +10907,7 @@
      {
       "code": "CHY115",
       "repi_km": 53.14,
+      "rhyp_km": null,
       "rrup_km": 38.261,
       "Tp": 2.338,
       "PGV": 34.559,
@@ -10602,6 +10916,7 @@
      {
       "code": "CHY116",
       "repi_km": 46.99,
+      "rhyp_km": null,
       "rrup_km": 32.853,
       "Tp": 2.345,
       "PGV": 45.592,
@@ -10610,6 +10925,7 @@
      {
       "code": "CHY125",
       "repi_km": 39.4,
+      "rhyp_km": null,
       "rrup_km": 25.301,
       "Tp": 2.933,
       "PGV": 52.383,
@@ -10618,6 +10934,7 @@
      {
       "code": "CHY131",
       "repi_km": 28.86,
+      "rhyp_km": null,
       "rrup_km": 21.162,
       "Tp": 1.848,
       "PGV": 58.843,
@@ -10626,6 +10943,7 @@
      {
       "code": "SHH",
       "repi_km": 22.91,
+      "rhyp_km": null,
       "rrup_km": 20.106,
       "Tp": 1.75,
       "PGV": 70.028,
@@ -10634,6 +10952,7 @@
      {
       "code": "SSH",
       "repi_km": 35.39,
+      "rhyp_km": null,
       "rrup_km": 28.578,
       "Tp": 2.016,
       "PGV": 55.85,
@@ -10642,6 +10961,7 @@
      {
       "code": "TRB029",
       "repi_km": 34.06,
+      "rhyp_km": null,
       "rrup_km": 27.437,
       "Tp": 2.289,
       "PGV": 66.199,
@@ -10995,6 +11315,7 @@
      {
       "code": "HWA007",
       "repi_km": 17.43,
+      "rhyp_km": null,
       "rrup_km": 1.7,
       "Tp": 4.473,
       "PGV": 94.97,
@@ -11003,6 +11324,7 @@
      {
       "code": "HWA008",
       "repi_km": 18.78,
+      "rhyp_km": null,
       "rrup_km": 0.7,
       "Tp": 3.269,
       "PGV": 95.235,
@@ -11011,6 +11333,7 @@
      {
       "code": "HWA009",
       "repi_km": 17.3,
+      "rhyp_km": null,
       "rrup_km": 1.3,
       "Tp": 4.781,
       "PGV": 106.273,
@@ -11019,6 +11342,7 @@
      {
       "code": "HWA010",
       "repi_km": 19.57,
+      "rhyp_km": null,
       "rrup_km": 0.7,
       "Tp": 3.248,
       "PGV": 120.488,
@@ -11027,6 +11351,7 @@
      {
       "code": "HWA011",
       "repi_km": 18.67,
+      "rhyp_km": null,
       "rrup_km": 1.6,
       "Tp": 3.829,
       "PGV": 86.932,
@@ -11035,6 +11360,7 @@
      {
       "code": "HWA012",
       "repi_km": 16.63,
+      "rhyp_km": null,
       "rrup_km": 2.1,
       "Tp": 4.865,
       "PGV": 81.845,
@@ -11043,6 +11369,7 @@
      {
       "code": "HWA013",
       "repi_km": 20.08,
+      "rhyp_km": null,
       "rrup_km": 1.2,
       "Tp": 2.744,
       "PGV": 102.019,
@@ -11051,6 +11378,7 @@
      {
       "code": "HWA014",
       "repi_km": 20.02,
+      "rhyp_km": null,
       "rrup_km": 0.5,
       "Tp": 3.654,
       "PGV": 146.485,
@@ -11059,6 +11387,7 @@
      {
       "code": "HWA015",
       "repi_km": 22.75,
+      "rhyp_km": null,
       "rrup_km": 22.147,
       "Tp": 2.905,
       "PGV": 33.972,
@@ -11067,6 +11396,7 @@
      {
       "code": "HWA016",
       "repi_km": 23.11,
+      "rhyp_km": null,
       "rrup_km": 22.448,
       "Tp": 2.758,
       "PGV": 37.359,
@@ -11075,6 +11405,7 @@
      {
       "code": "HWA017",
       "repi_km": 25.82,
+      "rhyp_km": null,
       "rrup_km": 25.164,
       "Tp": 3.423,
       "PGV": 23.121,
@@ -11083,6 +11414,7 @@
      {
       "code": "HWA019",
       "repi_km": 19.21,
+      "rhyp_km": null,
       "rrup_km": 0.3,
       "Tp": 3.318,
       "PGV": 138.388,
@@ -11091,6 +11423,7 @@
      {
       "code": "HWA028",
       "repi_km": 16.12,
+      "rhyp_km": null,
       "rrup_km": 0.9,
       "Tp": 4.172,
       "PGV": 51.724,
@@ -11099,6 +11432,7 @@
      {
       "code": "HWA050",
       "repi_km": 19.56,
+      "rhyp_km": null,
       "rrup_km": 1.9,
       "Tp": 2.156,
       "PGV": 75.417,
@@ -11107,6 +11441,7 @@
      {
       "code": "HWA060",
       "repi_km": 26.64,
+      "rhyp_km": null,
       "rrup_km": 25.629,
       "Tp": 1.246,
       "PGV": 55.265,
@@ -11115,6 +11450,7 @@
      {
       "code": "HWA062",
       "repi_km": 18.42,
+      "rhyp_km": null,
       "rrup_km": 1.0,
       "Tp": 3.906,
       "PGV": 95.672,
@@ -11123,6 +11459,7 @@
      {
       "code": "HWA063",
       "repi_km": 18.95,
+      "rhyp_km": null,
       "rrup_km": 1.7,
       "Tp": 2.345,
       "PGV": 87.348,
@@ -11131,6 +11468,7 @@
      {
       "code": "S009",
       "repi_km": 18.45,
+      "rhyp_km": null,
       "rrup_km": 17.802,
       "Tp": 3.339,
       "PGV": 90.392,
@@ -11139,6 +11477,7 @@
      {
       "code": "S019",
       "repi_km": 23.1,
+      "rhyp_km": null,
       "rrup_km": 22.433,
       "Tp": 2.744,
       "PGV": 32.778,
@@ -11147,6 +11486,7 @@
      {
       "code": "TRB042",
       "repi_km": 17.64,
+      "rhyp_km": null,
       "rrup_km": 0.9,
       "Tp": 3.276,
       "PGV": 80.432,

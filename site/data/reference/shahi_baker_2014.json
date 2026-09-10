@@ -59,6 +59,7 @@
      {
       "code": "Ferndale City Hall",
       "repi_km": 36.56,
+      "rhyp_km": 32.4,
       "rrup_km": 27.0,
       "Tp": 2.0,
       "PGV": 40.3,
@@ -119,6 +120,7 @@
      {
       "code": "Pacoima Dam (upper left abut)",
       "repi_km": 11.86,
+      "rhyp_km": 17.6,
       "rrup_km": 1.8,
       "Tp": 1.64,
       "PGV": 121.9,
@@ -178,6 +180,7 @@
      {
       "code": "Tabas",
       "repi_km": null,
+      "rhyp_km": 55.5,
       "rrup_km": 2.0,
       "Tp": 6.19,
       "PGV": 129.7,
@@ -290,6 +293,7 @@
      {
       "code": "Gilroy Array #2",
       "repi_km": null,
+      "rhyp_km": 13.6,
       "rrup_km": 9.0,
       "Tp": 1.46,
       "PGV": 32.0,
@@ -298,6 +302,7 @@
      {
       "code": "Gilroy Array #3",
       "repi_km": null,
+      "rhyp_km": 12.5,
       "rrup_km": 7.4,
       "Tp": 1.16,
       "PGV": 30.8,
@@ -306,6 +311,7 @@
      {
       "code": "Gilroy Array #4",
       "repi_km": null,
+      "rhyp_km": 11.1,
       "rrup_km": 5.7,
       "Tp": 1.35,
       "PGV": 32.1,
@@ -314,6 +320,7 @@
      {
       "code": "Gilroy Array #6",
       "repi_km": null,
+      "rhyp_km": 9.1,
       "rrup_km": 3.1,
       "Tp": 1.23,
       "PGV": 49.6,
@@ -554,6 +561,7 @@
      {
       "code": "Agrarias",
       "repi_km": null,
+      "rhyp_km": 10.3,
       "rrup_km": 0.7,
       "Tp": 2.34,
       "PGV": 53.5,
@@ -562,6 +570,7 @@
      {
       "code": "Brawley Airport",
       "repi_km": null,
+      "rhyp_km": 44.3,
       "rrup_km": 10.4,
       "Tp": 4.4,
       "PGV": 36.7,
@@ -570,6 +579,7 @@
      {
       "code": "EC County Center FF",
       "repi_km": null,
+      "rhyp_km": 30.7,
       "rrup_km": 7.3,
       "Tp": 4.42,
       "PGV": 70.8,
@@ -578,6 +588,7 @@
      {
       "code": "El Centro - Meloland Geot. Array",
       "repi_km": null,
+      "rhyp_km": 21.8,
       "rrup_km": 0.1,
       "Tp": 3.42,
       "PGV": 116.4,
@@ -586,6 +597,7 @@
      {
       "code": "El Centro Array #10",
       "repi_km": null,
+      "rhyp_km": 30.5,
       "rrup_km": 8.6,
       "Tp": 4.52,
       "PGV": 55.2,
@@ -594,6 +606,7 @@
      {
       "code": "El Centro Array #3",
       "repi_km": null,
+      "rhyp_km": 30.3,
       "rrup_km": 12.9,
       "Tp": 4.5,
       "PGV": 55.8,
@@ -602,6 +615,7 @@
      {
       "code": "El Centro Array #4",
       "repi_km": null,
+      "rhyp_km": 28.9,
       "rrup_km": 7.0,
       "Tp": 4.79,
       "PGV": 80.8,
@@ -610,6 +624,7 @@
      {
       "code": "El Centro Array #5",
       "repi_km": null,
+      "rhyp_km": 29.5,
       "rrup_km": 4.0,
       "Tp": 4.13,
       "PGV": 96.5,
@@ -618,6 +633,7 @@
      {
       "code": "El Centro Array #6",
       "repi_km": null,
+      "rhyp_km": 29.2,
       "rrup_km": 1.4,
       "Tp": 3.77,
       "PGV": 121.6,
@@ -626,6 +642,7 @@
      {
       "code": "El Centro Array #7",
       "repi_km": null,
+      "rhyp_km": 29.4,
       "rrup_km": 0.6,
       "Tp": 4.38,
       "PGV": 111.9,
@@ -634,6 +651,7 @@
      {
       "code": "El Centro Differential Array",
       "repi_km": null,
+      "rhyp_km": 29.0,
       "rrup_km": 5.1,
       "Tp": 6.27,
       "PGV": 73.5,
@@ -642,6 +660,7 @@
      {
       "code": "Holtville Post Office",
       "repi_km": null,
+      "rhyp_km": 22.2,
       "rrup_km": 7.5,
       "Tp": 4.82,
       "PGV": 73.4,
@@ -701,6 +720,7 @@
      {
       "code": "El Centro Array #6",
       "repi_km": 10.34,
+      "rhyp_km": 13.2,
       "rrup_km": 10.4,
       "Tp": 0.69,
       "PGV": 26.0,
@@ -775,6 +795,7 @@
      {
       "code": "Bar-Skupstina Opstine",
       "repi_km": null,
+      "rhyp_km": 12.9,
       "rrup_km": 7.0,
       "Tp": 1.44,
       "PGV": 62.7,
@@ -783,6 +804,7 @@
      {
       "code": "Ulcinj - Hotel Olimpic",
       "repi_km": null,
+      "rhyp_km": 16.3,
       "rrup_km": 5.8,
       "Tp": 1.97,
       "PGV": 62.8,
@@ -865,6 +887,7 @@
      {
       "code": "Bagnoli Irpinio",
       "repi_km": null,
+      "rhyp_km": 24.6,
       "rrup_km": 8.2,
       "Tp": 1.71,
       "PGV": 38.1,
@@ -873,6 +896,7 @@
      {
       "code": "Sturno (STN)",
       "repi_km": null,
+      "rhyp_km": 31.8,
       "rrup_km": 10.8,
       "Tp": 3.27,
       "PGV": 71.1,
@@ -932,6 +956,7 @@
      {
       "code": "Long Valley Dam (Upr L Abut)",
       "repi_km": 11.45,
+      "rhyp_km": 19.8,
       "rrup_km": 16.0,
       "Tp": 1.01,
       "PGV": 43.3,
@@ -1049,6 +1074,7 @@
      {
       "code": "Parachute Test Site",
       "repi_km": 20.46,
+      "rhyp_km": 20.6,
       "rrup_km": 16.7,
       "Tp": 4.39,
       "PGV": 60.8,
@@ -1057,6 +1083,7 @@
      {
       "code": "Westmorland Fire Sta",
       "repi_km": 7.01,
+      "rhyp_km": 7.4,
       "rrup_km": 6.5,
       "Tp": 1.22,
       "PGV": 52.9,
@@ -1165,6 +1192,7 @@
      {
       "code": "Anticline Ridge Free-Field",
       "repi_km": 1.21,
+      "rhyp_km": 12.5,
       "rrup_km": 11.6,
       "Tp": 0.26,
       "PGV": 26.3,
@@ -1173,6 +1201,7 @@
      {
       "code": "Anticline Ridge Pad",
       "repi_km": 1.21,
+      "rhyp_km": 12.5,
       "rrup_km": 11.6,
       "Tp": 0.27,
       "PGV": 23.3,
@@ -1232,6 +1261,7 @@
      {
       "code": "Transmitter Hill",
       "repi_km": 5.74,
+      "rhyp_km": 9.5,
       "rrup_km": 9.5,
       "Tp": 0.88,
       "PGV": 64.4,
@@ -1291,6 +1321,7 @@
      {
       "code": "Coalinga-14th & Elm (Old CHP)",
       "repi_km": 7.75,
+      "rhyp_km": 12.7,
       "rrup_km": 10.9,
       "Tp": 0.44,
       "PGV": 32.8,
@@ -1409,6 +1440,7 @@
      {
       "code": "Coyote Lake Dam (SW Abut)",
       "repi_km": 24.26,
+      "rhyp_km": 26.0,
       "rrup_km": 0.5,
       "Tp": 1.07,
       "PGV": 76.8,
@@ -1417,6 +1449,7 @@
      {
       "code": "Gilroy Array #6",
       "repi_km": 36.04,
+      "rhyp_km": 37.3,
       "rrup_km": 9.9,
       "Tp": 1.23,
       "PGV": 37.3,
@@ -1511,6 +1544,7 @@
      {
       "code": "Kalamata (bsmt) (2nd trigger)",
       "repi_km": 2.09,
+      "rhyp_km": 8.7,
       "rrup_km": 5.6,
       "Tp": 0.79,
       "PGV": 27.0,
@@ -1604,6 +1638,7 @@
      {
       "code": "Morongo Valley Fire Station",
       "repi_km": 7.14,
+      "rhyp_km": 12.6,
       "rrup_km": 12.0,
       "Tp": 2.38,
       "PGV": 39.4,
@@ -1714,6 +1749,7 @@
      {
       "code": "Geotech Investig Center",
       "repi_km": 3.71,
+      "rhyp_km": 13.5,
       "rrup_km": 6.3,
       "Tp": 0.81,
       "PGV": 68.3,
@@ -1722,6 +1758,7 @@
      {
       "code": "National Geografical Inst",
       "repi_km": 5.03,
+      "rhyp_km": 14.5,
       "rrup_km": 7.0,
       "Tp": 1.13,
       "PGV": 92.2,
@@ -2235,6 +2272,7 @@
      {
       "code": "SMART1 C00",
       "repi_km": 0.88,
+      "rhyp_km": 70.0,
       "rrup_km": 59.9,
       "Tp": 1.57,
       "PGV": 34.8,
@@ -2243,6 +2281,7 @@
      {
       "code": "SMART1 E01",
       "repi_km": 3.53,
+      "rhyp_km": 67.4,
       "rrup_km": 57.3,
       "Tp": 1.39,
       "PGV": 36.9,
@@ -2251,6 +2290,7 @@
      {
       "code": "SMART1 I01",
       "repi_km": 0.71,
+      "rhyp_km": 70.2,
       "rrup_km": 60.1,
       "Tp": 1.57,
       "PGV": 32.9,
@@ -2259,6 +2299,7 @@
      {
       "code": "SMART1 I07",
       "repi_km": 1.07,
+      "rhyp_km": 69.8,
       "rrup_km": 59.7,
       "Tp": 1.67,
       "PGV": 34.0,
@@ -2267,6 +2308,7 @@
      {
       "code": "SMART1 M01",
       "repi_km": 0.42,
+      "rhyp_km": 70.9,
       "rrup_km": 60.9,
       "Tp": 1.39,
       "PGV": 26.1,
@@ -2275,6 +2317,7 @@
      {
       "code": "SMART1 M07",
       "repi_km": 1.86,
+      "rhyp_km": 69.0,
       "rrup_km": 58.9,
       "Tp": 1.54,
       "PGV": 40.4,
@@ -2283,6 +2326,7 @@
      {
       "code": "SMART1 O07",
       "repi_km": 2.77,
+      "rhyp_km": 68.1,
       "rrup_km": 58.0,
       "Tp": 1.53,
       "PGV": 28.7,
@@ -2291,6 +2335,7 @@
      {
       "code": "SMART1 I02",
       "repi_km": 0.68,
+      "rhyp_km": 70.2,
       "rrup_km": 60.1,
       "Tp": 1.67,
       "PGV": 38.9,
@@ -2299,6 +2344,7 @@
      {
       "code": "SMART1 I03",
       "repi_km": 0.71,
+      "rhyp_km": 70.1,
       "rrup_km": 60.0,
       "Tp": 1.67,
       "PGV": 35.6,
@@ -2307,6 +2353,7 @@
      {
       "code": "SMART1 I04",
       "repi_km": 0.8,
+      "rhyp_km": 70.0,
       "rrup_km": 59.9,
       "Tp": 1.67,
       "PGV": 34.1,
@@ -2315,6 +2362,7 @@
      {
       "code": "SMART1 I05",
       "repi_km": 0.9,
+      "rhyp_km": 69.9,
       "rrup_km": 59.8,
       "Tp": 1.69,
       "PGV": 33.5,
@@ -2323,6 +2371,7 @@
      {
       "code": "SMART1 I06",
       "repi_km": 1.0,
+      "rhyp_km": 69.8,
       "rrup_km": 59.8,
       "Tp": 1.67,
       "PGV": 33.5,
@@ -2331,6 +2380,7 @@
      {
       "code": "SMART1 I08",
       "repi_km": 1.06,
+      "rhyp_km": 69.8,
       "rrup_km": 59.8,
       "Tp": 1.67,
       "PGV": 36.9,
@@ -2339,6 +2389,7 @@
      {
       "code": "SMART1 I09",
       "repi_km": 1.04,
+      "rhyp_km": 69.9,
       "rrup_km": 59.8,
       "Tp": 1.67,
       "PGV": 34.8,
@@ -2347,6 +2398,7 @@
      {
       "code": "SMART1 I11",
       "repi_km": 0.88,
+      "rhyp_km": 70.1,
       "rrup_km": 60.0,
       "Tp": 1.57,
       "PGV": 31.3,
@@ -2355,6 +2407,7 @@
      {
       "code": "SMART1 I12",
       "repi_km": 0.78,
+      "rhyp_km": 70.2,
       "rrup_km": 60.1,
       "Tp": 1.57,
       "PGV": 32.7,
@@ -2363,6 +2416,7 @@
      {
       "code": "SMART1 M02",
       "repi_km": 0.24,
+      "rhyp_km": 71.0,
       "rrup_km": 60.9,
       "Tp": 1.48,
       "PGV": 29.7,
@@ -2371,6 +2425,7 @@
      {
       "code": "SMART1 M03",
       "repi_km": 0.49,
+      "rhyp_km": 70.5,
       "rrup_km": 60.5,
       "Tp": 1.57,
       "PGV": 34.0,
@@ -2379,6 +2434,7 @@
      {
       "code": "SMART1 M04",
       "repi_km": 1.02,
+      "rhyp_km": 70.0,
       "rrup_km": 59.9,
       "Tp": 1.51,
       "PGV": 33.1,
@@ -2387,6 +2443,7 @@
      {
       "code": "SMART1 M05",
       "repi_km": 1.32,
+      "rhyp_km": 69.6,
       "rrup_km": 59.5,
       "Tp": 1.57,
       "PGV": 36.2,
@@ -2395,6 +2452,7 @@
      {
       "code": "SMART1 M06",
       "repi_km": 1.67,
+      "rhyp_km": 69.2,
       "rrup_km": 59.1,
       "Tp": 1.51,
       "PGV": 37.3,
@@ -2403,6 +2461,7 @@
      {
       "code": "SMART1 M09",
       "repi_km": 1.84,
+      "rhyp_km": 69.4,
       "rrup_km": 59.4,
       "Tp": 1.57,
       "PGV": 30.8,
@@ -2411,6 +2470,7 @@
      {
       "code": "SMART1 M10",
       "repi_km": 1.54,
+      "rhyp_km": 69.9,
       "rrup_km": 59.9,
       "Tp": 1.6,
       "PGV": 30.4,
@@ -2419,6 +2479,7 @@
      {
       "code": "SMART1 M12",
       "repi_km": 0.86,
+      "rhyp_km": 70.8,
       "rrup_km": 60.8,
       "Tp": 1.44,
       "PGV": 25.0,
@@ -2427,6 +2488,7 @@
      {
       "code": "SMART1 O04",
       "repi_km": 1.78,
+      "rhyp_km": 70.1,
       "rrup_km": 60.0,
       "Tp": 1.44,
       "PGV": 36.7,
@@ -2435,6 +2497,7 @@
      {
       "code": "SMART1 O05",
       "repi_km": 2.24,
+      "rhyp_km": 69.2,
       "rrup_km": 59.0,
       "Tp": 1.48,
       "PGV": 33.4,
@@ -2443,6 +2506,7 @@
      {
       "code": "SMART1 O06",
       "repi_km": 2.61,
+      "rhyp_km": 68.3,
       "rrup_km": 58.2,
       "Tp": 1.6,
       "PGV": 34.3,
@@ -2451,6 +2515,7 @@
      {
       "code": "SMART1 O08",
       "repi_km": 2.94,
+      "rhyp_km": 68.2,
       "rrup_km": 58.1,
       "Tp": 1.44,
       "PGV": 31.9,
@@ -2459,6 +2524,7 @@
      {
       "code": "SMART1 O11",
       "repi_km": 2.06,
+      "rhyp_km": 70.9,
       "rrup_km": 60.9,
       "Tp": 1.23,
       "PGV": 27.6,
@@ -2589,6 +2655,7 @@
      {
       "code": "Kornbloom Road (temp)",
       "repi_km": null,
+      "rhyp_km": 21.3,
       "rrup_km": 18.5,
       "Tp": 2.13,
       "PGV": 33.1,
@@ -2597,6 +2664,7 @@
      {
       "code": "Parachute Test Site",
       "repi_km": null,
+      "rhyp_km": 18.4,
       "rrup_km": 0.9,
       "Tp": 2.39,
       "PGV": 143.9,
@@ -2605,6 +2673,7 @@
      {
       "code": "Poe Road (temp)",
       "repi_km": null,
+      "rhyp_km": 14.4,
       "rrup_km": 11.2,
       "Tp": 2.87,
       "PGV": 42.1,
@@ -2762,6 +2831,7 @@
      {
       "code": "Bell Gardens - Jaboneria",
       "repi_km": 11.88,
+      "rhyp_km": 18.8,
       "rrup_km": 17.8,
       "Tp": 0.82,
       "PGV": 30.0,
@@ -2770,6 +2840,7 @@
      {
       "code": "Compton - Castlegate St",
       "repi_km": 19.91,
+      "rhyp_km": 24.6,
       "rrup_km": 23.4,
       "Tp": 0.87,
       "PGV": 32.8,
@@ -2778,6 +2849,7 @@
      {
       "code": "Downey - Birchdale",
       "repi_km": 15.38,
+      "rhyp_km": 21.1,
       "rrup_km": 20.8,
       "Tp": 0.86,
       "PGV": 40.1,
@@ -2786,6 +2858,7 @@
      {
       "code": "Downey - Co Maint Bldg",
       "repi_km": 16.14,
+      "rhyp_km": 21.7,
       "rrup_km": 20.8,
       "Tp": 0.88,
       "PGV": 33.1,
@@ -2794,6 +2867,7 @@
      {
       "code": "LB - Orange Ave",
       "repi_km": 20.77,
+      "rhyp_km": 25.3,
       "rrup_km": 24.5,
       "Tp": 0.9,
       "PGV": 31.2,
@@ -2802,6 +2876,7 @@
      {
       "code": "Norwalk - Imp Hwy, S Grnd",
       "repi_km": 15.04,
+      "rhyp_km": 20.9,
       "rrup_km": 20.4,
       "Tp": 0.9,
       "PGV": 28.0,
@@ -2810,6 +2885,7 @@
      {
       "code": "Santa Fe Springs - E.Joslin",
       "repi_km": 11.8,
+      "rhyp_km": 18.7,
       "rrup_km": 18.5,
       "Tp": 0.81,
       "PGV": 44.3,
@@ -3090,6 +3166,7 @@
      {
       "code": "Alameda Naval Air Stn Hanger",
       "repi_km": 90.87,
+      "rhyp_km": 92.4,
       "rrup_km": 71.0,
       "Tp": 2.1,
       "PGV": 40.8,
@@ -3098,6 +3175,7 @@
      {
       "code": "Emeryville - 6363 Christie",
       "repi_km": 96.62,
+      "rhyp_km": 98.1,
       "rrup_km": 77.0,
       "Tp": 1.67,
       "PGV": 44.0,
@@ -3106,6 +3184,7 @@
      {
       "code": "Gilroy - Historic Bldg.",
       "repi_km": 27.82,
+      "rhyp_km": 33.1,
       "rrup_km": 11.0,
       "Tp": 1.64,
       "PGV": 43.6,
@@ -3114,6 +3193,7 @@
      {
       "code": "Gilroy Array #2",
       "repi_km": 29.48,
+      "rhyp_km": 34.5,
       "rrup_km": 11.1,
       "Tp": 1.73,
       "PGV": 46.2,
@@ -3122,6 +3202,7 @@
      {
       "code": "Gilroy Array #3",
       "repi_km": 31.11,
+      "rhyp_km": 35.9,
       "rrup_km": 12.8,
       "Tp": 2.64,
       "PGV": 44.8,
@@ -3130,6 +3211,7 @@
      {
       "code": "Oakland - Outer Harbor Wharf",
       "repi_km": 94.11,
+      "rhyp_km": 95.6,
       "rrup_km": 74.3,
       "Tp": 1.83,
       "PGV": 48.2,
@@ -3138,6 +3220,7 @@
      {
       "code": "Oakland - Title & Trust",
       "repi_km": 91.78,
+      "rhyp_km": 93.3,
       "rrup_km": 72.2,
       "Tp": 1.39,
       "PGV": 36.3,
@@ -3146,6 +3229,7 @@
      {
       "code": "SF - Presidio",
       "repi_km": 97.92,
+      "rhyp_km": 99.3,
       "rrup_km": 77.4,
       "Tp": 1.32,
       "PGV": 32.9,
@@ -3154,6 +3238,7 @@
      {
       "code": "Saratoga - Aloha Ave",
       "repi_km": 27.4,
+      "rhyp_km": 32.4,
       "rrup_km": 8.5,
       "Tp": 4.57,
       "PGV": 53.5,
@@ -3162,6 +3247,7 @@
      {
       "code": "Saratoga - W Valley Coll.",
       "repi_km": 27.2,
+      "rhyp_km": 32.2,
       "rrup_km": 9.3,
       "Tp": 5.65,
       "PGV": 62.0,
@@ -3170,6 +3256,7 @@
      {
       "code": "Treasure Island",
       "repi_km": 97.54,
+      "rhyp_km": 99.0,
       "rrup_km": 77.4,
       "Tp": 2.08,
       "PGV": 33.4,
@@ -3178,6 +3265,7 @@
      {
       "code": "Los Gatos - Lexington Dam",
       "repi_km": 20.53,
+      "rhyp_km": 26.8,
       "rrup_km": 5.0,
       "Tp": 1.57,
       "PGV": 121.3,
@@ -3323,6 +3411,7 @@
      {
       "code": "Cape Mendocino",
       "repi_km": null,
+      "rhyp_km": 14.1,
       "rrup_km": 7.0,
       "Tp": 4.84,
       "PGV": 124.1,
@@ -3331,6 +3420,7 @@
      {
       "code": "Petrolia",
       "repi_km": null,
+      "rhyp_km": 10.5,
       "rrup_km": 8.2,
       "Tp": 3.0,
       "PGV": 96.7,
@@ -3339,6 +3429,7 @@
      {
       "code": "Bunker Hill FAA",
       "repi_km": null,
+      "rhyp_km": 21.9,
       "rrup_km": 12.2,
       "Tp": 5.36,
       "PGV": 80.6,
@@ -3347,6 +3438,7 @@
      {
       "code": "Centerville Beach, Naval Fac",
       "repi_km": null,
+      "rhyp_km": 29.6,
       "rrup_km": 18.3,
       "Tp": 1.97,
       "PGV": 57.5,
@@ -3406,6 +3498,7 @@
      {
       "code": "Indio - Jackson Road",
       "repi_km": 25.63,
+      "rhyp_km": 28.4,
       "rrup_km": 25.5,
       "Tp": 1.1,
       "PGV": 53.3,
@@ -3537,6 +3630,7 @@
      {
       "code": "Barstow",
       "repi_km": null,
+      "rhyp_km": 95.0,
       "rrup_km": 34.9,
       "Tp": 9.13,
       "PGV": 28.8,
@@ -3545,6 +3639,7 @@
      {
       "code": "Lucerne",
       "repi_km": null,
+      "rhyp_km": 44.6,
       "rrup_km": 2.2,
       "Tp": 5.12,
       "PGV": 132.3,
@@ -3553,6 +3648,7 @@
      {
       "code": "Yermo Fire Station",
       "repi_km": null,
+      "rhyp_km": 86.3,
       "rrup_km": 23.6,
       "Tp": 7.5,
       "PGV": 55.8,
@@ -3829,6 +3925,7 @@
      {
       "code": "Jensen Filter Plant",
       "repi_km": null,
+      "rhyp_km": 21.8,
       "rrup_km": 5.4,
       "Tp": 3.16,
       "PGV": 101.5,
@@ -3837,6 +3934,7 @@
      {
       "code": "Jensen Filter Plant Generator",
       "repi_km": null,
+      "rhyp_km": 21.8,
       "rrup_km": 5.4,
       "Tp": 3.54,
       "PGV": 66.1,
@@ -3845,6 +3943,7 @@
      {
       "code": "LA - Saturn St",
       "repi_km": null,
+      "rhyp_km": 30.9,
       "rrup_km": 27.0,
       "Tp": 0.98,
       "PGV": 41.6,
@@ -3853,6 +3952,7 @@
      {
       "code": "LA - Sepulveda VA Hospital",
       "repi_km": null,
+      "rhyp_km": 19.4,
       "rrup_km": 8.4,
       "Tp": 0.93,
       "PGV": 77.9,
@@ -3861,6 +3961,7 @@
      {
       "code": "LA Dam",
       "repi_km": null,
+      "rhyp_km": 21.1,
       "rrup_km": 5.9,
       "Tp": 1.62,
       "PGV": 86.3,
@@ -3869,6 +3970,7 @@
      {
       "code": "Newhall - Fire Sta",
       "repi_km": null,
+      "rhyp_km": 26.8,
       "rrup_km": 5.9,
       "Tp": 1.37,
       "PGV": 116.1,
@@ -3877,6 +3979,7 @@
      {
       "code": "Newhall - W Pico Canyon Rd.",
       "repi_km": null,
+      "rhyp_km": 27.8,
       "rrup_km": 5.5,
       "Tp": 2.98,
       "PGV": 118.3,
@@ -3885,6 +3988,7 @@
      {
       "code": "Pacoima Dam (downstr)",
       "repi_km": null,
+      "rhyp_km": 26.9,
       "rrup_km": 7.0,
       "Tp": 0.59,
       "PGV": 50.2,
@@ -3893,6 +3997,7 @@
      {
       "code": "Pacoima Dam (upper left)",
       "repi_km": null,
+      "rhyp_km": 26.9,
       "rrup_km": 7.0,
       "Tp": 0.84,
       "PGV": 106.1,
@@ -3901,6 +4006,7 @@
      {
       "code": "Pacoima Kagel Canyon",
       "repi_km": null,
+      "rhyp_km": 26.0,
       "rrup_km": 7.3,
       "Tp": 0.73,
       "PGV": 56.8,
@@ -3909,6 +4015,7 @@
      {
       "code": "Pardee - SCE",
       "repi_km": null,
+      "rhyp_km": 31.1,
       "rrup_km": 7.5,
       "Tp": 1.23,
       "PGV": 76.3,
@@ -3917,6 +4024,7 @@
      {
       "code": "Rinaldi Receiving Sta",
       "repi_km": null,
+      "rhyp_km": 20.6,
       "rrup_km": 6.5,
       "Tp": 1.25,
       "PGV": 149.1,
@@ -3925,6 +4033,7 @@
      {
       "code": "Sylmar - Converter Sta",
       "repi_km": null,
+      "rhyp_km": 21.9,
       "rrup_km": 5.3,
       "Tp": 2.98,
       "PGV": 106.3,
@@ -3933,6 +4042,7 @@
      {
       "code": "Sylmar - Converter Sta East",
       "repi_km": null,
+      "rhyp_km": 22.2,
       "rrup_km": 5.2,
       "Tp": 3.53,
       "PGV": 114.0,
@@ -3941,6 +4051,7 @@
      {
       "code": "Sylmar - Olive View Med FF",
       "repi_km": null,
+      "rhyp_km": 24.2,
       "rrup_km": 5.3,
       "Tp": 2.44,
       "PGV": 130.6,
@@ -4061,6 +4172,7 @@
      {
       "code": "KJMA",
       "repi_km": null,
+      "rhyp_km": 25.6,
       "rrup_km": 1.0,
       "Tp": 1.09,
       "PGV": 105.6,
@@ -4069,6 +4181,7 @@
      {
       "code": "Port Island (0 m)",
       "repi_km": null,
+      "rhyp_km": 26.3,
       "rrup_km": 3.3,
       "Tp": 2.83,
       "PGV": 103.0,
@@ -4077,6 +4190,7 @@
      {
       "code": "Takarazuka",
       "repi_km": null,
+      "rhyp_km": 42.5,
       "rrup_km": 0.3,
       "Tp": 1.81,
       "PGV": 95.6,
@@ -4085,6 +4199,7 @@
      {
       "code": "Takatori",
       "repi_km": null,
+      "rhyp_km": 22.2,
       "rrup_km": 1.5,
       "Tp": 1.55,
       "PGV": 153.2,
@@ -4093,6 +4208,7 @@
      {
       "code": "Port Island (83 m)",
       "repi_km": null,
+      "rhyp_km": 26.3,
       "rrup_km": 3.3,
       "Tp": 2.53,
       "PGV": 71.6,
@@ -4152,6 +4268,7 @@
      {
       "code": "Jiashi",
       "repi_km": 1057.4,
+      "rhyp_km": 27.7,
       "rrup_km": 17.7,
       "Tp": 1.09,
       "PGV": 34.6,
@@ -4975,6 +5092,7 @@
      {
       "code": "CHY006",
       "repi_km": null,
+      "rhyp_km": 41.3,
       "rrup_km": 9.8,
       "Tp": 2.57,
       "PGV": 58.3,
@@ -4983,6 +5101,7 @@
      {
       "code": "CHY024",
       "repi_km": null,
+      "rhyp_km": 25.4,
       "rrup_km": 9.6,
       "Tp": 6.65,
       "PGV": 61.6,
@@ -4991,6 +5110,7 @@
      {
       "code": "CHY101",
       "repi_km": null,
+      "rhyp_km": 33.0,
       "rrup_km": 9.9,
       "Tp": 5.34,
       "PGV": 108.9,
@@ -4999,6 +5119,7 @@
      {
       "code": "NST",
       "repi_km": null,
+      "rhyp_km": 89.2,
       "rrup_km": 38.4,
       "Tp": 7.88,
       "PGV": 32.3,
@@ -5007,6 +5128,7 @@
      {
       "code": "NSY",
       "repi_km": null,
+      "rhyp_km": 63.8,
       "rrup_km": 13.1,
       "Tp": 9.16,
       "PGV": 59.3,
@@ -5015,6 +5137,7 @@
      {
       "code": "TCU",
       "repi_km": null,
+      "rhyp_km": 37.1,
       "rrup_km": 5.2,
       "Tp": 4.51,
       "PGV": 43.8,
@@ -5023,6 +5146,7 @@
      {
       "code": "TCU006",
       "repi_km": null,
+      "rhyp_km": 122.8,
       "rrup_km": 72.6,
       "Tp": 10.88,
       "PGV": 35.8,
@@ -5031,6 +5155,7 @@
      {
       "code": "TCU014",
       "repi_km": null,
+      "rhyp_km": 142.2,
       "rrup_km": 92.7,
       "Tp": 10.37,
       "PGV": 27.2,
@@ -5039,6 +5164,7 @@
      {
       "code": "TCU015",
       "repi_km": null,
+      "rhyp_km": 101.9,
       "rrup_km": 49.8,
       "Tp": 9.11,
       "PGV": 44.0,
@@ -5047,6 +5173,7 @@
      {
       "code": "TCU017",
       "repi_km": null,
+      "rhyp_km": 105.6,
       "rrup_km": 54.3,
       "Tp": 8.67,
       "PGV": 47.5,
@@ -5055,6 +5182,7 @@
      {
       "code": "TCU018",
       "repi_km": null,
+      "rhyp_km": 117.3,
       "rrup_km": 66.3,
       "Tp": 10.23,
       "PGV": 42.7,
@@ -5063,6 +5191,7 @@
      {
       "code": "TCU026",
       "repi_km": null,
+      "rhyp_km": 106.5,
       "rrup_km": 56.1,
       "Tp": 8.37,
       "PGV": 45.7,
@@ -5071,6 +5200,7 @@
      {
       "code": "TCU029",
       "repi_km": null,
+      "rhyp_km": 79.6,
       "rrup_km": 28.0,
       "Tp": 5.29,
       "PGV": 62.7,
@@ -5079,6 +5209,7 @@
      {
       "code": "TCU031",
       "repi_km": null,
+      "rhyp_km": 80.5,
       "rrup_km": 30.2,
       "Tp": 5.93,
       "PGV": 63.3,
@@ -5087,6 +5218,7 @@
      {
       "code": "TCU033",
       "repi_km": null,
+      "rhyp_km": 93.4,
       "rrup_km": 40.9,
       "Tp": 8.97,
       "PGV": 41.7,
@@ -5095,6 +5227,7 @@
      {
       "code": "TCU034",
       "repi_km": null,
+      "rhyp_km": 88.2,
       "rrup_km": 35.7,
       "Tp": 8.87,
       "PGV": 45.2,
@@ -5103,6 +5236,7 @@
      {
       "code": "TCU036",
       "repi_km": null,
+      "rhyp_km": 68.3,
       "rrup_km": 19.8,
       "Tp": 5.38,
       "PGV": 63.2,
@@ -5111,6 +5245,7 @@
      {
       "code": "TCU038",
       "repi_km": null,
+      "rhyp_km": 73.5,
       "rrup_km": 25.4,
       "Tp": 9.58,
       "PGV": 54.9,
@@ -5119,6 +5254,7 @@
      {
       "code": "TCU039",
       "repi_km": null,
+      "rhyp_km": 72.0,
       "rrup_km": 19.9,
       "Tp": 9.33,
       "PGV": 57.8,
@@ -5127,6 +5263,7 @@
      {
       "code": "TCU040",
       "repi_km": null,
+      "rhyp_km": 69.5,
       "rrup_km": 22.1,
       "Tp": 6.43,
       "PGV": 47.6,
@@ -5135,6 +5272,7 @@
      {
       "code": "TCU045",
       "repi_km": null,
+      "rhyp_km": 77.9,
       "rrup_km": 26.0,
       "Tp": 9.34,
       "PGV": 43.7,
@@ -5143,6 +5281,7 @@
      {
       "code": "TCU046",
       "repi_km": null,
+      "rhyp_km": 69.3,
       "rrup_km": 16.7,
       "Tp": 8.04,
       "PGV": 31.3,
@@ -5151,6 +5290,7 @@
      {
       "code": "TCU047",
       "repi_km": null,
+      "rhyp_km": 86.8,
       "rrup_km": 35.0,
       "Tp": 12.31,
       "PGV": 44.4,
@@ -5159,6 +5299,7 @@
      {
       "code": "TCU049",
       "repi_km": null,
+      "rhyp_km": 39.7,
       "rrup_km": 3.8,
       "Tp": 10.22,
       "PGV": 56.5,
@@ -5167,6 +5308,7 @@
      {
       "code": "TCU051",
       "repi_km": null,
+      "rhyp_km": 39.4,
       "rrup_km": 7.6,
       "Tp": 10.38,
       "PGV": 52.8,
@@ -5175,6 +5317,7 @@
      {
       "code": "TCU052",
       "repi_km": null,
+      "rhyp_km": 40.4,
       "rrup_km": 0.7,
       "Tp": 11.96,
       "PGV": 209.1,
@@ -5183,6 +5326,7 @@
      {
       "code": "TCU053",
       "repi_km": null,
+      "rhyp_km": 42.0,
       "rrup_km": 6.0,
       "Tp": 13.12,
       "PGV": 37.1,
@@ -5191,6 +5335,7 @@
      {
       "code": "TCU056",
       "repi_km": null,
+      "rhyp_km": 40.5,
       "rrup_km": 10.5,
       "Tp": 8.94,
       "PGV": 45.3,
@@ -5199,6 +5344,7 @@
      {
       "code": "TCU059",
       "repi_km": null,
+      "rhyp_km": 54.0,
       "rrup_km": 17.1,
       "Tp": 7.78,
       "PGV": 64.1,
@@ -5207,6 +5353,7 @@
      {
       "code": "TCU063",
       "repi_km": null,
+      "rhyp_km": 36.4,
       "rrup_km": 9.8,
       "Tp": 6.55,
       "PGV": 78.9,
@@ -5215,6 +5362,7 @@
      {
       "code": "TCU064",
       "repi_km": null,
+      "rhyp_km": 59.7,
       "rrup_km": 16.6,
       "Tp": 8.46,
       "PGV": 52.3,
@@ -5223,6 +5371,7 @@
      {
       "code": "TCU065",
       "repi_km": null,
+      "rhyp_km": 27.9,
       "rrup_km": 0.6,
       "Tp": 5.74,
       "PGV": 136.5,
@@ -5231,6 +5380,7 @@
      {
       "code": "TCU068",
       "repi_km": null,
+      "rhyp_km": 48.5,
       "rrup_km": 0.3,
       "Tp": 12.29,
       "PGV": 342.1,
@@ -5239,6 +5389,7 @@
      {
       "code": "TCU075",
       "repi_km": null,
+      "rhyp_km": 22.2,
       "rrup_km": 0.9,
       "Tp": 5.0,
       "PGV": 104.9,
@@ -5247,6 +5398,7 @@
      {
       "code": "TCU076",
       "repi_km": null,
+      "rhyp_km": 17.9,
       "rrup_km": 2.7,
       "Tp": 4.73,
       "PGV": 71.2,
@@ -5255,6 +5407,7 @@
      {
       "code": "TCU081",
       "repi_km": null,
+      "rhyp_km": 107.3,
       "rrup_km": 55.5,
       "Tp": 9.38,
       "PGV": 42.5,
@@ -5263,6 +5416,7 @@
      {
       "code": "TCU082",
       "repi_km": null,
+      "rhyp_km": 37.1,
       "rrup_km": 5.2,
       "Tp": 8.1,
       "PGV": 56.2,
@@ -5271,6 +5425,7 @@
      {
       "code": "TCU087",
       "repi_km": null,
+      "rhyp_km": 56.2,
       "rrup_km": 7.0,
       "Tp": 10.4,
       "PGV": 45.5,
@@ -5279,6 +5434,7 @@
      {
       "code": "TCU088",
       "repi_km": null,
+      "rhyp_km": 58.2,
       "rrup_km": 18.2,
       "Tp": 11.14,
       "PGV": 35.5,
@@ -5287,6 +5443,7 @@
      {
       "code": "TCU094",
       "repi_km": null,
+      "rhyp_km": 105.2,
       "rrup_km": 54.5,
       "Tp": 8.3,
       "PGV": 39.6,
@@ -5295,6 +5452,7 @@
      {
       "code": "TCU095",
       "repi_km": null,
+      "rhyp_km": 96.0,
       "rrup_km": 45.2,
       "Tp": 7.67,
       "PGV": 42.8,
@@ -5303,6 +5461,7 @@
      {
       "code": "TCU096",
       "repi_km": null,
+      "rhyp_km": 106.4,
       "rrup_km": 54.5,
       "Tp": 9.46,
       "PGV": 40.7,
@@ -5311,6 +5470,7 @@
      {
       "code": "TCU098",
       "repi_km": null,
+      "rhyp_km": 100.1,
       "rrup_km": 47.7,
       "Tp": 9.28,
       "PGV": 46.8,
@@ -5319,6 +5479,7 @@
      {
       "code": "TCU101",
       "repi_km": null,
+      "rhyp_km": 45.8,
       "rrup_km": 2.1,
       "Tp": 10.32,
       "PGV": 76.7,
@@ -5327,6 +5488,7 @@
      {
       "code": "TCU102",
       "repi_km": null,
+      "rhyp_km": 46.3,
       "rrup_km": 1.5,
       "Tp": 9.63,
       "PGV": 104.8,
@@ -5335,6 +5497,7 @@
      {
       "code": "TCU103",
       "repi_km": null,
+      "rhyp_km": 53.0,
       "rrup_km": 6.1,
       "Tp": 8.69,
       "PGV": 67.1,
@@ -5343,6 +5506,7 @@
      {
       "code": "TCU104",
       "repi_km": null,
+      "rhyp_km": 49.9,
       "rrup_km": 12.9,
       "Tp": 7.19,
       "PGV": 56.1,
@@ -5351,6 +5515,7 @@
      {
       "code": "TCU128",
       "repi_km": null,
+      "rhyp_km": 63.8,
       "rrup_km": 13.1,
       "Tp": 9.02,
       "PGV": 60.7,
@@ -5359,6 +5524,7 @@
      {
       "code": "TCU136",
       "repi_km": null,
+      "rhyp_km": 49.4,
       "rrup_km": 8.3,
       "Tp": 8.88,
       "PGV": 61.5,
@@ -5367,6 +5533,7 @@
      {
       "code": "WGK",
       "repi_km": null,
+      "rhyp_km": 33.0,
       "rrup_km": 9.9,
       "Tp": 5.74,
       "PGV": 104.3,
@@ -5511,6 +5678,7 @@
      {
       "code": "CHY024",
       "repi_km": null,
+      "rhyp_km": 26.7,
       "rrup_km": 19.6,
       "Tp": 3.19,
       "PGV": 32.7,
@@ -5519,6 +5687,7 @@
      {
       "code": "CHY035",
       "repi_km": null,
+      "rhyp_km": 42.9,
       "rrup_km": 34.5,
       "Tp": 1.06,
       "PGV": 30.1,
@@ -5527,6 +5696,7 @@
      {
       "code": "CHY080",
       "repi_km": null,
+      "rhyp_km": 30.5,
       "rrup_km": 22.4,
       "Tp": 1.38,
       "PGV": 69.8,
@@ -5535,6 +5705,7 @@
      {
       "code": "TCU065",
       "repi_km": null,
+      "rhyp_km": 33.0,
       "rrup_km": 26.1,
       "Tp": 1.53,
       "PGV": 35.4,
@@ -5543,6 +5714,7 @@
      {
       "code": "TCU076",
       "repi_km": null,
+      "rhyp_km": 22.2,
       "rrup_km": 14.7,
       "Tp": 0.92,
       "PGV": 61.5,
@@ -5551,6 +5723,7 @@
      {
       "code": "TCU078",
       "repi_km": null,
+      "rhyp_km": 7.8,
       "rrup_km": 7.6,
       "Tp": 3.86,
       "PGV": 56.3,
@@ -5610,6 +5783,7 @@
      {
       "code": "CHY074",
       "repi_km": null,
+      "rhyp_km": 20.6,
       "rrup_km": 6.2,
       "Tp": 2.44,
       "PGV": 44.0,
@@ -5706,6 +5880,7 @@
      {
       "code": "CHY101",
       "repi_km": null,
+      "rhyp_km": 52.5,
       "rrup_km": 36.0,
       "Tp": 3.26,
       "PGV": 34.1,
@@ -5714,6 +5889,7 @@
      {
       "code": "TCU078",
       "repi_km": null,
+      "rhyp_km": 24.0,
       "rrup_km": 11.5,
       "Tp": 4.15,
       "PGV": 38.4,
@@ -5722,6 +5898,7 @@
      {
       "code": "TCU080",
       "repi_km": null,
+      "rhyp_km": 18.3,
       "rrup_km": 10.2,
       "Tp": 1.02,
       "PGV": 39.3,
@@ -5826,6 +6003,7 @@
      {
       "code": "Bolu",
       "repi_km": null,
+      "rhyp_km": 43.6,
       "rrup_km": 12.0,
       "Tp": 0.88,
       "PGV": 65.8,
@@ -5834,6 +6012,7 @@
      {
       "code": "Duzce",
       "repi_km": null,
+      "rhyp_km": 14.1,
       "rrup_km": 6.6,
       "Tp": 5.94,
       "PGV": 78.9,
@@ -5842,6 +6021,7 @@
      {
       "code": "IRIGM 487",
       "repi_km": null,
+      "rhyp_km": 26.7,
       "rrup_km": 2.6,
       "Tp": 10.05,
       "PGV": 39.2,
@@ -5962,6 +6142,7 @@
      {
       "code": "Arcelik",
       "repi_km": null,
+      "rhyp_km": 56.0,
       "rrup_km": 13.5,
       "Tp": 7.79,
       "PGV": 40.3,
@@ -5970,6 +6151,7 @@
      {
       "code": "Gebze",
       "repi_km": null,
+      "rhyp_km": 49.7,
       "rrup_km": 10.9,
       "Tp": 5.99,
       "PGV": 53.0,
@@ -5978,6 +6160,7 @@
      {
       "code": "Izmit",
       "repi_km": null,
+      "rhyp_km": 16.9,
       "rrup_km": 7.2,
       "Tp": 5.37,
       "PGV": 38.1,
@@ -5986,6 +6169,7 @@
      {
       "code": "Yarimca",
       "repi_km": null,
+      "rhyp_km": 25.1,
       "rrup_km": 4.8,
       "Tp": 4.95,
       "PGV": 90.6,
@@ -6046,6 +6230,7 @@
      {
       "code": "TTR008",
       "repi_km": 17.05,
+      "rhyp_km": 20.7,
       "rrup_km": 6.9,
       "Tp": 1.54,
       "PGV": 53.2,
@@ -6139,6 +6324,7 @@
      {
       "code": "Napa Fire Station #3",
       "repi_km": 9.76,
+      "rhyp_km": 14.2,
       "rrup_km": 11.5,
       "Tp": 0.73,
       "PGV": 42.4,
@@ -6232,6 +6418,7 @@
      {
       "code": "TAPS Pump Station #10",
       "repi_km": null,
+      "rhyp_km": 84.9,
       "rrup_km": 2.7,
       "Tp": 3.16,
       "PGV": 121.4,
@@ -6291,6 +6478,7 @@
      {
       "code": "Bam",
       "repi_km": null,
+      "rhyp_km": 13.9,
       "rrup_km": 1.7,
       "Tp": 2.02,
       "PGV": 124.2,
@@ -6375,6 +6563,7 @@
      {
       "code": "NIG021",
       "repi_km": 21.53,
+      "rhyp_km": 24.0,
       "rrup_km": 11.3,
       "Tp": 0.32,
       "PGV": 66.9,
@@ -6383,6 +6572,7 @@
      {
       "code": "NIGH11",
       "repi_km": 17.24,
+      "rhyp_km": 20.3,
       "rrup_km": 8.9,
       "Tp": 1.8,
       "PGV": 65.6,
@@ -6648,6 +6838,7 @@
      {
       "code": "PARKFIELD - EADES",
       "repi_km": null,
+      "rhyp_km": 12.8,
       "rrup_km": 2.9,
       "Tp": 1.22,
       "PGV": 35.8,
@@ -6656,6 +6847,7 @@
      {
       "code": "Slack Canyon",
       "repi_km": null,
+      "rhyp_km": 32.5,
       "rrup_km": 3.0,
       "Tp": 0.85,
       "PGV": 53.2,
@@ -6664,6 +6856,7 @@
      {
       "code": "Parkfield - Cholame 1E",
       "repi_km": null,
+      "rhyp_km": 14.0,
       "rrup_km": 3.0,
       "Tp": 1.33,
       "PGV": 51.6,
@@ -6672,6 +6865,7 @@
      {
       "code": "Parkfield - Cholame 2WA",
       "repi_km": null,
+      "rhyp_km": 14.1,
       "rrup_km": 3.0,
       "Tp": 1.08,
       "PGV": 57.9,
@@ -6680,6 +6874,7 @@
      {
       "code": "Parkfield - Cholame 3E",
       "repi_km": null,
+      "rhyp_km": 14.4,
       "rrup_km": 5.5,
       "Tp": 0.52,
       "PGV": 31.0,
@@ -6688,6 +6883,7 @@
      {
       "code": "Parkfield - Cholame 3W",
       "repi_km": null,
+      "rhyp_km": 14.6,
       "rrup_km": 3.6,
       "Tp": 1.02,
       "PGV": 43.5,
@@ -6696,6 +6892,7 @@
      {
       "code": "Parkfield - Cholame 4W",
       "repi_km": null,
+      "rhyp_km": 14.7,
       "rrup_km": 4.2,
       "Tp": 0.7,
       "PGV": 38.3,
@@ -6704,6 +6901,7 @@
      {
       "code": "Parkfield - Fault Zone 1",
       "repi_km": null,
+      "rhyp_km": 11.7,
       "rrup_km": 2.5,
       "Tp": 1.19,
       "PGV": 81.9,
@@ -6712,6 +6910,7 @@
      {
       "code": "Parkfield - Fault Zone 9",
       "repi_km": null,
+      "rhyp_km": 12.9,
       "rrup_km": 2.9,
       "Tp": 1.13,
       "PGV": 27.0,
@@ -6720,6 +6919,7 @@
      {
       "code": "Parkfield - Fault Zone 12",
       "repi_km": null,
+      "rhyp_km": 13.7,
       "rrup_km": 2.6,
       "Tp": 1.19,
       "PGV": 56.5,
@@ -6728,6 +6928,7 @@
      {
       "code": "Parkfield - Stone Corral 4E",
       "repi_km": null,
+      "rhyp_km": 11.9,
       "rrup_km": 8.8,
       "Tp": 0.6,
       "PGV": 84.3,
@@ -6736,6 +6937,7 @@
      {
       "code": "PARKFIELD - STONE CORRAL 1E",
       "repi_km": null,
+      "rhyp_km": 10.8,
       "rrup_km": 3.8,
       "Tp": 0.57,
       "PGV": 43.4,
@@ -6947,6 +7149,7 @@
      {
       "code": "Joetsu Kakizakiku Kakizaki",
       "repi_km": 30.03,
+      "rhyp_km": 36.6,
       "rrup_km": 11.9,
       "Tp": 1.4,
       "PGV": 91.1,
@@ -6955,6 +7158,7 @@
      {
       "code": "Yoshikawaku Joetsu City",
       "repi_km": 35.74,
+      "rhyp_km": 40.9,
       "rrup_km": 16.9,
       "Tp": 1.33,
       "PGV": 63.8,
@@ -6963,6 +7167,7 @@
      {
       "code": "Kashiwazaki City Center",
       "repi_km": 21.47,
+      "rhyp_km": 21.5,
       "rrup_km": 11.1,
       "Tp": 2.93,
       "PGV": 126.0,
@@ -6971,6 +7176,7 @@
      {
       "code": "Oguni Nagaoka",
       "repi_km": 35.15,
+      "rhyp_km": 29.0,
       "rrup_km": 20.0,
       "Tp": 0.8,
       "PGV": 80.3,
@@ -6979,6 +7185,7 @@
      {
       "code": "Kariwa",
       "repi_km": 20.54,
+      "rhyp_km": 16.1,
       "rrup_km": 12.0,
       "Tp": 3.08,
       "PGV": 154.5,
@@ -6987,6 +7194,7 @@
      {
       "code": "Yan Sakuramachi City watershed",
       "repi_km": 35.83,
+      "rhyp_km": 23.8,
       "rrup_km": 19.0,
       "Tp": 1.41,
       "PGV": 39.4,
@@ -6995,6 +7203,7 @@
      {
       "code": "Joetsu Otemachi",
       "repi_km": 51.5,
+      "rhyp_km": 58.8,
       "rrup_km": 32.9,
       "Tp": 0.55,
       "PGV": 34.9,
@@ -7003,6 +7212,7 @@
      {
       "code": "Iizuna Imokawa",
       "repi_km": 87.98,
+      "rhyp_km": 92.4,
       "rrup_km": 66.4,
       "Tp": 0.92,
       "PGV": 81.5,
@@ -7011,6 +7221,7 @@
      {
       "code": "SERVICE HALL: 2.4 M DEPTH",
       "repi_km": 18.81,
+      "rhyp_km": 16.3,
       "rrup_km": 11.0,
       "Tp": 2.39,
       "PGV": 126.0,
@@ -7019,6 +7230,7 @@
      {
       "code": "SERVICE HALL:50.8 M DEPTH",
       "repi_km": null,
+      "rhyp_km": 16.3,
       "rrup_km": 11.0,
       "Tp": 2.98,
       "PGV": 85.3,
@@ -7135,6 +7347,7 @@
      {
       "code": "IWTH26",
       "repi_km": 12.91,
+      "rhyp_km": 14.4,
       "rrup_km": 6.0,
       "Tp": 4.0,
       "PGV": 56.9,
@@ -7143,6 +7356,7 @@
      {
       "code": "Machimukai Town",
       "repi_km": 43.48,
+      "rhyp_km": 43.6,
       "rrup_km": 24.1,
       "Tp": 4.16,
       "PGV": 40.0,
@@ -7261,6 +7475,7 @@
      {
       "code": "Deyangbaima",
       "repi_km": 109.86,
+      "rhyp_km": 111.4,
       "rrup_km": 30.5,
       "Tp": 6.75,
       "PGV": 36.0,
@@ -7269,6 +7484,7 @@
      {
       "code": "Mianzuqingping",
       "repi_km": 86.71,
+      "rhyp_km": 90.3,
       "rrup_km": 6.6,
       "Tp": 9.37,
       "PGV": 144.5,
@@ -7394,6 +7610,7 @@
      {
       "code": "L'Aquila - V. Aterno - Centro Valle",
       "repi_km": null,
+      "rhyp_km": 10.3,
       "rrup_km": 6.3,
       "Tp": 1.07,
       "PGV": 42.1,
@@ -7402,6 +7619,7 @@
      {
       "code": "L'Aquila - V. Aterno -F. Aterno",
       "repi_km": null,
+      "rhyp_km": 10.4,
       "rrup_km": 6.5,
       "Tp": 1.18,
       "PGV": 31.6,
@@ -7410,6 +7628,7 @@
      {
       "code": "L'Aquila - Parking",
       "repi_km": null,
+      "rhyp_km": 9.4,
       "rrup_km": 5.4,
       "Tp": 1.98,
       "PGV": 46.3,
@@ -7673,6 +7892,7 @@
      {
       "code": "CBGS",
       "repi_km": null,
+      "rhyp_km": 48.2,
       "rrup_km": 18.1,
       "Tp": 12.62,
       "PGV": 59.9,
@@ -7681,6 +7901,7 @@
      {
       "code": "DSLC",
       "repi_km": null,
+      "rhyp_km": 17.3,
       "rrup_km": 8.5,
       "Tp": 7.83,
       "PGV": 65.9,
@@ -7689,6 +7910,7 @@
      {
       "code": "GDLC",
       "repi_km": null,
+      "rhyp_km": 11.8,
       "rrup_km": 1.2,
       "Tp": 6.23,
       "PGV": 128.5,
@@ -7697,6 +7919,7 @@
      {
       "code": "HORC",
       "repi_km": null,
+      "rhyp_km": 15.4,
       "rrup_km": 7.3,
       "Tp": 9.92,
       "PGV": 106.1,
@@ -7705,6 +7928,7 @@
      {
       "code": "LINC",
       "repi_km": null,
+      "rhyp_km": 35.5,
       "rrup_km": 7.1,
       "Tp": 7.37,
       "PGV": 116.5,
@@ -7713,6 +7937,7 @@
      {
       "code": "LPCC",
       "repi_km": null,
+      "rhyp_km": 55.3,
       "rrup_km": 25.7,
       "Tp": 10.63,
       "PGV": 30.2,
@@ -7721,6 +7946,7 @@
      {
       "code": "NNBS",
       "repi_km": null,
+      "rhyp_km": 56.6,
       "rrup_km": 26.8,
       "Tp": 8.04,
       "PGV": 56.5,
@@ -7729,6 +7955,7 @@
      {
       "code": "REHS",
       "repi_km": null,
+      "rhyp_km": 49.5,
       "rrup_km": 19.5,
       "Tp": 12.02,
       "PGV": 65.3,
@@ -7737,6 +7964,7 @@
      {
       "code": "RHSC",
       "repi_km": null,
+      "rhyp_km": 43.8,
       "rrup_km": 13.6,
       "Tp": 9.39,
       "PGV": 63.8,
@@ -7745,6 +7973,7 @@
      {
       "code": "ROLC",
       "repi_km": null,
+      "rhyp_km": 29.0,
       "rrup_km": 1.5,
       "Tp": 7.14,
       "PGV": 85.7,
@@ -7753,6 +7982,7 @@
      {
       "code": "SHLC",
       "repi_km": null,
+      "rhyp_km": 52.2,
       "rrup_km": 22.3,
       "Tp": 8.76,
       "PGV": 65.7,
@@ -7761,6 +7991,7 @@
      {
       "code": "SMTC",
       "repi_km": null,
+      "rhyp_km": 49.6,
       "rrup_km": 20.9,
       "Tp": 9.35,
       "PGV": 64.4,
@@ -7769,6 +8000,7 @@
      {
       "code": "TPLC",
       "repi_km": null,
+      "rhyp_km": 36.5,
       "rrup_km": 6.1,
       "Tp": 8.93,
       "PGV": 74.1,
@@ -7865,6 +8097,7 @@
      {
       "code": "TAMAULIPAS",
       "repi_km": null,
+      "rhyp_km": 28.4,
       "rrup_km": 26.6,
       "Tp": 8.43,
       "PGV": 56.3,
@@ -7873,6 +8106,7 @@
      {
       "code": "El Centro Array #12",
       "repi_km": null,
+      "rhyp_km": 58.3,
       "rrup_km": 11.3,
       "Tp": 8.72,
       "PGV": 72.6,
@@ -7881,6 +8115,7 @@
      {
       "code": "Westside Elementary School",
       "repi_km": null,
+      "rhyp_km": 67.4,
       "rrup_km": 11.4,
       "Tp": 7.08,
       "PGV": 60.7,
@@ -8047,6 +8282,7 @@
      {
       "code": "CCCC",
       "repi_km": null,
+      "rhyp_km": 8.3,
       "rrup_km": 3.3,
       "Tp": 1.72,
       "PGV": 66.9,
@@ -8055,6 +8291,7 @@
      {
       "code": "CHHC",
       "repi_km": null,
+      "rhyp_km": 9.5,
       "rrup_km": 4.8,
       "Tp": 1.96,
       "PGV": 81.3,
@@ -8063,6 +8300,7 @@
      {
       "code": "CMHS",
       "repi_km": null,
+      "rhyp_km": 8.8,
       "rrup_km": 4.5,
       "Tp": 2.04,
       "PGV": 48.1,
@@ -8071,6 +8309,7 @@
      {
       "code": "HPSC",
       "repi_km": null,
+      "rhyp_km": 9.8,
       "rrup_km": 4.3,
       "Tp": 6.85,
       "PGV": 48.3,
@@ -8079,6 +8318,7 @@
      {
       "code": "PRPC",
       "repi_km": null,
+      "rhyp_km": 7.7,
       "rrup_km": 2.0,
       "Tp": 4.82,
       "PGV": 123.1,
@@ -8087,6 +8327,7 @@
      {
       "code": "REHS",
       "repi_km": null,
+      "rhyp_km": 9.7,
       "rrup_km": 5.1,
       "Tp": 1.55,
       "PGV": 97.5,
@@ -8095,6 +8336,7 @@
      {
       "code": "SHLC",
       "repi_km": null,
+      "rhyp_km": 10.0,
       "rrup_km": 5.6,
       "Tp": 3.58,
       "PGV": 72.4,
@@ -8103,6 +8345,7 @@
      {
       "code": "LPCC",
       "repi_km": null,
+      "rhyp_km": 7.3,
       "rrup_km": 6.1,
       "Tp": 3.8,
       "PGV": 44.7,
