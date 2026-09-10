@@ -1,31 +1,31 @@
 {
-  "catalogs": [
-    {
-      "id": "shahi_baker_2014",
-      "label": "S&B",
-      "short": "S&B 2014",
-      "url": "https://www.jackwbaker.com/pulse_classification_v2/Pulse-like-records.html",
-      "n_events": 46,
-      "n_records": 243,
-      "pulse_only": false
-    },
-    {
-      "id": "taiwan_ncree",
-      "label": "NCREE",
-      "short": "NCREE",
-      "url": "https://nfpv.ncree.org.tw/",
-      "n_events": 56,
-      "n_records": 340,
-      "pulse_only": false
-    },
-    {
-      "id": "yen_2022",
-      "label": "YEN",
-      "short": "Yen",
-      "url": "",
-      "n_events": 6,
-      "n_records": 84,
-      "pulse_only": true
-    }
-  ]
+ "catalogs": [
+  {
+   "id": "shahi_baker_2014",
+   "label": "S&B",
+   "short": "S&B 2014",
+   "url": "https://www.jackwbaker.com/pulse_classification_v2/Pulse-like-records.html",
+   "n_events": 46,
+   "n_records": 243,
+   "pulse_only": false
+  },
+  {
+   "id": "taiwan_ncree",
+   "label": "NCREE",
+   "short": "NCREE",
+   "url": "https://nfpv.ncree.org.tw/",
+   "n_events": 56,
+   "n_records": 340,
+   "pulse_only": false
+  },
+  {
+   "id": "yen_2022",
+   "label": "YEN",
+   "short": "YEN",
+   "url": "",
+   "n_events": 6,
+   "n_records": 84,
+   "pulse_only": true
+  }
+ ]
 }

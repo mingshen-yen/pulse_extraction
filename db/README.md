@@ -23,29 +23,37 @@ D1 "pulse_db"  ◄── functions/_lib.js ──►  /api/catalogs , /api/catal
                                           site/app.js (REF_API)
 ```
 
-## Regenerate the SQL from the workbook
+## Regenerate everything from the workbook
+
+`references/tables/pulse_table_audited.xlsx` is the **single source of truth**
+for the reference catalogs — both the D1 seed and the static
+`site/data/reference/*.json` fallback bundle are derived from it (the old
+`scripts/import_reference_tables.py` + `pulse_records_with_coords.csv` path is
+superseded).
 
 ```bash
 pip install openpyxl
-python scripts/load_workbook.py                       # -> db/seed.sql
-python scripts/load_workbook.py --sqlite db/site.dev.db   # + a local SQLite DB
+python scripts/load_workbook.py --sqlite db/site.dev.db   # xlsx -> db/seed.sql + local DB
+node   scripts/build_reference_json.mjs                   # local DB -> site/data/reference/*.json
+node   scripts/check_api_parity.mjs                       # confirm the two agree
 ```
 
-`db/seed.sql` and `db/site.dev.db` are generated artefacts (git-ignored).
-`db/schema.sql` is the human-owned schema; `db/migrations/0001_init.sql` is the
-identical first migration wrangler applies.
+`db/seed.sql` and `db/site.dev.db` are generated artefacts (git-ignored); the
+JSON bundle is committed so plain GitHub Pages still works. `db/schema.sql` is
+the human-owned schema; `db/migrations/0001_init.sql` is the identical first
+migration wrangler applies. Catalog display text (label / citation / url) lives
+in `CATALOGS` in `scripts/load_workbook.py` — the workbook has no label sheet.
 
-## Prove the API matches the current site before switching
+## Parity check
 
 ```bash
-node scripts/check_api_parity.mjs        # diffs functions/_lib.js output vs site/data/reference/*.json
+node scripts/check_api_parity.mjs        # functions/_lib.js output vs site/data/reference/*.json
 ```
 
-Expected: **all checks passed**, with a note that 36 event *keys* change
-(the audited table carries clean display names — "San Fernando" instead of
-"1971 SanFernando USA"). The key is only an internal Map id in `app.js`; no
-deep links use it. Per-station numbers may also drift slightly because the
-audited workbook carries USGS hypocentres rather than the old NGA ones.
+Both sides come from the same code now, so this is a regression guard:
+**all checks passed**. (Event *keys* and some display names / hypocentres
+changed vs the pre-xlsx bundle — the key is only an internal Map id in
+`app.js`, no deep links use it.)
 
 ## One-time Cloudflare setup
 

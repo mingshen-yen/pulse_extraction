@@ -34,18 +34,21 @@ CATALOG_MAP = {
     "Taiwan database(NCREE)": "taiwan_ncree",
     "Yen(2022)": "yen_2022",
 }
-# label = compact form shown in the "Data source" selector (frontend reads
-# catalogs.label); citation = full reference shown under the selector.
+# Catalog display metadata (the workbook has no catalog-label sheet).  label =
+# compact form in the "Data source" selector; citation = text under it.
 CATALOGS = [
-    dict(id="shahi_baker_2014", label="S&B 2014", short="S&B 2014",
-         citation="Shahi, S.K. & Baker, J.W. (2014), BSSA 104(5). "
-                  "Pulse-like-records list.",
+    dict(id="shahi_baker_2014", label="S&B", short="S&B 2014",
+         citation="Ground motions in the NGA-West2 database that were identified "
+                  "as pulse-like using the Shahi and Baker (2014) model.",
          url=f"{JWB}/Pulse-like-records.html", pulse_only=0, sort_order=1),
     dict(id="taiwan_ncree", label="NCREE", short="NCREE",
-         citation="NCREE near-fault pulse-like ground-motion database, Taiwan.",
-         url="https://www.ncree.org/", pulse_only=0, sort_order=2),
-    dict(id="yen_2022", label="Yen 2022", short="Yen 2022",
-         citation="Yen et al. (2022) near-fault velocity-pulse catalog.",
+         citation="Database of Near-Fault Strong Motions with Pulse-like "
+                  "Velocity from NCREE, using the Shahi and Baker (2014) model.",
+         url="https://nfpv.ncree.org.tw/", pulse_only=0, sort_order=2),
+    dict(id="yen_2022", label="YEN", short="YEN",
+         citation="Identified pulses from Yen et al.(2022), "
+                  "Türker et al. (2024) and Yen et al. (2025), using the "
+                  "Shahi and Baker (2014) model.",
          url="", pulse_only=1, sort_order=3),
 ]
 
