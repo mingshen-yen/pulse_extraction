@@ -14,6 +14,19 @@ const evKey = (n, y) =>
     .replace(/[^a-z0-9]+/g, "_")
     .replace(/^_|_$/g, "") + (y ? "|" + y : "");
 
+/* Reference catalogs load from the static JSON bundle by default.  Set
+   window.PULSE_REF_API (e.g. "/api") or append ?refapi=/api to read them from
+   the D1-backed Pages Functions instead — the JSON shapes are identical
+   (functions/_lib.js mirrors scripts/import_reference_tables.py). */
+const REF_API =
+  new URLSearchParams(location.search).get("refapi") ||
+  (typeof window !== "undefined" && window.PULSE_REF_API) ||
+  null;
+const refIndexURL = () =>
+  REF_API ? `${REF_API}/catalogs` : "data/reference/index.json";
+const refCatalogURL = (id) =>
+  REF_API ? `${REF_API}/catalog/${id}` : `data/reference/${id}.json`;
+
 const map = L.map("map", { zoomControl: true }).setView([20, 0], 2);
 
 const OSM_ATTR =
@@ -53,7 +66,7 @@ const byNewest = (events) =>
 async function boot() {
   const [pipe, refIdx] = await Promise.all([
     fetch("data/index.json").then((r) => r.json()),
-    fetch("data/reference/index.json")
+    fetch(refIndexURL())
       .then((r) => r.json())
       .catch(() => ({ catalogs: [] })),
   ]);
@@ -67,9 +80,7 @@ async function boot() {
   };
   await Promise.all(
     refIdx.catalogs.map(async (c) => {
-      const doc = await fetch(`data/reference/${c.id}.json`).then((r) =>
-        r.json(),
-      );
+      const doc = await fetch(refCatalogURL(c.id)).then((r) => r.json());
       sources[c.id] = {
         label: c.label,
         kind: "reference",
