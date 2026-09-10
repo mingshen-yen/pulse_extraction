@@ -3,7 +3,7 @@
   "catalog": "taiwan_ncree",
   "label": "NCREE",
   "short": "NCREE",
-  "citation": "Database of Near-Fault Strong Motions with Pulse-like Velocity from NCREE",
+  "citation": "Database of Near-Fault Strong Motions with Pulse-like Velocity from NCREE, using the Shahi and Baker (2014) model.",
   "url": "https://nfpv.ncree.org.tw/",
   "pulse_only": false,
   "n_events": 56,
