@@ -31,11 +31,11 @@ header {
 }
 header h1 {
   margin: 0 0 0px;
-  font-size: 24px;
+  font-size: 22px;
 }
 header p {
   margin: 0;
-  max-width: 120ch;
+  max-width: 250ch;
   color: #445;
 }
 
