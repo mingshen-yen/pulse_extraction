@@ -16,5 +16,5 @@ compatibility_date = "2024-09-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "pulse_db"
-database_id = "REPLACE_WITH_ID_FROM_wrangler_d1_create"
+database_id = "77b673d8-0d51-420f-abb0-23f82b2d5675"
 migrations_dir = "db/migrations"
