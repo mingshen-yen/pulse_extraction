@@ -1,6 +1,6 @@
 {
  "schema": "pulse-extraction/reference/2",
- "catalog": "yen_2022",
+ "catalog": "yen",
  "label": "YEN",
  "short": "YEN",
  "citation": "Identified pulses from Yen et al.(2022), T\u00fcrker et al. (2024) and Yen et al. (2025), using the Shahi and Baker (2014) model.",

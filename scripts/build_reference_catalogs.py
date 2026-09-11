@@ -39,22 +39,23 @@ JWB = "https://www.jackwbaker.com/pulse_classification_v2"
 BIN_EDGES = (0, 5, 10, 20, 40, 80, 160)
 R_EARTH_KM = 6371.0088
 
-# active_sheet -> catalog id shown on the site
-ACTIVE_MAP = {"S&B": "shahi_baker_2014", "NCREE": "taiwan_ncree", "YEN": "yen_2022"}
+# active_sheet -> catalog id shown on the site (id = the workbook's own sheet
+# tab name, lowercased; matches the S&B / NCREE / YEN sheets in pulse_table.xlsx)
+ACTIVE_MAP = {"S&B": "sb", "NCREE": "ncree", "YEN": "yen"}
 
 # Catalog display metadata (the workbook has no catalog-label sheet).
 CATALOGS = {
-    "shahi_baker_2014": dict(
+    "sb": dict(
         label="S&B", short="S&B 2014",
         citation="Ground motions in the NGA-West2 database that were identified "
                  "as pulse-like using the Shahi and Baker (2014) model.",
         url=f"{JWB}/Pulse-like-records.html", pulse_only=False, sort_order=1),
-    "taiwan_ncree": dict(
+    "ncree": dict(
         label="NCREE", short="NCREE",
         citation="Database of Near-Fault Strong Motions with Pulse-like "
                  "Velocity from NCREE, using the Shahi and Baker (2014) model.",
         url="https://nfpv.ncree.org.tw/", pulse_only=False, sort_order=2),
-    "yen_2022": dict(
+    "yen": dict(
         label="YEN", short="YEN",
         citation="Identified pulses from Yen et al.(2022), "
                  "Türker et al. (2024) and Yen et al. (2025), using the "
@@ -202,7 +203,7 @@ def _station(r, ev, cat):
         vals = [v for v in (ew, ns) if v is not None]
         pgv = max(vals) if vals else None
     is_pulse = bool(r.get("fault_normal_pulse") == 1 or r.get("Ipulse_H") is True
-                   or cat == "yen_2022")
+                   or cat == "yen")
     lat, lon = _f(r.get("latitude_deg")), _f(r.get("longitude_deg"))
     s = dict(
         code=str(r["station_original"]).strip() if r.get("station_original") not in (None, "")
@@ -220,7 +221,7 @@ def _station(r, ev, cat):
         fling={True: True, False: False}.get(r.get("fling")),
         directivity=True if r.get("directivity_effect") == 1 else None,
         rsn=rsn,
-        summary_url=f"{JWB}/{rsn}.html" if rsn and cat == "shahi_baker_2014" else None,
+        summary_url=f"{JWB}/{rsn}.html" if rsn and cat == "sb" else None,
         quality_flag=str(r["quality_flag"]) if r.get("quality_flag") not in (None, "") else None,
         coord_status=r.get("coord_status") if r.get("coord_status") not in (None, "matched") else None,
         repi_km=_r(haversine_km(ev.get("hypo_latitude_deg"), ev.get("hypo_longitude_deg"),

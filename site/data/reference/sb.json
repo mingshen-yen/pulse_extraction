@@ -1,6 +1,6 @@
 {
  "schema": "pulse-extraction/reference/2",
- "catalog": "shahi_baker_2014",
+ "catalog": "sb",
  "label": "S&B",
  "short": "S&B 2014",
  "citation": "Ground motions in the NGA-West2 database that were identified as pulse-like using the Shahi and Baker (2014) model.",

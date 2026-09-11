@@ -1,6 +1,6 @@
 {
  "schema": "pulse-extraction/reference/2",
- "catalog": "taiwan_ncree",
+ "catalog": "ncree",
  "label": "NCREE",
  "short": "NCREE",
  "citation": "Database of Near-Fault Strong Motions with Pulse-like Velocity from NCREE, using the Shahi and Baker (2014) model.",

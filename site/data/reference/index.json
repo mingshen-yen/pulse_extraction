@@ -1,7 +1,7 @@
 {
  "catalogs": [
   {
-   "id": "shahi_baker_2014",
+   "id": "sb",
    "label": "S&B",
    "short": "S&B 2014",
    "url": "https://www.jackwbaker.com/pulse_classification_v2/Pulse-like-records.html",
@@ -10,7 +10,7 @@
    "pulse_only": false
   },
   {
-   "id": "taiwan_ncree",
+   "id": "ncree",
    "label": "NCREE",
    "short": "NCREE",
    "url": "https://nfpv.ncree.org.tw/",
@@ -19,7 +19,7 @@
    "pulse_only": false
   },
   {
-   "id": "yen_2022",
+   "id": "yen",
    "label": "YEN",
    "short": "YEN",
    "url": "",
