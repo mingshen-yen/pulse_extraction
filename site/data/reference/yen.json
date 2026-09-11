@@ -2490,8 +2490,257 @@
    "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000irp8"
   },
   {
-   "key": "turkey_1|2023",
-   "name": "turkey-1",
+   "key": "elbistan|2023",
+   "name": "Elbistan",
+   "year": "2023",
+   "lat": 38.0106,
+   "lon": 37.1962,
+   "depth_km": 7.432,
+   "mag": 7.5,
+   "fault_type": "strike-slip",
+   "stations": [
+    {
+     "code": "4612",
+     "lat": 38.02395,
+     "lon": 36.48187,
+     "rrup_km": 3.0,
+     "rhyp_km": 63.034,
+     "is_pulse": true,
+     "Tp": 6.2,
+     "PGV": 180.9,
+     "ori_n": -18.0,
+     "ori_fp": 88.0,
+     "repi_km": 62.59
+    },
+    {
+     "code": "131",
+     "lat": 37.856602,
+     "lon": 36.115347,
+     "rrup_km": 15.4,
+     "rhyp_km": 96.613,
+     "is_pulse": true,
+     "Tp": 11.7,
+     "PGV": 37.4,
+     "ori_n": -34.0,
+     "ori_fp": 76.0,
+     "repi_km": 96.33
+    },
+    {
+     "code": "132",
+     "lat": 37.855892,
+     "lon": 36.114868,
+     "rrup_km": 15.5,
+     "rhyp_km": 96.669,
+     "is_pulse": true,
+     "Tp": 11.8,
+     "PGV": 24.2,
+     "ori_n": -23.0,
+     "ori_fp": 87.0,
+     "repi_km": 96.38
+    },
+    {
+     "code": "4611",
+     "lat": 37.7472,
+     "lon": 37.28426,
+     "rrup_km": 27.4,
+     "rhyp_km": 31.19,
+     "is_pulse": true,
+     "Tp": 10.8,
+     "PGV": 40.3,
+     "ori_n": 74.0,
+     "ori_fp": 22.0,
+     "repi_km": 30.29
+    },
+    {
+     "code": "4614",
+     "lat": 37.48513,
+     "lon": 37.29775,
+     "rrup_km": 55.9,
+     "rhyp_km": 59.573,
+     "is_pulse": true,
+     "Tp": 9.3,
+     "PGV": 34.5,
+     "ori_n": 86.0,
+     "ori_fp": 11.0,
+     "repi_km": 59.11
+    },
+    {
+     "code": "NAR",
+     "lat": 37.3919,
+     "lon": 37.1574,
+     "rrup_km": 68.2,
+     "rhyp_km": 69.281,
+     "is_pulse": true,
+     "Tp": 9.6,
+     "PGV": 26.5,
+     "ori_n": 89.0,
+     "ori_fp": 7.0,
+     "repi_km": 68.88
+    },
+    {
+     "code": "4615",
+     "lat": 37.38676,
+     "lon": 37.13803,
+     "rrup_km": 69.1,
+     "rhyp_km": 69.952,
+     "is_pulse": true,
+     "Tp": 9.4,
+     "PGV": 30.4,
+     "ori_n": 83.0,
+     "ori_fp": 13.0,
+     "repi_km": 69.56
+    }
+   ],
+   "stats": {
+    "n": 7,
+    "n_pulse": 7,
+    "pulse_fraction": 1.0,
+    "Tp_median": 9.6,
+    "PGV_median": 34.5,
+    "Tp_range": [
+     6.2,
+     11.8
+    ],
+    "by_distance": [
+     {
+      "r_lo": 0,
+      "r_hi": 5,
+      "n": 1,
+      "n_pulse": 1,
+      "pulse_fraction": 1.0,
+      "Tp_median": 6.2
+     },
+     {
+      "r_lo": 10,
+      "r_hi": 20,
+      "n": 2,
+      "n_pulse": 2,
+      "pulse_fraction": 1.0,
+      "Tp_median": 11.8
+     },
+     {
+      "r_lo": 20,
+      "r_hi": 40,
+      "n": 1,
+      "n_pulse": 1,
+      "pulse_fraction": 1.0,
+      "Tp_median": 10.8
+     },
+     {
+      "r_lo": 40,
+      "r_hi": 80,
+      "n": 3,
+      "n_pulse": 3,
+      "pulse_fraction": 1.0,
+      "Tp_median": 9.4
+     }
+    ],
+    "scatter": [
+     {
+      "code": "4612",
+      "repi_km": 62.59,
+      "rhyp_km": 63.034,
+      "rrup_km": 3.0,
+      "Tp": 6.2,
+      "PGV": 180.9,
+      "is_pulse": true
+     },
+     {
+      "code": "131",
+      "repi_km": 96.33,
+      "rhyp_km": 96.613,
+      "rrup_km": 15.4,
+      "Tp": 11.7,
+      "PGV": 37.4,
+      "is_pulse": true
+     },
+     {
+      "code": "132",
+      "repi_km": 96.38,
+      "rhyp_km": 96.669,
+      "rrup_km": 15.5,
+      "Tp": 11.8,
+      "PGV": 24.2,
+      "is_pulse": true
+     },
+     {
+      "code": "4611",
+      "repi_km": 30.29,
+      "rhyp_km": 31.19,
+      "rrup_km": 27.4,
+      "Tp": 10.8,
+      "PGV": 40.3,
+      "is_pulse": true
+     },
+     {
+      "code": "4614",
+      "repi_km": 59.11,
+      "rhyp_km": 59.573,
+      "rrup_km": 55.9,
+      "Tp": 9.3,
+      "PGV": 34.5,
+      "is_pulse": true
+     },
+     {
+      "code": "NAR",
+      "repi_km": 68.88,
+      "rhyp_km": 69.281,
+      "rrup_km": 68.2,
+      "Tp": 9.6,
+      "PGV": 26.5,
+      "is_pulse": true
+     },
+     {
+      "code": "4615",
+      "repi_km": 69.56,
+      "rhyp_km": 69.952,
+      "rrup_km": 69.1,
+      "Tp": 9.4,
+      "PGV": 30.4,
+      "is_pulse": true
+     }
+    ]
+   },
+   "n_mappable": 7,
+   "fault": {
+    "strike": 276,
+    "dip": 80,
+    "length_km": 195,
+    "width_km": 30,
+    "model": "USGS finite-fault inversion",
+    "trace": [
+     [
+      38.30174,
+      37.91905
+     ],
+     [
+      36.09066,
+      38.10215
+     ]
+    ],
+    "rake": -0.0,
+    "segments": 3
+   },
+   "source_model": {
+    "np1": [
+     277.2,
+     77.87,
+     3.5
+    ],
+    "np2": [
+     186.46,
+     86.57,
+     167.85
+    ],
+    "source": "USGS moment-tensor",
+    "mag": 7.5,
+    "mag_type": "Mw"
+   },
+   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jlqa"
+  },
+  {
+   "key": "pazarcik|2023",
+   "name": "Pazarcik",
    "year": "2023",
    "lat": 37.2256,
    "lon": 37.0143,
@@ -3081,255 +3330,6 @@
     "mag_type": "Mw"
    },
    "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jllz"
-  },
-  {
-   "key": "turkey_2|2023",
-   "name": "turkey-2",
-   "year": "2023",
-   "lat": 38.0106,
-   "lon": 37.1962,
-   "depth_km": 7.432,
-   "mag": 7.5,
-   "fault_type": "strike-slip",
-   "stations": [
-    {
-     "code": "4612",
-     "lat": 38.02395,
-     "lon": 36.48187,
-     "rrup_km": 3.0,
-     "rhyp_km": 63.034,
-     "is_pulse": true,
-     "Tp": 6.2,
-     "PGV": 180.9,
-     "ori_n": -18.0,
-     "ori_fp": 88.0,
-     "repi_km": 62.59
-    },
-    {
-     "code": "131",
-     "lat": 37.856602,
-     "lon": 36.115347,
-     "rrup_km": 15.4,
-     "rhyp_km": 96.613,
-     "is_pulse": true,
-     "Tp": 11.7,
-     "PGV": 37.4,
-     "ori_n": -34.0,
-     "ori_fp": 76.0,
-     "repi_km": 96.33
-    },
-    {
-     "code": "132",
-     "lat": 37.855892,
-     "lon": 36.114868,
-     "rrup_km": 15.5,
-     "rhyp_km": 96.669,
-     "is_pulse": true,
-     "Tp": 11.8,
-     "PGV": 24.2,
-     "ori_n": -23.0,
-     "ori_fp": 87.0,
-     "repi_km": 96.38
-    },
-    {
-     "code": "4611",
-     "lat": 37.7472,
-     "lon": 37.28426,
-     "rrup_km": 27.4,
-     "rhyp_km": 31.19,
-     "is_pulse": true,
-     "Tp": 10.8,
-     "PGV": 40.3,
-     "ori_n": 74.0,
-     "ori_fp": 22.0,
-     "repi_km": 30.29
-    },
-    {
-     "code": "4614",
-     "lat": 37.48513,
-     "lon": 37.29775,
-     "rrup_km": 55.9,
-     "rhyp_km": 59.573,
-     "is_pulse": true,
-     "Tp": 9.3,
-     "PGV": 34.5,
-     "ori_n": 86.0,
-     "ori_fp": 11.0,
-     "repi_km": 59.11
-    },
-    {
-     "code": "NAR",
-     "lat": 37.3919,
-     "lon": 37.1574,
-     "rrup_km": 68.2,
-     "rhyp_km": 69.281,
-     "is_pulse": true,
-     "Tp": 9.6,
-     "PGV": 26.5,
-     "ori_n": 89.0,
-     "ori_fp": 7.0,
-     "repi_km": 68.88
-    },
-    {
-     "code": "4615",
-     "lat": 37.38676,
-     "lon": 37.13803,
-     "rrup_km": 69.1,
-     "rhyp_km": 69.952,
-     "is_pulse": true,
-     "Tp": 9.4,
-     "PGV": 30.4,
-     "ori_n": 83.0,
-     "ori_fp": 13.0,
-     "repi_km": 69.56
-    }
-   ],
-   "stats": {
-    "n": 7,
-    "n_pulse": 7,
-    "pulse_fraction": 1.0,
-    "Tp_median": 9.6,
-    "PGV_median": 34.5,
-    "Tp_range": [
-     6.2,
-     11.8
-    ],
-    "by_distance": [
-     {
-      "r_lo": 0,
-      "r_hi": 5,
-      "n": 1,
-      "n_pulse": 1,
-      "pulse_fraction": 1.0,
-      "Tp_median": 6.2
-     },
-     {
-      "r_lo": 10,
-      "r_hi": 20,
-      "n": 2,
-      "n_pulse": 2,
-      "pulse_fraction": 1.0,
-      "Tp_median": 11.8
-     },
-     {
-      "r_lo": 20,
-      "r_hi": 40,
-      "n": 1,
-      "n_pulse": 1,
-      "pulse_fraction": 1.0,
-      "Tp_median": 10.8
-     },
-     {
-      "r_lo": 40,
-      "r_hi": 80,
-      "n": 3,
-      "n_pulse": 3,
-      "pulse_fraction": 1.0,
-      "Tp_median": 9.4
-     }
-    ],
-    "scatter": [
-     {
-      "code": "4612",
-      "repi_km": 62.59,
-      "rhyp_km": 63.034,
-      "rrup_km": 3.0,
-      "Tp": 6.2,
-      "PGV": 180.9,
-      "is_pulse": true
-     },
-     {
-      "code": "131",
-      "repi_km": 96.33,
-      "rhyp_km": 96.613,
-      "rrup_km": 15.4,
-      "Tp": 11.7,
-      "PGV": 37.4,
-      "is_pulse": true
-     },
-     {
-      "code": "132",
-      "repi_km": 96.38,
-      "rhyp_km": 96.669,
-      "rrup_km": 15.5,
-      "Tp": 11.8,
-      "PGV": 24.2,
-      "is_pulse": true
-     },
-     {
-      "code": "4611",
-      "repi_km": 30.29,
-      "rhyp_km": 31.19,
-      "rrup_km": 27.4,
-      "Tp": 10.8,
-      "PGV": 40.3,
-      "is_pulse": true
-     },
-     {
-      "code": "4614",
-      "repi_km": 59.11,
-      "rhyp_km": 59.573,
-      "rrup_km": 55.9,
-      "Tp": 9.3,
-      "PGV": 34.5,
-      "is_pulse": true
-     },
-     {
-      "code": "NAR",
-      "repi_km": 68.88,
-      "rhyp_km": 69.281,
-      "rrup_km": 68.2,
-      "Tp": 9.6,
-      "PGV": 26.5,
-      "is_pulse": true
-     },
-     {
-      "code": "4615",
-      "repi_km": 69.56,
-      "rhyp_km": 69.952,
-      "rrup_km": 69.1,
-      "Tp": 9.4,
-      "PGV": 30.4,
-      "is_pulse": true
-     }
-    ]
-   },
-   "n_mappable": 7,
-   "fault": {
-    "strike": 276,
-    "dip": 80,
-    "length_km": 195,
-    "width_km": 30,
-    "model": "USGS finite-fault inversion",
-    "trace": [
-     [
-      38.30174,
-      37.91905
-     ],
-     [
-      36.09066,
-      38.10215
-     ]
-    ],
-    "rake": -0.0,
-    "segments": 3
-   },
-   "source_model": {
-    "np1": [
-     277.2,
-     77.87,
-     3.5
-    ],
-    "np2": [
-     186.46,
-     86.57,
-     167.85
-    ],
-    "source": "USGS moment-tensor",
-    "mag": 7.5,
-    "mag_type": "Mw"
-   },
-   "usgs_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jlqa"
   }
  ]
 }

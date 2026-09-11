@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 import statistics as st
 import sys
 from pathlib import Path
@@ -92,9 +93,21 @@ def haversine_km(lat1, lon1, lat2, lon2):
 
 
 def key(name, year=""):
-    import re
     s = re.sub(r"[^a-z0-9]+", "_", f"{name}".lower()).strip("_")
     return f"{s}|{year}" if year else s
+
+
+# event_names is "seg | seg | ..."; usually the display name comes first
+# ("San Fernando | 1971_SanFernando_USA") but a few rows lead with an internal
+# alias instead ("turkey-1 | Pazarcik"). Skip alias-shaped segments -- all
+# lowercase-word-dash-digit, ALL_CAPS/underscore codes, or a leading
+# yyyy_-prefixed slug -- and take the first segment that looks like a name.
+_ALIAS_SEG = re.compile(r"^[a-z]+-\d+$|^[A-Z0-9_]+$|^\d{4}_|^[a-z0-9]+(?:_[a-z0-9]+)+$")
+
+
+def display_name(event_names, fallback):
+    segs = [s.strip() for s in str(event_names or fallback).split("|")]
+    return next((s for s in segs if not _ALIAS_SEG.match(s)), segs[0])
 
 
 def _dist(s):
@@ -257,11 +270,11 @@ def build():
             segs = segs_by_event.get(ev["event_key"], [])
             fault = _fault_model(ev, segs)
             sm = _source_model(ev)
-            names = ev.get("event_names") or ev["event_key"]
+            name = display_name(ev.get("event_names"), ev["event_key"])
             out = dict(
-                key=key(str(names).split("|")[0].strip(), ev["event_key"][:4]
+                key=key(name, ev["event_key"][:4]
                         if ev["event_key"][:4].isdigit() else ""),
-                name=str(names).split("|")[0].strip(),
+                name=name,
                 year=ev["event_key"][:4] if ev["event_key"][:4].isdigit() else None,
                 lat=ev.get("hypo_latitude_deg"), lon=ev.get("hypo_longitude_deg"),
                 depth_km=ev.get("hypo_depth_km"), mag=ev.get("catalog_magnitude"),
