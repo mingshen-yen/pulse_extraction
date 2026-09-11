@@ -109,8 +109,73 @@ async function setSource(id) {
         : "")
     : `${s.list.length} events processed end-to-end · updated ` +
       `${(s.generated || "").slice(0, 16).replace("T", " ")} UTC`;
-  if (s.list.length) selectEvent(s.list[0].key);
+  showOverview(s);
 }
+
+/* ---------- catalog overview: every epicentre, nothing selected --------- */
+function showOverview(s) {
+  current = null;
+  document
+    .querySelectorAll("#event-list li")
+    .forEach((x) => x.classList.remove("active"));
+  document
+    .querySelectorAll("#panel table.rec-table")
+    .forEach((t) => t.remove());
+  Object.values(charts).forEach((c) => c.destroy());
+  charts = {};
+  $("#charts").hidden = true;
+  drawOverviewMap(s);
+  drawOverviewHead(s);
+  $("#station-detail").innerHTML =
+    '<span class="muted">Select an event from the list or a marker on the map.</span>';
+}
+
+function drawOverviewMap(s) {
+  layer.clearLayers();
+  oriLayer.clearLayers();
+  oriData = [];
+  const pts = [];
+  s.list.forEach((e) => {
+    if (e.lat == null) return;
+    const np = e.n_pulse ?? e.stats?.n_pulse ?? 0;
+    const n = e.n ?? e.stats?.n ?? 0;
+    L.marker([e.lat, e.lon], {
+      icon: L.divIcon({
+        className: "epi epi-small",
+        html: "★",
+        iconSize: [16, 16],
+        iconAnchor: [8, 8],
+      }),
+    })
+      .bindPopup(
+        `<b>${e.name}</b><br>${e.mag_type || "M"} ${fmt(e.mag, 1)} · ` +
+          `${(e.time || e.year || "").toString().slice(0, 10)}` +
+          (n ? `<br>${np}/${n} pulse-like` : ""),
+      )
+      .on("click", () => selectEvent(e.key))
+      .addTo(layer);
+    pts.push([e.lat, e.lon]);
+  });
+  fitTarget = pts.length ? L.latLngBounds(pts).pad(0.15) : null;
+  if (fitTarget) map.fitBounds(fitTarget, { padding: [24, 24], maxZoom: 8 });
+  else map.setView([20, 0], 2);
+}
+
+function drawOverviewHead(s) {
+  const n = s.kind === "pipeline" ? s.list.length : s.meta.n_events;
+  const mapped = s.list.filter((e) => e.lat != null).length;
+  $("#event-head").innerHTML =
+    `<h3>${s.label}</h3>` +
+    `<div class="kv">${n} event${n === 1 ? "" : "s"}` +
+    (mapped < n ? ` · ${mapped} located on the map` : "") +
+    `</div>` +
+    `<div class="kv muted">Select an event from the list or a marker on the map.</div>`;
+}
+
+$("#overview-link").onclick = (ev) => {
+  ev.preventDefault();
+  showOverview(sources[activeSource]);
+};
 
 function renderList(s) {
   const ul = $("#event-list");
@@ -167,6 +232,7 @@ async function selectEvent(key) {
       pipeline: s.label,
     };
   }
+  $("#charts").hidden = false;
   drawMap(current);
   drawHead(current);
   drawCharts(current);

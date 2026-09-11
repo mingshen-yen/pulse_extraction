@@ -75,6 +75,17 @@ aside h2 {
   letter-spacing: 0.05em;
   color: #667;
 }
+#events h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+#events h2 #overview-link {
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+  font-size: 11px;
+}
 .lbl {
   display: block;
   font-size: 11px;
@@ -224,6 +235,12 @@ table.rec-table tr:hover td {
   height: 11px;
   border-radius: 50%;
   border: 2px solid var(--fault);
+}
+.epi-small {
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  cursor: pointer;
 }
 
 #event-head h3 {
