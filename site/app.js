@@ -1,6 +1,6 @@
 /* Near-fault velocity-pulse extraction — showcase map.
    Data from scripts/build_site_data.py (pipeline) and
-   scripts/import_reference_tables.py (published catalogs). No build step. */
+   scripts/build_reference_catalogs.py (published catalogs). No build step. */
 
 const PULSE = "#d62728",
   NOPULSE = "#6b7f99",

@@ -330,354 +330,7 @@
     "source": "NGA representative fault plane",
     "mag": 7.02,
     "mag_type": "Mw"
-   },
-   "usgs_url": "/Users/mingshen/Desktop/Screenshot 2026-09-10 at 23.58.23.png"
-  },
-  {
-   "key": "kumafore|2016",
-   "name": "KumaFore",
-   "year": "2016",
-   "lat": 32.7417,
-   "lon": 130.8087,
-   "depth_km": 11.39,
-   "mag": 6.1,
-   "fault_type": "Strike slip",
-   "stations": [
-    {
-     "code": "KMMH14",
-     "lat": 32.635,
-     "lon": 130.752,
-     "rrup_km": 1.9,
-     "rhyp_km": 9.7,
-     "is_pulse": true,
-     "Tp": 1.82,
-     "PGV": 52.27,
-     "ori_n": 347.65,
-     "ori_fp": 37.35,
-     "repi_km": 13.0
-    },
-    {
-     "code": "93020",
-     "lat": 32.643,
-     "lon": 130.671,
-     "rrup_km": 7.7,
-     "rhyp_km": 13.2,
-     "is_pulse": true,
-     "Tp": 1.26,
-     "PGV": 39.01,
-     "ori_n": 344.85,
-     "ori_fp": 40.15,
-     "repi_km": 16.93
-    },
-    {
-     "code": "93021",
-     "lat": 32.706,
-     "lon": 130.731,
-     "rrup_km": 4.4,
-     "rhyp_km": 7.3,
-     "is_pulse": true,
-     "Tp": 1.81,
-     "PGV": 57.82,
-     "ori_n": 24.99,
-     "ori_fp": -0.01,
-     "repi_km": 8.28
-    },
-    {
-     "code": "93024",
-     "lat": 32.589,
-     "lon": 130.707,
-     "rrup_km": 8.1,
-     "rhyp_km": 15.2,
-     "is_pulse": true,
-     "Tp": 1.69,
-     "PGV": 59.01,
-     "ori_n": 311.08,
-     "ori_fp": 73.92,
-     "repi_km": 19.47
-    },
-    {
-     "code": "93025",
-     "lat": 32.636,
-     "lon": 130.752,
-     "rrup_km": 1.8,
-     "rhyp_km": 9.6,
-     "is_pulse": true,
-     "Tp": 1.69,
-     "PGV": 64.49,
-     "ori_n": 345.94,
-     "ori_fp": 39.06,
-     "repi_km": 12.9
-    },
-    {
-     "code": "93050",
-     "lat": 32.736,
-     "lon": 130.759,
-     "rrup_km": 3.5,
-     "rhyp_km": 7.3,
-     "is_pulse": true,
-     "Tp": 2.45,
-     "PGV": 43.2,
-     "ori_n": 334.29,
-     "ori_fp": 50.71,
-     "repi_km": 4.69
-    },
-    {
-     "code": "93051",
-     "lat": 32.788,
-     "lon": 130.819,
-     "rrup_km": 4.6,
-     "rhyp_km": 12.1,
-     "is_pulse": true,
-     "Tp": 1.16,
-     "PGV": 74.62,
-     "ori_n": 72.07,
-     "ori_fp": 47.07,
-     "repi_km": 5.24
-    },
-    {
-     "code": "93055",
-     "lat": 32.531,
-     "lon": 130.635,
-     "rrup_km": 17.2,
-     "rhyp_km": 23.8,
-     "is_pulse": true,
-     "Tp": 1.75,
-     "PGV": 26.27,
-     "ori_n": 319.81,
-     "ori_fp": 65.19,
-     "repi_km": 28.52
-    },
-    {
-     "code": "93056",
-     "lat": 32.559,
-     "lon": 130.651,
-     "rrup_km": 13.9,
-     "rhyp_km": 20.5,
-     "is_pulse": true,
-     "Tp": 1.81,
-     "PGV": 37.59,
-     "ori_n": 324.11,
-     "ori_fp": 60.89,
-     "repi_km": 25.11
-    },
-    {
-     "code": "93057",
-     "lat": 32.579,
-     "lon": 130.676,
-     "rrup_km": 10.7,
-     "rhyp_km": 17.5,
-     "is_pulse": true,
-     "Tp": 1.5,
-     "PGV": 54.32,
-     "ori_n": 325.96,
-     "ori_fp": 59.04,
-     "repi_km": 21.95
-    },
-    {
-     "code": "93058",
-     "lat": 32.552,
-     "lon": 130.685,
-     "rrup_km": 12.6,
-     "rhyp_km": 19.5,
-     "is_pulse": true,
-     "Tp": 1.39,
-     "PGV": 25.47,
-     "ori_n": 321.6,
-     "ori_fp": 63.4,
-     "repi_km": 24.06
-    },
-    {
-     "code": "9CF",
-     "lat": 32.648,
-     "lon": 130.684,
-     "rrup_km": 6.4,
-     "rhyp_km": 12.0,
-     "is_pulse": true,
-     "Tp": 1.39,
-     "PGV": 51.28,
-     "ori_n": 346.44,
-     "ori_fp": 38.56,
-     "repi_km": 15.64
-    }
-   ],
-   "stats": {
-    "n": 12,
-    "n_pulse": 12,
-    "pulse_fraction": 1.0,
-    "Tp_median": 1.69,
-    "PGV_median": 51.78,
-    "Tp_range": [
-     1.16,
-     2.45
-    ],
-    "by_distance": [
-     {
-      "r_lo": 0,
-      "r_hi": 5,
-      "n": 5,
-      "n_pulse": 5,
-      "pulse_fraction": 1.0,
-      "Tp_median": 1.81
-     },
-     {
-      "r_lo": 5,
-      "r_hi": 10,
-      "n": 3,
-      "n_pulse": 3,
-      "pulse_fraction": 1.0,
-      "Tp_median": 1.39
-     },
-     {
-      "r_lo": 10,
-      "r_hi": 20,
-      "n": 4,
-      "n_pulse": 4,
-      "pulse_fraction": 1.0,
-      "Tp_median": 1.75
-     }
-    ],
-    "scatter": [
-     {
-      "code": "KMMH14",
-      "repi_km": 13.0,
-      "rhyp_km": 9.7,
-      "rrup_km": 1.9,
-      "Tp": 1.82,
-      "PGV": 52.27,
-      "is_pulse": true
-     },
-     {
-      "code": "93020",
-      "repi_km": 16.93,
-      "rhyp_km": 13.2,
-      "rrup_km": 7.7,
-      "Tp": 1.26,
-      "PGV": 39.01,
-      "is_pulse": true
-     },
-     {
-      "code": "93021",
-      "repi_km": 8.28,
-      "rhyp_km": 7.3,
-      "rrup_km": 4.4,
-      "Tp": 1.81,
-      "PGV": 57.82,
-      "is_pulse": true
-     },
-     {
-      "code": "93024",
-      "repi_km": 19.47,
-      "rhyp_km": 15.2,
-      "rrup_km": 8.1,
-      "Tp": 1.69,
-      "PGV": 59.01,
-      "is_pulse": true
-     },
-     {
-      "code": "93025",
-      "repi_km": 12.9,
-      "rhyp_km": 9.6,
-      "rrup_km": 1.8,
-      "Tp": 1.69,
-      "PGV": 64.49,
-      "is_pulse": true
-     },
-     {
-      "code": "93050",
-      "repi_km": 4.69,
-      "rhyp_km": 7.3,
-      "rrup_km": 3.5,
-      "Tp": 2.45,
-      "PGV": 43.2,
-      "is_pulse": true
-     },
-     {
-      "code": "93051",
-      "repi_km": 5.24,
-      "rhyp_km": 12.1,
-      "rrup_km": 4.6,
-      "Tp": 1.16,
-      "PGV": 74.62,
-      "is_pulse": true
-     },
-     {
-      "code": "93055",
-      "repi_km": 28.52,
-      "rhyp_km": 23.8,
-      "rrup_km": 17.2,
-      "Tp": 1.75,
-      "PGV": 26.27,
-      "is_pulse": true
-     },
-     {
-      "code": "93056",
-      "repi_km": 25.11,
-      "rhyp_km": 20.5,
-      "rrup_km": 13.9,
-      "Tp": 1.81,
-      "PGV": 37.59,
-      "is_pulse": true
-     },
-     {
-      "code": "93057",
-      "repi_km": 21.95,
-      "rhyp_km": 17.5,
-      "rrup_km": 10.7,
-      "Tp": 1.5,
-      "PGV": 54.32,
-      "is_pulse": true
-     },
-     {
-      "code": "93058",
-      "repi_km": 24.06,
-      "rhyp_km": 19.5,
-      "rrup_km": 12.6,
-      "Tp": 1.39,
-      "PGV": 25.47,
-      "is_pulse": true
-     },
-     {
-      "code": "9CF",
-      "repi_km": 15.64,
-      "rhyp_km": 12.0,
-      "rrup_km": 6.4,
-      "Tp": 1.39,
-      "PGV": 51.28,
-      "is_pulse": true
-     }
-    ]
-   },
-   "n_mappable": 12,
-   "fault": {
-    "strike": 205,
-    "dip": 74,
-    "length_km": 14.4,
-    "width_km": 8.7,
-    "model": "Wells & Coppersmith (1994) scaling",
-    "trace": [
-     [
-      130.84125,
-      32.8004
-     ],
-     [
-      130.77615,
-      32.683
-     ]
-    ],
-    "rake": 180
-   },
-   "source_model": {
-    "np1": [
-     205,
-     74,
-     180
-    ],
-    "np2": null,
-    "source": "NGA representative fault plane",
-    "mag": 6.1,
-    "mag_type": "Mw"
-   },
-   "usgs_url": "/Users/mingshen/Desktop/Screenshot 2026-09-10 at 23.58.23.png"
+   }
   },
   {
    "key": "kumamoto|2016",
@@ -1321,8 +974,357 @@
     "source": "NGA representative fault plane",
     "mag": 7.04,
     "mag_type": "Mw"
+   }
+  },
+  {
+   "key": "kumamoto_second_foreshock|2016",
+   "name": "Kumamoto second foreshock",
+   "year": "2016",
+   "lat": 32.7004,
+   "lon": 130.7767,
+   "depth_km": 5.9,
+   "mag": 6.4,
+   "fault_type": "Strike slip",
+   "stations": [
+    {
+     "code": "KMMH14",
+     "lat": 32.635,
+     "lon": 130.752,
+     "rrup_km": 1.9,
+     "rhyp_km": 9.7,
+     "is_pulse": true,
+     "Tp": 1.82,
+     "PGV": 52.27,
+     "ori_n": 347.65,
+     "ori_fp": 37.35,
+     "repi_km": 7.63
+    },
+    {
+     "code": "93020",
+     "lat": 32.643,
+     "lon": 130.671,
+     "rrup_km": 7.7,
+     "rhyp_km": 13.2,
+     "is_pulse": true,
+     "Tp": 1.26,
+     "PGV": 39.01,
+     "ori_n": 344.85,
+     "ori_fp": 40.15,
+     "repi_km": 11.77
+    },
+    {
+     "code": "93021",
+     "lat": 32.706,
+     "lon": 130.731,
+     "rrup_km": 4.4,
+     "rhyp_km": 7.3,
+     "is_pulse": true,
+     "Tp": 1.81,
+     "PGV": 57.82,
+     "ori_n": 24.99,
+     "ori_fp": -0.01,
+     "repi_km": 4.32
+    },
+    {
+     "code": "93024",
+     "lat": 32.589,
+     "lon": 130.707,
+     "rrup_km": 8.1,
+     "rhyp_km": 15.2,
+     "is_pulse": true,
+     "Tp": 1.69,
+     "PGV": 59.01,
+     "ori_n": 311.08,
+     "ori_fp": 73.92,
+     "repi_km": 14.0
+    },
+    {
+     "code": "93025",
+     "lat": 32.636,
+     "lon": 130.752,
+     "rrup_km": 1.8,
+     "rhyp_km": 9.6,
+     "is_pulse": true,
+     "Tp": 1.69,
+     "PGV": 64.49,
+     "ori_n": 345.94,
+     "ori_fp": 39.06,
+     "repi_km": 7.52
+    },
+    {
+     "code": "93050",
+     "lat": 32.736,
+     "lon": 130.759,
+     "rrup_km": 3.5,
+     "rhyp_km": 7.3,
+     "is_pulse": true,
+     "Tp": 2.45,
+     "PGV": 43.2,
+     "ori_n": 334.29,
+     "ori_fp": 50.71,
+     "repi_km": 4.29
+    },
+    {
+     "code": "93051",
+     "lat": 32.788,
+     "lon": 130.819,
+     "rrup_km": 4.6,
+     "rhyp_km": 12.1,
+     "is_pulse": true,
+     "Tp": 1.16,
+     "PGV": 74.62,
+     "ori_n": 72.07,
+     "ori_fp": 47.07,
+     "repi_km": 10.51
+    },
+    {
+     "code": "93055",
+     "lat": 32.531,
+     "lon": 130.635,
+     "rrup_km": 17.2,
+     "rhyp_km": 23.8,
+     "is_pulse": true,
+     "Tp": 1.75,
+     "PGV": 26.27,
+     "ori_n": 319.81,
+     "ori_fp": 65.19,
+     "repi_km": 23.04
+    },
+    {
+     "code": "93056",
+     "lat": 32.559,
+     "lon": 130.651,
+     "rrup_km": 13.9,
+     "rhyp_km": 20.5,
+     "is_pulse": true,
+     "Tp": 1.81,
+     "PGV": 37.59,
+     "ori_n": 324.11,
+     "ori_fp": 60.89,
+     "repi_km": 19.64
+    },
+    {
+     "code": "93057",
+     "lat": 32.579,
+     "lon": 130.676,
+     "rrup_km": 10.7,
+     "rhyp_km": 17.5,
+     "is_pulse": true,
+     "Tp": 1.5,
+     "PGV": 54.32,
+     "ori_n": 325.96,
+     "ori_fp": 59.04,
+     "repi_km": 16.47
+    },
+    {
+     "code": "93058",
+     "lat": 32.552,
+     "lon": 130.685,
+     "rrup_km": 12.6,
+     "rhyp_km": 19.5,
+     "is_pulse": true,
+     "Tp": 1.39,
+     "PGV": 25.47,
+     "ori_n": 321.6,
+     "ori_fp": 63.4,
+     "repi_km": 18.6
+    },
+    {
+     "code": "9CF",
+     "lat": 32.648,
+     "lon": 130.684,
+     "rrup_km": 6.4,
+     "rhyp_km": 12.0,
+     "is_pulse": true,
+     "Tp": 1.39,
+     "PGV": 51.28,
+     "ori_n": 346.44,
+     "ori_fp": 38.56,
+     "repi_km": 10.45
+    }
+   ],
+   "stats": {
+    "n": 12,
+    "n_pulse": 12,
+    "pulse_fraction": 1.0,
+    "Tp_median": 1.69,
+    "PGV_median": 51.78,
+    "Tp_range": [
+     1.16,
+     2.45
+    ],
+    "by_distance": [
+     {
+      "r_lo": 0,
+      "r_hi": 5,
+      "n": 5,
+      "n_pulse": 5,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.81
+     },
+     {
+      "r_lo": 5,
+      "r_hi": 10,
+      "n": 3,
+      "n_pulse": 3,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.39
+     },
+     {
+      "r_lo": 10,
+      "r_hi": 20,
+      "n": 4,
+      "n_pulse": 4,
+      "pulse_fraction": 1.0,
+      "Tp_median": 1.75
+     }
+    ],
+    "scatter": [
+     {
+      "code": "KMMH14",
+      "repi_km": 7.63,
+      "rhyp_km": 9.7,
+      "rrup_km": 1.9,
+      "Tp": 1.82,
+      "PGV": 52.27,
+      "is_pulse": true
+     },
+     {
+      "code": "93020",
+      "repi_km": 11.77,
+      "rhyp_km": 13.2,
+      "rrup_km": 7.7,
+      "Tp": 1.26,
+      "PGV": 39.01,
+      "is_pulse": true
+     },
+     {
+      "code": "93021",
+      "repi_km": 4.32,
+      "rhyp_km": 7.3,
+      "rrup_km": 4.4,
+      "Tp": 1.81,
+      "PGV": 57.82,
+      "is_pulse": true
+     },
+     {
+      "code": "93024",
+      "repi_km": 14.0,
+      "rhyp_km": 15.2,
+      "rrup_km": 8.1,
+      "Tp": 1.69,
+      "PGV": 59.01,
+      "is_pulse": true
+     },
+     {
+      "code": "93025",
+      "repi_km": 7.52,
+      "rhyp_km": 9.6,
+      "rrup_km": 1.8,
+      "Tp": 1.69,
+      "PGV": 64.49,
+      "is_pulse": true
+     },
+     {
+      "code": "93050",
+      "repi_km": 4.29,
+      "rhyp_km": 7.3,
+      "rrup_km": 3.5,
+      "Tp": 2.45,
+      "PGV": 43.2,
+      "is_pulse": true
+     },
+     {
+      "code": "93051",
+      "repi_km": 10.51,
+      "rhyp_km": 12.1,
+      "rrup_km": 4.6,
+      "Tp": 1.16,
+      "PGV": 74.62,
+      "is_pulse": true
+     },
+     {
+      "code": "93055",
+      "repi_km": 23.04,
+      "rhyp_km": 23.8,
+      "rrup_km": 17.2,
+      "Tp": 1.75,
+      "PGV": 26.27,
+      "is_pulse": true
+     },
+     {
+      "code": "93056",
+      "repi_km": 19.64,
+      "rhyp_km": 20.5,
+      "rrup_km": 13.9,
+      "Tp": 1.81,
+      "PGV": 37.59,
+      "is_pulse": true
+     },
+     {
+      "code": "93057",
+      "repi_km": 16.47,
+      "rhyp_km": 17.5,
+      "rrup_km": 10.7,
+      "Tp": 1.5,
+      "PGV": 54.32,
+      "is_pulse": true
+     },
+     {
+      "code": "93058",
+      "repi_km": 18.6,
+      "rhyp_km": 19.5,
+      "rrup_km": 12.6,
+      "Tp": 1.39,
+      "PGV": 25.47,
+      "is_pulse": true
+     },
+     {
+      "code": "9CF",
+      "repi_km": 10.45,
+      "rhyp_km": 12.0,
+      "rrup_km": 6.4,
+      "Tp": 1.39,
+      "PGV": 51.28,
+      "is_pulse": true
+     }
+    ]
    },
-   "usgs_url": "/Users/mingshen/Desktop/Screenshot 2026-09-10 at 23.58.23.png"
+   "n_mappable": 12,
+   "fault": {
+    "strike": 205,
+    "dip": 60,
+    "length_km": 27.0,
+    "width_km": 7.5,
+    "model": "USGS finite-fault inversion",
+    "trace": [
+     [
+      130.8376,
+      32.81031
+     ],
+     [
+      130.7158,
+      32.59049
+     ]
+    ],
+    "rake": null,
+    "segments": 2
+   },
+   "source_model": {
+    "np1": [
+     205,
+     80,
+     null
+    ],
+    "np2": [
+     205,
+     60,
+     null
+    ],
+    "source": "NGA representative fault plane",
+    "mag": 6.4,
+    "mag_type": "MJMA"
+   }
   },
   {
    "key": "meinong|2016",
@@ -1791,8 +1793,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.4,
     "mag_type": "Mw"
-   },
-   "usgs_url": "/Users/mingshen/Desktop/Screenshot 2026-09-10 at 23.58.23.png"
+   }
   },
   {
    "key": "hualien|2018",
@@ -2165,8 +2166,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.4,
     "mag_type": "Mw"
-   },
-   "usgs_url": "/Users/mingshen/Desktop/Screenshot 2026-09-10 at 23.58.23.png"
+   }
   },
   {
    "key": "iburi|2018",
@@ -2324,8 +2324,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.8,
     "mag_type": "Mw (finite-source model)"
-   },
-   "usgs_url": "https://doi.org/10.1186/s40623-019-1080-0"
+   }
   },
   {
    "key": "duzce|2022",
@@ -2341,7 +2340,7 @@
      "code": "8101",
      "lat": 40.8436,
      "lon": 31.1489,
-     "rhyp_km": 10.67,
+     "rrup_km": 12.37,
      "is_pulse": true,
      "Tp": 1.9,
      "PGV": 40.89,
@@ -2353,7 +2352,7 @@
      "code": "8102",
      "lat": 40.8342,
      "lon": 31.1644,
-     "rhyp_km": 11.79,
+     "rrup_km": 13.19,
      "is_pulse": true,
      "Tp": 1.61,
      "PGV": 79.25,
@@ -2365,7 +2364,7 @@
      "code": "8104",
      "lat": 40.8611,
      "lon": 31.1804,
-     "rhyp_km": 13.74,
+     "rrup_km": 15.02,
      "is_pulse": true,
      "Tp": 1.92,
      "PGV": 40.78,
@@ -2377,7 +2376,7 @@
      "code": "8109",
      "lat": 40.781,
      "lon": 31.0144,
-     "rhyp_km": 4.75,
+     "rrup_km": 5.62,
      "is_pulse": true,
      "Tp": 1.75,
      "PGV": 44.0,
@@ -2398,8 +2397,8 @@
     ],
     "by_distance": [
      {
-      "r_lo": 0,
-      "r_hi": 5,
+      "r_lo": 5,
+      "r_hi": 10,
       "n": 1,
       "n_pulse": 1,
       "pulse_fraction": 1.0,
@@ -2418,8 +2417,8 @@
      {
       "code": "8101",
       "repi_km": 13.98,
-      "rhyp_km": 10.67,
-      "rrup_km": null,
+      "rhyp_km": null,
+      "rrup_km": 12.37,
       "Tp": 1.9,
       "PGV": 40.89,
       "is_pulse": true
@@ -2427,8 +2426,8 @@
      {
       "code": "8102",
       "repi_km": 15.25,
-      "rhyp_km": 11.79,
-      "rrup_km": null,
+      "rhyp_km": null,
+      "rrup_km": 13.19,
       "Tp": 1.61,
       "PGV": 79.25,
       "is_pulse": true
@@ -2436,8 +2435,8 @@
      {
       "code": "8104",
       "repi_km": 16.84,
-      "rhyp_km": 13.74,
-      "rrup_km": null,
+      "rhyp_km": null,
+      "rrup_km": 15.02,
       "Tp": 1.92,
       "PGV": 40.78,
       "is_pulse": true
@@ -2445,8 +2444,8 @@
      {
       "code": "8109",
       "repi_km": 6.62,
-      "rhyp_km": 4.75,
-      "rrup_km": null,
+      "rhyp_km": null,
+      "rrup_km": 5.62,
       "Tp": 1.75,
       "PGV": 44.0,
       "is_pulse": true

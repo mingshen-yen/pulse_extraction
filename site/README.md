@@ -23,24 +23,23 @@ pip install -r ../requirements.txt
 python ../scripts/build_site_data.py --curated          # rebuild the 6 curated events
 python ../scripts/build_site_data.py --event 2010_darfield   # just one
 python ../scripts/build_site_data.py --poll --min-mag 5.8    # append new live events (USGS)
-python ../scripts/import_reference_tables.py                 # rebuild data/reference/ from the master table
+python ../scripts/build_reference_catalogs.py                # rebuild published catalogs from the audited workbook
 ```
 
-`import_reference_tables.py` builds three published catalogs from the single
-consolidated table `references/tables/pulse_records_with_coords.csv` (which
-already carries a resolved coordinate per record):
+`build_reference_catalogs.py` builds three published catalogs from the audited
+workbook `references/tables/pulse_table.xlsx`. Only fields used by the public
+interface are exported; audit notes and local evidence paths stay out of the
+site JSON.
 
-* **Shahi & Baker (2014)** — `Baker(2014)` sheet, 243 records, 241 mapped, with
+* **Shahi & Baker (2014)** — `Baker(2014)` sheet, 243 records, all mapped, with
   fault-normal-pulse flags; each record links to its jackwbaker.com page.
 * **NCREE Taiwan** — 340 records, all mapped, with event hypocentres.
-* **Yen et al. (2022)** — 84 near-fault pulse records, 83 mapped.
+* **YEN** — 118 near-fault pulse records, all mapped, combining Yen et al.
+  (2022), Türker et al. (2024), and Yen et al. (2025).
 
-Each event also gets a **source model** from USGS ComCat: moment-tensor /
-focal-mechanism nodal planes and, where a finite-fault inversion exists, its
-geometry — used to draw the rupture polygon (solid = inversion, dashed =
-magnitude-scaled). USGS responses cache to `site/data/reference/_cache/`
-(git-ignored); `--no-net` reuses them. The generated `site/data/reference/*.json`
-is committed; each catalog carries its citation.
+Event and source-model parameters come from the workbook's audited
+`Event_sources` and `Finite_fault_segments` sheets. The generated
+`site/data/reference/*.json` is committed; each catalog carries its citation.
 
 Each event: fetch strong-motion waveforms (GeoNet FDSN / ESM) → `run_pulse`
 (Kamai baseline correction · Arias 5–95 % window · 50 Hz) → one `data/events/*.json`.

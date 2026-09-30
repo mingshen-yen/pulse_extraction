@@ -94,8 +94,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.6,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "tabas_iran|1978",
@@ -182,8 +181,7 @@
     "source": "NGA representative fault plane",
     "mag": 7.4,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "coyote_lake|1979",
@@ -344,8 +342,7 @@
     "source": "NGA representative fault plane",
     "mag": 5.7,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "imperial_valley_06|1979",
@@ -690,8 +687,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.5,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "montenegro_yugo|1979",
@@ -800,8 +796,7 @@
     "source": "NGA representative fault plane",
     "mag": 7.1,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "irpinia_italy_01|1980",
@@ -918,8 +913,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.9,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "westmorland|1981",
@@ -1006,8 +1000,7 @@
     "source": "NGA representative fault plane",
     "mag": 5.9,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "morgan_hill|1984",
@@ -1124,8 +1117,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.2,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "kalamata_greece_02|1986",
@@ -1211,8 +1203,7 @@
     "source": "NGA representative fault plane",
     "mag": 5.4,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "san_salvador|1986",
@@ -1321,8 +1312,7 @@
     "source": "NGA representative fault plane",
     "mag": 5.8,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "superstition_hills_02|1987",
@@ -1439,8 +1429,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.5,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "loma_prieta|1989",
@@ -1645,8 +1634,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.9,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "cape_mendocino|1992",
@@ -1785,8 +1773,7 @@
     "source": "NGA representative fault plane",
     "mag": 7,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "landers|1992",
@@ -1925,8 +1912,7 @@
     "source": "NGA representative fault plane",
     "mag": 7.3,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "northridge_01|1994",
@@ -2299,8 +2285,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.7,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "kobe_japan|1995",
@@ -2453,8 +2438,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.9,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "1998_rayli_taiwan|1998",
@@ -2575,8 +2559,7 @@
     "source": "USGS moment-tensor",
     "mag": 5.72,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "1999_chichi_05_taiwan|1999",
@@ -2789,8 +2772,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.19,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "1999_chiayi_01_taiwan|1999",
@@ -3109,8 +3091,7 @@
     "source": "USGS moment-tensor",
     "mag": 5.86,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "1999_chiayi_02_taiwan|1999",
@@ -3341,8 +3322,7 @@
     "source": "USGS moment-tensor",
     "mag": 5.57,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "1999_hualien_taiwan|1999",
@@ -3543,8 +3523,7 @@
     "source": "USGS moment-tensor",
     "mag": 6.31,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "chi_chi_taiwan|1999",
@@ -4851,8 +4830,7 @@
     "source": "USGS moment-tensor",
     "mag": 7.65,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "chi_chi_taiwan_03|1999",
@@ -5108,8 +5086,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.3,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "chi_chi_taiwan_04|1999",
@@ -5196,8 +5173,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.42,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "chi_chi_taiwan_06|1999",
@@ -5358,8 +5334,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.49,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "duzce_turkey|1999",
@@ -5476,8 +5451,7 @@
     "source": "NGA representative fault plane",
     "mag": 7.1,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "kocaeli_turkey|1999",
@@ -5651,8 +5625,7 @@
     "source": "USGS moment-tensor",
     "mag": 7.5,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "tottori_japan|2000",
@@ -5739,8 +5712,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.6,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2001_taipo_taiwan|2001",
@@ -5798,8 +5770,7 @@
      }
     ]
    },
-   "n_mappable": 1,
-   "usgs_url": "NCREE original table in this workbook"
+   "n_mappable": 1
   },
   {
    "key": "2002_hualien_offshore_taiwan|2002",
@@ -6140,8 +6111,7 @@
     "source": "USGS moment-tensor",
     "mag": 7.12,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "denali_alaska|2002",
@@ -6233,8 +6203,7 @@
     "source": "USGS moment-tensor",
     "mag": 7.9,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "bam_iran|2003",
@@ -6321,8 +6290,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.6,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2004_taitung_taiwan|2004",
@@ -6413,8 +6381,7 @@
     "source": "USGS moment-tensor",
     "mag": 6.24,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "niigata_japan|2004",
@@ -6531,8 +6498,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.6,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "parkfield_02_ca|2004",
@@ -6847,8 +6813,7 @@
     "source": "NGA representative fault plane",
     "mag": 6,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2005_ilan_suao_taiwan|2005",
@@ -6969,8 +6934,7 @@
     "source": "USGS moment-tensor",
     "mag": 5.77,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2006_hengchun_offshore_01_taiwan|2006",
@@ -7061,8 +7025,7 @@
     "source": "USGS moment-tensor",
     "mag": 7.02,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2006_hengchun_offshore_taiwan|2006",
@@ -7197,8 +7160,7 @@
     "source": "USGS moment-tensor",
     "mag": 6.94,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2006_taitung_taiwan|2006",
@@ -7407,8 +7369,7 @@
     "source": "USGS moment-tensor",
     "mag": 6.17,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2007_taitung_taiwan|2007",
@@ -7466,8 +7427,7 @@
      }
     ]
    },
-   "n_mappable": 1,
-   "usgs_url": "NCREE original table in this workbook"
+   "n_mappable": 1
   },
   {
    "key": "chuetsu_oki|2007",
@@ -7554,8 +7514,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.8,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2009_hualien_offshore_taiwan|2009",
@@ -7786,8 +7745,7 @@
     "source": "USGS moment-tensor",
     "mag": 6.47,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2009_nantou_taiwan|2009",
@@ -7908,8 +7866,7 @@
     "source": "USGS moment-tensor",
     "mag": 5.6,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "l_aquila_italy|2009",
@@ -8040,8 +7997,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.3,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2010_jiaxian_taiwan|2010",
@@ -8604,8 +8560,7 @@
     "source": "USGS moment-tensor",
     "mag": 6.29,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "darfield_new_zealand|2010",
@@ -8980,8 +8935,7 @@
     "source": "NGA representative fault plane",
     "mag": 7,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "el_mayor_cucapah|2010",
@@ -9090,8 +9044,7 @@
     "source": "NGA representative fault plane",
     "mag": 7.2,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "christchurch_new_zealand|2011",
@@ -9208,8 +9161,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.2,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2013_nantou_01_taiwan|2013",
@@ -9418,8 +9370,7 @@
     "source": "USGS moment-tensor",
     "mag": 6.01,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2013_nantou_02_taiwan|2013",
@@ -9614,8 +9565,7 @@
     "source": "USGS moment-tensor",
     "mag": 6.3,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2013_ruisui_taiwan|2013",
@@ -9824,8 +9774,7 @@
     "source": "USGS moment-tensor",
     "mag": 6.32,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2015_gorkha_nepal|2015",
@@ -9916,8 +9865,7 @@
     "source": "USGS moment-tensor",
     "mag": 7.8,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "2016_kaikoura_newzealand|2016",
@@ -10039,8 +9987,7 @@
     "source": "USGS moment-tensor",
     "mag": 7.8,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "kumamoto|2016",
@@ -10250,8 +10197,7 @@
     "source": "NGA representative fault plane",
     "mag": 7,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "meinong|2016",
@@ -11078,8 +11024,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.4,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   },
   {
    "key": "hualien|2018",
@@ -11599,8 +11544,7 @@
     "source": "NGA representative fault plane",
     "mag": 6.42,
     "mag_type": "Mw"
-   },
-   "usgs_url": "NCREE original table in this workbook"
+   }
   }
  ]
 }

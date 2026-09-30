@@ -30,6 +30,7 @@ import re
 import statistics as st
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 import openpyxl
 
@@ -74,6 +75,25 @@ def _f(x):
 
 def _r(x, n):
     return None if x is None else round(x, n)
+
+
+def _public_url(value, *, host=None):
+    """Return a browser-safe public URL, otherwise ``None``.
+
+    Audit workbooks can legitimately contain local evidence paths and prose in
+    their source fields. Those values must never be copied into public JSON.
+    ``host`` additionally restricts a link to one hostname, which is used for
+    the frontend's explicitly-labelled USGS link.
+    """
+    if not isinstance(value, str):
+        return None
+    value = value.strip()
+    parsed = urlparse(value)
+    if parsed.scheme not in ("http", "https") or not parsed.netloc:
+        return None
+    if host and parsed.hostname != host:
+        return None
+    return value
 
 
 def _sheet(wb, name):
@@ -243,6 +263,33 @@ def _station(r, ev, cat):
     return {k: v for k, v in s.items() if v is not None or k in ("lat", "lon", "code", "is_pulse")}
 
 
+def _validate_catalog(cat_id, events):
+    """Fail the build on data that is unsafe or structurally invalid online."""
+    seen = set()
+    for event in events:
+        if not (-90 <= event["lat"] <= 90 and -180 <= event["lon"] <= 180):
+            raise ValueError(f"{cat_id}/{event['name']}: invalid event coordinates")
+        for station in event["stations"]:
+            ident = (event["key"], station["code"])
+            if ident in seen:
+                raise ValueError(f"{cat_id}: duplicate event/station {ident}")
+            seen.add(ident)
+            lat, lon = station.get("lat"), station.get("lon")
+            if lat is None or lon is None:
+                raise ValueError(f"{cat_id}/{event['name']}/{station['code']}: missing coordinates")
+            if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+                raise ValueError(f"{cat_id}/{event['name']}/{station['code']}: invalid coordinates")
+            for field in ("rrup_km", "rhyp_km", "repi_km", "Tp", "PGV"):
+                value = station.get(field)
+                if value is not None and value < 0:
+                    raise ValueError(
+                        f"{cat_id}/{event['name']}/{station['code']}: negative {field}"
+                    )
+        usgs_url = event.get("usgs_url")
+        if usgs_url and not _public_url(usgs_url, host="earthquake.usgs.gov"):
+            raise ValueError(f"{cat_id}/{event['name']}: invalid USGS URL")
+
+
 def build():
     wb = openpyxl.load_workbook(XLSX, read_only=True, data_only=True)
     pulse_rows = [r for r in _sheet(wb, "Pulse_records") if r.get("active_sheet")]
@@ -286,10 +333,12 @@ def build():
                 out["fault"] = fault
             if sm:
                 out["source_model"] = sm
-            if ev.get("source_url"):
-                out["usgs_url"] = ev["source_url"]
+            usgs_url = _public_url(ev.get("source_url"), host="earthquake.usgs.gov")
+            if usgs_url:
+                out["usgs_url"] = usgs_url
             events.append(out)
         events.sort(key=lambda e: (e.get("year") or "", e["name"]))
+        _validate_catalog(cat_id, events)
 
         doc = dict(schema="pulse-extraction/reference/2", catalog=cat_id,
                    label=meta["label"], short=meta["short"], citation=meta["citation"],
