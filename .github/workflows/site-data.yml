@@ -20,6 +20,8 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -35,6 +37,7 @@ jobs:
             python scripts/build_site_data.py --poll --min-mag "${{ inputs.min_mag || '5.8' }}" --hours 168
           fi
       - name: Commit if changed
+        id: commit
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -42,6 +45,14 @@ jobs:
             git add site/data
             git commit -m "data: refresh event JSON ($(date -u +%Y-%m-%dT%H:%MZ))"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "no data changes"
           fi
+
+  # Pushes made with GITHUB_TOKEN don't trigger other workflows, so deploy here.
+  deploy:
+    needs: refresh
+    if: needs.refresh.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit

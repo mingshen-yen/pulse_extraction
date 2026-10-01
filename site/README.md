@@ -56,12 +56,15 @@ python -m http.server -d site 8000   # then open http://localhost:8000
 
 ## Deploy
 
-The site is hosted on Cloudflare Pages (project `pulse-extraction`) by direct
-upload, so pushing to GitHub does not redeploy it:
+The site is hosted on Cloudflare Pages (project `pulse-extraction`).
+`.github/workflows/deploy.yml` uploads `site/` on every push to `main` that
+touches `site/**`, and `.github/workflows/site-data.yml` runs `--poll` every
+6 h, commits new event JSON and then calls the deploy workflow. Both need the
+repo secret `CLOUDFLARE_API_TOKEN` (Account → Cloudflare Pages → Edit) and the
+repo variable `CLOUDFLARE_ACCOUNT_ID`.
+
+Manual deploy:
 
 ```bash
 wrangler pages deploy site --project-name pulse-extraction --branch feat/showcase-site
 ```
-
-`.github/workflows/site-data.yml` runs `--poll` every 6 h and commits new event
-JSON; redeploy afterwards to publish it.
