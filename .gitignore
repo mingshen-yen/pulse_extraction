@@ -7,3 +7,7 @@ output/
 
 # showcase-site build caches (regenerated from USGS / source tables)
 site/data/reference/_cache/
+
+# local tool state
+.wrangler/
+.claude/worktrees/
