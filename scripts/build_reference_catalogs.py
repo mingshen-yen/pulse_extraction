@@ -2,10 +2,9 @@
 """references/tables/pulse_table.xlsx  ->  site/data/reference/*.json
 
 The workbook is the audited source of truth for the three published pulse
-catalogs shown in the site's "Data source" selector. Unlike the older
-scripts/import_reference_tables.py (which read a CSV export and re-derived
-source models from live USGS lookups), everything here comes straight out of
-the workbook's own consolidated sheets -- no network access, no CSV.
+catalogs shown in the site's "Data source" selector. Everything here comes
+straight out of the workbook's own consolidated sheets -- no network access,
+no CSV.
 
     python scripts/build_reference_catalogs.py
 

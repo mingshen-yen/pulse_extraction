@@ -2,12 +2,10 @@
 
 Published finite-source rupture models gathered for a handful of events.
 
-**Not used by the showcase site.** The site draws a single schematic *surface
-rupture trace* per event, taken from the USGS ComCat source model
-(`scripts/import_reference_tables.py`): the along-strike extent of the USGS
-finite-fault slip model where one exists, otherwise a magnitude-scaled line
-through the epicentre along nodal plane 1. These files are kept as reference in
-case a higher-fidelity model is wanted later.
+**Not used by the showcase site.** The site's event metadata comes from
+`references/tables/pulse_table.xlsx` (via `scripts/build_reference_catalogs.py`).
+These files are kept as reference in case a higher-fidelity model is wanted
+later.
 
 | file | event | format / source |
 |---|---|---|
