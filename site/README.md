@@ -56,6 +56,12 @@ python -m http.server -d site 8000   # then open http://localhost:8000
 
 ## Deploy
 
-`.github/workflows/pages.yml` publishes `site/` to GitHub Pages on push to
-`main`. `.github/workflows/site-data.yml` runs `--poll` every 6 h and commits new
-event JSON. Enable Pages (Settings → Pages → Source: GitHub Actions) once.
+The site is hosted on Cloudflare Pages (project `pulse-extraction`) by direct
+upload, so pushing to GitHub does not redeploy it:
+
+```bash
+wrangler pages deploy site --project-name pulse-extraction --branch feat/showcase-site
+```
+
+`.github/workflows/site-data.yml` runs `--poll` every 6 h and commits new event
+JSON; redeploy afterwards to publish it.
