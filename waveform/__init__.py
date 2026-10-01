@@ -10,6 +10,7 @@ from .pipeline import (VelocityResult, acc_to_velocity, run_pulse,
                        run_pulse_variants)
 from .qc import QCError, QCResult, QCThresholds, check_record
 from .response import ResponseInfo, resolve_response
+from .site_export import event_summary, haversine_km
 
 __all__ = ["basc", "window", "classify_velocity", "pulse_picks", "select_primary",
            "VelocityResult", "acc_to_velocity", "run_pulse",
@@ -17,4 +18,5 @@ __all__ = ["basc", "window", "classify_velocity", "pulse_picks", "select_primary
            "batch_esm_event", "batch_fdsn_event", "esm_event_search", "fetch_esm_event",
            "read_esm_asc_zip",
            "check_record", "QCResult", "QCThresholds", "QCError",
-           "resolve_response", "ResponseInfo"]
+           "resolve_response", "ResponseInfo",
+           "event_summary", "haversine_km"]

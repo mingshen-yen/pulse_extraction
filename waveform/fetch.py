@@ -329,12 +329,29 @@ def _prep(st):
     return st
 
 
+def _station_coords(inventory, net, sta):
+    """``(lat, lon, elev_m)`` for ``net.sta`` from an ObsPy Inventory, or Nones."""
+    if inventory is None:
+        return None, None, None
+    try:
+        for n in inventory.select(network=net, station=sta):
+            for s in n:
+                return (float(s.latitude), float(s.longitude),
+                        float(s.elevation) if s.elevation is not None else None)
+    except Exception:                                    # noqa: BLE001
+        pass
+    return None, None, None
+
+
 def _finish(tr_e, tr_n, tr_z, info, base_meta) -> ThreeComponentAcc:
     dt = float(tr_e.stats.delta)
     n = min(tr_e.stats.npts, tr_n.stats.npts, tr_z.stats.npts)
     meta = dict(base_meta)
+    lat, lon, elev = _station_coords(
+        info.inventory, base_meta.get("network"), base_meta.get("station"))
     meta.update(
         sampling_rate=tr_e.stats.sampling_rate,
+        station_lat=lat, station_lon=lon, station_elev_m=elev,
         response=info.to_dict(),
         response_removed=info.inventory is not None,
     )
