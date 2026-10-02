@@ -6,7 +6,7 @@ and of the reference catalogs (build_reference_catalogs.py); this script loads
 exactly those files into D1, so the API and the static fallback cannot drift.
 
     python scripts/build_d1_seed.py
-    wrangler d1 execute pulse_db --remote --file db/seed.sql --yes
+    wrangler d1 execute pulse_api --remote --file db/seed.sql --yes
 
 The seed starts with db/schema.sql (DROP + CREATE), so every load is a full
 rebuild.

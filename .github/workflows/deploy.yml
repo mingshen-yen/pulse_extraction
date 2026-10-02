@@ -44,5 +44,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: |
-            d1 execute pulse_db --remote --file db/seed.sql --yes
+            d1 execute pulse_api --remote --file db/seed.sql --yes
             pages deploy site --project-name pulse-extraction --branch ${{ env.PAGES_BRANCH }}

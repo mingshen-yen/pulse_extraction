@@ -57,7 +57,7 @@ python -m http.server -d site 8000   # then open http://localhost:8000
 ## API (Cloudflare D1)
 
 `functions/api/*` (Pages Functions) serve the same data from the D1 database
-`pulse_db`, with record filters on magnitude, Tp and distance (Rrup, else Rhyp):
+`pulse_api`, with record filters on magnitude, Tp and distance (Rrup, else Rhyp):
 
 | endpoint | returns |
 |---|---|
@@ -74,7 +74,7 @@ D1 is loaded from `site/data/*.json`, so the JSON stays the single build output:
 
 ```bash
 python scripts/build_d1_seed.py                                   # -> db/seed.sql
-wrangler d1 execute pulse_db --local --file db/seed.sql --yes     # local copy
+wrangler d1 execute pulse_api --local --file db/seed.sql --yes     # local copy
 wrangler pages dev                                                # site + API on :8788
 python scripts/check_api_parity.py http://localhost:8788          # API == static files
 ```
@@ -93,6 +93,6 @@ Manual deploy:
 
 ```bash
 python scripts/build_d1_seed.py
-wrangler d1 execute pulse_db --remote --file db/seed.sql --yes
+wrangler d1 execute pulse_api --remote --file db/seed.sql --yes
 wrangler pages deploy site --project-name pulse-extraction --branch feat/showcase-site
 ```

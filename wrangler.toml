@@ -14,5 +14,5 @@ compatibility_date = "2026-09-01"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "pulse_db"
-database_id = "77b673d8-0d51-420f-abb0-23f82b2d5675"
+database_name = "pulse_api"
+database_id = "348e185f-a6da-4627-afd1-61c2936a0f5a"
