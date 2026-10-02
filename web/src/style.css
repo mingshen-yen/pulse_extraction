@@ -366,3 +366,7 @@ footer {
 .leaflet-popup-content b {
   font-size: 13px;
 }
+#charts .chart-box {
+  position: relative;
+  height: 150px;
+}
