@@ -36,7 +36,10 @@ STAT_KEYS = ("n", "n_pulse", "pulse_fraction", "Tp_median", "PGV_median", "Tp_ra
 
 def get(base: str, path: str, **params):
     q = urllib.parse.urlencode(params)
-    with urllib.request.urlopen(f"{base}/api/{path}?{q}", timeout=30) as r:
+    # Cloudflare turns away urllib's default User-Agent with a 403
+    req = urllib.request.Request(f"{base}/api/{path}?{q}",
+                                 headers={"User-Agent": "pulse-extraction-parity-check"})
+    with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 
 
