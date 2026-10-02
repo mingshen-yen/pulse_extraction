@@ -22,9 +22,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # The pulse-extraction project was created by direct upload with this as its
-  # production branch; deploying under any other name makes a preview instead.
-  PAGES_BRANCH: feat/showcase-site
+  # Must equal the pulse-extraction project's production branch (Cloudflare
+  # dashboard); deploying under any other name makes a preview instead.
+  PAGES_BRANCH: main
 
 jobs:
   deploy:

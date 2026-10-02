@@ -94,5 +94,5 @@ Manual deploy:
 ```bash
 python scripts/build_d1_seed.py
 wrangler d1 execute pulse_api --remote --file db/seed.sql --yes
-wrangler pages deploy site --project-name pulse-extraction --branch feat/showcase-site
+wrangler pages deploy site --project-name pulse-extraction --branch main
 ```
