@@ -28,4 +28,4 @@ other working columns stay in D1. The one rename: the S&B sheet has both
 `Mechanism` and `mechanism`, and SQLite column names ignore case, so the second
 is `sheet_sb."mechanism_col23"`.
 
-How to edit, re-import a new workbook, and back up: see `site/README.md`.
+How to edit, re-import a new workbook, and back up: see `web/README.md`.

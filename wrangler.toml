@@ -1,12 +1,12 @@
 # Cloudflare Pages project for the showcase site.
 #
-#   site/        static page (Leaflet map, Chart.js)
+#   web/         the page (Vite + React); `npm run build` -> web/dist
 #   functions/   Pages Functions: /api/* over the D1 database below, and the
 #                middleware that keeps mingslab.com/pulse_database the one URL
 #   db/          schema.sql (idempotent); D1 itself is the source of truth
 
 name = "pulse-extraction"
-pages_build_output_dir = "site"
+pages_build_output_dir = "web/dist"
 compatibility_date = "2026-09-01"
 
 [[d1_databases]]

@@ -1,13 +1,14 @@
 # Showcase site
 
 Map of near-fault velocity-pulse results at https://mingslab.com/pulse_database/.
-No build step: plain HTML + Leaflet + Chart.js from CDNs. All data comes from a
-small API (`functions/api/`, Cloudflare Pages Functions) over the Cloudflare D1
+A React + TypeScript app (Vite) with Leaflet (react-leaflet) and Chart.js
+(react-chartjs-2). All data comes from a small API (`functions/api/`, Cloudflare Pages Functions) over the Cloudflare D1
 database `pulse_api`. **D1 is the source of truth**; there are no data files in
 the repo.
 
 ```
-site/            index.html  style.css  app.js
+web/             the page: src/App.tsx, src/components/{Sidebar,MapView,Panel}.tsx,
+                 src/api.ts (types + fetchers), src/style.css; build -> web/dist
 functions/api/   catalogs.js  events.js  event.js  _lib.js (derivation, shared)
 functions/       _middleware.js (one public URL, see below)
 db/schema.sql    site_catalogs + pipeline tables (idempotent)
@@ -93,12 +94,16 @@ Filter parameters: `mag_min`, `mag_max`, `tp_min`, `tp_max`, `dist_min`,
 
 ## Run locally
 
+From the repo root:
+
 ```bash
 wrangler d1 export pulse_api --remote --output /tmp/pulse_api.sql   # copy the data
 wrangler d1 execute pulse_api --local --file /tmp/pulse_api.sql --yes
-wrangler pages dev                                                  # site + API on :8788
+(cd web && npm ci && npm run build)
+wrangler pages dev                                    # web/dist + API on :8788
+(cd web && npm run dev)                               # hot reload on :5173, api/* -> :8788
 python scripts/check_site_api.py http://localhost:8788
-node --test tests/api_lib.test.mjs                                  # API unit tests
+node --test tests/api_lib.test.mjs                    # API unit tests
 ```
 
 ## Deploy
@@ -110,9 +115,9 @@ proxy in the personal site (mingshen-yen/minghsuan,
 `X-Pulse-Proxy`; `functions/_middleware.js` sends direct visits to
 `pulse-extraction.pages.dev` to mingslab.com, so there is one public URL.
 
-* `.github/workflows/deploy.yml` uploads `site/` + `functions/` on every push
-  to `main` that touches them, applies `db/schema.sql` (idempotent, never
-  touches data) and checks the live API.
+* `.github/workflows/deploy.yml` builds `web/` and uploads `web/dist` +
+  `functions/` on every push to `main` that touches them, applies
+  `db/schema.sql` (idempotent, never touches data) and checks the live API.
 * `.github/workflows/site-data.yml` runs `--poll` every 6 h and writes new
   events straight into D1; nothing is committed or redeployed.
 * `.github/workflows/d1-backup.yml` exports D1 every Monday as a workflow
@@ -125,5 +130,6 @@ Pages → Edit, Account → D1 → Edit) and the repo variable
 Manual deploy:
 
 ```bash
-wrangler pages deploy site --project-name pulse-extraction --branch main
+(cd web && npm ci && npm run build)
+wrangler pages deploy web/dist --project-name pulse-extraction --branch main
 ```
