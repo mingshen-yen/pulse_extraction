@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "([ -d web/node_modules ] || (cd web && npm ci)) && (cd web && npm run build) && wrangler pages dev --port 8788"
+      ],
+      "port": 8788
+    }
+  ]
+}

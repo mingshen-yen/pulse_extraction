@@ -1,8 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import {
-  fetchCatalogs, fetchEvent, fetchEvents, readFilters, writeFilters,
-  type Catalog, type EventSummary, type EventView, type Filters, type Station,
+  fetchCatalogs,
+  fetchEvent,
+  fetchEvents,
+  readFilters,
+  writeFilters,
+  type Catalog,
+  type EventSummary,
+  type EventView,
+  type Filters,
+  type Station,
 } from "./api";
 import MapView from "./components/MapView";
 import Panel, { OverviewHead, type CrossLink } from "./components/Panel";
@@ -15,7 +23,9 @@ export default function App() {
   const [catalogs, setCatalogs] = useState<Catalog[]>([]);
   const [lists, setLists] = useState<Lists>({});
   const [active, setActive] = useState("pipeline");
-  const [filters, setFilters] = useState<Filters>(() => readFilters(location.search));
+  const [filters, setFilters] = useState<Filters>(() =>
+    readFilters(location.search),
+  );
   const [loading, setLoading] = useState(false);
   const [view, setView] = useState<EventView | null>(null);
   const [station, setStation] = useState<Station | null>(null);
@@ -32,10 +42,21 @@ export default function App() {
     let stale = false;
     setLoading(true);
     writeFilters(filters);
-    Promise.all(catalogs.map((c) => fetchEvents(c.id, filters).then((d) => [c.id, d] as const)))
+    Promise.all(
+      catalogs.map((c) =>
+        fetchEvents(c.id, filters).then((d) => [c.id, d] as const),
+      ),
+    )
       .then((pairs) => {
         if (stale) return;
-        setLists(Object.fromEntries(pairs.map(([id, d]) => [id, { events: byNewest(d.events), nRecords: d.n_records }])));
+        setLists(
+          Object.fromEntries(
+            pairs.map(([id, d]) => [
+              id,
+              { events: byNewest(d.events), nRecords: d.n_records },
+            ]),
+          ),
+        );
         setView(null);
         setStation(null);
       })
@@ -82,22 +103,39 @@ export default function App() {
     });
   }, [view, catalogs, lists, active]);
 
-  const filterNote = loading ? "loading…" : isFiltered && list ? `${list.nRecords} matching records` : "";
-  const fitKey = view ? `event:${view.catalog}:${view.key}` : `overview:${active}:${JSON.stringify(filters)}:${overviewTick}:${events.length}`;
+  const filterNote = loading
+    ? "loading…"
+    : isFiltered && list
+      ? `${list.nRecords} matching records`
+      : "";
+  const fitKey = view
+    ? `event:${view.catalog}:${view.key}`
+    : `overview:${active}:${JSON.stringify(filters)}:${overviewTick}:${events.length}`;
 
   return (
     <>
       <header>
-        <h1>Near-fault Pulse Database</h1>
+        <h1>Near-fault Pulse Database v1</h1>
         <p>
-          <b>Automatic pulse extraction pipeline</b> based on the Shahi&nbsp;&amp; Baker (2014) pulse
-          classifier, fed by near-real-time waveforms from a strong-motion archive (GeoNet FDSN, ESM):
+          <b>Automatic pulse extraction pipeline </b> based on the
+          Shahi&nbsp;&amp; Baker (2014) pulse classifier, fed by near-real-time
+          waveforms from a strong-motion archive (GeoNet FDSN, ESM):
         </p>
         <p>
-          <b>fetch&nbsp;&rarr; baseline correction &rarr; Arias window &rarr; classifier</b>.
+          <b>
+            fetch&nbsp;&rarr; baseline correction &rarr; Arias window &rarr;
+            classifier
+          </b>
+          .
         </p>
-        <p className="muted">Each waveform in Pipeline results is processed end-to-end and mapped.</p>
-        <a href="https://github.com/mingshen-yen/pulse_extraction" target="_blank" rel="noopener">
+        <p className="muted">
+          Each waveform in Pipeline results is processed end-to-end and mapped.
+        </p>
+        <a
+          href="https://github.com/mingshen-yen/pulse_extraction"
+          target="_blank"
+          rel="noopener"
+        >
           source&nbsp;&amp;&nbsp;validation&nbsp;&rarr;
         </a>
       </header>
@@ -129,11 +167,21 @@ export default function App() {
             onSelectStation={setStation}
           />
           <div id="legend">
-            <span><i className="dot pulse"></i> pulse</span>
-            <span><i className="dot nopulse"></i> no pulse</span>
-            <span><i className="bar"></i> marker size &prop; PGV</span>
-            <span><i className="tick"></i> pulse orientation</span>
-            <span><i className="ring"></i> fling step</span>
+            <span>
+              <i className="dot pulse"></i> pulse
+            </span>
+            <span>
+              <i className="dot nopulse"></i> no pulse
+            </span>
+            <span>
+              <i className="bar"></i> marker size &prop; PGV
+            </span>
+            <span>
+              <i className="tick"></i> pulse orientation
+            </span>
+            <span>
+              <i className="ring"></i> fling step
+            </span>
           </div>
         </section>
 
@@ -158,8 +206,9 @@ export default function App() {
       </main>
 
       <footer className="muted">
-        Event mechanism from USGS ComCat where available. Data © GeoNet / GNS Science (CC-BY 4.0), ESM / INGV
-        (CC-BY). © 2026 Ming-Hsuan Yen. All rights reserved.
+        Event mechanism from USGS ComCat where available. Data © GeoNet / GNS
+        Science (CC-BY 4.0), ESM / INGV (CC-BY). © 2026 Ming-Hsuan Yen. All
+        rights reserved.
       </footer>
     </>
   );
