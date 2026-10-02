@@ -1,6 +1,8 @@
 /* Near-fault velocity-pulse extraction — showcase map.
    Data from scripts/build_site_data.py (pipeline) and
-   scripts/build_reference_catalogs.py (published catalogs). No build step. */
+   scripts/build_reference_catalogs.py (published catalogs), served by the
+   D1-backed api/* (functions/api/) when it is there, else read straight from
+   data/*.json (no filtering then). No build step. */
 
 const PULSE = "#d62728",
   NOPULSE = "#6b7f99",
@@ -42,6 +44,16 @@ let charts = {},
 const sources = {}; // id -> { label, kind:'pipeline'|'reference', list:[…], docs, citation }
 let activeSource = "pipeline";
 
+/* api/* answers -> lists and events come from D1 and can be filtered;
+   otherwise (plain static hosting) the data/*.json files are used as-is. */
+let API = false;
+const FILTERS = ["mag_min", "mag_max", "tp_min", "tp_max", "dist_min", "dist_max"];
+const filters = {}; // name -> number, mirrored in the page URL
+const query = (extra = {}) => new URLSearchParams({ ...extra, ...filters });
+const filtered = () => Object.keys(filters).length > 0;
+const getJSON = (url) =>
+  fetch(url).then((r) => (r.ok ? r.json() : Promise.reject(new Error(url))));
+
 /* newest event first: full ISO time if present, else the 4-digit year */
 const evWhen = (e) => String(e.time || e.year || "");
 const byNewest = (events) =>
@@ -51,6 +63,42 @@ const byNewest = (events) =>
 
 /* ---------- boot ---------------------------------------------------------- */
 async function boot() {
+  const cats = await getJSON("api/catalogs").catch(() => null);
+  if (cats) {
+    API = true;
+    for (const c of cats.catalogs)
+      sources[c.id] = {
+        label: c.label,
+        kind: c.kind,
+        url: c.url,
+        meta: c,
+        pulseOnly: !!c.pulse_only,
+        citation: c.citation || null,
+        generated: c.generated,
+        list: [],
+      };
+    readFilters();
+    await loadLists();
+  } else {
+    await bootStatic();
+  }
+  setupFilterForm();
+  buildSourceSelect();
+  await setSource("pipeline");
+}
+
+/* every source's (filtered) event list; all of them, so "also in" links work */
+async function loadLists() {
+  await Promise.all(
+    Object.entries(sources).map(async ([id, s]) => {
+      const d = await getJSON(`api/events?${query({ catalog: id })}`);
+      s.list = byNewest(d.events);
+      s.nRecords = d.n_records;
+    }),
+  );
+}
+
+async function bootStatic() {
   const [pipe, refIdx] = await Promise.all([
     fetch("data/index.json").then((r) => r.json()),
     fetch("data/reference/index.json")
@@ -82,16 +130,66 @@ async function boot() {
       };
     }),
   );
+}
 
-  buildSourceSelect();
-  await setSource("pipeline");
+/* ---------- filters (API only) ------------------------------------------ */
+function readFilters() {
+  const p = new URLSearchParams(location.search);
+  for (const k of FILTERS) {
+    const v = p.get(k);
+    if (v != null && v.trim() !== "" && Number.isFinite(+v)) filters[k] = +v;
+  }
+}
+
+function writeFilterURL() {
+  const q = query().toString();
+  history.replaceState(null, "", location.pathname + (q ? `?${q}` : "") + location.hash);
+}
+
+function setupFilterForm() {
+  const form = $("#filters");
+  if (!API) {
+    form.classList.add("off");
+    form.querySelectorAll("input, button").forEach((x) => (x.disabled = true));
+    $("#filter-note").textContent = "needs the API (static copy)";
+    return;
+  }
+  for (const k of FILTERS) form.elements[k].value = filters[k] ?? "";
+  form.onsubmit = async (ev) => {
+    ev.preventDefault();
+    for (const k of FILTERS) {
+      const v = form.elements[k].value.trim();
+      if (v !== "" && Number.isFinite(+v)) filters[k] = +v;
+      else delete filters[k];
+    }
+    await applyFilters();
+  };
+  form.onreset = () => {
+    // runs before the inputs are cleared; apply once they are
+    setTimeout(() => form.requestSubmit(), 0);
+  };
+  noteFilters();
+}
+
+async function applyFilters() {
+  writeFilterURL();
+  $("#filter-note").textContent = "loading…";
+  await loadLists();
+  noteFilters();
+  await setSource(activeSource);
+}
+
+function noteFilters() {
+  const s = sources[activeSource];
+  $("#filter-note").textContent =
+    filtered() && s ? `${s.nRecords} matching records` : "";
 }
 
 function buildSourceSelect() {
   const sel = $("#source");
   sel.innerHTML = "";
   for (const [id, s] of Object.entries(sources)) {
-    const n = s.kind === "pipeline" ? s.list.length : s.meta.n_events;
+    const n = API || s.kind !== "pipeline" ? s.meta.n_events : s.list.length;
     sel.append(new Option(`${s.label} (${n})`, id));
   }
   sel.onchange = () => setSource(sel.value);
@@ -102,12 +200,13 @@ async function setSource(id) {
   $("#source").value = id;
   const s = sources[id];
   renderList(s);
+  if (API) noteFilters();
   $("#source-note").innerHTML = s.citation
     ? `<b>${s.label}.</b> ${s.citation} ` +
       (s.url
         ? `<a href="${s.url}" target="_blank" rel="noopener">link</a>`
         : "")
-    : `${s.list.length} events processed end-to-end · updated ` +
+    : `${s.meta?.n_events ?? s.list.length} events processed end-to-end · updated ` +
       `${(s.generated || "").slice(0, 16).replace("T", " ")} UTC`;
   showOverview(s);
 }
@@ -162,11 +261,12 @@ function drawOverviewMap(s) {
 }
 
 function drawOverviewHead(s) {
-  const n = s.kind === "pipeline" ? s.list.length : s.meta.n_events;
+  const n = API || s.kind === "pipeline" ? s.list.length : s.meta.n_events;
   const mapped = s.list.filter((e) => e.lat != null).length;
   $("#event-head").innerHTML =
     `<h3>${s.label}</h3>` +
     `<div class="kv">${n} event${n === 1 ? "" : "s"}` +
+    (filtered() ? ` · ${s.nRecords} records match the filters` : "") +
     (mapped < n ? ` · ${mapped} located on the map` : "") +
     `</div>` +
     `<div class="kv muted">Select an event from the list or a marker on the map.</div>`;
@@ -180,6 +280,8 @@ $("#overview-link").onclick = (ev) => {
 function renderList(s) {
   const ul = $("#event-list");
   ul.innerHTML = "";
+  if (!s.list.length)
+    ul.innerHTML = `<li class="muted">No events match the filters.</li>`;
   s.list.forEach((e) => {
     const np = e.n_pulse ?? e.stats?.n_pulse ?? 0;
     const n = e.n ?? e.stats?.n ?? 0;
@@ -203,12 +305,18 @@ async function selectEvent(key) {
     .forEach((x) => x.classList.toggle("active", x.dataset.key === key));
   const s = sources[activeSource];
 
+  const doc = API
+    ? await getJSON(`api/event?${query({ catalog: activeSource, key })}`)
+    : s.kind === "pipeline"
+      ? await getJSON(`data/events/${key}.json`)
+      : s.docs[key];
+
   if (s.kind === "pipeline") {
-    current = await fetch(`data/events/${key}.json`).then((r) => r.json());
+    current = doc;
     current.origin = "pipeline";
     current.pulseOnly = false;
   } else {
-    const e = s.docs[key];
+    const e = doc;
     current = {
       origin: "reference",
       pulseOnly: s.pulseOnly,

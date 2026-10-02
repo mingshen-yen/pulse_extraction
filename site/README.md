@@ -54,17 +54,45 @@ python -m http.server -d site 8000   # then open http://localhost:8000
 
 (Needs to be served over http — `file://` blocks the `fetch()` calls.)
 
+## API (Cloudflare D1)
+
+`functions/api/*` (Pages Functions) serve the same data from the D1 database
+`pulse_api`, with record filters on magnitude, Tp and distance (Rrup, else Rhyp):
+
+| endpoint | returns |
+|---|---|
+| `GET /api/catalogs` | every catalog with its event and record counts |
+| `GET /api/events?catalog=sb&mag_min=7&tp_min=2&dist_max=15` | events with at least one matching record; `n` / `n_pulse` count the matching records only |
+| `GET /api/event?catalog=sb&key=…&tp_min=2` | one event as in the static file, with stations narrowed to the filters and stats recomputed |
+
+Filter parameters: `mag_min`, `mag_max`, `tp_min`, `tp_max`, `dist_min`,
+`dist_max`. The page keeps the active filters in its URL, so filtered views
+can be shared. Served without the API (`python -m http.server`), the page
+reads `data/*.json` directly and the filter form is disabled.
+
+D1 is loaded from `site/data/*.json`, so the JSON stays the single build output:
+
+```bash
+python scripts/build_d1_seed.py                                   # -> db/seed.sql
+wrangler d1 execute pulse_api --local --file db/seed.sql --yes     # local copy
+wrangler pages dev                                                # site + API on :8788
+python scripts/check_api_parity.py http://localhost:8788          # API == static files
+```
+
 ## Deploy
 
 The site is hosted on Cloudflare Pages (project `pulse-extraction`).
-`.github/workflows/deploy.yml` uploads `site/` on every push to `main` that
-touches `site/**`, and `.github/workflows/site-data.yml` runs `--poll` every
-6 h, commits new event JSON and then calls the deploy workflow. Both need the
-repo secret `CLOUDFLARE_API_TOKEN` (Account → Cloudflare Pages → Edit) and the
-repo variable `CLOUDFLARE_ACCOUNT_ID`.
+`.github/workflows/deploy.yml` reloads D1 and uploads `site/` + `functions/` on
+every push to `main` that touches them, and `.github/workflows/site-data.yml`
+runs `--poll` every 6 h, commits new event JSON and then calls the deploy
+workflow. Both need the repo secret `CLOUDFLARE_API_TOKEN` (Account →
+Cloudflare Pages → Edit, Account → D1 → Edit) and the repo variable
+`CLOUDFLARE_ACCOUNT_ID`.
 
 Manual deploy:
 
 ```bash
+python scripts/build_d1_seed.py
+wrangler d1 execute pulse_api --remote --file db/seed.sql --yes
 wrangler pages deploy site --project-name pulse-extraction --branch feat/showcase-site
 ```

@@ -1,9 +1,19 @@
 name: Deploy site to Cloudflare Pages
 
+# Reloads the D1 database behind /api/* from site/data/*.json, then uploads
+# site/ + functions/.  The token needs Account → Cloudflare Pages → Edit and
+# Account → D1 → Edit.
+
 on:
   push:
     branches: [main]
-    paths: ["site/**", ".github/workflows/deploy.yml"]
+    paths:
+      - "site/**"
+      - "functions/**"
+      - "db/**"
+      - "wrangler.toml"
+      - "scripts/build_d1_seed.py"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
   workflow_call:          # called by site-data.yml after it commits new data
 
@@ -25,10 +35,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python scripts/build_d1_seed.py
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: >-
-            pages deploy site --project-name pulse-extraction
-            --branch ${{ env.PAGES_BRANCH }}
+          command: |
+            d1 execute pulse_api --remote --file db/seed.sql --yes
+            pages deploy site --project-name pulse-extraction --branch ${{ env.PAGES_BRANCH }}
