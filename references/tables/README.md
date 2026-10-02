@@ -4,7 +4,10 @@ The audited reference workbook (`pulse_table.xlsx`) now lives in the Cloudflare
 D1 database `pulse_api`, one table per sheet with the sheet's own column names,
 and **D1 is the source of truth**: edit the data there. The site derives the
 three published catalogs from it on every request (`functions/api/_lib.js`).
-It has 701 active station records:
+The workbook file was removed from the repo; the version that was imported is
+in git history:
+`git show ea3801a:references/tables/pulse_table.xlsx > pulse_table.xlsx`.
+The reference data has 701 active station records:
 
 | `active_sheet` | records | public catalog |
 |---|---:|---|
