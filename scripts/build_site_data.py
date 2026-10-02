@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Build the showcase-site data: run the pulse pipeline per event, write
-``site/data/events/<key>.json`` + ``site/data/index.json``.
+"""Build the showcase-site data: run the pulse pipeline per event and store
+the result in D1 (pipeline_events / pipeline_records, see db/schema.sql).
 
     python scripts/build_site_data.py --curated              # rebuild all curated events
     python scripts/build_site_data.py --event 2010_darfield  # just one
     python scripts/build_site_data.py --poll --min-mag 5.8   # append new live events
+    ... --local                                              # local D1 (wrangler pages dev)
+
+Writing to the remote D1 needs CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID or a
+`wrangler login` (see scripts/d1_pipeline.py).
 
 Curated events use a hand-picked near-fault station list; ``--poll`` queries
 USGS for recent shallow events and auto-selects nearby strong-motion stations.
@@ -28,9 +32,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from waveform.pipeline import run_pulse                           # noqa: E402
 from waveform.site_export import event_summary, haversine_km      # noqa: E402
+sys.path.insert(0, str(ROOT / "scripts"))
+from d1_pipeline import D1                                        # noqa: E402
 
-SITE = ROOT / "site" / "data"
-EVENTS_DIR = SITE / "events"
 USGS = "https://earthquake.usgs.gov/fdsnws/event/1/query"
 
 PIPE = dict(method="kamai", window="arias", decimate_to=50,
@@ -324,7 +328,7 @@ def process_poll(cfg):
 
 
 # --------------------------------------------------------------------------- #
-def build_one(key, cfg):
+def build_one(key, cfg, db):
     print(f"\n=== {key}  ({cfg.get('name')}) ===")
     kind = cfg["kind"]
     cfg.setdefault("key", key)
@@ -344,34 +348,10 @@ def build_one(key, cfg):
         ev["name"] = cfg["name"]
     ev.setdefault("region", cfg.get("region"))
     summary = event_summary(ev, recs)
-    summary["key"] = key
-    EVENTS_DIR.mkdir(parents=True, exist_ok=True)
-    (EVENTS_DIR / f"{key}.json").write_text(json.dumps(summary, indent=1))
+    db.save_event(key, summary)
     s = summary["stats"]
-    print(f"  wrote {key}.json  —  {s['n']} stations, {s['n_pulse']} pulse-like")
+    print(f"  saved {key} to D1  —  {s['n']} stations, {s['n_pulse']} pulse-like")
     return summary
-
-
-def write_index():
-    rows = []
-    for p in sorted(EVENTS_DIR.glob("*.json")):
-        d = json.loads(p.read_text())
-        e, s = d["event"], d["stats"]
-        rows.append({
-            "key": d["key"], "name": e.get("name"), "region": e.get("region"),
-            "time": e.get("time"), "lat": e.get("lat"), "lon": e.get("lon"),
-            "depth_km": e.get("depth_km"), "mag": e.get("mag"),
-            "mag_type": e.get("mag_type"), "source": e.get("source"),
-            "n": s["n"], "n_pulse": s["n_pulse"],
-            "pulse_fraction": s["pulse_fraction"],
-            "Tp_median": s["Tp_median"], "has_fault": "fault" in e,
-        })
-    rows.sort(key=lambda r: (r["time"] or ""), reverse=True)
-    SITE.mkdir(parents=True, exist_ok=True)
-    (SITE / "index.json").write_text(json.dumps(
-        {"generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-         "events": rows}, indent=1))
-    print(f"\nindex.json — {len(rows)} events")
 
 
 def main(argv=None):
@@ -385,33 +365,33 @@ def main(argv=None):
     ap.add_argument("--min-mag", type=float, default=5.8)
     ap.add_argument("--hours", type=float, default=72)
     ap.add_argument("--max-depth", type=float, default=50)
+    ap.add_argument("--local", action="store_true", help="write to the local D1")
     args = ap.parse_args(argv)
     warnings.filterwarnings("ignore")
+    if not (args.curated or args.event or args.poll):
+        ap.print_help()
+        return
+    db = D1(local=args.local)
 
     for k in args.event:
-        build_one(k, CURATED[k])
+        build_one(k, CURATED[k], db)
     if args.curated:
         for k, cfg in CURATED.items():
             try:
-                build_one(k, cfg)
+                build_one(k, cfg, db)
             except Exception as exc:                             # noqa: BLE001
                 print(f"  {k}: FAILED {exc}")
     if args.poll:
-        known = {json.loads(p.read_text())["event"].get("id")
-                 for p in EVENTS_DIR.glob("*.json")} if EVENTS_DIR.exists() else set()
+        known = db.known_usgs_ids()
         new = poll_new(args.min_mag, args.hours, args.max_depth, known)
         print(f"poll: {len(new)} new event(s)")
         for eid, cfg in new.items():
             key = "live_" + eid.replace(":", "_")
             try:
-                build_one(key, cfg)
+                build_one(key, cfg, db)
             except Exception as exc:                             # noqa: BLE001
                 print(f"  {key}: FAILED {exc}")
-
-    if args.curated or args.event or args.poll:
-        write_index()
-    else:
-        ap.print_help()
+    db.mark_run()
 
 
 if __name__ == "__main__":

@@ -148,9 +148,6 @@ aside h2 {
   border-color: var(--ink);
   color: #fff;
 }
-#filters.off {
-  opacity: 0.55;
-}
 #filter-note {
   font-size: 11px;
   line-height: 1.3;

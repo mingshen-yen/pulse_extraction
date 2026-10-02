@@ -1,5 +1,9 @@
 name: Refresh event data
 
+# Runs the pulse pipeline on new USGS events and writes the results straight
+# into D1 (pipeline_events / pipeline_records).  The site reads D1 through its
+# API, so nothing is committed or redeployed.
+
 on:
   schedule:
     - cron: "17 */6 * * *"          # every 6 h
@@ -15,44 +19,35 @@ on:
         default: "5.8"
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: site-data
+  cancel-in-progress: false
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    outputs:
-      changed: ${{ steps.commit.outputs.changed }}
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      WRANGLER: npx --yes wrangler@4
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Build
+      - name: Run the pipeline into D1
         run: |
           if [ "${{ inputs.mode }}" = "curated" ]; then
             python scripts/build_site_data.py --curated
           else
             python scripts/build_site_data.py --poll --min-mag "${{ inputs.min_mag || '5.8' }}" --hours 168
           fi
-      - name: Commit if changed
-        id: commit
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          if ! git diff --quiet -- site/data; then
-            git add site/data
-            git commit -m "data: refresh event JSON ($(date -u +%Y-%m-%dT%H:%MZ))"
-            git push
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "no data changes"
-          fi
-
-  # Pushes made with GITHUB_TOKEN don't trigger other workflows, so deploy here.
-  deploy:
-    needs: refresh
-    if: needs.refresh.outputs.changed == 'true'
-    uses: ./.github/workflows/deploy.yml
-    secrets: inherit
+      - name: Check the live API
+        run: python scripts/check_site_api.py https://mingslab.com/pulse_database

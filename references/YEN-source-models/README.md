@@ -2,8 +2,8 @@
 
 Published finite-source rupture models gathered for a handful of events.
 
-**Not used by the showcase site.** The site's event metadata comes from
-`references/tables/pulse_table.xlsx` (via `scripts/build_reference_catalogs.py`).
+**Not used by the showcase site.** The site's event metadata comes from the
+reference workbook tables in D1 (see `references/tables/README.md`).
 These files are kept as reference in case a higher-fidelity model is wanted
 later.
 

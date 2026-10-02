@@ -1,0 +1,32 @@
+name: Back up D1
+
+# D1 is the only copy of the data, so export it weekly as an artifact
+# (kept 90 days), on top of D1's own 30-day Time Travel.
+# Restore: wrangler d1 execute pulse_api --remote --file <export>.sql --yes
+# (into an empty database, or after dropping the tables it recreates).
+
+on:
+  schedule:
+    - cron: "41 3 * * 1"            # Mondays 03:41 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: d1 export pulse_api --remote --output pulse_api.sql
+      - name: Name the export by date
+        run: mv pulse_api.sql "pulse_api-$(date -u +%Y-%m-%d).sql" && ls -l pulse_api-*.sql
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pulse_api-backup
+          path: pulse_api-*.sql
+          retention-days: 90
