@@ -52,9 +52,9 @@ Put the records in `data/records/2023_turkey/` and the CSV at
 `data/reference/ES_published_pulse_table.csv`, then:
 
 ```bash
-python tests/historical_2023_turkey.py            # per-station Tp/PGV/PI vs ES
-python tests/compare_methods.py --quick           # Kamai vs eBASCO accuracy+stability
-python tests/compare_corrected_acc.py --reps 8    # corrected-acceleration stability
+python validation/historical_2023_turkey.py            # per-station Tp/PGV/PI vs ES
+python validation/compare_methods.py --quick           # Kamai vs eBASCO accuracy+stability
+python validation/compare_corrected_acc.py --reps 8    # corrected-acceleration stability
 ```
 
 Each script also takes `--mseed <dir>` / `--es <csv>` to point elsewhere.

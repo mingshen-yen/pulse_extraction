@@ -3,7 +3,7 @@ strong-motion records and compare against the EarthScope published pulse table
 (``ES_published_pulse_table.csv``: uncorrected vs corrected Tp / PGV / PI).
 
 Usage:
-    python tests/historical_2023_turkey.py [--mseed DIR] [--es CSV] [--method both]
+    python validation/historical_2023_turkey.py [--mseed DIR] [--es CSV] [--method both]
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from waveform.pipeline import run_pulse                          # noqa: E402
-from tests._data import es_csv, read_three, records_dir         # noqa: E402
+from validation._data import es_csv, read_three, records_dir         # noqa: E402
 
 
 def load_es(path):

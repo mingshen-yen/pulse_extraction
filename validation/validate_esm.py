@@ -17,9 +17,9 @@ Outputs (``output/``, git-ignored):
 Fetched + processed records cache to ``output/esm_cache.pkl``.
 
 Usage:
-    python tests/validate_esm.py                 # fetch (or reuse cache) + compare + plot
-    python tests/validate_esm.py --refetch       # force re-download
-    python tests/validate_esm.py --plots-only    # cache only, just redraw figures
+    python validation/validate_esm.py                 # fetch (or reuse cache) + compare + plot
+    python validation/validate_esm.py --refetch       # force re-download
+    python validation/validate_esm.py --plots-only    # cache only, just redraw figures
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from waveform.fetch import fetch_esm_event                        # noqa: E402
 from waveform.pipeline import run_pulse                           # noqa: E402
-from tests._pulse_validation import (compute_stats, plot_scaling,  # noqa: E402
+from validation._pulse_validation import (compute_stats, plot_scaling,  # noqa: E402
                                      plot_traces, write_tables)
 
 OUT = ROOT / "output"

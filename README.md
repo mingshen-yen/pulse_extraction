@@ -52,7 +52,7 @@ record + both fling variants: `python -m waveform.run_record`.
 table, every record pulled from the archive, no local files: **25 / 27 `is_pulse`
 across 5 events (1979–2011)**, median |ΔTp| 0.032 s, median |ΔPGV| 0.60 cm/s
 (2009 L'Aquila, 1980 Irpinia, 1979 Montenegro via ESM; 2010 Darfield, 2011
-Christchurch via GeoNet). Drivers: `tests/validate_{esm,geonet,summary}.py`.
+Christchurch via GeoNet). Drivers: `validation/validate_{esm,geonet,summary}.py`.
 Full detail in [waveform/README](waveform/README.md).
 
 ## Layout
@@ -108,16 +108,17 @@ each pulse-like component, plus a combined `pulseData.csv`.
 `pytest` runs anywhere on the committed fixtures in `tests/fixtures/`. For batch
 validation against the EarthScope 2023 Türkiye pulse table, drop the records in
 `data/records/2023_turkey/` and the CSV in `data/reference/` (both git-ignored)
-and run `tests/historical_2023_turkey.py`, `tests/compare_methods.py`,
-`tests/compare_corrected_acc.py`. Layout and filename convention:
+and run `validation/historical_2023_turkey.py`, `validation/compare_methods.py`,
+`validation/compare_corrected_acc.py`. Layout and filename convention:
 [data/README.md](data/README.md).
 
 ## Validation (classifier port)
 
-`tests/validate.py` regenerated the `TK.3123` / `TK.2712` inputs from the ESM
-`.ASC` files and compared against `classification_matlab/Results/2023_Turkey/`.
-It is kept as an **offline record** — it needs the original MATLAB data/results
-tree and is not runnable inside this stand-alone repo. `tests/test_matlab_wavelets.py`
+The Python port was checked against the MATLAB reference outputs
+(`classification_matlab/Results/2023_Turkey/`, `TK.3123` / `TK.2712` regenerated
+from the ESM `.ASC` files). That one-off script needed the original MATLAB
+data/results tree, so it is no longer in the repo; it is in git history
+(`git show 653b556:tests/validate.py`). `tests/test_matlab_wavelets.py`
 runs anywhere. Measured agreement:
 
 | quantity | agreement |

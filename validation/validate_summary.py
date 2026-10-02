@@ -7,7 +7,7 @@ produces, over every Shahi & Baker (2014) pulse record fetched:
     output/validation_summary.csv       one row per record, all 5 events
     output/validation_summary.png       Tp & PGV 1:1  +  Tp & PGV vs Rrup
 
-    python tests/validate_summary.py
+    python validation/validate_summary.py
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from tests._pulse_validation import compute_stats                 # noqa: E402
+from validation._pulse_validation import compute_stats                 # noqa: E402
 
 OUT = ROOT / "output"
 CACHES = ["esm_cache.pkl", "geonet_cache.pkl"]
