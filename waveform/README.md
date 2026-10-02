@@ -202,7 +202,7 @@ station in the wider per-event runs is correctly `is_pulse=0`. See
 `output/{2009_LAquila,1980_Irpinia,1979_Montenegro}/` and
 `output/esm_vs_SB2014_all.csv`. (Sanity check, 2016-08-24 Amatrice M6.0 / AMT:
 `is_pulse=True`, `Tp ≈ 0.8 s`, `PGV ≈ 44 cm/s` — the known Amatrice pulse.)
-Driver: `python tests/validate_esm.py [--refetch|--plots-only]`.
+Driver: `python validation/validate_esm.py [--refetch|--plots-only]`.
 
 ### Validation — GeoNet FDSN (raw counts + StationXML) vs Shahi & Baker (2014)
 
@@ -220,11 +220,11 @@ events, every SB2014 pulse record fetched:
 
 Long-period pulses (Darfield CBGS/REHS `Tp ≈ 12.6 s`) reproduce to <0.2 s. See
 `output/{2010_Darfield,2011_Christchurch}/` and `output/geonet_vs_*_all.csv`.
-Driver: `python tests/validate_geonet.py [--refetch|--plots-only]`.
+Driver: `python validation/validate_geonet.py [--refetch|--plots-only]`.
 
 ### Combined — 27 records, 5 events (1979–2011)
 
-`python tests/validate_summary.py` merges both caches into
+`python validation/validate_summary.py` merges both caches into
 `output/validation_summary.csv` and a one-page figure (Tp & PGV 1:1 vs the
 reference, plus Tp & PGV vs Rrup). Overall: **is_pulse 25/27**, median
 |ΔTp| **0.032 s**, median |ΔPGV| **0.60 cm/s**; both `is_pulse` misses
@@ -243,7 +243,7 @@ the EarthScope published pulse table more closely than the eBASCO port
 (median |ΔTp| 0.13 s vs 0.45, |ΔPGV| 2 vs 7 cm/s), never fails (eBASCO: 3–5 / 23),
 and the corrected acceleration is ~40× less noise-sensitive and invariant to the
 start window. Use `"ebasco"` only when the permanent (fling) displacement itself
-matters. See `tests/compare_methods.py` / `tests/compare_corrected_acc.py`.
+matters. See `validation/compare_methods.py` / `validation/compare_corrected_acc.py`.
 
 ### Fling-retained vs fling-removed pair (`run_pulse_variants`)
 

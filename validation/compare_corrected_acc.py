@@ -20,7 +20,7 @@ acceleration moves:
              (a) additive noise: `reps` realisations at 1% RMS
              (b) start trim:     cut 0 / 0.5 / 1 / 2 s off the front
 
-Usage:  python tests/compare_corrected_acc.py [--reps N]
+Usage:  python validation/compare_corrected_acc.py [--reps N]
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ warnings.filterwarnings("ignore")
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from waveform import basc                                        # noqa: E402
 from waveform.ebasco import ebasco_correct                       # noqa: E402
-from tests._data import read_three, records_dir                  # noqa: E402
+from validation._data import read_three, records_dir                  # noqa: E402
 
 STATIONS = ["3123", "2712", "3145", "4615", "NAR", "3137", "2716", "3116"]
 _MSEED = None

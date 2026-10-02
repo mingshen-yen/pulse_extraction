@@ -7,7 +7,7 @@ Stability -- on a representative subset, resample the record under
              (a) additive noise and (b) start-window trims, and report the
              scatter of Tp / PGV / PI.
 
-Usage:  python tests/compare_methods.py [--quick]
+Usage:  python validation/compare_methods.py [--quick]
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ import numpy as np
 warnings.filterwarnings("ignore")
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from waveform.pipeline import run_pulse                          # noqa: E402
-from tests._data import es_csv, read_three, records_dir          # noqa: E402
+from validation._data import es_csv, read_three, records_dir          # noqa: E402
 
 SUBSET = ["3123", "2712", "3145", "4615", "NAR", "3137", "2716", "3116"]
 

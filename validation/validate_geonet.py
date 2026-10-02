@@ -12,7 +12,7 @@ Reference: ``data/reference/table_SB2014.csv`` (git-ignored).
 Outputs mirror ``validate_esm.py`` under ``output/`` with the ``geonet`` prefix;
 records cache to ``output/geonet_cache.pkl``.
 
-    python tests/validate_geonet.py [--refetch] [--plots-only] [--no-plots]
+    python validation/validate_geonet.py [--refetch] [--plots-only] [--no-plots]
 """
 
 from __future__ import annotations
@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from waveform.fetch import fetch_event_acc                        # noqa: E402
 from waveform.pipeline import run_pulse                           # noqa: E402
-from tests._pulse_validation import (compute_stats, plot_scaling,  # noqa: E402
+from validation._pulse_validation import (compute_stats, plot_scaling,  # noqa: E402
                                      plot_traces, write_tables)
 
 OUT = ROOT / "output"

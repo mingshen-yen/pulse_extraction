@@ -10,7 +10,7 @@ Inputs (``data/records/2018_Hualien_records/``, git-ignored):
 
 This is the classifier-only path -- no fetch / QC / baseline correction.
 
-Usage:  python tests/validate_hualien.py [--data DIR]
+Usage:  python validation/validate_hualien.py [--data DIR]
 """
 
 from __future__ import annotations

@@ -4,5 +4,5 @@ PyWavelets>=1.4
 pandas>=1.5
 matplotlib>=3.6
 obspy>=1.4          # MiniSEED / FDSN fetch + instrument-response removal
-adjustText>=1.0    # optional: non-overlapping labels in tests/validate_*.py plots
+adjustText>=1.0    # optional: non-overlapping labels in validation/validate_*.py plots
 pytest>=7          # tests
