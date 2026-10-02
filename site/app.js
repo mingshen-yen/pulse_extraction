@@ -1,8 +1,7 @@
 /* Near-fault velocity-pulse extraction — showcase map.
-   Data from scripts/build_site_data.py (pipeline) and
-   scripts/build_reference_catalogs.py (published catalogs), served by the
-   D1-backed api/* (functions/api/) when it is there, else read straight from
-   data/*.json (no filtering then). No build step. */
+   All data comes from the D1-backed api/* (functions/api/): the published
+   catalogs from the workbook tables, the pipeline results from
+   scripts/build_site_data.py. No build step. */
 
 const PULSE = "#d62728",
   NOPULSE = "#6b7f99",
@@ -41,12 +40,9 @@ let charts = {},
   current = null,
   fitTarget = null,
   oriData = [];
-const sources = {}; // id -> { label, kind:'pipeline'|'reference', list:[…], docs, citation }
+const sources = {}; // id -> { label, kind:'pipeline'|'reference', list:[…], citation }
 let activeSource = "pipeline";
 
-/* api/* answers -> lists and events come from D1 and can be filtered;
-   otherwise (plain static hosting) the data/*.json files are used as-is. */
-let API = false;
 const FILTERS = ["mag_min", "mag_max", "tp_min", "tp_max", "dist_min", "dist_max"];
 const filters = {}; // name -> number, mirrored in the page URL
 const query = (extra = {}) => new URLSearchParams({ ...extra, ...filters });
@@ -63,25 +59,20 @@ const byNewest = (events) =>
 
 /* ---------- boot ---------------------------------------------------------- */
 async function boot() {
-  const cats = await getJSON("api/catalogs").catch(() => null);
-  if (cats) {
-    API = true;
-    for (const c of cats.catalogs)
-      sources[c.id] = {
-        label: c.label,
-        kind: c.kind,
-        url: c.url,
-        meta: c,
-        pulseOnly: !!c.pulse_only,
-        citation: c.citation || null,
-        generated: c.generated,
-        list: [],
-      };
-    readFilters();
-    await loadLists();
-  } else {
-    await bootStatic();
-  }
+  const cats = await getJSON("api/catalogs");
+  for (const c of cats.catalogs)
+    sources[c.id] = {
+      label: c.label,
+      kind: c.kind,
+      url: c.url,
+      meta: c,
+      pulseOnly: !!c.pulse_only,
+      citation: c.citation || null,
+      generated: c.generated,
+      list: [],
+    };
+  readFilters();
+  await loadLists();
   setupFilterForm();
   buildSourceSelect();
   await setSource("pipeline");
@@ -98,41 +89,7 @@ async function loadLists() {
   );
 }
 
-async function bootStatic() {
-  const [pipe, refIdx] = await Promise.all([
-    fetch("data/index.json").then((r) => r.json()),
-    fetch("data/reference/index.json")
-      .then((r) => r.json())
-      .catch(() => ({ catalogs: [] })),
-  ]);
-
-  sources.pipeline = {
-    label: "Pipeline results",
-    kind: "pipeline",
-    citation: null,
-    list: byNewest(pipe.events),
-    generated: pipe.generated,
-  };
-  await Promise.all(
-    refIdx.catalogs.map(async (c) => {
-      const doc = await fetch(`data/reference/${c.id}.json`).then((r) =>
-        r.json(),
-      );
-      sources[c.id] = {
-        label: c.label,
-        kind: "reference",
-        url: c.url,
-        meta: c,
-        pulseOnly: !!c.pulse_only,
-        list: byNewest(doc.events),
-        citation: doc.citation,
-        docs: Object.fromEntries(doc.events.map((e) => [e.key, e])),
-      };
-    }),
-  );
-}
-
-/* ---------- filters (API only) ------------------------------------------ */
+/* ---------- filters ------------------------------------------------------ */
 function readFilters() {
   const p = new URLSearchParams(location.search);
   for (const k of FILTERS) {
@@ -148,12 +105,6 @@ function writeFilterURL() {
 
 function setupFilterForm() {
   const form = $("#filters");
-  if (!API) {
-    form.classList.add("off");
-    form.querySelectorAll("input, button").forEach((x) => (x.disabled = true));
-    $("#filter-note").textContent = "needs the API (static copy)";
-    return;
-  }
   for (const k of FILTERS) form.elements[k].value = filters[k] ?? "";
   form.onsubmit = async (ev) => {
     ev.preventDefault();
@@ -189,7 +140,7 @@ function buildSourceSelect() {
   const sel = $("#source");
   sel.innerHTML = "";
   for (const [id, s] of Object.entries(sources)) {
-    const n = API || s.kind !== "pipeline" ? s.meta.n_events : s.list.length;
+    const n = s.meta.n_events;
     sel.append(new Option(`${s.label} (${n})`, id));
   }
   sel.onchange = () => setSource(sel.value);
@@ -200,7 +151,7 @@ async function setSource(id) {
   $("#source").value = id;
   const s = sources[id];
   renderList(s);
-  if (API) noteFilters();
+  noteFilters();
   $("#source-note").innerHTML = s.citation
     ? `<b>${s.label}.</b> ${s.citation} ` +
       (s.url
@@ -261,7 +212,7 @@ function drawOverviewMap(s) {
 }
 
 function drawOverviewHead(s) {
-  const n = API || s.kind === "pipeline" ? s.list.length : s.meta.n_events;
+  const n = s.list.length;
   const mapped = s.list.filter((e) => e.lat != null).length;
   $("#event-head").innerHTML =
     `<h3>${s.label}</h3>` +
@@ -305,11 +256,7 @@ async function selectEvent(key) {
     .forEach((x) => x.classList.toggle("active", x.dataset.key === key));
   const s = sources[activeSource];
 
-  const doc = API
-    ? await getJSON(`api/event?${query({ catalog: activeSource, key })}`)
-    : s.kind === "pipeline"
-      ? await getJSON(`data/events/${key}.json`)
-      : s.docs[key];
+  const doc = await getJSON(`api/event?${query({ catalog: activeSource, key })}`);
 
   if (s.kind === "pipeline") {
     current = doc;
@@ -689,6 +636,6 @@ addEventListener("resize", refreshLayout);
 
 boot().catch((e) => {
   $("#event-list").innerHTML =
-    `<li class="muted">Could not load data/ — run the build scripts and serve ` +
-    `this folder over http.<br>${e}</li>`;
+    `<li class="muted">Could not load the data API (api/catalogs). Locally, ` +
+    `run <code>wrangler pages dev</code>.<br>${e}</li>`;
 });

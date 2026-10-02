@@ -1,8 +1,9 @@
 name: Deploy site to Cloudflare Pages
 
-# Reloads the D1 database behind /api/* from site/data/*.json, then uploads
-# site/ + functions/.  The token needs Account → Cloudflare Pages → Edit and
-# Account → D1 → Edit.
+# Uploads site/ + functions/ (the D1-backed API).  D1 is the source of truth
+# for the data, so a deploy never rewrites it; it only applies db/schema.sql,
+# which is idempotent (CREATE ... IF NOT EXISTS, INSERT OR IGNORE).
+# The token needs Account → Cloudflare Pages → Edit and Account → D1 → Edit.
 
 on:
   push:
@@ -10,12 +11,11 @@ on:
     paths:
       - "site/**"
       - "functions/**"
-      - "db/**"
+      - "db/schema.sql"
       - "wrangler.toml"
-      - "scripts/build_d1_seed.py"
+      - "tests/api_lib.test.mjs"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
-  workflow_call:          # called by site-data.yml after it commits new data
 
 concurrency:
   group: cloudflare-pages
@@ -25,24 +25,28 @@ env:
   # Must equal the pulse-extraction project's production branch (Cloudflare
   # dashboard); deploying under any other name makes a preview instead.
   PAGES_BRANCH: main
+  PUBLIC_URL: https://mingslab.com/pulse_database
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # github.ref (not the triggering sha) so a call from site-data.yml picks
-      # up the data commit it just pushed.
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          ref: ${{ github.ref }}
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - run: python scripts/build_d1_seed.py
+          node-version: "24"
+      - run: node --test tests/api_lib.test.mjs
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: |
-            d1 execute pulse_api --remote --file db/seed.sql --yes
+            d1 execute pulse_api --remote --file db/schema.sql --yes
             pages deploy site --project-name pulse-extraction --branch ${{ env.PAGES_BRANCH }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check the live API
+        run: |
+          sleep 20   # let the new deployment take over
+          python scripts/check_site_api.py "$PUBLIC_URL"

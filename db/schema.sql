@@ -1,44 +1,53 @@
--- D1 schema for the showcase API (functions/api/*).
--- Rebuilt from scratch on every load: scripts/build_d1_seed.py writes
--- db/seed.sql = this file + INSERTs from site/data/*.json.
+-- D1 schema for the showcase API (functions/api/*).  D1 is the source of truth.
 --
--- The filterable columns (mag, Tp, dist_km) are real columns with indexes;
--- everything else rides along untouched in `doc` (JSON) so the API returns the
--- same objects as the static files.
+-- Idempotent: safe to apply to a live database at any time
+--   wrangler d1 execute pulse_api --remote --file db/schema.sql --yes
+--
+-- The workbook tables (pulse_records, event_sources, finite_fault_segments,
+-- ...) are created by scripts/import_workbook.py, one table per sheet of
+-- pulse_table.xlsx with the sheet's own column names.  The API derives the
+-- site's catalogs from them on every request, so edits show up immediately.
 
-DROP TABLE IF EXISTS records;
-DROP TABLE IF EXISTS events;
-DROP TABLE IF EXISTS catalogs;
-
-CREATE TABLE catalogs (
-  id         TEXT PRIMARY KEY,      -- 'pipeline' | 'sb' | 'ncree' | 'yen' ...
-  ord        INTEGER NOT NULL,      -- order in the "Data source" selector
-  kind       TEXT NOT NULL,         -- 'pipeline' | 'reference'
-  doc        TEXT NOT NULL          -- catalog metadata (label, citation, ...)
+-- Catalogs in the "Data source" selector.  Reference catalogs map to the
+-- pulse_records rows whose active_sheet equals `active_sheet`.
+CREATE TABLE IF NOT EXISTS site_catalogs (
+  id           TEXT PRIMARY KEY,
+  ord          INTEGER NOT NULL,
+  kind         TEXT NOT NULL CHECK (kind IN ('pipeline', 'reference')),
+  label        TEXT NOT NULL,
+  short        TEXT,
+  citation     TEXT,
+  url          TEXT,
+  pulse_only   INTEGER NOT NULL DEFAULT 0,  -- every record is a pulse (no verdict column)
+  active_sheet TEXT,                        -- reference only
+  updated      TEXT                         -- pipeline: last run (UTC, ISO 8601)
 );
+INSERT OR IGNORE INTO site_catalogs VALUES
+  ('pipeline', 0, 'pipeline', 'Pipeline results', NULL, NULL, NULL, 0, NULL, NULL),
+  ('sb', 1, 'reference', 'S&B', 'S&B 2014',
+   'Ground motions in the NGA-West2 database that were identified as pulse-like using the Shahi and Baker (2014) model.',
+   'https://www.jackwbaker.com/pulse_classification_v2/Pulse-like-records.html', 0, 'S&B', NULL),
+  ('ncree', 2, 'reference', 'NCREE', 'NCREE',
+   'Database of Near-Fault Strong Motions with Pulse-like Velocity from NCREE, using the Shahi and Baker (2014) model.',
+   'https://nfpv.ncree.org.tw/', 0, 'NCREE', NULL),
+  ('yen', 3, 'reference', 'YEN', 'YEN',
+   'Identified pulses from Yen et al.(2022), Türker et al. (2024) and Yen et al. (2025), using the Shahi and Baker (2014) model.',
+   '', 1, 'YEN', NULL);
 
-CREATE TABLE events (
-  catalog    TEXT NOT NULL REFERENCES catalogs(id),
-  key        TEXT NOT NULL,
-  ord        INTEGER NOT NULL,      -- original order within the catalog
+-- Pipeline results, written by scripts/build_site_data.py (scripts/d1_pipeline.py).
+-- doc holds the nested event / fault / pipeline-settings objects as JSON.
+CREATE TABLE IF NOT EXISTS pipeline_events (
+  key        TEXT PRIMARY KEY,               -- e.g. 2010_darfield, live_us7000abcd
+  usgs_id    TEXT,                           -- event.id, used to skip known events
+  time       TEXT,
   mag        REAL,
-  doc        TEXT NOT NULL,         -- event without stations / stats
-  summary    TEXT NOT NULL,         -- list entry (pipeline: data/index.json row)
-  PRIMARY KEY (catalog, key)
+  doc        TEXT NOT NULL,                  -- {schema, generated, pipeline, event}
+  updated    TEXT NOT NULL
 );
-CREATE INDEX events_mag ON events (catalog, mag);
-
-CREATE TABLE records (
-  catalog    TEXT NOT NULL,
-  event_key  TEXT NOT NULL,
-  ord        INTEGER NOT NULL,      -- original order within the event
-  is_pulse   INTEGER NOT NULL,
-  Tp         REAL,
-  PGV        REAL,
-  dist_km    REAL,                  -- Rrup, else Rhyp (the distance every plot uses)
-  doc        TEXT NOT NULL,         -- the station object
-  FOREIGN KEY (catalog, event_key) REFERENCES events (catalog, key)
+CREATE TABLE IF NOT EXISTS pipeline_records (
+  event_key  TEXT NOT NULL REFERENCES pipeline_events (key) ON DELETE CASCADE,
+  ord        INTEGER NOT NULL,
+  code       TEXT NOT NULL,
+  doc        TEXT NOT NULL,                  -- station object incl. pulse_trace
+  PRIMARY KEY (event_key, ord)
 );
-CREATE INDEX records_event ON records (catalog, event_key);
-CREATE INDEX records_tp    ON records (catalog, Tp);
-CREATE INDEX records_dist  ON records (catalog, dist_km);
