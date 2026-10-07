@@ -115,7 +115,7 @@ export default function App() {
   return (
     <>
       <header>
-        <h1>Near-fault Pulse Database v1</h1>
+        <h1>Near-fault Velocity Pulse Database v1</h1>
         <p>
           <b>Automatic pulse extraction pipeline </b> based on the
           Shahi&nbsp;&amp; Baker (2014) pulse classifier, fed by near-real-time
